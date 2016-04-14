@@ -56,10 +56,27 @@ class matrix {
 		 * */
 		void print();
 		virtual ~matrix();
+
+		/**
+		 * Returns the data
+		 * */
+		std::vector<std::vector<T> > get_data();
+
+		/**
+		 * Returns number of rows of the matrix
+		 * */
+		int rows();
+
+		/**
+		 * Returns number of columns of a specific row
+		 * */
+		int columns(int row);
+
+		/**
+		 *  Accessing operator for an element
+		 * */
+		inline T &operator()(const int row, const int col);
 };
-
-
-
 
 template<class T>
 matrix<T>::matrix(int rows) {
@@ -67,10 +84,12 @@ matrix<T>::matrix(int rows) {
 }
 
 template<class T>
-matrix<T>::matrix() {}
+matrix<T>::matrix() {
+}
 
 template<class T>
-matrix<T>::~matrix() {}
+matrix<T>::~matrix() {
+}
 
 template<class T>
 matrix<T>::matrix(int rows, int cols) {
@@ -98,12 +117,35 @@ void matrix<T>::add_element(T e) {
 }
 
 template<class T>
-void matrix<T>::print() {
-	for ( int i = 0; i < data.size(); ++i ) {
-		for ( int j = 0; j < data[i].size(); ++j )
-			std::cout << data[i][j] << ' ';
-		std::cout << '\n';
+int matrix<T>::rows() {
+	return data.size();
+}
+
+template<class T>
+int matrix<T>::columns(int row) {
+	if ( row >= data.size() )
+		return -1;
+	return data[row].size();
+}
+
+template<class T>
+std::vector<std::vector<T> > matrix<T>::get_data() {
+	return data;
+}
+
+template<class T>
+inline T &matrix<T>::operator()(const int r, const int c) {
+	return data[r][c];
+}
+
+template<class T>
+std::ostream& operator<<(std::ostream &out, matrix<T> &m) {
+	for (int i = 0; i < m.rows(); ++i) {
+		for (int j = 0; j < m.columns(i); j++)
+			out << m(i, j) << ' ';
+		out << '\n';
 	}
+	return (out);
 }
 
 } /* namespace mirt */
