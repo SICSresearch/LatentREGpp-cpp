@@ -1,0 +1,65 @@
+\hypertarget{classmirt_1_1matrix}{}\section{mirt\+:\+:matrix$<$ T $>$ Class Template Reference}
+\label{classmirt_1_1matrix}\index{mirt\+::matrix$<$ T $>$@{mirt\+::matrix$<$ T $>$}}
+
+
+{\ttfamily \#include $<$matrix.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmirt_1_1matrix_a283baccb8a0971f387dc06bc43938cea}{matrix} (int rows, int cols)
+\item 
+\hyperlink{classmirt_1_1matrix_a087ff2c390116144a149a25463778665}{matrix} (int cols)
+\item 
+void \hyperlink{classmirt_1_1matrix_abe4e475aefe0f247ba93f64f9e763c4a}{add\+\_\+row} (std\+::vector$<$ T $>$ \&new\+\_\+row)
+\item 
+void \hyperlink{classmirt_1_1matrix_a34dc35c2b12c0caf617c0a8e3031cb09}{add\+\_\+row} ()
+\item 
+void \hyperlink{classmirt_1_1matrix_aa1cdd1e063393fb855fe883b45b182ec}{add\+\_\+element} (T e)
+\item 
+void \hyperlink{classmirt_1_1matrix_afeff800c797c7b6745f8b2615de0a6bf}{print} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\\*
+class mirt\+::matrix$<$ T $>$}
+
+Matrix class. Matrix class used to store information. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{mirt\+::matrix@{mirt\+::matrix}!matrix@{matrix}}
+\index{matrix@{matrix}!mirt\+::matrix@{mirt\+::matrix}}
+\subsubsection[{\texorpdfstring{matrix(int rows, int cols)}{matrix(int rows, int cols)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf mirt\+::matrix}$<$ T $>$\+::{\bf matrix} (
+\begin{DoxyParamCaption}
+\item[{int}]{rows, }
+\item[{int}]{cols}
+\end{DoxyParamCaption}
+)}\hypertarget{classmirt_1_1matrix_a283baccb8a0971f387dc06bc43938cea}{}\label{classmirt_1_1matrix_a283baccb8a0971f387dc06bc43938cea}
+Creates a new matrix with size rows $\ast$ cols \index{mirt\+::matrix@{mirt\+::matrix}!matrix@{matrix}}
+\index{matrix@{matrix}!mirt\+::matrix@{mirt\+::matrix}}
+\subsubsection[{\texorpdfstring{matrix(int cols)}{matrix(int cols)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ {\bf mirt\+::matrix}$<$ T $>$\+::{\bf matrix} (
+\begin{DoxyParamCaption}
+\item[{int}]{cols}
+\end{DoxyParamCaption}
+)}\hypertarget{classmirt_1_1matrix_a087ff2c390116144a149a25463778665}{}\label{classmirt_1_1matrix_a087ff2c390116144a149a25463778665}
+Creates a new matrix specifying only the number of rows rows can be added after using add\+\_\+row(std\+::vector) method 
+
+\subsection{Member Function Documentation}
+\index{mirt\+::matrix@{mirt\+::matrix}!add\+\_\+element@{add\+\_\+element}}
+\index{add\+\_\+element@{add\+\_\+element}!mirt\+::matrix@{mirt\+::matrix}}
+\subsubsection[{\texorpdfstring{add\+\_\+element(\+T e)}{add_element(T e)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf mirt\+::matrix}$<$ T $>$\+::add\+\_\+element (
+\begin{DoxyParamCaption}
+\item[{T}]{e}
+\end{DoxyParamCaption}
+)}\hypertarget{classmirt_1_1matrix_aa1cdd1e063393fb855fe883b45b182ec}{}\label{classmirt_1_1matrix_aa1cdd1e063393fb855fe883b45b182ec}
+Adds an element to the last row \index{mirt\+::matrix@{mirt\+::matrix}!add\+\_\+row@{add\+\_\+row}}
+\index{add\+\_\+row@{add\+\_\+row}!mirt\+::matrix@{mirt\+::matrix}}
+\subsubsection[{\texorpdfstring{add\+\_\+row(std\+::vector$<$ T $>$ \&new\+\_\+row)}{add_row(std::vector< T > &new_row)}}]{\setlength{\rightskip}{0pt plus 5cm}template$<$class T $>$ void {\bf mirt\+::matrix}$<$ T $>$\+::add\+\_\+row (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ T $>$ \&}]{new\+\_\+row}
+\end{DoxyParamCaption}
+)}\hypertarget{classmirt_1_1matrix_abe4e475aefe0f247ba93f64f9e763c4a}{}\label{classmirt_1_1matrix_abe4e475aefe0f247ba93f64f9e763c4a}
+Adds a new row to the current matrix 
+
+Here is the call graph for this function\+:
