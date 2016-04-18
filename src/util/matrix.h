@@ -13,8 +13,9 @@
 
 namespace mirt {
 
-/*
- * Class matrix
+/**
+ *	Matrix class.
+ *	Matrix class used to store information.
  * */
 
 template<class T>
