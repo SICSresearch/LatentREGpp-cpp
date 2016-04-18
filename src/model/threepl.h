@@ -12,7 +12,7 @@
 
 namespace mirt {
 
-/*
+/**
  * 3PL Model
  *
  * Parameters:

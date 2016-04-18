@@ -1,6 +1,8 @@
 #include <iostream>
 #include "util/matrix.h"
 #include "util/input.h"
+#include "model/twopl.h"
+#include "estimation/estimation.h"
 #include <fstream>
 
 using namespace mirt;
@@ -11,16 +13,14 @@ using std::cout;
  * Main function used to test classes and implemented
  * algorithm.
  */
-int main() {
 
-	/*
-	 * Example of how to read a matrix from a csv
-	 * saving the values as int
-	 *
-	 * matrix and input have to have the same type
-	 * */
-	matrix<short> Y;
-	input<short> in(';');
+int main() {
+	matrix<char> Y;
+	input<char> in(';');
 	in.importCSV("test/dataset01.csv", Y);
+
 	cout << Y << '\n';
+
+	model model_chosen = twopl();
+	estimation e(model_chosen, Y);
 }

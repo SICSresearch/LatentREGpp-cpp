@@ -38,7 +38,12 @@ class matrix {
 		/**
 		 * Adds a new row to the current matrix
 		 * */
-		void add_row(std::vector<T> &new_row);
+		void add_row(std::vector<T> *new_row);
+
+		/**
+		 * Adds a new row to the current matrix
+		 * */
+		void add_row(std::vector<T> new_row);
 		void add_row(T* new_row, int size);
 		/**
 		 * Adds an empty row
@@ -49,18 +54,17 @@ class matrix {
 		 * Adds an element to the last row
 		 * */
 		void add_element(T e);
-
-		// Temporary method to prints the matrix
-		/**
-		 * Prints the matrix
-		 * */
-		void print();
 		virtual ~matrix();
 
 		/**
 		 * Returns the data
 		 * */
 		std::vector<std::vector<T> > get_data();
+
+		/**
+		 * Returns the i-th row in the matrix
+		 * */
+		std::vector<T> get_row(int i);
 
 		/**
 		 * Returns number of rows of the matrix
@@ -97,7 +101,12 @@ matrix<T>::matrix(int rows, int cols) {
 }
 
 template<class T>
-void matrix<T>::add_row(std::vector<T> &new_row) {
+void matrix<T>::add_row(std::vector<T> *new_row) {
+	data.push_back(*new_row);
+}
+
+template<class T>
+void matrix<T>::add_row(std::vector<T> new_row) {
 	data.push_back(new_row);
 }
 
@@ -134,6 +143,11 @@ std::vector<std::vector<T> > matrix<T>::get_data() {
 }
 
 template<class T>
+std::vector<T> matrix<T>::get_row(int i) {
+	return data[i];
+}
+
+template<class T>
 inline T &matrix<T>::operator()(const int r, const int c) {
 	return data[r][c];
 }
@@ -142,7 +156,7 @@ template<class T>
 std::ostream& operator<<(std::ostream &out, matrix<T> &m) {
 	for (int i = 0; i < m.rows(); ++i) {
 		for (int j = 0; j < m.columns(i); j++)
-			out << m(i, j) << ' ';
+			out << short(m(i, j)) << ' ';
 		out << '\n';
 	}
 	return (out);

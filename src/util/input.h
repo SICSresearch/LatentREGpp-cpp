@@ -21,8 +21,8 @@ namespace mirt {
 template<class T>
 class input {
 	private:
-		/*
-		 * delimiter to split each file line
+		/**
+		 * Delimiter to split each file line
 		 */
 		char delimiter;
 
@@ -33,19 +33,17 @@ class input {
 		virtual ~input();
 
 		/**
-		 * Imports binary matrices from a csv
-		 *
-		 * Not implement yet
+		 * Imports matrices from a csv
 		 * */
 		bool importCSV(std::string filename, matrix<T>& m);
 
 		/**
-		 * Gets the delimitier used for inputting
+		 * Gets the delimiter used for inputting
 		 * */
 		char get_delimiter() const;
 
 		/**
-		 * Sets the delimitier for inputting text matrices
+		 * Sets the delimiter for inputting text matrices
 		 * */
 		void set_delimiter(char);
 };
@@ -80,7 +78,7 @@ bool input<T>::importCSV(std::string filename, matrix<T>& m) {
 				next = std::find(start, end, delimiter);
 			}
 			splitted.push_back(atoi(std::string(start, next).c_str()));
-			m.add_row(splitted);
+			m.add_row(&splitted);
 		}
 		file.close();
 		return true;
