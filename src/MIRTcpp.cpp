@@ -22,5 +22,5 @@ int main() {
 	cout << Y << '\n';
 
 	model model_chosen = twopl();
-	estimation e(model_chosen, Y);
+	estimation e(model_chosen, Y, 1, 10, 0.001);
 }
