@@ -133,7 +133,7 @@ int matrix<T>::rows() {
 
 template<class T>
 int matrix<T>::columns(int row) {
-	if ( row >= data.size() )
+	if ( (unsigned)row >= data.size() )
 		return -1;
 	return data[row].size();
 }
@@ -150,7 +150,7 @@ std::vector<T> matrix<T>::get_row(int i) {
 
 template<class T>
 inline T &matrix<T>::operator()(const int r, const int c) {
-	return data[r][c];
+	return data.at(r).at(c);
 }
 
 template<class T>
