@@ -33,9 +33,9 @@ class input {
 		virtual ~input();
 
 		/**
-		 * Imports matrices from a csv
+		 * Imports matrixes from a csv
 		 * */
-		bool importCSV(std::string filename, matrix<T>& m);
+		bool importData(std::string filename, matrix<T>& m);
 
 		/**
 		 * Gets the delimiter used for inputting
@@ -63,7 +63,7 @@ input<T>::~input() {
 }
 
 template<class T>
-bool input<T>::importCSV(std::string filename, matrix<T>& m) {
+bool input<T>::importData(std::string filename, matrix<T>& m) {
 	std::string line;
 	std::ifstream file(filename.c_str());
 	if (file.is_open()) {
@@ -73,11 +73,15 @@ bool input<T>::importCSV(std::string filename, matrix<T>& m) {
 			std::string::const_iterator end = line.end();
 			std::string::const_iterator next = std::find(start, end, delimiter);
 			while (next != end) {
-				splitted.push_back(atoi(std::string(start, next).c_str()));
+				std::string to_add(start, next);
+				if ( !to_add.empty() )
+					splitted.push_back(atof(to_add.c_str()));
 				start = next + 1;
 				next = std::find(start, end, delimiter);
 			}
-			splitted.push_back(atoi(std::string(start, next).c_str()));
+			std::string to_add(start, next);
+			if ( !to_add.empty() )
+				splitted.push_back(atof(to_add.c_str()));
 			m.add_row(&splitted);
 		}
 		file.close();

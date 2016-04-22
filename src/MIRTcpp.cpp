@@ -3,6 +3,7 @@
 #include "util/input.h"
 #include "model/twopl.h"
 #include "estimation/estimation.h"
+#include "util/quadraturepoints.h"
 #include <fstream>
 
 using namespace mirt;
@@ -15,9 +16,11 @@ using std::cout;
  */
 
 int main() {
+	compute_and_save_quadrature_points("data/quadrature10_in.data", 2);
+
 	matrix<char> Y;
 	input<char> in(';');
-	in.importCSV("test/dataset01.csv", Y);
+	in.importData("test/dataset01.csv", Y);
 
 	cout << Y << '\n';
 
