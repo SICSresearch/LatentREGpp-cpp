@@ -3,7 +3,6 @@
 	<name>MIRTcpp</name>
 	<comment></comment>
 	<projects>
-		<project>MIRTcpp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

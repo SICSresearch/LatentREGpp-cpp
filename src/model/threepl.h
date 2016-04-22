@@ -24,6 +24,7 @@ class threepl : public model {
 	public:
 		threepl();
 		virtual ~threepl();
+		double P(std::vector<double>, item_parameter);
 };
 
 } /* namespace mirt */

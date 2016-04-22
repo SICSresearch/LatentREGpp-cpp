@@ -52,6 +52,11 @@ class matrix {
 		void add_row();
 
 		/**
+		 * Adds a empty row with specified size
+		 * */
+		void add_row(int);
+
+		/**
 		 * Adds an element to the last row
 		 * */
 		void add_element(T e);
@@ -119,6 +124,11 @@ void matrix<T>::add_row(T* new_row, int size) {
 template<class T>
 void matrix<T>::add_row() {
 	data.push_back(std::vector<T>());
+}
+
+template<class T>
+void matrix<T>::add_row(int size) {
+	data.push_back(std::vector<T>(size));
 }
 
 template<class T>

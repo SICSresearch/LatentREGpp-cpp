@@ -11,6 +11,7 @@
 #include "../model/model.h"
 #include "../util/matrix.h"
 #include "../util/itemparameter.h"
+#include "estep.h"
 #include <map>
 #include <cmath>
 
@@ -37,17 +38,17 @@ class estimation {
 		int p;
 
 		/**
-		 * Number of nodes
-		 * Number of Quadrature points
-		 * */
-		int G;
-
-		/**
 		 * Number of response patterns
 		 * */
 		int s;
 		double convergence_difference;
+
+		/**
+		 * Vector of parameters
+		 * */
 		std::vector<item_parameter> zeta;
+
+
 		/**
 		 * Y , s x p, matrix of pattern responses.
 		 *
@@ -55,6 +56,11 @@ class estimation {
 		 * p is the number of items
 		 * */
 		matrix<char> Y;
+
+		/**
+		 * Dichotomized matrix
+		 * */
+		std::vector<matrix<bool> > X;
 
 		/**
 		 * nl, frequencies of each pattern allocated in Y
@@ -65,18 +71,6 @@ class estimation {
 		 * vector to allocate the number of categories of each item
 		 * */
 		std::vector<int> categories_item;
-
-		/**
-		 * Probability matrix
-		 *
-		 * pi(g, l) with g = 1, ..., G; l = 1, ..., s
-		 * 		i.e, the size of pi is
-		 * 			 Number of Quadrature points X Number of response patterns
-		 *
-		 * pi(g, l) is the probability that a response pattern belongs to
-		 * 			group g
-		 * */
-		matrix<double> pi;
 
 	public:
 		estimation();

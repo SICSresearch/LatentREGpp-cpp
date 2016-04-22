@@ -16,11 +16,11 @@ estimation::estimation() {
 
 estimation::estimation(model &m, matrix<char> &data, short d = 1, short iterations = -1,
 					   double convergence_difference = 0.0001) {
-	static int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
-
-	model_used = m;
 	// Setting the dimension
 	this->d = d;
+
+	//Finding the matrix of response patterns Y
+	//And its frequency
 	std::map<std::vector<char>, int> freq;
 	for ( int i = 0; i < data.rows(); ++i )
 		++freq[data.get_row(i)];
@@ -40,8 +40,6 @@ estimation::estimation(model &m, matrix<char> &data, short d = 1, short iteratio
 	// of any response pattern
 	this->p = Y.columns(0);
 
-	this->iterations = iterations;
-	this->convergence_difference = convergence_difference;
 
 	//Finding the number of categories of each item
 	for ( int j = 0; j < p; ++j ) {
@@ -51,11 +49,23 @@ estimation::estimation(model &m, matrix<char> &data, short d = 1, short iteratio
 		categories_item.push_back(max_category);
 	}
 
-	//Setting the number of quadrature points
-	G = MAX_NUMBER_OF_QUADRATURE_POINTS / d;
+	/**
+	 * After Y, here matrix X (dichotomized matrix) is computed
+	 *
+	 *
+	 */
+	X = std::vector<matrix<bool> >(s);
+	for ( int l = 0; l < s; ++l ) {
+		for ( int i = 0; i < p; ++i ) {
+			X[l].add_row(categories_item[i]);
+			X[Y(l, i)] = 1;
+		}
+	}
 
-	//Setting size of pi matrix
-	pi = matrix<double>(G, s);
+	//Configurations for each estimation
+	model_used = m;
+	this->iterations = iterations;
+	this->convergence_difference = convergence_difference;
 }
 
 estimation::~estimation() {
@@ -68,11 +78,19 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	//initial values
-	void init_values();
+	static int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
+
+	// Defining the number of nodes
+	static int G = MAX_NUMBER_OF_QUADRATURE_POINTS / d;;
+
+	//Finding initial values for zeta
+	initial_values();
 
 	for ( ; ; ) {
 		// E step here
+
+
+
 		// M step here
 
 

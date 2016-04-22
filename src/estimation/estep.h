@@ -8,17 +8,16 @@
 #ifndef ESTIMATION_ESTEP_H_
 #define ESTIMATION_ESTEP_H_
 
+#include "../model/model.h"
+#include "../util/matrix.h"
+
 namespace mirt {
 
-/*
- * E step of the EM Algorithm
+/**
+ * Estep of the EMAlgortihm
  *
  * */
-class estep {
-	public:
-		estep();
-		virtual ~estep();
-};
+void Estep(model, std::vector<item_parameter>&, matrix<char>&, std::vector<matrix<bool> >&, int);
 
 } /* namespace mirt */
 

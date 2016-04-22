@@ -36,6 +36,8 @@ class item_parameter {
 
 		std::vector<double> get_alpha();
 		std::vector<double> get_gamma();
+
+		int get_categories();
 };
 
 } /* namespace mirt */

@@ -22,6 +22,7 @@ class onepl: public model {
 	public:
 		onepl();
 		virtual ~onepl();
+		double P(std::vector<double>, item_parameter);
 };
 
 } /* namespace mirt */

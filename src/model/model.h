@@ -8,6 +8,9 @@
 #ifndef MODEL_MODEL_H_
 #define MODEL_MODEL_H_
 
+#include <vector>
+#include "../util/itemparameter.h"
+
 namespace mirt {
 
 /*
@@ -19,6 +22,12 @@ class model {
 public:
 	model();
 	virtual ~model();
+
+	/**
+	 * This method computes the probability that a response pattern U_l has the category k to item
+	 * i, given that its latent trait vector theta, and the item paramters
+	 * */
+	double P(std::vector<double>, item_parameter);
 };
 
 } /* namespace mirt */
