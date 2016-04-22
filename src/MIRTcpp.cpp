@@ -15,8 +15,15 @@ using std::cout;
  * algorithm.
  */
 
+inline void improveIO () {
+	std::ios_base::sync_with_stdio(0);
+	std::cin.tie(0); std::cout.tie(0);
+}
+
 int main() {
-	compute_and_save_quadrature_points("data/quadrature10_in.data", 2);
+	improveIO();
+
+	compute_and_save_quadrature_points("data/quadrature10_in.data", 3);
 
 	matrix<char> Y;
 	input<char> in(';');
