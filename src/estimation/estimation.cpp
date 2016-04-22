@@ -80,8 +80,17 @@ void estimation::initial_values() {
 void estimation::EMAlgortihm() {
 	static int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
 
-	// Defining the number of nodes
-	static int G = MAX_NUMBER_OF_QUADRATURE_POINTS / d;;
+	/**
+	 * Defining the number of quadrature points
+	 *
+	 * As max number of quadrature points is 40
+	 *
+	 * G will be in 1dimension = 40
+	 * 				2dimension = 20
+	 * 				3dimension = 10
+	 * 				> 4dimension = 5
+	 * */
+	static int G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << d, 8));
 
 	//Finding initial values for zeta
 	initial_values();

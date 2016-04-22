@@ -25,16 +25,24 @@ namespace mirt {
 		}
 	}
 
-	void compute_and_save_quadrature_points(std::string filename, int d) {
-		matrix<double> temp;
+	void compute_and_save_quadrature_points(int G, int d) {
+		std::vector<double> q;
 		input<double> in(' ');
 		//Quadrature points loaded from file
-		in.importData(filename, temp);
-		//Saving them as a vector
-		std::vector<double> q;
-		for ( int i = 0; i < temp.rows(); ++i )
-			for ( int j = 0; j < temp.columns(i); ++j )
-				q.push_back(temp(i, j));
+		std::stringstream ss;
+		ss << G;
+		std::string filename = "data/quadrature" + ss.str() + "_in.data";
+		if ( !in.importData(filename, q) ) {
+			std::cout << "Your filename " << filename << '\n';
+			std::cout << "Filename must have this form: " << '\n';
+			std::cout << "quadratureG_in.data and be allocated in /data/ \n";
+			return;
+		}
+
+		double f = sqrt(2);
+		for ( int i = 0; i < q.size(); ++i )
+			q[i] *= f;
+
 		/**
 		 * Here the latent trait vectors are computed
 		 * using a backtracking approach
@@ -44,11 +52,10 @@ namespace mirt {
 		matrix<double> latent_trait;
 		//current latent trait vector, it starts void
 		std::vector<double> current_trait;
-		//vector of used
-		std::vector<bool> used(q.size());
-
 		//computing latent trait vector for the given dimension
 		compute_latent_trait(q, d, current_trait, latent_trait);
+
+
 
 		std::cout << "Latent trait vectors. Total[" << latent_trait.rows() << "]\n";
 		for ( int i = 0; i < latent_trait.rows(); ++i ) {
@@ -59,8 +66,74 @@ namespace mirt {
 			}
 			std::cout << "]\n";
 		}
+
+		std::ofstream out;
+		ss.str("");
+		ss << G;
+		filename = "data/quadrature" + ss.str() + "_computed.data";
+		out.open(filename.c_str());
+		for ( int i = 0; i < latent_trait.rows(); ++i ) {
+			for ( int j = 0; j < latent_trait.columns(i); ++j )
+				out << latent_trait(i, j) << ' ';
+			out << '\n';
+		}
+		out.close();
 	}
 
+	void compute_weights ( std::vector<double> &w, int r,
+						   double current_weight, std::vector<double> &weights ) {
+		if ( r == 0 ) {
+			weights.push_back(current_weight);
+			return;
+		}
+		for ( int i = 0; i < w.size(); ++i ) {
+			current_weight *= w[i];
+			compute_weights(w, r - 1, current_weight, weights);
+			current_weight /= w[i];
+		}
+	}
+
+	void compute_and_save_weights ( int G, int d ) {
+		std::vector<double> w;
+		input<double> in(' ');
+		std::stringstream ss;
+		ss << G;
+		std::string filename = "data/weights" + ss.str() + "_in.data";
+		if ( !in.importData(filename, w) ) {
+			std::cout << "Your filename " << filename << '\n';
+			std::cout << "Filename must have this form: " << '\n';
+			std::cout << "weightsG_in.data and be allocated in /data/\n";
+			return;
+		}
+
+		double pi = acos(-1);
+		double f = pow(sqrt(pi), d);
+		for ( int i = 0; i < w.size(); ++i )
+			w[i] /= f;
+
+		/**
+		 * Weights are computed as the same way than latent trait vectors
+		 * Using backtracking
+		 * */
+
+		std::vector<double> weights;
+		double current_weight = 1;
+		compute_weights(w, d, current_weight, weights);
+
+		std::cout << "Weights. Total[" << weights.size() << "]\n";
+		for ( int i = 0; i < weights.size(); ++i ) {
+			std::cout << weights[i] << '\n';
+		}
+
+		std::ofstream out;
+		ss.str("");
+		ss << G;
+		filename = "data/weights" + ss.str() + "_computed.data";
+		out.open(filename.c_str());
+		for ( int i = 0; i < weights.size(); ++i )
+			out << weights[i] << '\n';
+		out.close();
+	}
 }
 
 

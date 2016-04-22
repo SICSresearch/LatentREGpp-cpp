@@ -5,6 +5,7 @@
 #include "estimation/estimation.h"
 #include "util/quadraturepoints.h"
 #include <fstream>
+#include <cstdlib>
 
 using namespace mirt;
 using std::cout;
@@ -21,15 +22,29 @@ inline void improveIO () {
 }
 
 int main() {
-	improveIO();
+	cout.setf(std::ios_base::fixed);
+	cout.precision(25);
 
-	compute_and_save_quadrature_points("data/quadrature10_in.data", 3);
+//	compute_and_save_quadrature_points(40, 1);
+//	compute_and_save_weights(40, 1);
+//
+//	compute_and_save_quadrature_points(20, 2);
+//	compute_and_save_weights(20, 2);
+//
+//	compute_and_save_quadrature_points(10, 3);
+//	compute_and_save_weights(10, 3);
+//
+//	compute_and_save_quadrature_points(5, 4);
+//	compute_and_save_weights(5, 4);
+
+
+	improveIO();
 
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData("test/dataset01.csv", Y);
 
-	cout << Y << '\n';
+	//cout << Y << '\n';
 
 	model model_chosen = twopl();
 	estimation e(model_chosen, Y, 1, 10, 0.001);
