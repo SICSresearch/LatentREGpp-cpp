@@ -10,6 +10,7 @@
 
 #include "../model/model.h"
 #include "../util/matrix.h"
+#include "../util/quadraturepoints.h"
 
 namespace mirt {
 
@@ -17,7 +18,7 @@ namespace mirt {
  * Estep of the EMAlgortihm
  *
  * */
-void Estep(model, std::vector<item_parameter>&, matrix<char>&, std::vector<matrix<bool> >&, int);
+void Estep(model&, std::vector<item_parameter>&, matrix<char>&, std::vector<matrix<int> >&, int);
 
 } /* namespace mirt */
 

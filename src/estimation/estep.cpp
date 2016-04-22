@@ -14,7 +14,12 @@ namespace mirt {
  *
  * */
 void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
-			 std::vector<matrix<bool> > &X, int G ) {
+			 std::vector<matrix<int> > &X, int G ) {
+	// Latent trait vectors are loaded
+	static matrix<double> theta = load_quadrature_points(G);
+	// Weights are loaded
+	static std::vector<double> w = load_weights(G);
+
 	/**
 	 * Number of response patterns
 	 * */
@@ -44,15 +49,26 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 			 * Computing each element of the matrix
 			 * pi(g, l)
 			 * */
-			double pi_gl = 0;
+			double pi_gl = 1;
 
-			matrix<bool> x_l = X[l];
+			/**
+			 * Just supporting polytomic case
+			 * */
+			matrix<int> &x_l = X[l];
 			for ( int i = 0; i < p; ++i ) {
+				double t = 1;
+
 				// Number of categories of this item
 				int mi = zeta[i].get_categories();
 				for ( int k = 0; k < mi; ++k ) {
-					// here, must be Pik(theta)^x_l(i, k) * w_g
+					if ( x_l(i, k) ) {
+						std::vector<double> theta_i = theta.get_row(i);
+						//t *= m.Pik(theta_i, zeta[i], k) * w[g];
+					} else
+						t *= w[g];
 				}
+
+				pi_gl *= t;
 			}
 		}
 	}

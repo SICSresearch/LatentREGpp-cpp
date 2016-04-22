@@ -52,17 +52,16 @@ estimation::estimation(model &m, matrix<char> &data, short d = 1, short iteratio
 	/**
 	 * After Y, here matrix X (dichotomized matrix) is computed
 	 *
-	 *
 	 */
-	X = std::vector<matrix<bool> >(s);
+	X = std::vector<matrix<int> >(s);
 	for ( int l = 0; l < s; ++l ) {
 		for ( int i = 0; i < p; ++i ) {
 			X[l].add_row(categories_item[i]);
-			X[Y(l, i)] = 1;
+			X[Y(l, i) - 1] = 1;
 		}
 	}
 
-	//Configurations for each estimation
+	//Configurations for the estimation
 	model_used = m;
 	this->iterations = iterations;
 	this->convergence_difference = convergence_difference;
@@ -94,6 +93,8 @@ void estimation::EMAlgortihm() {
 
 	//Finding initial values for zeta
 	initial_values();
+
+	Estep(model_used, zeta, Y, X, G);
 
 	for ( ; ; ) {
 		// E step here

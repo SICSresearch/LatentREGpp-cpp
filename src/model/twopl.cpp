@@ -18,4 +18,8 @@ twopl::~twopl() {
 	// TODO Auto-generated destructor stub
 }
 
+double twopl::Pik(std::vector<double> &theta, item_parameter &item, int k) {
+
+}
+
 } /* namespace mirt */

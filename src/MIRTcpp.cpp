@@ -37,14 +37,13 @@ int main() {
 //	compute_and_save_quadrature_points(5, 4);
 //	compute_and_save_weights(5, 4);
 
-
 	improveIO();
 
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("test/dataset01.csv", Y);
+	in.importData("test/dataset02.csv", Y);
 
-	//cout << Y << '\n';
+	cout << Y << '\n';
 
 	model model_chosen = twopl();
 	estimation e(model_chosen, Y, 1, 10, 0.001);

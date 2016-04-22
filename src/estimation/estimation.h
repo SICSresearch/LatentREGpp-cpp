@@ -60,7 +60,7 @@ class estimation {
 		/**
 		 * Dichotomized matrix
 		 * */
-		std::vector<matrix<bool> > X;
+		std::vector<matrix<int> > X;
 
 		/**
 		 * nl, frequencies of each pattern allocated in Y

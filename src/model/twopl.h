@@ -23,7 +23,7 @@ class twopl : public model {
 	public:
 		twopl();
 		virtual ~twopl();
-		double P(std::vector<double>, item_parameter);
+		double Pik(std::vector<double>&, item_parameter&, int);
 };
 
 } /* namespace mirt */

@@ -134,6 +134,28 @@ namespace mirt {
 			out << weights[i] << '\n';
 		out.close();
 	}
+
+	matrix<double> load_quadrature_points ( int G ) {
+		std::stringstream ss;
+		ss << G;
+		std::string filename = "data/quadrature" + ss.str() + "_computed.data";
+
+		matrix<double> m;
+		input<double> in(' ');
+		in.importData(filename, m);
+		return m;
+	}
+
+	std::vector<double> load_weights ( int G ) {
+		std::stringstream ss;
+		ss << G;
+		std::string filename = "data/weights" + ss.str() + "_computed.data";
+
+		std::vector<double> v;
+		input<double> in(' ');
+		in.importData(filename, v);
+		return v;
+	}
 }
 
 

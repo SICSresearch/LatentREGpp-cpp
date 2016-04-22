@@ -27,7 +27,7 @@ public:
 	 * This method computes the probability that a response pattern U_l has the category k to item
 	 * i, given that its latent trait vector theta, and the item paramters
 	 * */
-	double P(std::vector<double>, item_parameter);
+	double Pik(std::vector<double>&, item_parameter&, int k);
 };
 
 } /* namespace mirt */
