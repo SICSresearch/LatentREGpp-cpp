@@ -63,7 +63,7 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 				for ( int k = 0; k < mi; ++k ) {
 					if ( x_l(i, k) ) {
 						std::vector<double> theta_i = theta.get_row(i);
-						//t *= m.Pik(theta_i, zeta[i], k) * w[g];
+						t *= m.Pik(theta_i, zeta[i], k) * w[g];
 					} else
 						t *= w[g];
 				}

@@ -1,7 +1,6 @@
 #include <iostream>
 #include "util/matrix.h"
 #include "util/input.h"
-#include "model/twopl.h"
 #include "estimation/estimation.h"
 #include "util/quadraturepoints.h"
 #include <fstream>
@@ -45,6 +44,5 @@ int main() {
 
 	cout << Y << '\n';
 
-	model model_chosen = twopl();
-	estimation e(model_chosen, Y, 1, 10, 0.001);
+	estimation e(2, Y, 1, 10, 0.001);
 }

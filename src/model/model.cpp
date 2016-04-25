@@ -14,6 +14,10 @@ model::model() {
 
 }
 
+model::model(int parameters) {
+
+}
+
 model::~model() {
 	// TODO Auto-generated destructor stub
 }

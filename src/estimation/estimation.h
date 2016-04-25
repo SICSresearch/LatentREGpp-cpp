@@ -72,6 +72,11 @@ class estimation {
 		 * */
 		std::vector<int> categories_item;
 
+		/**
+		 * bool variable to know if data is polytomous or dichotomous
+		 * */
+		bool dichotomous;
+
 	public:
 		estimation();
 
@@ -91,7 +96,7 @@ class estimation {
 		 *
 		 * Then it builds the matrix of pattern responses and its frequency
 		 * */
-		estimation(model&, matrix<char>&, short, short, double);
+		estimation(int, matrix<char>&, short, short, double);
 		virtual ~estimation();
 
 		void initial_values();

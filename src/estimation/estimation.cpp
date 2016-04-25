@@ -14,7 +14,7 @@ estimation::estimation() {
 
 }
 
-estimation::estimation(model &m, matrix<char> &data, short d = 1, short iterations = -1,
+estimation::estimation(int m, matrix<char> &data, short d = 1, short iterations = -1,
 					   double convergence_difference = 0.0001) {
 	// Setting the dimension
 	this->d = d;
@@ -41,13 +41,24 @@ estimation::estimation(model &m, matrix<char> &data, short d = 1, short iteratio
 	this->p = Y.columns(0);
 
 
-	//Finding the number of categories of each item
+	//Finding the number of categories of each item and seeing if it's dichotomous
+	this->dichotomous = false;
 	for ( int j = 0; j < p; ++j ) {
 		int max_category = -1;
-		for ( int i = 0; i < s; ++i )
+		for ( int i = 0; i < s; ++i ) {
 			if ( Y(i, j) > max_category ) max_category = Y(i, j);
+			dichotomous |= Y(i, j) == 0;
+		}
 		categories_item.push_back(max_category);
 	}
+
+	// If it's dichotomous, we add 1 to data
+	if ( !dichotomous ) {
+		for ( int i = 0; i < s; ++i )
+			for ( int j = 0; j < p; ++j )
+				++Y(i, j);
+	}
+
 
 	/**
 	 * After Y, here matrix X (dichotomized matrix) is computed
@@ -62,7 +73,7 @@ estimation::estimation(model &m, matrix<char> &data, short d = 1, short iteratio
 	}
 
 	//Configurations for the estimation
-	model_used = m;
+	model_used = model(m);
 	this->iterations = iterations;
 	this->convergence_difference = convergence_difference;
 }

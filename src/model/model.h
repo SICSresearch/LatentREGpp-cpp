@@ -21,6 +21,11 @@ namespace mirt {
 class model {
 public:
 	model();
+
+	/**
+	 * This receives 1, 2 or 3. Depending on the model to use
+	 * */
+	model(int);
 	virtual ~model();
 
 	/**
