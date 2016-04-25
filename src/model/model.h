@@ -9,6 +9,8 @@
 #define MODEL_MODEL_H_
 
 #include <vector>
+#include <cmath>
+#include <cassert>
 #include "../util/itemparameter.h"
 
 namespace mirt {
@@ -18,7 +20,9 @@ namespace mirt {
  * It represents what is the model approach to use
  * Might be 1PL, 2PL, 3PL
  * */
+
 class model {
+
 public:
 	model();
 
@@ -29,10 +33,17 @@ public:
 	virtual ~model();
 
 	/**
+	 * Probability in dichotomous case
+	 * */
+	double Pstar_ik(std::vector<double>&, item_parameter&, int k);
+
+	/**
 	 * This method computes the probability that a response pattern U_l has the category k to item
 	 * i, given that its latent trait vector theta, and the item paramters
 	 * */
 	double Pik(std::vector<double>&, item_parameter&, int k);
+
+
 };
 
 } /* namespace mirt */

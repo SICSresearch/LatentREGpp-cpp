@@ -23,9 +23,11 @@ class item_parameter {
 		 * */
 		short categories;
 
+	public:
+
 		std::vector<double> alpha;
 		std::vector<double> gamma;
-	public:
+
 		item_parameter();
 
 		/**
@@ -37,7 +39,8 @@ class item_parameter {
 		std::vector<double> get_alpha();
 		std::vector<double> get_gamma();
 
-		int get_categories();
+		short get_categories();
+		short get_dimension();
 };
 
 } /* namespace mirt */

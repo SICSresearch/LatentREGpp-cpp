@@ -17,7 +17,7 @@ using std::cout;
 
 inline void improveIO () {
 	std::ios_base::sync_with_stdio(0);
-	std::cin.tie(0); std::cout.tie(0);
+	//std::cin.tie(0); std::cout.tie(0);
 }
 
 int main() {
@@ -42,7 +42,9 @@ int main() {
 	input<char> in(';');
 	in.importData("test/dataset02.csv", Y);
 
-	cout << Y << '\n';
+	cout << "Data\n";
+	cout << Y << std::endl;
 
 	estimation e(2, Y, 1, 10, 0.001);
+	e.EMAlgortihm();
 }

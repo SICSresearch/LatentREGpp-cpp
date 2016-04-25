@@ -67,8 +67,9 @@ estimation::estimation(int m, matrix<char> &data, short d = 1, short iterations 
 	X = std::vector<matrix<int> >(s);
 	for ( int l = 0; l < s; ++l ) {
 		for ( int i = 0; i < p; ++i ) {
-			X[l].add_row(categories_item[i]);
-			X[Y(l, i) - 1] = 1;
+			std::vector<int> row(categories_item[i]);
+			row[Y(l, i) - 1] = 1;
+			X[l].add_row(row);
 		}
 	}
 
@@ -100,22 +101,22 @@ void estimation::EMAlgortihm() {
 	 * 				3dimension = 10
 	 * 				> 4dimension = 5
 	 * */
-	static int G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << d, 8));
+	static int G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
 
 	//Finding initial values for zeta
 	initial_values();
 
 	Estep(model_used, zeta, Y, X, G);
 
-	for ( ; ; ) {
-		// E step here
-
-
-
-		// M step here
-
-
-	}
+//	for ( ; ; ) {
+//		// E step here
+//
+//
+//
+//		// M step here
+//
+//
+//	}
 }
 
 

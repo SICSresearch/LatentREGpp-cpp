@@ -8,6 +8,7 @@
 #ifndef ESTIMATION_ESTEP_H_
 #define ESTIMATION_ESTEP_H_
 
+#include <iostream>
 #include "../model/model.h"
 #include "../util/matrix.h"
 #include "../util/quadraturepoints.h"

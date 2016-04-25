@@ -7,6 +7,9 @@
 
 #include "estep.h"
 
+//Includes for testing
+#include "../../test/pimatrixtest.h";
+
 namespace mirt {
 
 /**
@@ -17,6 +20,7 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 			 std::vector<matrix<int> > &X, int G ) {
 	// Latent trait vectors are loaded
 	static matrix<double> theta = load_quadrature_points(G);
+
 	// Weights are loaded
 	static std::vector<double> w = load_weights(G);
 
@@ -42,36 +46,75 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 	 * */
 	matrix<double> pi(G, s);
 
-
+	/**
+	 * Computing pi matrix
+	 * */
 	for ( int g = 0; g < G; ++g ) {
-		for ( int l = 0; l < s; ++s ) {
+		for ( int l = 0; l < s; ++l ) {
 			/**
 			 * Computing each element of the matrix
 			 * pi(g, l)
 			 * */
-			double pi_gl = 1;
 
-			/**
-			 * Just supporting polytomic case
-			 * */
+			//std::cout << "Computing pi(" << g << ' ' << l << ") " << std::endl;
+
+			double &pi_gl = pi(g, l);
+
+			double numerator = 1;
+
 			matrix<int> &x_l = X[l];
 			for ( int i = 0; i < p; ++i ) {
-				double t = 1;
+				double product = 1;
 
 				// Number of categories of this item
 				int mi = zeta[i].get_categories();
 				for ( int k = 0; k < mi; ++k ) {
 					if ( x_l(i, k) ) {
 						std::vector<double> theta_i = theta.get_row(i);
-						t *= m.Pik(theta_i, zeta[i], k) * w[g];
-					} else
-						t *= w[g];
+						product *= m.Pik(theta_i, zeta[i], k);
+						//std::cout << i << ' ' << k << ' ' << m.Pik(theta_i, zeta[i], k) << std::endl;
+					}
+					product *= w[g];
 				}
 
-				pi_gl *= t;
+				numerator *= product;
 			}
+
+			double denominator = 0;
+
+			for ( int h = 0; h < G; ++h ) {
+				double product1 = 1;
+
+				for ( int i = 0; i < p; ++i ) {
+					double product2 = 1;
+
+					// Number of categories of this item
+					int mi = zeta[i].get_categories();
+					for ( int k = 0; k < mi; ++k ) {
+						if ( x_l(i, k) ) {
+							std::vector<double> theta_i = theta.get_row(i);
+							product2 *= m.Pik(theta_i, zeta[i], k);
+						}
+						product2 *= w[h];
+					}
+
+					product1 *= product2;
+				}
+
+				denominator += product1;
+			}
+
+			//std::cout << numerator << ' ' << denominator << std::endl;
+
+			pi_gl = numerator / denominator;
+			//std::cout << pi_gl << std::endl;
 		}
 	}
+
+	std::cout.precision(4);
+	//std::cout << "Pi matrix" << std::endl;
+	//std::cout << pi << std::endl;
+	std::cout << test_pi(pi) << std::endl;
 }
 
 } /* namespace mirt */

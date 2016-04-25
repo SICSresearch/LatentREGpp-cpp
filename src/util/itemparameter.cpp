@@ -41,8 +41,12 @@ std::vector<double> item_parameter::get_gamma() {
 	return gamma;
 }
 
-int item_parameter::get_categories() {
+short item_parameter::get_categories() {
 	return categories;
+}
+
+short item_parameter::get_dimension() {
+	return d;
 }
 
 } /* namespace mirt */
