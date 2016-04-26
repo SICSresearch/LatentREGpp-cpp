@@ -96,7 +96,7 @@ class estimation {
 		 *
 		 * Then it builds the matrix of pattern responses and its frequency
 		 * */
-		estimation(int, matrix<char>&, short, short, double);
+		estimation(int, matrix<char>&, short, double);
 		virtual ~estimation();
 
 		void initial_values();

@@ -45,6 +45,6 @@ int main() {
 	cout << "Data\n";
 	cout << Y << std::endl;
 
-	estimation e(2, Y, 1, 10, 0.001);
+	estimation e(2, Y, 1, 0.001);
 	e.EMAlgortihm();
 }

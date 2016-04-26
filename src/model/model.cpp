@@ -15,7 +15,7 @@ model::model() {
 }
 
 model::model(int parameters) {
-
+	this->parameters = parameters;
 }
 
 double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, int k) {
@@ -29,27 +29,46 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 	if ( k == -1 ) return 1;
 	if ( k == parameters.get_categories() - 1 ) return 0;
 
-	//This is for 2PL Case
+	if ( this->parameters == 1 ) {
+		/**
+		 * 1PL Approach
+		 *
+		 * */
 
+		return 0.5;
+	}
+	if ( this->parameters == 2 ) {
+		/**
+		 * 2PL Approach
+		 *
+		 * */
+
+		/**
+		 * Dimensions
+		 * */
+		short d = parameters.get_dimension();
+
+		/**
+		 * Initialized with gamma_k value
+		 * */
+		double eta = parameters.gamma[k];
+
+		//Computing dot product
+		for ( short i = 0; i < d; ++i )
+			eta += parameters.alpha[i] * theta[i];
+
+		return 1.0 / (1.0 + std::exp(-eta));
+	}
 	/**
-	 * Dimensions
+	 * 3PL Approach
+	 *
 	 * */
-	short d = parameters.get_dimension();
 
-	/**
-	 * Initialized with gamma_k value
-	 * */
-	double eta = parameters.gamma[k];
-
-	//Computing dot product
-	for ( short i = 0; i < d; ++i )
-		eta += parameters.alpha[i] * theta[i];
-
-	return 1.0 / (1.0 + std::exp(-eta));
+	return 1;
 }
 
 double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k) {
-	static const double LOWER_BOUND_ = 1e-06;
+	static const double LOWER_BOUND_ = 1e-08;
 	static const double UPPER_BOUND_ = 0.999999;
 
 	double P_ik = Pstar_ik(theta, parameters, k - 1) - Pstar_ik(theta, parameters, k);

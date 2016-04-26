@@ -23,6 +23,13 @@ namespace mirt {
 
 class model {
 
+private:
+
+	/**
+	 * Number of parameters of the model
+	 * */
+	int parameters;
+
 public:
 	model();
 

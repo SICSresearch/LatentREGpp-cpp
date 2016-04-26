@@ -13,7 +13,7 @@
 namespace mirt {
 
 	/**
-	 * Tests the sum if each row of pi matrix is equals to 1
+	 * Tests the sum if each columns of pi matrix is equals to 1
 	 * */
 	bool test_pi ( matrix<double> &pi );
 }

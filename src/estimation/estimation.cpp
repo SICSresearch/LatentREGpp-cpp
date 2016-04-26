@@ -14,7 +14,7 @@ estimation::estimation() {
 
 }
 
-estimation::estimation(int m, matrix<char> &data, short d = 1, short iterations = -1,
+estimation::estimation(int m, matrix<char> &data, short d = 1,
 					   double convergence_difference = 0.0001) {
 	// Setting the dimension
 	this->d = d;
@@ -53,10 +53,12 @@ estimation::estimation(int m, matrix<char> &data, short d = 1, short iterations 
 	}
 
 	// If it's dichotomous, we add 1 to data
-	if ( !dichotomous ) {
+	if ( dichotomous ) {
 		for ( int i = 0; i < s; ++i )
 			for ( int j = 0; j < p; ++j )
 				++Y(i, j);
+		for ( int i = 0; i < p; ++i )
+			++categories_item[i];
 	}
 
 
@@ -75,7 +77,6 @@ estimation::estimation(int m, matrix<char> &data, short d = 1, short iterations 
 
 	//Configurations for the estimation
 	model_used = model(m);
-	this->iterations = iterations;
 	this->convergence_difference = convergence_difference;
 }
 

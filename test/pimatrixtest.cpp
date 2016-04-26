@@ -13,9 +13,9 @@ namespace mirt {
 		const double MIN = 0.9999;
 
 		bool correct = true;
-		for ( int i = 0; i < pi.rows(); ++i ) {
+		for ( int j = 0; j < pi.columns(0); ++j ) {
 			double sum = 0;
-			for ( int j = 0; j < pi.columns(i); ++j )
+			for ( int i = 0; i < pi.rows(); ++i )
 				sum += pi(i, j);
 			correct &= sum >= MIN;
 		}

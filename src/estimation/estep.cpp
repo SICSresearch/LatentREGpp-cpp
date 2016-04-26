@@ -55,9 +55,6 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 			 * Computing each element of the matrix
 			 * pi(g, l)
 			 * */
-
-			//std::cout << "Computing pi(" << g << ' ' << l << ") " << std::endl;
-
 			double &pi_gl = pi(g, l);
 
 			double numerator = 1;
@@ -70,15 +67,16 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 				int mi = zeta[i].get_categories();
 				for ( int k = 0; k < mi; ++k ) {
 					if ( x_l(i, k) ) {
-						std::vector<double> theta_i = theta.get_row(i);
-						product *= m.Pik(theta_i, zeta[i], k);
-						//std::cout << i << ' ' << k << ' ' << m.Pik(theta_i, zeta[i], k) << std::endl;
+						std::vector<double> theta_g = theta.get_row(g);
+						product *= m.Pik(theta_g, zeta[i], k);
 					}
-					product *= w[g];
 				}
 
 				numerator *= product;
 			}
+
+			//Now multiply by the weight of node g
+			numerator *= w[g];
 
 			double denominator = 0;
 
@@ -92,29 +90,22 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 					int mi = zeta[i].get_categories();
 					for ( int k = 0; k < mi; ++k ) {
 						if ( x_l(i, k) ) {
-							std::vector<double> theta_i = theta.get_row(i);
-							product2 *= m.Pik(theta_i, zeta[i], k);
+							std::vector<double> theta_h = theta.get_row(h);
+							product2 *= m.Pik(theta_h, zeta[i], k);
 						}
-						product2 *= w[h];
 					}
-
 					product1 *= product2;
 				}
-
-				denominator += product1;
+				denominator += product1 * w[h];
 			}
 
-			//std::cout << numerator << ' ' << denominator << std::endl;
-
 			pi_gl = numerator / denominator;
-			//std::cout << pi_gl << std::endl;
 		}
 	}
 
-	std::cout.precision(4);
-	//std::cout << "Pi matrix" << std::endl;
-	//std::cout << pi << std::endl;
-	std::cout << test_pi(pi) << std::endl;
+	//Asserting pi correctness
+	bool pi_ok = test_pi(pi);
+	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 }
 
 } /* namespace mirt */
