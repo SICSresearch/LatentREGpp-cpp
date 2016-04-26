@@ -41,6 +41,12 @@ class estimation {
 		 * Number of response patterns
 		 * */
 		int s;
+
+		/**
+		 * Number of examinees
+		 * */
+		int N;
+
 		double convergence_difference;
 
 		/**

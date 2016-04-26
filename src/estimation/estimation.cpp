@@ -31,6 +31,9 @@ estimation::estimation(int m, matrix<char> &data, short d = 1,
 		nl.push_back(it->second);
 	}
 
+	// Number of examinees
+	this->N = data.rows();
+
 	// Number of response patterns
 	this->s = Y.rows();
 
@@ -107,7 +110,7 @@ void estimation::EMAlgortihm() {
 	//Finding initial values for zeta
 	initial_values();
 
-	Estep(model_used, zeta, Y, X, G);
+	Estep(model_used, zeta, Y, X, nl, G, N);
 
 //	for ( ; ; ) {
 //		// E step here

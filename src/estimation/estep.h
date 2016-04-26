@@ -19,7 +19,8 @@ namespace mirt {
  * Estep of the EMAlgortihm
  *
  * */
-void Estep(model&, std::vector<item_parameter>&, matrix<char>&, std::vector<matrix<int> >&, int);
+void Estep(model&, std::vector<item_parameter>&, matrix<char>&,
+		   std::vector<matrix<int> >&, std::vector<int>&, int, int);
 
 } /* namespace mirt */
 
