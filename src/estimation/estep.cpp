@@ -17,7 +17,9 @@ namespace mirt {
  *
  * */
 void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
-			 std::vector<matrix<int> > &X, std::vector<int> &nl, int G, int N ) {
+			 std::vector<matrix<int> > &X, std::vector<int> &nl, int G, int N,
+			 std::vector<matrix<double> > &r ) {
+
 	// Latent trait vectors are loaded
 	static matrix<double> theta = load_quadrature_points(G);
 
@@ -112,21 +114,15 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 	 * who answered category k to item i
 	 *
 	 * */
-	std::vector<matrix<double> > r(G);
-
 	for ( int g = 0; g < G; ++g ) {
 		for ( int i = 0; i < p; ++i ) {
 			// Number of categories of item i
 			int mi = zeta[i].get_categories();
-			std::vector<double> r_gi(mi);
 			for ( int k = 0; k < mi; ++k ) {
-				double r_gik = 0;
+				double &r_gik = r[g](i, k);
 				for ( int l = 0; l < s; ++l )
 					r_gik += nl[l] * X[l](i, k) * pi(g, l);
-
-				r_gi[k] = r_gik;
 			}
-			r[g].add_row(r_gi);
 		}
 	}
 

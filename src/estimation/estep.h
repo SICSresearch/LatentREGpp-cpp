@@ -20,7 +20,8 @@ namespace mirt {
  *
  * */
 void Estep(model&, std::vector<item_parameter>&, matrix<char>&,
-		   std::vector<matrix<int> >&, std::vector<int>&, int, int);
+		   std::vector<matrix<int> >&, std::vector<int>&, int, int,
+		   std::vector<matrix<double> >&);
 
 } /* namespace mirt */
 

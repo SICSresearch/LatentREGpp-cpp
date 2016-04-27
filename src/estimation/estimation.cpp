@@ -110,7 +110,15 @@ void estimation::EMAlgortihm() {
 	//Finding initial values for zeta
 	initial_values();
 
-	Estep(model_used, zeta, Y, X, nl, G, N);
+	//Setting size of matrix r
+	std::vector<matrix<double> > r(G);
+	for ( int g = 0; g < G; ++g ) {
+		r[g] = matrix<double>();
+		for ( int i = 0; i < p; ++i )
+			r[g].add_row(categories_item[i]);
+	}
+
+	Estep(model_used, zeta, Y, X, nl, G, N, r);
 
 //	for ( ; ; ) {
 //		// E step here
