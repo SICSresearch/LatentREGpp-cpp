@@ -8,7 +8,7 @@
 #include "estep.h"
 
 //Includes for testing
-#include "../../test/test.h"
+#include "../test/test.h"
 
 namespace mirt {
 
@@ -113,6 +113,7 @@ void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
 	 * Expected number of examinees for each group g
 	 * who answered category k to item i
 	 *
+	 * Matrix r
 	 * */
 	for ( int g = 0; g < G; ++g ) {
 		for ( int i = 0; i < p; ++i ) {

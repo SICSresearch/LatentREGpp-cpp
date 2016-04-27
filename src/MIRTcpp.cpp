@@ -40,7 +40,7 @@ int main() {
 
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("test/dataset03.csv", Y);
+	in.importData("datasets/dataset03.csv", Y);
 
 	cout << "Data\n";
 	cout << Y << std::endl;
