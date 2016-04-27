@@ -8,17 +8,14 @@
 #ifndef ESTIMATION_MSTEP_H_
 #define ESTIMATION_MSTEP_H_
 
-namespace mirt {
+#include <iostream>
+#include "../util/matrix.h"
 
-/*
- * M step of the EM Algorithm
- *
- * */
-class mstep {
-	public:
-		mstep();
-		virtual ~mstep();
-};
+namespace mirt {
+	/**
+ 	 * M step of the EM Algorithm
+	 */
+	void Mstep();
 
 } /* namespace mirt */
 

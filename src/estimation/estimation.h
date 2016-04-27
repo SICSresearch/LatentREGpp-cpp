@@ -12,6 +12,7 @@
 #include "../util/matrix.h"
 #include "../util/itemparameter.h"
 #include "estep.h"
+#include "mstep.h"
 #include <map>
 #include <cmath>
 

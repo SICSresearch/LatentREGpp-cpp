@@ -9,13 +9,6 @@
 
 namespace mirt {
 
-mstep::mstep() {
-	// TODO Auto-generated constructor stub
-
-}
-
-mstep::~mstep() {
-	// TODO Auto-generated destructor stub
-}
+void Mstep(){}
 
 } /* namespace mirt */
