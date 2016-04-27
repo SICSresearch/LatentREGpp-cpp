@@ -118,7 +118,12 @@ void estimation::EMAlgortihm() {
 			r[g].add_row(categories_item[i]);
 	}
 
-	Estep(model_used, zeta, Y, X, nl, G, N, r);
+	double dif;
+	do {
+		Estep(model_used, zeta, Y, X, nl, G, N, r);
+		dif = Mstep(model_used, zeta, r);
+	} while ( dif > convergence_difference );
+
 
 //	for ( ; ; ) {
 //		// E step here

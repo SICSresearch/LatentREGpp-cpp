@@ -9,6 +9,9 @@
 
 namespace mirt {
 
-void Mstep(){}
+double Mstep(model &model_used, std::vector<item_parameter> &zeta, std::vector<matrix<double> > &r) {
+
+	return 0.0000001;
+}
 
 } /* namespace mirt */

@@ -9,13 +9,15 @@
 #define ESTIMATION_MSTEP_H_
 
 #include <iostream>
+#include <vector>
 #include "../util/matrix.h"
+#include "../model/model.h"
 
 namespace mirt {
 	/**
  	 * M step of the EM Algorithm
 	 */
-	void Mstep();
+	double Mstep(model&, std::vector<item_parameter>&, std::vector<matrix<double> >&);
 
 } /* namespace mirt */
 
