@@ -11,12 +11,64 @@
 #include "../model/model.h"
 #include "../util/matrix.h"
 #include "../util/itemparameter.h"
+#include "../util/quadraturepoints.h"
 #include "estep.h"
 #include "mstep.h"
 #include <map>
 #include <cmath>
 
 namespace mirt {
+
+extern model m;
+/**
+ * Dimension of the data
+ * */
+extern short d;
+/**
+ * Number of items
+ * */
+extern int p;
+/**
+ * Number of response patterns
+ * */
+extern int s;
+
+/**
+ * Number of examinees
+ * */
+extern int N;
+
+/**
+ * Vector of parameters
+ * */
+extern std::vector<item_parameter> zeta;
+
+/**
+ * Y , s x p, matrix of pattern responses.
+ *
+ * where s is the number of patterns s <= N (N, number of examinees)
+ * p is the number of items
+ * */
+extern matrix<char> Y;
+
+/**
+ * Dichotomized matrix
+ * */
+extern std::vector<matrix<int> > X;
+
+/**
+ * nl, frequencies of each pattern allocated in Y
+ * */
+extern std::vector<int> nl;
+
+// Latent trait vectors
+extern matrix<double> theta;
+
+// Weights
+extern std::vector<double> w;
+
+extern const int MAX_NUMBER_OF_QUADRATURE_POINTS;
+
 
 
 /*
@@ -26,53 +78,11 @@ namespace mirt {
  * */
 class estimation {
 	private:
-		model model_used;
 		short iterations;
 		/**
-		 * Dimension of the data
-		 * */
-		short d;
-
-		/**
-		 * Number of items
-		 * */
-		int p;
-
-		/**
-		 * Number of response patterns
-		 * */
-		int s;
-
-		/**
-		 * Number of examinees
-		 * */
-		int N;
-
-		double convergence_difference;
-
-		/**
-		 * Vector of parameters
-		 * */
-		std::vector<item_parameter> zeta;
-
-
-		/**
-		 * Y , s x p, matrix of pattern responses.
 		 *
-		 * where s is the number of patterns s <= N (N, number of examinees)
-		 * p is the number of items
 		 * */
-		matrix<char> Y;
-
-		/**
-		 * Dichotomized matrix
-		 * */
-		std::vector<matrix<int> > X;
-
-		/**
-		 * nl, frequencies of each pattern allocated in Y
-		 * */
-		std::vector<int> nl;
+		double convergence_difference;
 
 		/**
 		 * vector to allocate the number of categories of each item

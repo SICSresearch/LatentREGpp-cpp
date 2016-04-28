@@ -14,10 +14,76 @@ estimation::estimation() {
 
 }
 
-estimation::estimation(int m, matrix<char> &data, short d = 1,
+
+model m;
+/**
+ * Dimension of the data
+ * */
+short d;
+/**
+ * Number of items
+ * */
+int p;
+/**
+ * Number of response patterns
+ * */
+int s;
+
+/**
+ * Number of examinees
+ * */
+int N;
+
+/**
+ * Vector of parameters
+ * */
+std::vector<item_parameter> zeta;
+
+/**
+ * Y , s x p, matrix of pattern responses.
+ *
+ * where s is the number of patterns s <= N (N, number of examinees)
+ * p is the number of items
+ * */
+matrix<char> Y;
+
+/**
+ * Dichotomized matrix
+ * */
+std::vector<matrix<int> > X;
+
+/**
+ * nl, frequencies of each pattern allocated in Y
+ * */
+std::vector<int> nl;
+
+// Latent trait vectors
+matrix<double> theta;
+
+// Weights
+std::vector<double> w;
+
+//Setting size of matrix r
+std::vector<matrix<double> > r;
+
+const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
+/**
+ * Defining the number of quadrature points
+ *
+ * As max number of quadrature points is 40
+ *
+ * G will be in 1dimension = 40
+ * 				2dimension = 20
+ * 				3dimension = 10
+ * 				> 4dimension = 5
+ * */
+int G;
+
+
+estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 					   double convergence_difference = 0.0001) {
 	// Setting the dimension
-	this->d = d;
+	mirt::d = d;
 
 	//Finding the matrix of response patterns Y
 	//And its frequency
@@ -32,16 +98,16 @@ estimation::estimation(int m, matrix<char> &data, short d = 1,
 	}
 
 	// Number of examinees
-	this->N = data.rows();
+	N = data.rows();
 
 	// Number of response patterns
-	this->s = Y.rows();
+	s = Y.rows();
 
 	// Finding the number of items
 	// As the matrix data is s x p
 	// we can find out the number of items just seeing the size
 	// of any response pattern
-	this->p = Y.columns(0);
+	p = Y.columns(0);
 
 
 	//Finding the number of categories of each item and seeing if it's dichotomous
@@ -78,8 +144,24 @@ estimation::estimation(int m, matrix<char> &data, short d = 1,
 		}
 	}
 
+	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
+
+	// Latent trait vectors are loaded
+	theta = load_quadrature_points(G);
+
+	// Weights are loaded
+	w = load_weights(G);
+
+	//Setting size of matrix r
+	r = std::vector<matrix<double> >(G);
+	for ( int g = 0; g < G; ++g ) {
+		r[g] = matrix<double>();
+		for ( int i = 0; i < p; ++i )
+			r[g].add_row(categories_item[i]);
+	}
+
 	//Configurations for the estimation
-	model_used = model(m);
+	mirt::m = model(themodel);
 	this->convergence_difference = convergence_difference;
 }
 
@@ -93,56 +175,14 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	static int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
-
-	/**
-	 * Defining the number of quadrature points
-	 *
-	 * As max number of quadrature points is 40
-	 *
-	 * G will be in 1dimension = 40
-	 * 				2dimension = 20
-	 * 				3dimension = 10
-	 * 				> 4dimension = 5
-	 * */
-	static int G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
-
-	// Latent trait vectors are loaded
-	static matrix<double> theta = load_quadrature_points(G);
-
-	// Weights are loaded
-	static std::vector<double> w = load_weights(G);
-
 	//Finding initial values for zeta
 	initial_values();
 
-	//Setting size of matrix r
-	std::vector<matrix<double> > r(G);
-	for ( int g = 0; g < G; ++g ) {
-		r[g] = matrix<double>();
-		for ( int i = 0; i < p; ++i )
-			r[g].add_row(categories_item[i]);
-	}
-
-	Estep estep(&model_used, &zeta, &Y, &X, &nl, G, N, &r, &theta, &w);
-	Mstep mstep(&model_used, &zeta, &r, G, p, &theta);
-
 	double dif;
 	do {
-		estep.run();
-		dif = mstep.run();
+		Estep();
+		dif = Mstep();
 	} while ( dif > convergence_difference );
-
-
-//	for ( ; ; ) {
-//		// E step here
-//
-//
-//
-//		// M step here
-//
-//
-//	}
 }
 
 

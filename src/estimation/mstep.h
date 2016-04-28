@@ -19,66 +19,92 @@
 
 namespace mirt {
 
+extern double C;
+
+
+extern model m;
+/**
+ * Dimension of the data
+ * */
+extern short d;
+/**
+ * Number of items
+ * */
+extern int p;
+/**
+ * Number of response patterns
+ * */
+extern int s;
+
+/**
+ * Number of examinees
+ * */
+extern int N;
+
+/**
+ * Vector of parameters
+ * */
+extern std::vector<item_parameter> zeta;
+
+/**
+ * Y , s x p, matrix of pattern responses.
+ *
+ * where s is the number of patterns s <= N (N, number of examinees)
+ * p is the number of items
+ * */
+extern matrix<char> Y;
+
+/**
+ * Dichotomized matrix
+ * */
+extern std::vector<matrix<int> > X;
+
+/**
+ * nl, frequencies of each pattern allocated in Y
+ * */
+extern std::vector<int> nl;
+
+// Latent trait vectors
+extern matrix<double> theta;
+
+// Weights
+extern std::vector<double> w;
+
+extern const int MAX_NUMBER_OF_QUADRATURE_POINTS;
+/**
+ * Defining the number of quadrature points
+ *
+ * As max number of quadrature points is 40
+ *
+ * G will be in 1dimension = 40
+ * 				2dimension = 20
+ * 				3dimension = 10
+ * 				> 4dimension = 5
+ * */
+extern int G;
+
+/**
+ * Matrix r
+ *
+ * Expected number of examinees in group g
+ * that answered category k to item i
+ * */
+extern std::vector<matrix<double> > r;
+//Varaiable to know the current item
+extern int i;
+
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 
 /**
  * M step of the EM Algorithm
  */
-class Mstep {
-public:
-	/**
-	 * Pointer to the model used
-	 * */
-	model* m_pointer;
-
-	/**
-	 * Pointer to zeta, vector of item parameters
-	 * */
-	std::vector<item_parameter>* zeta_pointer;
-
-
-	/**
-	 * Pointer to the r matrix
-	 *
-	 * Which means:
-	 * Expected number of examinees for each group g
-	 * who answered category k to item i
-	 * */
-	std::vector<matrix<double> >* r_pointer;
-
-	/**
-	 * Number of nodes
-	 * */
-	int G;
-
-	/**
-	 * Number of items
-	 * */
-	int p;
-
-	/**
-	 * Variable to know which is the current item that the step is processing
-	 * */
-	int i;
-
-	/**
-	 * Pointer to Latent trait vectors
-	 * */
-	matrix<double>* theta_pointer;
-
-	Mstep(model*, std::vector<item_parameter>*, std::vector<matrix<double> >*, int, int, matrix<double>*);
+double Mstep();
 
 	/**
 	 * Function to be maximized
 	 * */
-	double Qi(const column_vector&);
 
-	/**
-	 * Executes the Mstep
-	 * */
-	double run();
-};
 } /* namespace mirt */
 
 #endif /* ESTIMATION_MSTEP_H_ */

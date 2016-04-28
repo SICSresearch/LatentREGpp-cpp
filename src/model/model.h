@@ -62,7 +62,7 @@ public:
 	 * (used for optimization part)
 	 *
 	 * */
-	double Pik(std::vector<double>&, const column_vector&, int k);
+	double Pik(std::vector<double>&, const column_vector&, int k, int d, int mi);
 };
 
 } /* namespace mirt */

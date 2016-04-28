@@ -80,10 +80,15 @@ double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k)
 	return P_ik;
 }
 
-double model::Pik(std::vector<double>& theta, const column_vector& v, int k) {
-	item_parameter item;
+double model::Pik(std::vector<double>& theta, const column_vector& v, int k, int d, int mi) {
+	item_parameter item(d, mi);
+	int j = 0;
+	for ( int k = 0; k < d; ++k, ++j )
+		item.alpha[k] = v(j);
+	for ( int k = 0; k < mi; ++k, ++j )
+		item.gamma[k] = v(j);
 
-	//Convert column_vector v to item_parameter and then call the other Pik
+	return Pik(theta, item, k);
 }
 
 model::~model() {

@@ -33,11 +33,23 @@ item_parameter::item_parameter(short d, short categories) {
 }
 
 item_parameter::item_parameter(short d) {
-	item_parameter::item_parameter(d, 2);
+	//item_parameter::item_parameter(d, 2);
 }
 
 item_parameter::item_parameter(short d, short categories, double c) {
-	item_parameter::item_parameter(d, categories);
+	this->d = d;
+	this->categories = categories;
+
+	/**
+	 * COMPUTING INITIAL VALUES
+	 *
+	 * Not supported yet
+	 * */
+
+	//Newbie values
+	for ( int i = 0; i < d; ++i ) alpha.push_back(1);
+	for ( int i = 0; i < categories; ++i ) gamma.push_back(1);
+
 	this->c = c;
 	guessing = true;
 	++number_of_parameters;
