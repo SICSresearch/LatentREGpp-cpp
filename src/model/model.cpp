@@ -83,8 +83,6 @@ double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k)
 
 	double P_ik = Pstar_ik(theta, parameters, k - 1) - Pstar_ik(theta, parameters, k);
 
-	assert( !(P_ik < 0) );
-
 	P_ik = std::max(P_ik, LOWER_BOUND_);
 	P_ik = std::min(P_ik, UPPER_BOUND_);
 	return P_ik;

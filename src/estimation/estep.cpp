@@ -107,7 +107,7 @@ void Estep ( ) {
 			// Number of categories of item i
 			int mi = zeta[i].get_categories();
 			for ( int k = 0; k < mi; ++k ) {
-				double &r_gik = r[g](i, k);
+				double &r_gik = r[g](i, k) = 0;
 				for ( int l = 0; l < s; ++l )
 					r_gik += nl[l] * X[l](i, k) * pi(g, l);
 			}

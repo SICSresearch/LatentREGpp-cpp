@@ -21,7 +21,10 @@ double Qi (const column_vector& v) {
 		int mi = zeta[i].get_categories();
 		for ( int k = 0; k < mi; ++k ) {
 			std::vector<double> theta_g = theta.get_row(g);
+
+			//Creating an item from a column_vector
 			item_parameter item_i = item_parameter::build_item(v, d, mi);
+
 			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
 		}
 	}
@@ -62,31 +65,30 @@ double Mstep() {
 		 *	Calling bfgs from dlib to optimize Qi
 		 * */
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-													 dlib::objective_delta_stop_strategy(1e-7),
+													 dlib::objective_delta_stop_strategy(1e-5),
 		                                             Qi,
 													 starting_point, -1);
 
-		std::cout << "Optimized: \n"<< starting_point << std::endl;
-
+		//std::cout << "Optimized: \n"<< starting_point << std::endl;
 		new_zeta.push_back(item_parameter::build_item(starting_point, d, zeta[i].get_categories()));
 
 		//Computing difference of current item
 		double current_difference = 0.0;
-		for ( int i = 0; i < zeta[i].alpha.size(); ++i )
+		for ( int j = 0; j < zeta[i].alpha.size(); ++j )
 			current_difference = std::max(current_difference,
 										  std::abs(zeta[i].alpha[j] - new_zeta[i].alpha[j]));
-		for ( int i = 0; i < zeta[i].gamma.size(); ++i )
+
+		for ( int j = 0; j < zeta[i].gamma.size(); ++j )
 			current_difference = std::max(current_difference,
 										  std::abs(zeta[i].gamma[j] - new_zeta[i].gamma[j]));
 
 		max_difference = std::max(max_difference, current_difference);
-		std::cout << "Difference between zeta's i " << current_difference << std::endl;
+		//std::cout << "Difference between zeta's " << i  << ' ' << current_difference << std::endl;
 	}
 
 
-
 	zeta = new_zeta;
-	return 0.000001;
+	return max_difference;
 }
 
 } /* namespace mirt */

@@ -33,6 +33,9 @@ namespace mirt {
 		//std::cout << N << ' ' << p << ' ' << sum << std::endl;
 
 		const double eps = 1e-5;
+
+		std::cout << "Total sum " << sum << std::endl;
+
 		return N * p == int(sum + eps);
 	}
 
