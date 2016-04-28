@@ -27,13 +27,31 @@ class item_parameter {
 
 		std::vector<double> alpha;
 		std::vector<double> gamma;
+		/**
+		 * bool variable to known if the guessing parameter is being taken into account
+		 * */
+		bool guessing;
+		/**
+		 * Guesing parameter
+		 * */
+		double c;
 
 		item_parameter();
+
+		/**
+		 * Receives dimension
+		 * */
+		item_parameter(short);
 
 		/**
 		 * Receives dimension and number of categories of the item
 		 * */
 		item_parameter(short, short);
+
+		/**
+		 * Receives dimension, number of categories of the item and guessing parameter
+		 * */
+		item_parameter(short, short, double);
 		virtual ~item_parameter();
 
 		std::vector<double> get_alpha();

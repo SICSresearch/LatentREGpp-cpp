@@ -55,6 +55,8 @@ Mstep::Mstep(model* m, std::vector<item_parameter>* zeta, std::vector<matrix<dou
 }
 
 double Mstep::run() {
+	// Obtaining reference of zeta
+	std::vector<item_parameter> &zeta = *zeta_pointer;
 
 	/*****************
 	 *  M STEP
@@ -63,7 +65,12 @@ double Mstep::run() {
 
 	// Iterate over the number of items
 	for ( i = 0; i < p; ++i ) {
-
+		column_vector starting_point(2);
+//		starting_point = 4, 8;
+//
+//		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
+//                									 dlib::objective_delta_stop_strategy(1e-7),
+//													 Qi, starting_point, -1);
 	}
 
 

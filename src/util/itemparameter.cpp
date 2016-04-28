@@ -27,6 +27,18 @@ item_parameter::item_parameter(short d, short categories) {
 	//Newbie values
 	for ( int i = 0; i < d; ++i ) alpha.push_back(1);
 	for ( int i = 0; i < categories; ++i ) gamma.push_back(1);
+
+	guessing = false;
+}
+
+item_parameter::item_parameter(short d) {
+	item_parameter::item_parameter(d, 2);
+}
+
+item_parameter::item_parameter(short d, short categories, double c) {
+	item_parameter::item_parameter(d, categories);
+	this->c = c;
+	guessing = true;
 }
 
 item_parameter::~item_parameter() {
