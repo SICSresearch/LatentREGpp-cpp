@@ -9,7 +9,28 @@
 
 namespace mirt {
 
-double Mstep(model &model_used, std::vector<item_parameter> &zeta, std::vector<matrix<double> > &r) {
+/**
+ * Function to be maximized
+ * */
+double Mstep::Qi ( const column_vector& m ) {
+	return 0;
+}
+
+Mstep::Mstep(model* m, std::vector<item_parameter>* zeta, std::vector<matrix<double> >* r) {
+	/**
+	 * Assigning all the pointers (matrixes and info) needed to be able to run the Mstep
+	 * */
+	this->m_pointer = m;
+	this->zeta_pointer = zeta;
+	this->r_pointer = r;
+}
+
+double Mstep::run() {
+
+	/*****************
+	 *  M STEP
+	 *
+	 * */
 
 	return 0.0000001;
 }

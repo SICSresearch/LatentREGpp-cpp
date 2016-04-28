@@ -107,6 +107,12 @@ void estimation::EMAlgortihm() {
 	 * */
 	static int G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
 
+	// Latent trait vectors are loaded
+	static matrix<double> theta = load_quadrature_points(G);
+
+	// Weights are loaded
+	static std::vector<double> w = load_weights(G);
+
 	//Finding initial values for zeta
 	initial_values();
 
@@ -118,10 +124,13 @@ void estimation::EMAlgortihm() {
 			r[g].add_row(categories_item[i]);
 	}
 
+	Estep estep(&model_used, &zeta, &Y, &X, &nl, G, N, &r, &theta, &w);
+	Mstep mstep(&model_used, &zeta, &r);
+
 	double dif;
 	do {
-		Estep(model_used, zeta, Y, X, nl, G, N, r);
-		dif = Mstep(model_used, zeta, r);
+		estep.run();
+		dif = mstep.run();
 	} while ( dif > convergence_difference );
 
 

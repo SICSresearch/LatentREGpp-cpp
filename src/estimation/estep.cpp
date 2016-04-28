@@ -16,15 +16,42 @@ namespace mirt {
  * Estep of the EMAlgortihm
  *
  * */
-void Estep ( model &m, std::vector<item_parameter> &zeta, matrix<char> &Y,
-			 std::vector<matrix<int> > &X, std::vector<int> &nl, int G, int N,
-			 std::vector<matrix<double> > &r ) {
+Estep::Estep( model *m, std::vector<item_parameter> *zeta, matrix<char> *Y,
+		 std::vector<matrix<int> > *X, std::vector<int> *nl, int G, int N,
+		 std::vector<matrix<double> > *r, matrix<double> *theta, std::vector<double> *w ) {
+	/**
+	 * Assigning all the pointers (matrixes and info) needed to be able to run the Estep
+	 * */
+	m_pointer = m;
+	zeta_pointer = zeta;
+	Y_pointer = Y;
+	X_pointer = X;
+	nl_pointer = nl;
+	this->G = G;
+	this->N = N;
+	r_pointer = r;
+	theta_pointer = theta;
+	w_pointer = w;
+}
 
-	// Latent trait vectors are loaded
-	static matrix<double> theta = load_quadrature_points(G);
+void Estep::run ( ) {
+	/**
+	 * Creating reference variables from pointers of each attribute
+	 * */
+	model &m = *m_pointer;
+	std::vector<item_parameter> &zeta = *zeta_pointer;
+	matrix<char> &Y = *Y_pointer;
+	std::vector<matrix<int> > &X = *X_pointer;
+	std::vector<int> &nl = *nl_pointer;
+	std::vector<matrix<double> > &r = *r_pointer;
+	matrix<double> &theta = *theta_pointer;
+	std::vector<double> &w = *w_pointer;
 
-	// Weights are loaded
-	static std::vector<double> w = load_weights(G);
+
+	/*****************
+	 *  E STEP
+	 *
+	 * */
 
 	/**
 	 * Number of response patterns
