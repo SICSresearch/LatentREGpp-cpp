@@ -13,7 +13,13 @@
 #include <cassert>
 #include "../util/itemparameter.h"
 
+//including optimization files from dlib library
+#include <dlib/optimization.h>
+
 namespace mirt {
+
+// Necessary typedef to be able to maximize using dlib
+typedef dlib::matrix<double,0,1> column_vector;
 
 /*
  * Model class
@@ -50,7 +56,13 @@ public:
 	 * */
 	double Pik(std::vector<double>&, item_parameter&, int k);
 
-
+	/**
+	 * Another way to compute Pik
+	 * based on column_vector type
+	 * (used for optimization part)
+	 *
+	 * */
+	double Pik(std::vector<double>&, const column_vector&, int k);
 };
 
 } /* namespace mirt */

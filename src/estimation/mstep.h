@@ -12,6 +12,7 @@
 #include <vector>
 #include "../util/matrix.h"
 #include "../model/model.h"
+#include <cmath>
 
 //including optimization files from dlib library
 #include <dlib/optimization.h>
@@ -46,7 +47,27 @@ public:
 	 * */
 	std::vector<matrix<double> >* r_pointer;
 
-	Mstep(model*, std::vector<item_parameter>*, std::vector<matrix<double> >*);
+	/**
+	 * Number of nodes
+	 * */
+	int G;
+
+	/**
+	 * Number of items
+	 * */
+	int p;
+
+	/**
+	 * Variable to know which is the current item that the step is processing
+	 * */
+	int i;
+
+	/**
+	 * Pointer to Latent trait vectors
+	 * */
+	matrix<double>* theta_pointer;
+
+	Mstep(model*, std::vector<item_parameter>*, std::vector<matrix<double> >*, int, int, matrix<double>*);
 
 	/**
 	 * Function to be maximized

@@ -80,6 +80,12 @@ double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k)
 	return P_ik;
 }
 
+double model::Pik(std::vector<double>& theta, const column_vector& v, int k) {
+	item_parameter item;
+
+	//Convert column_vector v to item_parameter and then call the other Pik
+}
+
 model::~model() {
 	// TODO Auto-generated destructor stub
 }

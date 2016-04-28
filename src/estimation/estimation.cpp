@@ -125,7 +125,7 @@ void estimation::EMAlgortihm() {
 	}
 
 	Estep estep(&model_used, &zeta, &Y, &X, &nl, G, N, &r, &theta, &w);
-	Mstep mstep(&model_used, &zeta, &r);
+	Mstep mstep(&model_used, &zeta, &r, G, p, &theta);
 
 	double dif;
 	do {
