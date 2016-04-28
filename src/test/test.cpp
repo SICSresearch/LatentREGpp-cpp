@@ -11,14 +11,14 @@
 namespace mirt {
 
 	bool test_pi ( matrix<double> &pi ) {
-		const double MIN = 0.999;
+		const double eps = 1e-5;
 
 		bool correct = true;
 		for ( int j = 0; j < pi.columns(0); ++j ) {
 			double sum = 0;
 			for ( int i = 0; i < pi.rows(); ++i )
 				sum += pi(i, j);
-			correct &= sum >= MIN;
+			correct &= 1 == int(sum + eps);
 		}
 
 		return correct;
@@ -30,12 +30,7 @@ namespace mirt {
 			for ( int j = 0; j < r[i].rows(); ++j )
 				for ( int k = 0; k < r[i].columns(j); ++k )
 					sum += r[i](j, k);
-		//std::cout << N << ' ' << p << ' ' << sum << std::endl;
-
 		const double eps = 1e-5;
-
-		std::cout << "Total sum " << sum << std::endl;
-
 		return N * p == int(sum + eps);
 	}
 

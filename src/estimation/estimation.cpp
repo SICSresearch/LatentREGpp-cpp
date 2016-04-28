@@ -184,10 +184,20 @@ void estimation::EMAlgortihm() {
 	double dif;
 	do {
 		Estep();
-		std::cout << "Estep finished" << std::endl;
 		dif = Mstep();
-		std::cout << ++iterations << std::endl;
+		std::cout << ++iterations << ' ' << dif << std::endl;
 	} while ( dif > convergence_difference );
+
+	for ( int i = 0; i < p; ++i ) {
+		std::cout << "Item " << i << std::endl;
+		std::cout << "Alphas:";
+		for ( int j = 0; j < d; ++j )
+			std::cout << ' ' << zeta[i].alpha[j];
+		std::cout << "\nGammas:";
+		for ( int j = 0; j < categories_item[i] - 1; ++j )
+			std::cout << ' ' << zeta[i].alpha[j];
+		std::cout << std::endl;
+	}
 }
 
 
