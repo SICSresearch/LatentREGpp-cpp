@@ -55,14 +55,6 @@ public:
 	 * i, given that its latent trait vector theta, and the item paramters
 	 * */
 	double Pik(std::vector<double>&, item_parameter&, int k);
-
-	/**
-	 * Another way to compute Pik
-	 * based on column_vector type
-	 * (used for optimization part)
-	 *
-	 * */
-	double Pik(std::vector<double>&, const column_vector&, int k, int d, int mi);
 };
 
 } /* namespace mirt */

@@ -12,6 +12,7 @@
 #include <vector>
 #include "../util/matrix.h"
 #include "../model/model.h"
+#include "../util/itemparameter.h"
 #include <cmath>
 
 //including optimization files from dlib library

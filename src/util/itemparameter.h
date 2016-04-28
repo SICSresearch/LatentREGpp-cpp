@@ -9,8 +9,13 @@
 #define UTIL_ITEMPARAMETER_H_
 
 #include <vector>
+//including optimization files from dlib library
+#include <dlib/optimization.h>
 
 namespace mirt {
+
+// Necessary typedef to be able to maximize using dlib
+typedef dlib::matrix<double,0,1> column_vector;
 
 class item_parameter {
 	private:
@@ -58,6 +63,9 @@ class item_parameter {
 		 * Receives dimension, number of categories of the item and guessing parameter
 		 * */
 		item_parameter(short, short, double);
+
+		static item_parameter build_item(const column_vector&, int, int);
+
 		virtual ~item_parameter();
 
 		std::vector<double> get_alpha();

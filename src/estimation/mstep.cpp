@@ -21,18 +21,18 @@ double Qi (const column_vector& v) {
 		int mi = zeta[i].get_categories();
 		for ( int k = 0; k < mi; ++k ) {
 			std::vector<double> theta_g = theta.get_row(g);
-			value += r[g](i, k) * log( m.Pik(theta_g, v, k, d, mi) );
+			item_parameter item_i = item_parameter::build_item(v, d, mi);
+			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
 		}
 	}
-
 	return value;
 }
 
 double Mstep() {
-	/*****************
+	/*********************************
 	 *  M STEP
 	 *
-	 * */
+	 *********************************/
 
 	// Iterate over the number of items
 	for ( i = 0; i < p; ++i ) {
@@ -45,7 +45,9 @@ double Mstep() {
 			starting_point(j) = zeta[i].gamma[k];
 		if ( zeta[i].guessing ) starting_point(j) = zeta[i].c;
 
-		//Calling bfgs from dlib to optimize Qi
+		/**
+		 *	Calling bfgs from dlib to optimize Qi
+		 * */
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
 													 dlib::objective_delta_stop_strategy(1e-7),
 		                                             Qi,

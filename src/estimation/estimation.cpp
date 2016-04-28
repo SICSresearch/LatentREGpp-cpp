@@ -14,7 +14,9 @@ estimation::estimation() {
 
 }
 
-
+/**
+ * Model to be used
+ * */
 model m;
 /**
  * Dimension of the data
@@ -78,7 +80,6 @@ const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
  * 				> 4dimension = 5
  * */
 int G;
-
 
 estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 					   double convergence_difference = 0.0001) {
