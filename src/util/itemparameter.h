@@ -23,6 +23,12 @@ class item_parameter {
 		 * */
 		short categories;
 
+		/**
+		 * Sum of all parameters of this item
+		 * */
+		short number_of_parameters;
+
+
 	public:
 
 		std::vector<double> alpha;
@@ -59,6 +65,7 @@ class item_parameter {
 
 		short get_categories();
 		short get_dimension();
+		short get_number_of_parameters();
 };
 
 } /* namespace mirt */

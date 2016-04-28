@@ -29,6 +29,7 @@ item_parameter::item_parameter(short d, short categories) {
 	for ( int i = 0; i < categories; ++i ) gamma.push_back(1);
 
 	guessing = false;
+	number_of_parameters = d + categories;
 }
 
 item_parameter::item_parameter(short d) {
@@ -39,6 +40,7 @@ item_parameter::item_parameter(short d, short categories, double c) {
 	item_parameter::item_parameter(d, categories);
 	this->c = c;
 	guessing = true;
+	++number_of_parameters;
 }
 
 item_parameter::~item_parameter() {
@@ -59,6 +61,10 @@ short item_parameter::get_categories() {
 
 short item_parameter::get_dimension() {
 	return d;
+}
+
+short item_parameter::get_number_of_parameters() {
+	return number_of_parameters;
 }
 
 } /* namespace mirt */

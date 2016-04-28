@@ -65,7 +65,7 @@ double Mstep::run() {
 
 	// Iterate over the number of items
 	for ( i = 0; i < p; ++i ) {
-		column_vector starting_point(2);
+		column_vector starting_point(zeta[i].get_number_of_parameters());
 //		starting_point = 4, 8;
 //
 //		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
