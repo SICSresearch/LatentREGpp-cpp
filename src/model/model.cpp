@@ -41,6 +41,8 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 		/**
 		 * 2PL Approach
 		 *
+		 *
+		 *
 		 * */
 
 		/**
@@ -57,6 +59,9 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 		for ( short i = 0; i < d; ++i )
 			eta += parameters.alpha[i] * theta[i];
 
+		/**
+		 * Equation (82) from Doc1
+		 * */
 		return 1.0 / (1.0 + std::exp(-eta));
 	}
 	/**
@@ -68,6 +73,11 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 }
 
 double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k) {
+	// TODO Should be loaded from file
+	/**
+	 * Equation (86) from Doc1
+	 *
+	 * */
 	static const double LOWER_BOUND_ = 1e-08;
 	static const double UPPER_BOUND_ = 0.999999;
 

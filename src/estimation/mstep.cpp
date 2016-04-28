@@ -28,6 +28,11 @@ double Qi (const column_vector& v) {
 	return value;
 }
 
+// TODO Include derivates
+const column_vector Qi_derivative (const column_vector& m) {
+
+}
+
 double Mstep() {
 	/*********************************
 	 *  M STEP
@@ -57,7 +62,7 @@ double Mstep() {
 		 *	Calling bfgs from dlib to optimize Qi
 		 * */
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-													 dlib::objective_delta_stop_strategy(1e-10),
+													 dlib::objective_delta_stop_strategy(1e-7),
 		                                             Qi,
 													 starting_point, -1);
 
@@ -78,8 +83,10 @@ double Mstep() {
 		std::cout << "Difference between zeta's i " << current_difference << std::endl;
 	}
 
+
+
 	zeta = new_zeta;
-	return 0.00001;
+	return 0.000001;
 }
 
 } /* namespace mirt */

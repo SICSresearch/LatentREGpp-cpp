@@ -184,6 +184,8 @@ void estimation::EMAlgortihm() {
 	double dif;
 	do {
 		Estep();
+		std::cout << "Estep finished" << std::endl;
+
 		dif = Mstep();
 
 		std::cout << ++iterations << std::endl;
