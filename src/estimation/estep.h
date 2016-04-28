@@ -62,8 +62,6 @@ extern matrix<double> theta;
 
 // Weights
 extern std::vector<double> w;
-
-extern const int MAX_NUMBER_OF_QUADRATURE_POINTS;
 /**
  * Defining the number of quadrature points
  *

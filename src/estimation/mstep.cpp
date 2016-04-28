@@ -34,6 +34,14 @@ double Mstep() {
 	 *
 	 *********************************/
 
+
+	double max_difference = 0.0;
+
+	/**
+	 * New vector of parameters
+	 * */
+	std::vector<item_parameter> new_zeta;
+
 	// Iterate over the number of items
 	for ( i = 0; i < p; ++i ) {
 		//Creating starting point
@@ -49,14 +57,29 @@ double Mstep() {
 		 *	Calling bfgs from dlib to optimize Qi
 		 * */
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-													 dlib::objective_delta_stop_strategy(1e-7),
+													 dlib::objective_delta_stop_strategy(1e-10),
 		                                             Qi,
 													 starting_point, -1);
 
 		std::cout << "Optimized: \n"<< starting_point << std::endl;
+
+		new_zeta.push_back(item_parameter::build_item(starting_point, d, zeta[i].get_categories()));
+
+		//Computing difference of current item
+		double current_difference = 0.0;
+		for ( int i = 0; i < zeta[i].alpha.size(); ++i )
+			current_difference = std::max(current_difference,
+										  std::abs(zeta[i].alpha[j] - new_zeta[i].alpha[j]));
+		for ( int i = 0; i < zeta[i].gamma.size(); ++i )
+			current_difference = std::max(current_difference,
+										  std::abs(zeta[i].gamma[j] - new_zeta[i].gamma[j]));
+
+		max_difference = std::max(max_difference, current_difference);
+		std::cout << "Difference between zeta's i " << current_difference << std::endl;
 	}
 
-	return 0.0000001;
+	zeta = new_zeta;
+	return 0.00001;
 }
 
 } /* namespace mirt */

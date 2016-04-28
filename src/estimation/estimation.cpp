@@ -82,7 +82,7 @@ const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
 int G;
 
 estimation::estimation(int themodel, matrix<char> &data, short d = 1,
-					   double convergence_difference = 0.0001) {
+					   double convergence_difference = 0.001) {
 	// Setting the dimension
 	mirt::d = d;
 
@@ -179,10 +179,14 @@ void estimation::EMAlgortihm() {
 	//Finding initial values for zeta
 	initial_values();
 
+	int iterations = 0;
+
 	double dif;
 	do {
 		Estep();
 		dif = Mstep();
+
+		std::cout << ++iterations << std::endl;
 	} while ( dif > convergence_difference );
 }
 
