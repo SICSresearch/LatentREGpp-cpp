@@ -43,6 +43,7 @@ namespace mirt {
 		for ( int i = 0; i < q.size(); ++i )
 			q[i] *= f;
 
+
 		/**
 		 * Here the latent trait vectors are computed
 		 * using a backtracking approach

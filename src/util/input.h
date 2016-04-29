@@ -112,7 +112,7 @@ bool input<T>::importData(std::string filename, std::vector<T>& m) {
 			std::string to_add(start, next);
 			if ( !to_add.empty() )
 				splitted.push_back(strtold(to_add.c_str(), NULL));
-			m.insert(m.begin(), splitted.begin(), splitted.end());
+			m.insert(m.end(), splitted.begin(), splitted.end());
 		}
 		file.close();
 		return true;

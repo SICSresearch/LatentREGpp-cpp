@@ -164,6 +164,7 @@ estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 	//Configurations for the estimation
 	mirt::m = model(themodel);
 	this->convergence_difference = convergence_difference;
+	this->iterations = 0;
 }
 
 estimation::~estimation() {
@@ -178,28 +179,26 @@ void estimation::initial_values() {
 void estimation::EMAlgortihm() {
 	//Finding initial values for zeta
 	initial_values();
-
-	int iterations = 0;
-
 	double dif;
 	do {
 		Estep();
 		dif = Mstep();
-		std::cout << "Iteration: " << ++iterations << ", Max-change: " << dif << std::endl;
+		++iterations;
+		//std::cout << "Iteration: " << ++iterations << ", Max-change: " << dif << std::endl;
 	} while ( dif > convergence_difference );
+}
 
-	std::cout << "\nResults" << std::endl;
+void estimation::print_results ( ) {
+	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i << std::endl;
 		for ( int j = 0; j < d; ++j )
-			std::cout << 'a' << j << ": " << zeta[i].alpha[j];
+			std::cout << 'a' << j << ": " << zeta[i].alpha[j] << ' ';
 		std::cout << std::endl;
 		for ( int j = 0; j < categories_item[i] - 1; ++j )
-			std::cout << 'd' << j << ": " << zeta[i].gamma[j];
+			std::cout << 'd' << j << ": " << zeta[i].gamma[j] << ' ';
 		std::cout << std::endl;
 	}
 }
-
-
 
 } /* namespace mirt */

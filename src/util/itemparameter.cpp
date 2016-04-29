@@ -26,10 +26,10 @@ item_parameter::item_parameter(short d, short categories) {
 
 	//Newbie values
 	for ( int i = 0; i < d; ++i ) alpha.push_back(1);
-	for ( int i = 0; i < categories; ++i ) gamma.push_back(1);
+	for ( int i = 0; i < categories - 1; ++i ) gamma.push_back(1);
 
 	guessing = false;
-	number_of_parameters = d + categories;
+	number_of_parameters = d + categories - 1;
 }
 
 item_parameter::item_parameter(short d) {
@@ -48,7 +48,7 @@ item_parameter item_parameter::build_item(const column_vector& v, int d, int mi)
 	int j = 0;
 	for ( int k = 0; k < d; ++k, ++j )
 		item.alpha[k] = v(j);
-	for ( int k = 0; k < mi; ++k, ++j )
+	for ( int k = 0; k < mi - 1; ++k, ++j )
 		item.gamma[k] = v(j);
 	//Here, there is a parameter c (guessing) into v
 	if ( j < v.size() ) {

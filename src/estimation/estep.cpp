@@ -102,6 +102,7 @@ void Estep ( ) {
 	 *
 	 * Matrix r
 	 * */
+
 	for ( int g = 0; g < G; ++g ) {
 		for ( int i = 0; i < p; ++i ) {
 			// Number of categories of item i
@@ -117,6 +118,7 @@ void Estep ( ) {
 	//Asserting r correctness
 	bool r_ok = test_r(r, N, p);
 	assert(("Sum of elements in r must be N x p", r_ok));
+
 }
 
 } /* namespace mirt */

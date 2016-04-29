@@ -122,6 +122,12 @@ class estimation {
 		 * depending on what is the model used
 		 * */
 		void EMAlgortihm();
+
+		/**
+		 * Prints the results
+		 * Values for alphas and d's
+		 * */
+		void print_results();
 };
 
 } /* namespace mirt */

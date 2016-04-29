@@ -28,7 +28,6 @@ double Qi (const column_vector& v) {
 			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
 		}
 	}
-	//std::cout << "Value: " << value << std::endl;
 	return value;
 }
 
@@ -70,7 +69,7 @@ double Mstep() {
 		                                             Qi,
 													 starting_point, -1);
 
-		std::cout << "Log-likelihood = " << Qi(starting_point) << std::endl;
+		//std::cout << "Log-likelihood = " << Qi(starting_point) << std::endl;
 		new_zeta.push_back(item_parameter::build_item(starting_point, d, zeta[i].get_categories()));
 
 		//Computing difference of current item
@@ -84,7 +83,6 @@ double Mstep() {
 										  std::abs(zeta[i].gamma[j] - new_zeta[i].gamma[j]));
 
 		max_difference = std::max(max_difference, current_difference);
-		//std::cout << "Difference between zeta's " << i  << ' ' << current_difference << std::endl;
 	}
 
 
