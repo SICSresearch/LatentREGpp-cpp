@@ -18,7 +18,7 @@ namespace mirt {
 			double sum = 0;
 			for ( int i = 0; i < pi.rows(); ++i )
 				sum += pi(i, j);
-			correct &= 1 == int(sum + eps);
+			correct &= 100 == int((sum + eps) * 100);
 		}
 
 		return correct;

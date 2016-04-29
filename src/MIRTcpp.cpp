@@ -42,8 +42,7 @@ int main() {
 	input<char> in(';');
 	in.importData("datasets/dataset03.csv", Y);
 
-	cout << "Data\n";
-	cout << Y << std::endl;
+	cout << "Data imported" << std::endl;
 
 	estimation e(2, Y, 1, 0.001);
 	e.EMAlgortihm();

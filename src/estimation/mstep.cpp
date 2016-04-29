@@ -28,6 +28,7 @@ double Qi (const column_vector& v) {
 			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
 		}
 	}
+	//std::cout << "Value: " << value << std::endl;
 	return value;
 }
 
@@ -65,11 +66,11 @@ double Mstep() {
 		 *	Calling bfgs from dlib to optimize Qi
 		 * */
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-													 dlib::objective_delta_stop_strategy(1e-5),
+													 dlib::objective_delta_stop_strategy(1e-9),
 		                                             Qi,
 													 starting_point, -1);
 
-		//std::cout << "Optimized: \n"<< starting_point << std::endl;
+		std::cout << "Log-likelihood = " << Qi(starting_point) << std::endl;
 		new_zeta.push_back(item_parameter::build_item(starting_point, d, zeta[i].get_categories()));
 
 		//Computing difference of current item

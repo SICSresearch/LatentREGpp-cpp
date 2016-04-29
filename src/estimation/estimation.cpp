@@ -185,17 +185,17 @@ void estimation::EMAlgortihm() {
 	do {
 		Estep();
 		dif = Mstep();
-		std::cout << ++iterations << ' ' << dif << std::endl;
+		std::cout << "Iteration: " << ++iterations << ", Max-change: " << dif << std::endl;
 	} while ( dif > convergence_difference );
 
+	std::cout << "\nResults" << std::endl;
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i << std::endl;
-		std::cout << "Alphas:";
 		for ( int j = 0; j < d; ++j )
-			std::cout << ' ' << zeta[i].alpha[j];
-		std::cout << "\nGammas:";
+			std::cout << 'a' << j << ": " << zeta[i].alpha[j];
+		std::cout << std::endl;
 		for ( int j = 0; j < categories_item[i] - 1; ++j )
-			std::cout << ' ' << zeta[i].alpha[j];
+			std::cout << 'd' << j << ": " << zeta[i].gamma[j];
 		std::cout << std::endl;
 	}
 }
