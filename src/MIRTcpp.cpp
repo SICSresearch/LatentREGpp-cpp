@@ -41,7 +41,8 @@ int main() {
 
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/dataset03.csv", Y);
+	in.importData("datasets/un_math02.csv", Y);
+	std::cout << "Data imported" << std::endl;
 
 	clock_t start = clock();
 
