@@ -36,6 +36,35 @@ void Estep ( ) {
 	matrix<double> pi(G, s);
 
 	/**
+	 * Saving the values of denominators
+	 * in pi(g, l) equation to avoid recompute them
+	 * */
+	std::vector<double> denominators(s);
+	for ( int l = 0; l < s; ++l ) {
+		double &denominator = denominators[l];
+		matrix<int> &x_l = X[l];
+		for ( int h = 0; h < G; ++h ) {
+			double product1 = 1;
+
+			for ( int i = 0; i < p; ++i ) {
+				double product2 = 1;
+
+				// Number of categories of this item
+				int mi = zeta[i].get_categories();
+				for ( int k = 0; k < mi; ++k ) {
+					if ( x_l(i, k) ) {
+						std::vector<double> theta_h = theta.get_row(h);
+						product2 *= m.Pik(theta_h, zeta[i], k);
+					}
+				}
+				product1 *= product2;
+			}
+			denominator += product1 * w[h];
+		}
+	}
+
+
+	/**
 	 * Computing pi matrix
 	 * */
 	for ( int g = 0; g < G; ++g ) {
@@ -66,29 +95,7 @@ void Estep ( ) {
 
 			//Now multiply by the weight of node g
 			numerator *= w[g];
-
-			double denominator = 0;
-
-			for ( int h = 0; h < G; ++h ) {
-				double product1 = 1;
-
-				for ( int i = 0; i < p; ++i ) {
-					double product2 = 1;
-
-					// Number of categories of this item
-					int mi = zeta[i].get_categories();
-					for ( int k = 0; k < mi; ++k ) {
-						if ( x_l(i, k) ) {
-							std::vector<double> theta_h = theta.get_row(h);
-							product2 *= m.Pik(theta_h, zeta[i], k);
-						}
-					}
-					product1 *= product2;
-				}
-				denominator += product1 * w[h];
-			}
-
-			pi_gl = numerator / denominator;
+			pi_gl = numerator / denominators[l];
 		}
 	}
 
