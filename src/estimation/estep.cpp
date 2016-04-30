@@ -36,7 +36,7 @@ void Estep ( ) {
 	matrix<double> pi(G, s);
 
 	/**
-	 * Saving the values of denominators
+	 * Computing and saving the values of denominators
 	 * in pi(g, l) equation to avoid recompute them
 	 * */
 	std::vector<double> denominators(s);

@@ -65,7 +65,7 @@ double Mstep() {
 		 *	Calling bfgs from dlib to optimize Qi
 		 * */
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-													 dlib::objective_delta_stop_strategy(1e-9),
+													 dlib::objective_delta_stop_strategy(1e-4),
 		                                             Qi,
 													 starting_point, -1);
 
