@@ -19,7 +19,7 @@ double Qi (const column_vector& v) {
 	for ( int g = 0; g < G; ++g ) {
 		int mi = zeta[i].get_categories();
 		for ( int k = 0; k < mi; ++k ) {
-			std::vector<double> theta_g = theta.get_row(g);
+			std::vector<double> &theta_g = *theta.get_pointer_row(g);
 
 			//Creating an item from a column_vector
 			item_parameter item_i = item_parameter::build_item(v, d, mi);

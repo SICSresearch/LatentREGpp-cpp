@@ -78,6 +78,11 @@ class matrix {
 		std::vector<T> get_row(int i);
 
 		/**
+		 * Returns the i-th row in the matrix
+		 * */
+		std::vector<T>* get_pointer_row(int i);
+
+		/**
 		 * Returns number of rows of the matrix
 		 * */
 		int rows();
@@ -167,6 +172,11 @@ std::vector<std::vector<T> > matrix<T>::get_data() {
 template<class T>
 std::vector<T> matrix<T>::get_row(int i) {
 	return data[i];
+}
+
+template<class T>
+std::vector<T>* matrix<T>::get_pointer_row(int i) {
+	return &data[i];
 }
 
 template<class T>

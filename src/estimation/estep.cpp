@@ -44,7 +44,7 @@ void Estep ( ) {
 		double &denominator = denominators[l] = 0;
 		for ( int h = 0; h < G; ++h ) {
 			double product = 1;
-			std::vector<double> theta_h = theta.get_row(h);
+			std::vector<double> &theta_h = *theta.get_pointer_row(h);
 			for ( int i = 0; i < p; ++i )
 				product *= m.Pik(theta_h, zeta[i], Y(l, i) - 1);
 			denominator += product * w[h];
@@ -61,7 +61,7 @@ void Estep ( ) {
 			 * pi(g, l)
 			 * */
 			double &pi_gl = pi(g, l);
-			std::vector<double> theta_g = theta.get_row(g);
+			std::vector<double> &theta_g = *theta.get_pointer_row(g);
 
 			double numerator = 1;
 			for ( int i = 0; i < p; ++i )
