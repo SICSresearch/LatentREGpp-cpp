@@ -30,12 +30,7 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 	if ( k == parameters.get_categories() - 1 ) return 0;
 
 	if ( this->parameters == 1 ) {
-		/**
-		 * 1PL Approach
-		 *
-		 * */
 
-		return 0.5;
 	}
 	if ( this->parameters == 2 ) {
 		/**
