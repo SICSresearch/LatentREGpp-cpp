@@ -17,15 +17,14 @@ double Qi (const column_vector& v) {
 	 * */
 	double value = 0;
 	for ( int g = 0; g < G; ++g ) {
+		std::vector<double> &theta_g = *theta.get_pointer_row(g);
+
 		int mi = zeta[i].get_categories();
-		for ( int k = 0; k < mi; ++k ) {
-			std::vector<double> &theta_g = *theta.get_pointer_row(g);
+		//Creating an item from a column_vector
+		item_parameter item_i = item_parameter::build_item(v, d, mi);
 
-			//Creating an item from a column_vector
-			item_parameter item_i = item_parameter::build_item(v, d, mi);
-
+		for ( int k = 0; k < mi; ++k )
 			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
-		}
 	}
 	return value;
 }
@@ -41,24 +40,19 @@ double Mstep() {
 	 *
 	 *********************************/
 
-
 	double max_difference = 0.0;
-
-	/**
-	 * New vector of parameters
-	 * */
-	std::vector<item_parameter> new_zeta;
 
 	// Iterate over the number of items
 	for ( i = 0; i < p; ++i ) {
 		//Creating starting point
 		column_vector starting_point(zeta[i].get_number_of_parameters());
 		int j = 0;
-		for ( int k = 0; k < zeta[i].alpha.size(); ++k, ++j )
+		for ( int k = 0; k < d; ++k, ++j )
 			starting_point(j) = zeta[i].alpha[k];
-		for ( int k = 0; k < zeta[i].gamma.size(); ++k, ++j )
+		for ( unsigned int k = 0; k < zeta[i].gamma.size(); ++k, ++j )
 			starting_point(j) = zeta[i].gamma[k];
 		if ( zeta[i].guessing ) starting_point(j) = zeta[i].c;
+
 
 		/**
 		 *	Calling bfgs from dlib to optimize Qi
@@ -68,24 +62,33 @@ double Mstep() {
 		                                             Qi,
 													 starting_point, -1);
 
-		//std::cout << "Log-likelihood = " << Qi(starting_point) << std::endl;
-		new_zeta.push_back(item_parameter::build_item(starting_point, d, zeta[i].get_categories()));
 
 		//Computing difference of current item
-		double current_difference = 0.0;
-		for ( int j = 0; j < zeta[i].alpha.size(); ++j )
-			current_difference = std::max(current_difference,
-										  std::abs(zeta[i].alpha[j] - new_zeta[i].alpha[j]));
+		double dif = 0.0;
 
-		for ( int j = 0; j < zeta[i].gamma.size(); ++j )
-			current_difference = std::max(current_difference,
-										  std::abs(zeta[i].gamma[j] - new_zeta[i].gamma[j]));
+		j = 0;
+		for ( int k = 0; k < d; ++k, ++j ) {
+			dif = std::max(dif, std::abs(zeta[i].alpha[k] - starting_point(j)));
 
-		max_difference = std::max(max_difference, current_difference);
+			//Updating new value for alpha
+			zeta[i].alpha[k] = starting_point(j);
+		}
+
+		for ( unsigned int k = 0; k < zeta[i].gamma.size(); ++k, ++j ) {
+			dif = std::max(dif, std::abs(zeta[i].gamma[k] - starting_point(j)));
+
+			//Updating new value for alpha
+			zeta[i].gamma[k] = starting_point(j);
+		}
+
+		if ( j == starting_point.size() ) {
+			dif = std::max(dif, std::abs(zeta[i].c - starting_point(j)));
+			zeta[i].c = starting_point(j);
+		}
+
+		max_difference = std::max(max_difference, dif);
 	}
 
-
-	zeta = new_zeta;
 	return max_difference;
 }
 

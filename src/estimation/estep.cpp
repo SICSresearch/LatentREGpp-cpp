@@ -40,6 +40,7 @@ void Estep ( ) {
 	 * in pi(g, l) equation to avoid recompute them
 	 * */
 	static std::vector<double> denominators(s);
+
 	for ( int l = 0; l < s; ++l ) {
 		double &denominator = denominators[l] = 0;
 		for ( int h = 0; h < G; ++h ) {
@@ -95,7 +96,6 @@ void Estep ( ) {
 	//Asserting r correctness
 	bool r_ok = test_r(r, N, p);
 	assert(("Sum of elements in r must be N x p", r_ok));
-
 }
 
 } /* namespace mirt */

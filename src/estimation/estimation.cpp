@@ -154,6 +154,8 @@ estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 	// Weights are loaded
 	w = load_weights(G);
 
+	G = theta.rows();
+
 	//Setting size of matrix r
 	r = std::vector<matrix<double> >(G);
 	for ( int g = 0; g < G; ++g ) {
@@ -196,7 +198,7 @@ void estimation::print_results ( ) {
 		for ( int j = 0; j < d; ++j )
 			std::cout << 'a' << j << ": " << zeta[i].alpha[j] << ' ';
 		std::cout << std::endl;
-		for ( int j = 0; j < categories_item[i] - 1; ++j )
+		for ( int j = 0; j < zeta[i].gamma.size(); ++j )
 			std::cout << 'd' << j << ": " << zeta[i].gamma[j] << ' ';
 		std::cout << std::endl;
 	}
