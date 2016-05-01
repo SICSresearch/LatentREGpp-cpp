@@ -82,15 +82,12 @@ void Estep ( ) {
 	 *
 	 * Matrix r
 	 * */
-
 	for ( int g = 0; g < G; ++g ) {
 		for ( int i = 0; i < p; ++i ) {
-			// Number of categories of item i
-			int mi = zeta[i].get_categories();
-			for ( int k = 0; k < mi; ++k ) {
-				double &r_gik = r[g](i, k) = 0;
-				for ( int l = 0; l < s; ++l )
-					r_gik += nl[l] * X[l](i, k) * pi(g, l);
+			r[g].reset_row(i);
+			for ( int l = 0; l < s; ++l ) {
+				int k = Y(l, i) - 1;
+				r[g](i, k) += nl[l] * pi(g, l);
 			}
 		}
 	}

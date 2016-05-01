@@ -135,15 +135,16 @@ estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 	/**
 	 * After Y, here matrix X (dichotomized matrix) is computed
 	 *
+	 * Not necessary
 	 */
-	X = std::vector<matrix<int> >(s);
-	for ( int l = 0; l < s; ++l ) {
-		for ( int i = 0; i < p; ++i ) {
-			std::vector<int> row(categories_item[i]);
-			row[Y(l, i) - 1] = 1;
-			X[l].add_row(row);
-		}
-	}
+//	X = std::vector<matrix<int> >(s);
+//	for ( int l = 0; l < s; ++l ) {
+//		for ( int i = 0; i < p; ++i ) {
+//			std::vector<int> row(categories_item[i]);
+//			row[Y(l, i) - 1] = 1;
+//			X[l].add_row(row);
+//		}
+//	}
 
 	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
 

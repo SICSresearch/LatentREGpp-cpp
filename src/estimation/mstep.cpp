@@ -9,7 +9,6 @@
 
 namespace mirt {
 
-double C = 100000.0;
 int i;
 
 double Qi (const column_vector& v) {
