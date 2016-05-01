@@ -194,13 +194,13 @@ void estimation::EMAlgortihm() {
 void estimation::print_results ( ) {
 	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
-		std::cout << "Item " << i << std::endl;
+		std::cout << "Item " << i << '\n';
 		for ( int j = 0; j < d; ++j )
 			std::cout << 'a' << j << ": " << zeta[i].alpha[j] << ' ';
-		std::cout << std::endl;
+		std::cout << '\n';
 		for ( int j = 0; j < zeta[i].gamma.size(); ++j )
 			std::cout << 'd' << j << ": " << zeta[i].gamma[j] << ' ';
-		std::cout << std::endl;
+		std::cout << '\n';
 	}
 }
 

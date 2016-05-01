@@ -18,12 +18,12 @@ using std::cout;
 
 inline void improveIO () {
 	std::ios_base::sync_with_stdio(0);
-	std::cin.tie(0); std::cout.tie(0);
+	//std::cin.tie(0); std::cout.tie(0);
 }
 
 int main() {
 	cout.setf(std::ios_base::fixed);
-	cout.precision(10);
+	cout.precision(5);
 
 //	compute_and_save_quadrature_points(40, 1);
 //	compute_and_save_weights(40, 1);
@@ -41,7 +41,7 @@ int main() {
 
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/dataset03.csv", Y);
+	in.importData("datasets/LSAT.csv", Y);
 	std::cout << "Data imported" << std::endl;
 
 	clock_t start = clock();
@@ -55,10 +55,10 @@ int main() {
 	 * */
 	estimation e(2, Y, 1, 0.001);
 	e.EMAlgortihm();
-	e.print_results();
 
 	clock_t stop = clock();
 	double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
 
-	cout << "Time elapsed: " << elapsed << " ms." << std::endl;
+	e.print_results();
+	cout << "Time elapsed: " << elapsed << " ms." << '\n';
 }

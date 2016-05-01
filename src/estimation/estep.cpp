@@ -36,19 +36,31 @@ void Estep ( ) {
 	static matrix<double> pi(G, s);
 
 	/**
-	 * Computing and saving the values of denominators
+	 * Computing and saving the values of numerator and denominators
 	 * in pi(g, l) equation to avoid recompute them
+	 *
+	 * As you can see in pi(g, l) equation [7 from Doc], denominators are the same by columns
+	 *
+	 * So, here numerators for each position in pi are computed
+	 * and the denominators are the summation of numerators by columns
+	 *
 	 * */
-	static std::vector<double> denominators(s);
+	static matrix<double> numerator(G, s);
+	static std::vector<double> denominator(s);
 
 	for ( int l = 0; l < s; ++l ) {
-		double &denominator = denominators[l] = 0;
+		double &denonimator_l = denominator[l] = 0;
 		for ( int h = 0; h < G; ++h ) {
-			double product = 1;
+			/**
+			 * Computing numerator for (g, l) position
+			 * */
+			double &numerator_gl = numerator(h, l) = 1;
 			std::vector<double> &theta_h = *theta.get_pointer_row(h);
 			for ( int i = 0; i < p; ++i )
-				product *= m.Pik(theta_h, zeta[i], Y(l, i) - 1);
-			denominator += product * w[h];
+				numerator_gl *= m.Pik(theta_h, zeta[i], Y(l, i) - 1);
+			numerator_gl *= w[h];
+
+			denonimator_l += numerator_gl;
 		}
 	}
 
@@ -61,15 +73,7 @@ void Estep ( ) {
 			 * Computing each element of the matrix
 			 * pi(g, l)
 			 * */
-			double &pi_gl = pi(g, l);
-			std::vector<double> &theta_g = *theta.get_pointer_row(g);
-
-			double numerator = 1;
-			for ( int i = 0; i < p; ++i )
-				numerator *= m.Pik(theta_g, zeta[i], Y(l, i) - 1);
-
-			//Now multiply by the weight of node g and divide by denominator previously computed
-			pi_gl = numerator * w[g] / denominators[l];
+			pi(g, l) = numerator(g, l) / denominator[l];
 		}
 	}
 
@@ -96,6 +100,7 @@ void Estep ( ) {
 	//Asserting r correctness
 	bool r_ok = test_r(r, N, p);
 	assert(("Sum of elements in r must be N x p", r_ok));
+
 }
 
 } /* namespace mirt */
