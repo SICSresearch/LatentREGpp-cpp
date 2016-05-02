@@ -9,42 +9,50 @@
 
 namespace mirt {
 
+/**
+ * Variable to know where is the current item
+ * */
 int i;
 
+/*****************************************
+ * Log likelihood Function to maximize
+ *
+ * */
 double Qi (const column_vector& v) {
 	/**
 	 * Computing value of Qi function
 	 * */
 	double value = 0;
+	int mi = zeta[i].get_categories();
+	//Creating an item from a column_vector
+	item_parameter item_i = item_parameter::build_item(v, d, mi);
 	for ( int g = 0; g < G; ++g ) {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
-
-		int mi = zeta[i].get_categories();
-		//Creating an item from a column_vector
-		item_parameter item_i = item_parameter::build_item(v, d, mi);
-
 		for ( int k = 0; k < mi; ++k )
 			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
 	}
 	return value;
 }
 
-// TODO Include derivates
-const column_vector Qi_derivative (const column_vector& m) {
-
+const column_vector Qi_derivative (const column_vector& v) {
+	// TODO Include derivatives
 }
 
-double Mstep() {
-	/*********************************
-	 *  M STEP
-	 *
-	 *********************************/
+/**********************************
+ *  M STEP						  *
+ *								  *
+ **********************************/
 
+double Mstep() {
 	double max_difference = 0.0;
 
-	// Iterate over the number of items
+	/**
+	 * Log likelihood must be optimized for every item
+	 * */
 	for ( i = 0; i < p; ++i ) {
-		//Creating starting point
+		/**
+		 * Starting point where optimization will start
+		 * */
 		column_vector starting_point(zeta[i].get_number_of_parameters());
 		int j = 0;
 		for ( int k = 0; k < d; ++k, ++j )
@@ -55,7 +63,7 @@ double Mstep() {
 
 
 		/**
-		 *	Calling bfgs from dlib to optimize Qi
+		 *	Calling BFGS from dlib to optimize Qi (Log likelihood)
 		 * */
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
 													 dlib::objective_delta_stop_strategy(1e-4),
@@ -70,14 +78,14 @@ double Mstep() {
 		for ( int k = 0; k < d; ++k, ++j ) {
 			dif = std::max(dif, std::abs(zeta[i].alpha[k] - starting_point(j)));
 
-			//Updating new value for alpha
+			//Updating new value for alpha k
 			zeta[i].alpha[k] = starting_point(j);
 		}
 
 		for ( unsigned int k = 0; k < zeta[i].gamma.size(); ++k, ++j ) {
 			dif = std::max(dif, std::abs(zeta[i].gamma[k] - starting_point(j)));
 
-			//Updating new value for alpha
+			//Updating new value for gamma k
 			zeta[i].gamma[k] = starting_point(j);
 		}
 
