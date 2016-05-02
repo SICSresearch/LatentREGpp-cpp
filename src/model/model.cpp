@@ -42,10 +42,13 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 		/**
 		 * Initialized with gamma_k value
 		 * */
+		//std::cout << "Lel " << parameters.gamma.size() << std::endl;
+		//std::cout << k << std::endl;
+
 		double eta = parameters.gamma[k];
 
 		//Computing dot product
-		for ( short i = 0; i < d; ++i )
+		for ( short i = 0; i < theta.size(); ++i )
 			eta += 1 * theta[i]; //no alpha in this model
 
 		/**
@@ -73,7 +76,7 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 		double eta = parameters.gamma[k];
 
 		//Computing dot product
-		for ( short i = 0; i < d; ++i )
+		for ( short i = 0; i < theta.size(); ++i )
 			eta += parameters.alpha[i] * theta[i];
 
 		/**
@@ -85,7 +88,6 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 	 * 3PL Approach
 	 *
 	 * */
-
 	/**
 	 * Dimensions
 	 * */
@@ -96,8 +98,11 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 	 * */
 	double eta = parameters.gamma[k];
 
-	//TODO
-	double c = 0; //guessing parameter
+	//Computing dot product
+	for ( short i = 0; i < d; ++i )
+		eta += parameters.alpha[i] * theta[i];
+
+	double c = parameters.c; //guessing parameter
 
 	return c + ((1.0 - c)/ (1.0 + std::exp(-eta)));
 }

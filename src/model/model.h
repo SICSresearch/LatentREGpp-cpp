@@ -29,14 +29,12 @@ typedef dlib::matrix<double,0,1> column_vector;
 
 class model {
 
-private:
-
+public:
 	/**
 	 * Number of parameters of the model
 	 * */
 	int parameters;
 
-public:
 	model();
 
 	/**

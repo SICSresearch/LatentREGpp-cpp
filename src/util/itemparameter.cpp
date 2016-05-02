@@ -14,9 +14,10 @@ item_parameter::item_parameter() {
 
 }
 
-item_parameter::item_parameter(short d, short categories) {
+item_parameter::item_parameter(short d, short categories, bool guessing) {
 	this->d = d;
 	this->categories = categories;
+	this->guessing = guessing;
 
 	/**
 	 * COMPUTING INITIAL VALUES
@@ -28,32 +29,33 @@ item_parameter::item_parameter(short d, short categories) {
 	for ( int i = 0; i < d; ++i ) alpha.push_back(1);
 	for ( int i = 0; i < categories - 1; ++i ) gamma.push_back(1);
 
-	guessing = false;
 	number_of_parameters = d + categories - 1;
+	if ( guessing ) {
+		c = 0.5;
+		++number_of_parameters;
+	}
 }
 
-item_parameter::item_parameter(short d) {
-	item_parameter(d, 2);
-}
-
-item_parameter::item_parameter(short d, short categories, double c) {
-	item_parameter(d, categories);
-	this->c = c;
-	guessing = true;
-	++number_of_parameters;
+item_parameter::item_parameter(short categories) {
+	item_parameter(0, categories, false);
 }
 
 item_parameter item_parameter::build_item(const column_vector& v, int d, int mi) {
-	item_parameter item(d, mi);
+	item_parameter item;
 	int j = 0;
 	for ( int k = 0; k < d; ++k, ++j )
-		item.alpha[k] = v(j);
+		item.alpha.push_back(v(j));
+	item.d = item.alpha.size();
 	for ( int k = 0; k < mi - 1; ++k, ++j )
-		item.gamma[k] = v(j);
+		item.gamma.push_back(v(j));
+	item.categories = item.gamma.size() + 1;
+	item.number_of_parameters = item.d + item.get_categories() - 1;
+
 	//Here, there is a parameter c (guessing) into v
 	if ( j < v.size() ) {
 		item.c = v(j);
 		item.guessing = true;
+		++item.number_of_parameters;
 	}
 	return item;
 }

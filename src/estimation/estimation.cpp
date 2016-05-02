@@ -81,6 +81,23 @@ const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
  * */
 int G;
 
+/**
+ * Probability matrix P
+ *
+ * P_gik
+ *
+ * P_gik means the probability that an individual has selected the category k
+ * to item i and belongs to group g
+ *
+ *
+ * The purpose of this matrix is to allocate the value of P_gik
+ * to avoid recompute them while numerators and denominators in Estep are computed
+ * */
+std::vector<matrix<double> > P;
+
+
+
+
 estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 					   double convergence_difference = 0.001) {
 	// Setting the dimension
@@ -135,16 +152,16 @@ estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 	/**
 	 * After Y, here matrix X (dichotomized matrix) is computed
 	 *
-	 * Not necessary
+	 *
 	 */
-//	X = std::vector<matrix<int> >(s);
-//	for ( int l = 0; l < s; ++l ) {
-//		for ( int i = 0; i < p; ++i ) {
-//			std::vector<int> row(categories_item[i]);
-//			row[Y(l, i) - 1] = 1;
-//			X[l].add_row(row);
-//		}
-//	}
+	X = std::vector<matrix<int> >(s);
+	for ( int l = 0; l < s; ++l ) {
+		for ( int i = 0; i < p; ++i ) {
+			std::vector<int> row(categories_item[i]);
+			row[Y(l, i) - 1] = 1;
+			X[l].add_row(row);
+		}
+	}
 
 	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
 
@@ -156,12 +173,16 @@ estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 
 	G = theta.rows();
 
-	//Setting size of matrix r
+	//Setting size of matrix r and P
 	r = std::vector<matrix<double> >(G);
+	P = std::vector<matrix<double> >(G);
 	for ( int g = 0; g < G; ++g ) {
 		r[g] = matrix<double>();
-		for ( int i = 0; i < p; ++i )
+		P[g] = matrix<double>();
+		for ( int i = 0; i < p; ++i ) {
 			r[g].add_row(categories_item[i]);
+			P[g].add_row(categories_item[i]);
+		}
 	}
 
 	//Configurations for the estimation
@@ -175,8 +196,11 @@ estimation::~estimation() {
 }
 
 void estimation::initial_values() {
-	for ( int i = 0; i < p; ++i )
-		zeta.push_back( item_parameter(d, categories_item[i]) );
+	for ( int i = 0; i < p; ++i ) {
+		if ( m.parameters == 1 ) zeta.push_back( item_parameter(categories_item[i]) );
+		if ( m.parameters == 2 ) zeta.push_back( item_parameter(d, categories_item[i], false) );
+		if ( m.parameters == 3 ) zeta.push_back( item_parameter(d, categories_item[i], true) );
+	}
 }
 
 void estimation::EMAlgortihm() {
@@ -201,6 +225,8 @@ void estimation::print_results ( ) {
 		for ( int j = 0; j < zeta[i].gamma.size(); ++j )
 			std::cout << 'd' << j << ": " << zeta[i].gamma[j] << ' ';
 		std::cout << '\n';
+		if ( zeta[i].guessing )
+			std::cout << "c: " << zeta[i].c << '\n';
 	}
 }
 

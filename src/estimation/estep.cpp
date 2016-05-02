@@ -9,6 +9,7 @@
 
 //Includes for testing
 #include "../test/test.h"
+#include <ctime>
 
 namespace mirt {
 
@@ -18,6 +19,18 @@ namespace mirt {
  **********************************/
 
 void Estep ( ) {
+	/**
+	 * Computing each element of matrix P_gik
+	 * */
+	for ( int g = 0; g < G; ++g ) {
+		std::vector<double> &theta_g = *theta.get_pointer_row(g);
+		for ( int i = 0; i < p; ++i ) {
+			int mi = zeta[i].get_categories();
+			for ( int k = 0; k < mi; ++k )
+				P[g](i, k) = m.Pik(theta_g, zeta[i], k);
+		}
+	}
+
 	/**
 	 * Probability matrix pi
 	 *
@@ -40,6 +53,7 @@ void Estep ( ) {
 	 * and the denominators are the summation of numerators by columns
 	 *
 	 * */
+
 	static matrix<double> numerator(G, s);
 	static std::vector<double> denominator(s);
 
@@ -49,8 +63,7 @@ void Estep ( ) {
 			/**
 			 * Computing numerator for (g, l) position
 			 * */
-			double &numerator_gl = numerator(g, l) = 1;
-			std::vector<double> &theta_g = *theta.get_pointer_row(g);
+			double &numerator_gl = numerator(g, l) = w[g];
 
 			/**
 			 * Here, P_gik is requested to the model
@@ -76,9 +89,7 @@ void Estep ( ) {
 			 *
 			 * */
 			for ( int i = 0; i < p; ++i )
-				numerator_gl *= m.Pik(theta_g, zeta[i], Y(l, i) - 1);
-			numerator_gl *= w[g];
-
+				numerator_gl *= P[g](i, Y(l, i) - 1);
 			/**
 			 * As denominator for a response pattern l is the summation over the latent traits
 			 * here numerator(g, l) is added to denominator[l]

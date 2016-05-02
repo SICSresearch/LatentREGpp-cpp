@@ -57,12 +57,7 @@ class item_parameter {
 		/**
 		 * Receives dimension and number of categories of the item
 		 * */
-		item_parameter(short, short);
-
-		/**
-		 * Receives dimension, number of categories of the item and guessing parameter
-		 * */
-		item_parameter(short, short, double);
+		item_parameter(short, short, bool);
 
 		static item_parameter build_item(const column_vector&, int, int);
 

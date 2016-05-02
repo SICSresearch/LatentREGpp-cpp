@@ -55,12 +55,11 @@ double Mstep() {
 		 * */
 		column_vector starting_point(zeta[i].get_number_of_parameters());
 		int j = 0;
-		for ( int k = 0; k < d; ++k, ++j )
+		for ( unsigned int k = 0; k < zeta[i].alpha.size(); ++k, ++j )
 			starting_point(j) = zeta[i].alpha[k];
 		for ( unsigned int k = 0; k < zeta[i].gamma.size(); ++k, ++j )
 			starting_point(j) = zeta[i].gamma[k];
 		if ( zeta[i].guessing ) starting_point(j) = zeta[i].c;
-
 
 		/**
 		 *	Calling BFGS from dlib to optimize Qi (Log likelihood)
@@ -75,7 +74,7 @@ double Mstep() {
 		double dif = 0.0;
 
 		j = 0;
-		for ( int k = 0; k < d; ++k, ++j ) {
+		for ( unsigned int k = 0; k < zeta[i].alpha.size(); ++k, ++j ) {
 			dif = std::max(dif, std::abs(zeta[i].alpha[k] - starting_point(j)));
 
 			//Updating new value for alpha k
@@ -89,7 +88,7 @@ double Mstep() {
 			zeta[i].gamma[k] = starting_point(j);
 		}
 
-		if ( j == starting_point.size() ) {
+		if ( j < starting_point.size() ) {
 			dif = std::max(dif, std::abs(zeta[i].c - starting_point(j)));
 			zeta[i].c = starting_point(j);
 		}

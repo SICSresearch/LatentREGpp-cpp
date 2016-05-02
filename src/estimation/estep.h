@@ -83,6 +83,20 @@ extern int G;
 extern std::vector<matrix<double> > r;
 
 /**
+ * Probability matrix P
+ *
+ * P_gik
+ *
+ * P_gik means the probability that an individual has selected the category k
+ * to item i and belongs to group g
+ *
+ *
+ * The purpose of this matrix is to allocate the value of P_gik
+ * to avoid recompute them while numerators and denominators are computed
+ * */
+extern std::vector<matrix<double> > P;
+
+/**
  * Estep of the EMAlgortihm
  *
  * */
