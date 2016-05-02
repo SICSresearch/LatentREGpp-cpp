@@ -30,6 +30,28 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 	if ( k == parameters.get_categories() - 1 ) return 0;
 
 	if ( this->parameters == 1 ) {
+		/**
+		 * 1PL Approach
+		 *
+		 * */
+		/**
+		 * Dimensions
+		 * */
+		short d = parameters.get_dimension();
+
+		/**
+		 * Initialized with gamma_k value
+		 * */
+		double eta = parameters.gamma[k];
+
+		//Computing dot product
+		for ( short i = 0; i < d; ++i )
+			eta += 1 * theta[i]; //no alpha in this model
+
+		/**
+		 * Equation (82) from Doc1
+		 * */
+		return 1.0 / (1.0 + std::exp(-eta));
 
 	}
 	if ( this->parameters == 2 ) {
@@ -64,7 +86,20 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 	 *
 	 * */
 
-	return 1;
+	/**
+	 * Dimensions
+	 * */
+	short d = parameters.get_dimension();
+
+	/**
+	 * Initialized with gamma_k value
+	 * */
+	double eta = parameters.gamma[k];
+
+	//TODO
+	double c = 0; //guessing parameter
+
+	return c + ((1.0 - c)/ (1.0 + std::exp(-eta)));
 }
 
 double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k) {
