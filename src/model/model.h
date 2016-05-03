@@ -21,6 +21,8 @@ namespace mirt {
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 
+class item_parameter;
+
 /*
  * Model class
  * It represents what is the model approach to use

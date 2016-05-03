@@ -25,7 +25,8 @@ double Qi (const column_vector& v) {
 	double value = 0;
 	int mi = zeta[i].get_categories();
 	//Creating an item from a column_vector
-	item_parameter item_i = item_parameter::build_item(v, d, mi);
+	item_parameter item_i(m, d, mi);
+	item_parameter::build_item(v, d, mi, item_i);
 	for ( int g = 0; g < G; ++g ) {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
 		for ( int k = 0; k < mi; ++k )
@@ -55,16 +56,16 @@ double Mstep() {
 		 * */
 		column_vector starting_point(zeta[i].get_number_of_parameters());
 		int j = 0;
-		for ( unsigned int k = 0; k < zeta[i].alpha.size(); ++k, ++j )
+		for ( unsigned int k = 0; k < zeta[i].alphas; ++k, ++j )
 			starting_point(j) = zeta[i].alpha[k];
-		for ( unsigned int k = 0; k < zeta[i].gamma.size(); ++k, ++j )
+		for ( unsigned int k = 0; k < zeta[i].gammas; ++k, ++j )
 			starting_point(j) = zeta[i].gamma[k];
 		if ( zeta[i].guessing ) starting_point(j) = zeta[i].c;
 
 		/**
 		 *	Calling BFGS from dlib to optimize Qi (Log likelihood)
 		 * */
-		dlib::find_max_using_approximate_derivatives(dlib::lbfgs_search_strategy(6),
+		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
 													 dlib::objective_delta_stop_strategy(1e-4),
 		                                             Qi,
 													 starting_point, -1);
@@ -74,14 +75,14 @@ double Mstep() {
 		double dif = 0.0;
 
 		j = 0;
-		for ( unsigned int k = 0; k < zeta[i].alpha.size(); ++k, ++j ) {
+		for ( unsigned int k = 0; k < zeta[i].alphas; ++k, ++j ) {
 			dif = std::max(dif, std::abs(zeta[i].alpha[k] - starting_point(j)));
 
 			//Updating new value for alpha k
 			zeta[i].alpha[k] = starting_point(j);
 		}
 
-		for ( unsigned int k = 0; k < zeta[i].gamma.size(); ++k, ++j ) {
+		for ( unsigned int k = 0; k < zeta[i].gammas; ++k, ++j ) {
 			dif = std::max(dif, std::abs(zeta[i].gamma[k] - starting_point(j)));
 
 			//Updating new value for gamma k

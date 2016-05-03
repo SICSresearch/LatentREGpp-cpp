@@ -196,11 +196,8 @@ estimation::~estimation() {
 }
 
 void estimation::initial_values() {
-	for ( int i = 0; i < p; ++i ) {
-		if ( m.parameters == 1 ) zeta.push_back( item_parameter(d, categories_item[i], false) );
-		if ( m.parameters == 2 ) zeta.push_back( item_parameter(d, categories_item[i], false) );
-		if ( m.parameters == 3 ) zeta.push_back( item_parameter(d, categories_item[i], true) );
-	}
+	for ( int i = 0; i < p; ++i )
+		zeta.push_back( item_parameter(m, d, categories_item[i]) );
 }
 
 void estimation::EMAlgortihm() {
@@ -219,10 +216,10 @@ void estimation::print_results ( ) {
 	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i << '\n';
-		for ( int j = 0; j < d; ++j )
+		for ( int j = 0; j < zeta[i].alphas; ++j )
 			std::cout << 'a' << j << ": " << zeta[i].alpha[j] << ' ';
 		std::cout << '\n';
-		for ( int j = 0; j < zeta[i].gamma.size(); ++j )
+		for ( int j = 0; j < zeta[i].gammas; ++j )
 			std::cout << 'd' << j << ": " << zeta[i].gamma[j] << ' ';
 		std::cout << '\n';
 		if ( zeta[i].guessing )

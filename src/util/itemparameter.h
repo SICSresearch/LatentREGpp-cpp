@@ -11,23 +11,17 @@
 #include <vector>
 //including optimization files from dlib library
 #include <dlib/optimization.h>
+#include "../model/model.h"
 
 namespace mirt {
 
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 
+class model;
+
 class item_parameter {
 	private:
-		/**
-		 * Dimension
-		 * */
-		short d;
-		/**
-		 * Number of categories of this item
-		 * */
-		short categories;
-
 		/**
 		 * Sum of all parameters of this item
 		 * */
@@ -38,6 +32,16 @@ class item_parameter {
 
 		std::vector<double> alpha;
 		std::vector<double> gamma;
+
+		/**
+		 * Number of alphas
+		 * */
+		short alphas;
+		/**
+		 * Number of categories of this item
+		 * */
+		short gammas;
+
 		/**
 		 * bool variable to known if the guessing parameter is being taken into account
 		 * */
@@ -54,12 +58,13 @@ class item_parameter {
 		 * */
 		item_parameter(short);
 
+
+		static void build_item(const column_vector&, int, int, item_parameter&);
+
 		/**
 		 * Receives dimension and number of categories of the item
 		 * */
-		item_parameter(short, short, bool);
-
-		static item_parameter build_item(const column_vector&, int, int);
+		item_parameter(model&, short, short);
 
 		virtual ~item_parameter();
 
