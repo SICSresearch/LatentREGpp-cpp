@@ -197,7 +197,7 @@ estimation::~estimation() {
 
 void estimation::initial_values() {
 	for ( int i = 0; i < p; ++i ) {
-		if ( m.parameters == 1 ) zeta.push_back( item_parameter(categories_item[i]) );
+		if ( m.parameters == 1 ) zeta.push_back( item_parameter(d, categories_item[i], false) );
 		if ( m.parameters == 2 ) zeta.push_back( item_parameter(d, categories_item[i], false) );
 		if ( m.parameters == 3 ) zeta.push_back( item_parameter(d, categories_item[i], true) );
 	}
