@@ -65,7 +65,7 @@ double Mstep() {
 		/**
 		 *	Calling BFGS from dlib to optimize Qi (Log likelihood)
 		 * */
-		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
+		dlib::find_max_using_approximate_derivatives(dlib::lbfgs_search_strategy(6),
 													 dlib::objective_delta_stop_strategy(1e-4),
 		                                             Qi,
 													 starting_point, -1);
