@@ -53,7 +53,7 @@ int main() {
 	 * 	1 dimension
 	 * 	0.0001 as convergence difference
 	 * */
-	estimation e(1, Y, 1, 0.0001);
+	estimation e(2, Y, 1, 0.001);
 	e.EMAlgortihm();
 
 	clock_t stop = clock();

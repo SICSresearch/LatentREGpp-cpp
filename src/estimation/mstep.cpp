@@ -56,9 +56,9 @@ double Mstep() {
 		 * */
 		column_vector starting_point(zeta[i].get_number_of_parameters());
 		int j = 0;
-		for ( unsigned int k = 0; k < zeta[i].alphas; ++k, ++j )
+		for ( int k = 0; k < zeta[i].alphas; ++k, ++j )
 			starting_point(j) = zeta[i].alpha[k];
-		for ( unsigned int k = 0; k < zeta[i].gammas; ++k, ++j )
+		for ( int k = 0; k < zeta[i].gammas; ++k, ++j )
 			starting_point(j) = zeta[i].gamma[k];
 		if ( zeta[i].guessing ) starting_point(j) = zeta[i].c;
 
@@ -75,21 +75,21 @@ double Mstep() {
 		double dif = 0.0;
 
 		j = 0;
-		for ( unsigned int k = 0; k < zeta[i].alphas; ++k, ++j ) {
+		for ( int k = 0; k < zeta[i].alphas; ++k, ++j ) {
 			dif = std::max(dif, std::abs(zeta[i].alpha[k] - starting_point(j)));
 
 			//Updating new value for alpha k
 			zeta[i].alpha[k] = starting_point(j);
 		}
 
-		for ( unsigned int k = 0; k < zeta[i].gammas; ++k, ++j ) {
+		for ( int k = 0; k < zeta[i].gammas; ++k, ++j ) {
 			dif = std::max(dif, std::abs(zeta[i].gamma[k] - starting_point(j)));
 
 			//Updating new value for gamma k
 			zeta[i].gamma[k] = starting_point(j);
 		}
 
-		if ( j < starting_point.size() ) {
+		if ( zeta[i].guessing ) {
 			dif = std::max(dif, std::abs(zeta[i].c - starting_point(j)));
 			zeta[i].c = starting_point(j);
 		}

@@ -216,14 +216,11 @@ void estimation::print_results ( ) {
 	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i << '\n';
-		for ( int j = 0; j < zeta[i].alphas; ++j )
-			std::cout << 'a' << j << ": " << zeta[i].alpha[j] << ' ';
-		std::cout << '\n';
+		for ( int j = 0; j < d; ++j )
+			std::cout << 'a' << j + 1 << ": " << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << ' ';
 		for ( int j = 0; j < zeta[i].gammas; ++j )
-			std::cout << 'd' << j << ": " << zeta[i].gamma[j] << ' ';
-		std::cout << '\n';
-		if ( zeta[i].guessing )
-			std::cout << "c: " << zeta[i].c << '\n';
+			std::cout << 'd' << j + 1 << ": " << zeta[i].gamma[j] << ' ';
+		std::cout << "c: " << ( zeta[i].guessing ? zeta[i].c : 0 ) << '\n';
 	}
 }
 
