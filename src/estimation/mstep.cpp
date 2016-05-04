@@ -36,7 +36,45 @@ double Qi (const column_vector& v) {
 }
 
 const column_vector Qi_derivative (const column_vector& v) {
-	// TODO Include derivatives
+	double tmp = 0;
+	double tmp2 = 0;
+	double tmp3 = 0;
+	double var = 0;
+	double kmax = zeta[i].get_categories();
+
+	//build item for each iteration
+	item_parameter item_i(m, d, kmax);
+	item_parameter::build_item(v, d, kmax, item_i);
+
+	column_vector res(kmax);
+
+	//Lambda derivative for each item
+	for (int g = 0; g < G; ++g) {
+		std::vector<double> &theta_g = *theta.get_pointer_row(g);
+		tmp3 = 0;
+		for (int k = 0; k<kmax ;++k) {
+			tmp3 += (((r[g](i, k))/(m.Pik(theta_g,item_i,k)))*((m.Pstar_ik(theta_g,item_i,k-1))*(1-(m.Pstar_ik(theta_g,item_i,k-1)))-(m.Pstar_ik(theta_g,item_i,k))*(1-(m.Pstar_ik(theta_g,item_i,k)))));
+		}
+		tmp2 += (theta_g[0]*tmp3);
+	}
+	res(0) = tmp2;
+
+	tmp2 = 0;
+
+	//k derivatives for each item
+	for (int k = 0; k<kmax-1;++k) {
+		for (int g = 0; g < G; ++g) {
+			std::vector<double> &theta_g = *theta.get_pointer_row(g);
+
+			tmp = m.Pstar_ik(theta_g,item_i,k)*(1-(m.Pstar_ik(theta_g,item_i,k)));
+			tmp2 = ((-(r[g](i, k)))/(m.Pik(theta_g,item_i,k)))+(r[g](i, k+1))/(m.Pik(theta_g,item_i,k+1));
+
+			var += tmp*tmp2;
+		}
+		res(k+1) = var;
+		var = 0;
+	}
+	return res;
 }
 
 /**********************************
@@ -63,13 +101,17 @@ double Mstep() {
 		if ( zeta[i].guessing ) starting_point(j) = zeta[i].c;
 
 		/**
-		 *	Calling BFGS from dlib to optimize Qi (Log likelihood)
+		 *	Calling BFGS from dlib to optimize Qi with auto-derivatives (Log likelihood)
 		 * */
-		dlib::find_max_using_approximate_derivatives(dlib::lbfgs_search_strategy(6),
+		/*dlib::find_max_using_approximate_derivatives(dlib::lbfgs_search_strategy(6),
 													 dlib::objective_delta_stop_strategy(1e-4),
 		                                             Qi,
-													 starting_point, -1);
+													 starting_point, -1);*/
 
+		/**
+		 *	Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
+		 * */
+		dlib::find_max(dlib::bfgs_search_strategy(),dlib::objective_delta_stop_strategy(1e-4),Qi,Qi_derivative,starting_point,-1);
 
 		//Computing difference of current item
 		double dif = 0.0;
