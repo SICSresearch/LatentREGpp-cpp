@@ -196,14 +196,30 @@ estimation::~estimation() {
 }
 
 void estimation::initial_values() {
-	for ( int i = 0; i < p; ++i )
+	for ( int i = 0; i < p; ++i ) {
 		zeta.push_back( item_parameter(m, d, categories_item[i]) );
+		if ( i == 0 ) {
+			item_parameter &item = zeta[i];
+			item.alpha[0] = 1;
+			item.alpha[1] = 0;
+			item.gamma[0] = 0;
+		}
+		if ( i == 15 ) {
+			item_parameter &item = zeta[i];
+			item.alpha[0] = 0;
+			item.alpha[1] = 1;
+			item.gamma[0] = 0;
+		}
+	}
 }
 
 void estimation::EMAlgortihm() {
 	//Finding initial values for zeta
 	initial_values();
 	double dif;
+
+	Estep();
+
 	do {
 		Estep();
 		dif = Mstep();

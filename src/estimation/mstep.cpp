@@ -51,6 +51,7 @@ double Mstep() {
 	 * Log likelihood must be optimized for every item
 	 * */
 	for ( i = 0; i < p; ++i ) {
+		if ( i % 15 == 0 ) continue;
 		/**
 		 * Starting point where optimization will start
 		 * */
