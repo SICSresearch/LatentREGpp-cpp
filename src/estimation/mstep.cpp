@@ -90,6 +90,13 @@ double Mstep() {
 	 * */
 	for ( i = 0; i < p; ++i ) {
 		/**
+		 * If it is multidimensional and this is one of the pinned items
+		 * i.e the first item of a dimension
+		 * this item is just skipped
+		 * */
+		if ( d > 1 && pinned_items.count(i) ) continue;
+
+		/**
 		 * Starting point where optimization will start
 		 * */
 		column_vector starting_point(zeta[i].get_number_of_parameters());

@@ -22,12 +22,20 @@ namespace mirt {
 typedef dlib::matrix<double,0,1> column_vector;
 
 class item_parameter;
+class model;
 
 /*
  * Model class
  * It represents what is the model approach to use
  * Might be 1PL, 2PL, 3PL
  * */
+
+/**
+ * Variable to know if data is dichotomous
+ *
+ * */
+extern bool dichotomous;
+extern model m;
 
 class model {
 

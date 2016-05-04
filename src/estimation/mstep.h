@@ -63,6 +63,14 @@ extern std::vector<matrix<double> > r;
 //Varaiable to know the current item
 extern int i;
 
+/**
+ * For multidimensional case
+ *
+ * set that contains what are the items that have to be pinned
+ * */
+extern std::set<int> pinned_items;
+
+
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 

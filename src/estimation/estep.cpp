@@ -112,8 +112,8 @@ void Estep ( ) {
 	}
 
 	//Asserting pi correctness
-//	bool pi_ok = test_pi(pi);
-//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+	bool pi_ok = test_pi(pi);
+	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
 	/**
 	 * Expected number of examinees for each group g
@@ -129,11 +129,15 @@ void Estep ( ) {
 				r[g](i, k) += nl[l] * pi(g, l);
 			}
 		}
+		//std::cout << "r" << g+1 << std::endl;
+		//std::cout << r[g] << std::endl;
 	}
 
+
+
 	//Asserting r correctness
-//	bool r_ok = test_r(r, N, p);
-//	assert(("Sum of elements in r must be N x p", r_ok));
+	bool r_ok = test_r(r, N, p);
+	assert(("Sum of elements in r must be N x p", r_ok));
 }
 
 } /* namespace mirt */
