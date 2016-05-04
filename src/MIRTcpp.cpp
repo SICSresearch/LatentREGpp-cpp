@@ -44,7 +44,7 @@ int main() {
 
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/dico-multi02.csv", Y);
+	in.importData("datasets/dico-multi03.csv", Y);
 	std::cout << "Data imported" << std::endl;
 
 	clock_t start = clock();
@@ -56,7 +56,7 @@ int main() {
 	 * 	1 dimension
 	 * 	0.0001 as convergence difference
 	 * */
-	estimation e(2, Y, 2, 0.001);
+	estimation e(2, Y, 3, 0.001);
 	e.EMAlgortihm();
 
 	clock_t stop = clock();

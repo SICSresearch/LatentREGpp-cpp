@@ -51,7 +51,13 @@ double Mstep() {
 	 * Log likelihood must be optimized for every item
 	 * */
 	for ( i = 0; i < p; ++i ) {
-		if ( i % 15 == 0 ) continue;
+		/**
+		 * If it is multidimensional and this is one of the pinned items
+		 * i.e the first item of a dimension
+		 * this item is just skipped
+		 * */
+		if ( d > 1 && (i % (p / d)) == 0 ) continue;
+
 		/**
 		 * Starting point where optimization will start
 		 * */

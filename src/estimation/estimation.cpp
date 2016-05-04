@@ -198,17 +198,29 @@ estimation::~estimation() {
 void estimation::initial_values() {
 	for ( int i = 0; i < p; ++i ) {
 		zeta.push_back( item_parameter(m, d, categories_item[i]) );
-		if ( i == 0 ) {
+
+	}
+
+	/**
+	 * If it is multidimensional
+	 *
+	 * here, the first item for each dimension is pinned
+	 * */
+	if ( d > 1 ) {
+		/**
+		 * It is supposed that there are p / d items for each dimension
+		 * if the user does not specify them
+		 *
+		 *
+		 * */
+		int items_for_dimension = p / d;
+		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
+			std::cout << i << std::endl;
 			item_parameter &item = zeta[i];
-			item.alpha[0] = 1;
-			item.alpha[1] = 0;
-			item.gamma[0] = 0;
-		}
-		if ( i == 15 ) {
-			item_parameter &item = zeta[i];
-			item.alpha[0] = 0;
-			item.alpha[1] = 1;
-			item.gamma[0] = 0;
+			item.alpha = std::vector<double>(item.alphas);
+			item.gamma = std::vector<double>(item.gammas);
+			item.alpha[j] = 1;
+			if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
 		}
 	}
 }
@@ -231,7 +243,7 @@ void estimation::EMAlgortihm() {
 void estimation::print_results ( ) {
 	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
-		std::cout << "Item " << i << '\n';
+		std::cout << "Item " << i + 1 << '\n';
 		for ( int j = 0; j < d; ++j )
 			std::cout << 'a' << j + 1 << ": " << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << ' ';
 		for ( int j = 0; j < zeta[i].gammas; ++j )
