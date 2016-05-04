@@ -118,7 +118,20 @@ double Mstep() {
 		/**
 		 *	Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
 		 * */
-		dlib::find_max(dlib::bfgs_search_strategy(),dlib::objective_delta_stop_strategy(1e-4),Qi,Qi_derivative,starting_point,-1);
+
+		/**
+		 * If the dimension is 1, the optimization is done with explicit derivatives
+		 * */
+		if ( d == 1 ) {
+			dlib::find_max(dlib::bfgs_search_strategy(),
+						   dlib::objective_delta_stop_strategy(1e-4),
+						   Qi,
+						   Qi_derivative,starting_point,-1);
+		} else {
+			dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
+						   dlib::objective_delta_stop_strategy(1e-4),
+						   Qi,starting_point,-1);
+		}
 
 		//Computing difference of current item
 		double dif = 0.0;
