@@ -95,11 +95,22 @@ int G;
  * */
 std::vector<matrix<double> > P;
 
+/**
+ * Variable to know if data is dichotomous
+ *
+ * */
+bool dichotomous;
+
+/**
+ * For multidimensional case
+ *
+ * set that contains what are the items that have to be pinned
+ * */
+std::set<int> pinned_items;
 
 
-
-estimation::estimation(int themodel, matrix<char> &data, short d = 1,
-					   double convergence_difference = 0.001) {
+estimation::estimation(int themodel, matrix<char> &data, short d,
+					   double convergence_difference) {
 	// Setting the dimension
 	mirt::d = d;
 
@@ -129,7 +140,7 @@ estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 
 
 	//Finding the number of categories of each item and seeing if it's dichotomous
-	this->dichotomous = false;
+	dichotomous = false;
 	for ( int j = 0; j < p; ++j ) {
 		int max_category = -1;
 		for ( int i = 0; i < s; ++i ) {
@@ -189,6 +200,28 @@ estimation::estimation(int themodel, matrix<char> &data, short d = 1,
 	mirt::m = model(themodel);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
+
+	initial_values();
+}
+
+estimation::estimation(int themodel, matrix<char> &data, short d,
+					   double convergence_difference, std::vector<int> &number_of_items) {
+	/**
+	 * Computing the items that will be pinned
+	 *
+	 * */
+
+	int before = 0;
+	pinned_items.insert(0);
+	for ( unsigned int i = 0; i < number_of_items.size() - 1; ++i ) {
+		before += number_of_items[i];
+		pinned_items.insert(before);
+	}
+
+	estimation(themodel, data, d, convergence_difference);
+
+	this->convergence_difference = convergence_difference;
+	this->iterations = 0;
 }
 
 estimation::~estimation() {
@@ -196,10 +229,8 @@ estimation::~estimation() {
 }
 
 void estimation::initial_values() {
-	for ( int i = 0; i < p; ++i ) {
+	for ( int i = 0; i < p; ++i )
 		zeta.push_back( item_parameter(m, d, categories_item[i]) );
-
-	}
 
 	/**
 	 * If it is multidimensional
@@ -213,25 +244,41 @@ void estimation::initial_values() {
 		 *
 		 *
 		 * */
-		int items_for_dimension = p / d;
-		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
-			std::cout << i << std::endl;
-			item_parameter &item = zeta[i];
-			item.alpha = std::vector<double>(item.alphas);
-			item.gamma = std::vector<double>(item.gammas);
-			item.alpha[j] = 1;
-			if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
+
+		if ( pinned_items.empty() ) {
+			int items_for_dimension = p / d;
+			for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
+				item_parameter &item = zeta[i];
+				item.alpha = std::vector<double>(item.alphas);
+				item.gamma = std::vector<double>(item.gammas);
+				item.alpha[j] = 1;
+				if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
+			}
+		}
+
+		/**
+		 * If user specify the number of items for each dimension, then
+		 * the first item of each dimension will be pinned
+		 * */
+
+		else {
+			std::set<int>::iterator it;
+			int j = 0;
+			for ( it = pinned_items.begin(); it != pinned_items.end(); ++it, ++j ) {
+				item_parameter &item = zeta[*it];
+				item.alpha = std::vector<double>(item.alphas);
+				item.gamma = std::vector<double>(item.gammas);
+				item.alpha[j] = 1;
+				if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
+			}
 		}
 	}
 }
 
+
+
 void estimation::EMAlgortihm() {
-	//Finding initial values for zeta
-	initial_values();
 	double dif;
-
-	Estep();
-
 	do {
 		Estep();
 		dif = Mstep();

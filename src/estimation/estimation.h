@@ -114,6 +114,15 @@ class estimation {
 		 * Then it builds the matrix of pattern responses and its frequency
 		 * */
 		estimation(int, matrix<char>&, short, double);
+
+
+		/**
+		 * Constructor of multidimensional case
+		 *
+		 * A vector that stores the number of items that each dimension has
+		 * */
+		estimation(int, matrix<char>&, short, double, std::vector<int>&);
+
 		virtual ~estimation();
 
 		void initial_values();

@@ -116,6 +116,26 @@ double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k)
 	static const double LOWER_BOUND_ = 1e-08;
 	static const double UPPER_BOUND_ = 0.999999;
 
+	if ( dichotomous && m.parameters == 3 ) {
+		short d = parameters.get_dimension();
+
+		/**
+		 * Initialized with gamma_k value
+		 * */
+		double eta = parameters.gamma[k];
+
+		//Computing dot product
+		for ( short i = 0; i < d; ++i )
+			eta += parameters.alpha[i] * theta[i];
+
+		double g = parameters.c;
+		double P_ik = 1.0 / (1.0 + exp(-g)) + (1.0 / (1.0 + exp(g))) * (1.0 / (1.0 + exp(-eta)));
+
+		P_ik = std::max(P_ik, LOWER_BOUND_);
+		P_ik = std::min(P_ik, UPPER_BOUND_);
+		return P_ik;
+	}
+
 	double P_ik = Pstar_ik(theta, parameters, k - 1) - Pstar_ik(theta, parameters, k);
 
 	P_ik = std::max(P_ik, LOWER_BOUND_);

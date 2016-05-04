@@ -56,7 +56,7 @@ double Mstep() {
 		 * i.e the first item of a dimension
 		 * this item is just skipped
 		 * */
-		if ( d > 1 && (i % (p / d)) == 0 ) continue;
+		if ( d > 1 && pinned_items.count(i) ) continue;
 
 		/**
 		 * Starting point where optimization will start

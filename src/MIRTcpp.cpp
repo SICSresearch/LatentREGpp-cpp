@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cstdio>
+#include <set>
 
 using namespace mirt;
 using std::cout;
@@ -44,19 +45,27 @@ int main() {
 
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/dico-multi03.csv", Y);
+	in.importData("datasets/poly-multi01.csv", Y);
 	std::cout << "Data imported" << std::endl;
 
 	clock_t start = clock();
 
 	/**
 	 * Estimation with
-	 * 	2PL
+	 * 	Model: 1PL, 2PL, 3PL
 	 * 	Y matrix as dataset
-	 * 	1 dimension
-	 * 	0.0001 as convergence difference
+	 * 	N dimension
+	 * 	0.001 as convergence difference
+	 *
+	 * 	If it is multidimensional you can specify the number of items for dimension
+	 * 	using a vector
 	 * */
-	estimation e(2, Y, 3, 0.001);
+
+	std::vector<int> number_of_items;
+	number_of_items.push_back(15);
+	number_of_items.push_back(15);
+
+	estimation e(2, Y, 2, 0.001, number_of_items);
 	e.EMAlgortihm();
 
 	clock_t stop = clock();
