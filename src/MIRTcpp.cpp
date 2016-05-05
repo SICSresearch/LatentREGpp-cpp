@@ -45,7 +45,7 @@ int main() {
 
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/un_math.csv", Y);
+	in.importData("datasets/poly-multi02.csv", Y);
 	std::cout << "Data imported" << std::endl;
 
 	clock_t start = clock();
@@ -61,15 +61,19 @@ int main() {
 	 * 	using a vector
 	 * */
 
+
 	//Multidimensional example
-//	std::vector<int> number_of_items;
-//	number_of_items.push_back(15);
-//	number_of_items.push_back(15);
-//
-//	estimation e(2, Y, 2, 0.001, number_of_items);
+	std::vector<int> number_of_items;
+	number_of_items.push_back(4);
+	number_of_items.push_back(4);
+	number_of_items.push_back(3);
+	estimation e(2, Y, 3, 0.001, number_of_items);
+
 
 	//Unidimensional
-	estimation e(3, Y, 1, 0.001);
+//	estimation e(3, Y, 1, 0.001);
+
+
 	e.EMAlgortihm();
 
 	clock_t stop = clock();
