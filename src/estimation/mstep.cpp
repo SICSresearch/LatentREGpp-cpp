@@ -108,14 +108,6 @@ double Mstep() {
 		if ( zeta[i].guessing ) starting_point(j) = zeta[i].c;
 
 		/**
-		 *	Calling BFGS from dlib to optimize Qi with auto-derivatives (Log likelihood)
-		 * */
-		/*dlib::find_max_using_approximate_derivatives(dlib::lbfgs_search_strategy(6),
-													 dlib::objective_delta_stop_strategy(1e-4),
-		                                             Qi,
-													 starting_point, -1);*/
-
-		/**
 		 *	Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
 		 * */
 
@@ -123,10 +115,17 @@ double Mstep() {
 		 * If the dimension is 1, the optimization is done with explicit derivatives
 		 * */
 		if ( d == 1 ) {
-			dlib::find_max(dlib::bfgs_search_strategy(),
-						   dlib::objective_delta_stop_strategy(1e-4),
-						   Qi,
-						   Qi_derivative,starting_point,-1);
+			if ( m.parameters < 3 ) {
+				dlib::find_max(dlib::bfgs_search_strategy(),
+											   dlib::objective_delta_stop_strategy(1e-4),
+											   Qi,
+											   Qi_derivative,starting_point,-1);
+			} else {
+				dlib::find_max_using_approximate_derivatives(dlib::lbfgs_search_strategy(6),
+											   dlib::objective_delta_stop_strategy(1e-4),
+											   Qi,
+											   starting_point,-1);
+			}
 		} else {
 			dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
 						   dlib::objective_delta_stop_strategy(1e-4),

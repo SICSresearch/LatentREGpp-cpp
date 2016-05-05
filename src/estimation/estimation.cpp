@@ -295,7 +295,9 @@ void estimation::print_results ( ) {
 			std::cout << 'a' << j + 1 << ": " << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << ' ';
 		for ( int j = 0; j < zeta[i].gammas; ++j )
 			std::cout << 'd' << j + 1 << ": " << zeta[i].gamma[j] << ' ';
-		std::cout << "c: " << ( zeta[i].guessing ? zeta[i].c : 0 ) << '\n';
+		if ( zeta[i].guessing )
+			std::cout << "c: " << std::max( zeta[i].c, 0.0 );
+		std::cout << '\n';
 	}
 }
 

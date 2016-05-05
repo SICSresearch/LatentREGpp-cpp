@@ -69,7 +69,7 @@ int main() {
 //	estimation e(2, Y, 2, 0.001, number_of_items);
 
 	//Unidimensional
-	estimation e(2, Y, 1, 0.001);
+	estimation e(3, Y, 1, 0.001);
 	e.EMAlgortihm();
 
 	clock_t stop = clock();
