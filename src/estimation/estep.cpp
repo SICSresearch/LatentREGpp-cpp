@@ -32,18 +32,6 @@ void Estep ( ) {
 	}
 
 	/**
-	 * Probability matrix pi
-	 *
-	 * pi(g, l) with g = 1, ..., G; l = 1, ..., s
-	 * 		i.e, the size of pi is
-	 * 			 Number of Quadrature points X Number of response patterns
-	 *
-	 * pi(g, l) is the probability that a response pattern belongs to
-	 * 			group g
-	 * */
-	static matrix<double> pi(G, s);
-
-	/**
 	 * Computing and saving the values of numerators and denominators
 	 * for pi(g, l) equation to avoid recompute them
 	 *
@@ -53,9 +41,6 @@ void Estep ( ) {
 	 * and the denominators are the summation of numerators by columns
 	 *
 	 * */
-
-	static matrix<double> numerator(G, s);
-	static std::vector<double> denominator(s);
 
 	for ( int l = 0; l < s; ++l ) {
 		double &denonimator_l = denominator[l] = 0;
@@ -99,8 +84,16 @@ void Estep ( ) {
 	}
 
 	/**
-	 * Computing pi matrix
+	 * Probability matrix pi
+	 *
+	 * pi(g, l) with g = 1, ..., G; l = 1, ..., s
+	 * 		i.e, the size of pi is
+	 * 			 Number of Quadrature points X Number of response patterns
+	 *
+	 * pi(g, l) is the probability that a response pattern belongs to
+	 * 			group g
 	 * */
+
 	for ( int g = 0; g < G; ++g ) {
 		for ( int l = 0; l < s; ++l ) {
 			/**
