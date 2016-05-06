@@ -108,6 +108,14 @@ bool dichotomous;
  * */
 std::set<int> pinned_items;
 
+/**
+ * Matrix of probabilities pi, denominators vector and matrix of numerators
+ * needed in Estep
+ * */
+matrix<double> numerator;
+std::vector<double> denominator;
+matrix<double> pi;
+
 
 estimation::estimation(int themodel, matrix<char> &data, short d,
 					   double convergence_difference) {
@@ -119,6 +127,9 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 	std::map<std::vector<char>, int> freq;
 	for ( int i = 0; i < data.rows(); ++i )
 		++freq[data.get_row(i)];
+
+	Y = matrix<char>();
+	nl = std::vector<int>();
 
 	std::map<std::vector<char>, int>::iterator it;
 	for ( it = freq.begin(); it != freq.end(); ++it ) {
@@ -196,6 +207,11 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 		}
 	}
 
+	//Matrixes needed in Estep
+	pi = matrix<double>(G, s);
+	numerator = matrix<double>(G, s);
+	denominator = std::vector<double>(s);
+
 	//Configurations for the estimation
 	mirt::m = model(themodel);
 	this->convergence_difference = convergence_difference;
@@ -229,6 +245,8 @@ estimation::~estimation() {
 }
 
 void estimation::initial_values() {
+	zeta = std::vector<item_parameter>();
+
 	for ( int i = 0; i < p; ++i )
 		zeta.push_back( item_parameter(m, d, categories_item[i]) );
 
@@ -267,9 +285,8 @@ void estimation::initial_values() {
 			for ( it = pinned_items.begin(); it != pinned_items.end(); ++it, ++j ) {
 				item_parameter &item = zeta[*it];
 				item.alpha = std::vector<double>(item.alphas);
-				item.gamma = std::vector<double>(item.gammas);
 				item.alpha[j] = 1;
-				if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
+				if ( item.gammas > 2 ) item.gamma[(item.gammas) / 2] = 1;
 			}
 		}
 	}
@@ -283,7 +300,7 @@ void estimation::EMAlgortihm() {
 		Estep();
 		dif = Mstep();
 		++iterations;
-		std::cout << "Iteration: " << iterations << ", Max-change: " << dif << std::endl;
+		//std::cout << "Iteration: " << iterations << ", Max-change: " << dif << std::endl;
 	} while ( dif > convergence_difference );
 }
 
@@ -298,6 +315,20 @@ void estimation::print_results ( ) {
 		if ( zeta[i].guessing )
 			std::cout << "c: " << std::max( zeta[i].c, 0.0 );
 		std::cout << '\n';
+	}
+}
+
+void estimation::print_results ( std::ofstream &fout ) {
+	fout << "Finished after " << iterations << " iterations.\n";
+	for ( int i = 0; i < p; ++i ) {
+		fout << "Item " << i + 1 << '\n';
+		for ( int j = 0; j < zeta[i].gammas; ++j )
+			fout << 'd' << j + 1 << ": " << zeta[i].gamma[j] << '\t';
+		for ( int j = 0; j < d; ++j )
+			fout << 'a' << j + 1 << ": " << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << '\t';
+		if ( zeta[i].guessing )
+			fout << "c: " << std::max( zeta[i].c, 0.0 );
+		fout << '\n';
 	}
 }
 

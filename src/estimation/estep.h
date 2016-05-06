@@ -97,6 +97,26 @@ extern std::vector<matrix<double> > r;
 extern std::vector<matrix<double> > P;
 
 /**
+ * Probability matrix pi
+ *
+ * pi(g, l) with g = 1, ..., G; l = 1, ..., s
+ * 		i.e, the size of pi is
+ * 			 Number of Quadrature points X Number of response patterns
+ *
+ * pi(g, l) is the probability that a response pattern belongs to
+ * 			group g
+ * */
+extern matrix<double> pi;
+
+/**
+ * Matrix of numerators and vector of denominators
+ * used to avoid recompute values while pi is built
+ * */
+extern matrix<double> numerator;
+extern std::vector<double> denominator;
+
+
+/**
  * Estep of the EMAlgortihm
  *
  * */

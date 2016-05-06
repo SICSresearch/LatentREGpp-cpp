@@ -25,12 +25,12 @@ inline void improveIO () {
 
 void simulation100iterations()
 {
-	for (int var = 0; var < 100; var++) {
+	for (int var = 30; var < 99; var++) {
 		input<char> in(';');
 		//output<char> out(';');
 		matrix<char> Y;
 
-		std::string inFile= "C:/Users/Jhonatan/Desktop/Tests poli-uni/dataset";
+		std::string inFile= "C:/Users/Jhonatan/Desktop/Test poli-uni escenario 2/dataset";
 		std::string extension = ".csv";
 
 		std::stringstream ss;
@@ -40,20 +40,20 @@ void simulation100iterations()
 
 		in.importData(file, Y);
 		std::cout << "Data imported" << std::endl;
-		std::cout << file << std::endl;
-		std::cout <<Y<<std::endl;
-		std::cout <<Y(2,2)<<std::endl;
 		std::cout <<Y.rows()<<" "<<Y.columns(0)<<std::endl;
-		//clock_t start = clock();
+		clock_t start = clock();
 		//Unidimensional
+
+		std::cout<<"ITERACION: "<<var+1<<std::endl;
+
 		estimation e(2, Y, 1, 0.001);
 
 		e.EMAlgortihm();
 
-		//clock_t stop = clock();
-		//double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
+		clock_t stop = clock();
+		double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
 
-		std::string outFile = "C:/Users/Jhonatan/Desktop/thisis/resultsDataSet";
+		std::string outFile = "C:/Users/Jhonatan/Desktop/Test poli-uni escenario 2/ResultsDataSet";
 
 		std::stringstream sss;
 		sss<<outFile<<var+1<<extension;
@@ -61,8 +61,8 @@ void simulation100iterations()
 		std::string oFile = sss.str();
 
 		e.print_results();
-		//e.exportData(oFile,elapsed);
-		//cout << "Time elapsed: " << elapsed << " ms." << '\n';
+		e.exportData(oFile,elapsed);
+		cout << "Time elapsed: " << elapsed << " ms." << '\n';
 	}
 
 }
@@ -89,6 +89,7 @@ int main() {
 
 	improveIO();
 
+	/*
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData("C:/Users/Jhonatan/Desktop/Tests poli-uni/dataset5.csv", Y);
@@ -96,7 +97,7 @@ int main() {
 
 	clock_t start = clock();
 
-	/**
+	**
 	 * Estimation with
 	 * 	Model: 1PL, 2PL, 3PL
 	 * 	Y matrix as dataset
@@ -105,7 +106,7 @@ int main() {
 	 *
 	 * 	If it is multidimensional you can specify the number of items for dimension
 	 * 	using a vector
-	 * */
+	 * *
 
 
 	//Multidimensional example
@@ -127,7 +128,9 @@ int main() {
 
 	e.print_results();
 	e.exportData("C:/Users/Jhonatan/Desktop/Tests poli-uni/ResultsDataSet5.csv",elapsed);
-	cout << "Time elapsed: " << elapsed << " ms." << '\n';
+	cout << "Time elapsed: " << elapsed << " ms." << '\n'; */
 
-	//simulation100iterations();
+	simulation100iterations();
+	//simulation();
+
 }
