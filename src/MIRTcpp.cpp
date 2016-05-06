@@ -47,14 +47,14 @@ void simulate_dicho_multi ( int start, int end ) {
 
 		std::string file_name = ss.str();
 		in.importData(file_name, Y);
-		//std::cout << file_name << " imported" << std::endl;
+		std::cout << file_name << " imported" << std::endl;
 
 		clock_t start = clock();
 
 		//Multidimensional configuration
 		std::vector<int> number_of_items;
-		number_of_items.push_back(5);
-		number_of_items.push_back(5);
+		number_of_items.push_back(25);
+		number_of_items.push_back(25);
 		estimation e(2, Y, 2, 0.001, number_of_items);
 
 		e.EMAlgortihm();
@@ -68,7 +68,7 @@ void simulate_dicho_multi ( int start, int end ) {
 
 		report_times << "ITERATION " << i << " - " << elapsed << "s." << '\n';
 
-		cout << "Iteration " << i << std::endl;
+		cout << "Iteration " << i << " - " << elapsed << "s." << '\n';
 	}
 
 	report_parameters.close();
@@ -76,7 +76,7 @@ void simulate_dicho_multi ( int start, int end ) {
 }
 
 void simulate_dicho_multi ( int iterations ) {
-	for ( int i = 1; i <= iterations; i += 10 ) {
+	for ( int i = 13; i <= iterations; i += 10 ) {
 		simulate_dicho_multi(i, i + 9);
 	}
 }
@@ -86,5 +86,5 @@ int main() {
 	//cout.precision(5);
 
 	improveIO();
-	simulate_dicho_multi(2);
+	simulate_dicho_multi(100);
 }

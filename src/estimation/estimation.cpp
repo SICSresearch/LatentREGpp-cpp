@@ -323,7 +323,7 @@ void estimation::print_results ( std::ofstream &fout ) {
 	for ( int i = 0; i < p; ++i ) {
 		fout << "Item " << i + 1 << '\n';
 		for ( int j = 0; j < zeta[i].gammas; ++j )
-			fout << 'd' << j + 1 << ": " << zeta[i].gamma[j] << '\t';
+			fout << 'd' << j + 1 << ": " << -zeta[i].gamma[j] << '\t';
 		for ( int j = 0; j < d; ++j )
 			fout << 'a' << j + 1 << ": " << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << '\t';
 		if ( zeta[i].guessing )
