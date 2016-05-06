@@ -267,9 +267,8 @@ void estimation::initial_values() {
 			for ( it = pinned_items.begin(); it != pinned_items.end(); ++it, ++j ) {
 				item_parameter &item = zeta[*it];
 				item.alpha = std::vector<double>(item.alphas);
-				item.gamma = std::vector<double>(item.gammas);
 				item.alpha[j] = 1;
-				if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
+				if ( item.gammas > 2 ) item.gamma[(item.gammas) / 2] = 1;
 			}
 		}
 	}
