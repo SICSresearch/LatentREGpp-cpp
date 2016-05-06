@@ -301,4 +301,24 @@ void estimation::print_results ( ) {
 	}
 }
 
+bool estimation::exportData(std::string filename,double time) {
+	std::string line;
+	std::ofstream file(filename.c_str());
+	if (file.is_open()) {
+		for ( int i = 0; i < p; ++i ) {
+			for ( int j = 0; j < d; ++j )
+				file << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << ';';
+			for ( int j = 0; j < zeta[i].gammas; ++j )
+				file << zeta[i].gamma[j] << ';';
+			if ( zeta[i].guessing )
+				file << std::max( zeta[i].c, 0.0 );
+			file << '\n';
+		}
+		file << time;
+		file.close();
+		return true;
+	}
+	return false;
+}
+
 } /* namespace mirt */
