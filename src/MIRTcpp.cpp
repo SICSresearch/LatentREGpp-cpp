@@ -25,18 +25,25 @@ inline void improveIO () {
 
 void simulation100iterations()
 {
-	for (int var = 30; var < 99; var++) {
+	std::string esc = "C:/Users/Jhonatan/Desktop/Tests poli-uni/escenario.csv";
+	std::string esc2 = "C:/Users/Jhonatan/Desktop/Tests poli-uni/tiempos.csv";
+
+	std::ofstream file2(esc.c_str());
+	std::ofstream file_time(esc2.c_str());
+
+	for (int var = 0; var < 100; var++) {
 		input<char> in(';');
-		//output<char> out(';');
 		matrix<char> Y;
 
-		std::string inFile= "C:/Users/Jhonatan/Desktop/Test poli-uni escenario 2/dataset";
+		std::string inFile= "C:/Users/Jhonatan/Desktop/Tests poli-uni/dataset";
 		std::string extension = ".csv";
 
 		std::stringstream ss;
 		ss<<inFile<<var+1<<extension;
 
 		std::string file = ss.str();
+
+		std::cout<<file;
 
 		in.importData(file, Y);
 		std::cout << "Data imported" << std::endl;
@@ -46,25 +53,36 @@ void simulation100iterations()
 
 		std::cout<<"ITERACION: "<<var+1<<std::endl;
 
-		estimation e(2, Y, 1, 0.001);
+		estimation e(2, Y, 1, 0.0001);
 
 		e.EMAlgortihm();
 
 		clock_t stop = clock();
 		double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
 
-		std::string outFile = "C:/Users/Jhonatan/Desktop/Test poli-uni escenario 2/ResultsDataSet";
+		//save in files
 
-		std::stringstream sss;
-		sss<<outFile<<var+1<<extension;
-
-		std::string oFile = sss.str();
+		for ( int i = 0; i < p; ++i ) {
+			for ( int j = 0; j < d; ++j )
+				file2 << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << ';';
+			for ( int j = 0; j < zeta[i].gammas; ++j )
+				file2 << zeta[i].gamma[j] << ';';
+			//for 3 and 4 categories
+			if(zeta[i].gammas==2)
+			{
+				file2 <<"NA"<<';';
+			}
+			if ( zeta[i].guessing )
+				file2 << std::max( zeta[i].c, 0.0 ) << ';';
+			file2 << var+1 << '\n';
+		}
+		file_time << elapsed <<'\n';
 
 		e.print_results();
-		e.exportData(oFile,elapsed);
 		cout << "Time elapsed: " << elapsed << " ms." << '\n';
 	}
-
+	file2.close();
+	file_time.close();
 }
 
 
