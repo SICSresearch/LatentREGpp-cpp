@@ -286,7 +286,7 @@ void estimation::initial_values() {
 				item_parameter &item = zeta[*it];
 				item.alpha = std::vector<double>(item.alphas);
 				item.alpha[j] = 1;
-				if ( item.gammas > 2 ) item.gamma[(item.gammas) / 2] = 1;
+				item.gamma[(item.gammas) / 2] = 0;
 			}
 		}
 	}
@@ -300,7 +300,6 @@ void estimation::EMAlgortihm() {
 		Estep();
 		dif = Mstep();
 		++iterations;
-		//std::cout << "Iteration: " << iterations << ", Max-change: " << dif << std::endl;
 	} while ( dif > convergence_difference );
 }
 
@@ -318,16 +317,17 @@ void estimation::print_results ( ) {
 	}
 }
 
-void estimation::print_results ( std::ofstream &fout ) {
-	fout << "Finished after " << iterations << " iterations.\n";
+void estimation::print_results ( std::ofstream &fout, int elapsed ) {
 	for ( int i = 0; i < p; ++i ) {
-		fout << "Item " << i + 1 << '\n';
-		for ( int j = 0; j < zeta[i].gammas; ++j )
-			fout << 'd' << j + 1 << ": " << -zeta[i].gamma[j] << '\t';
-		for ( int j = 0; j < d; ++j )
-			fout << 'a' << j + 1 << ": " << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << '\t';
+		for ( int j = 0; j < d; ++j ) {
+			if ( j ) fout << ';';
+			fout << ( m.parameters != 1 ? zeta[i].alpha[j] : 1 );
+		}
+		for ( int j = 0; j < zeta[i].gammas; ++j ) {
+			fout << ';' << zeta[i].gamma[j];
+		}
 		if ( zeta[i].guessing )
-			fout << "c: " << std::max( zeta[i].c, 0.0 );
+			fout << ';' << std::max( zeta[i].c, 0.0 );
 		fout << '\n';
 	}
 }

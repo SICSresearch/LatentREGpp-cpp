@@ -23,21 +23,17 @@ inline void improveIO () {
 	//std::cin.tie(0); std::cout.tie(0);
 }
 
-void simulate_dicho_multi ( int start, int end ) {
-	std::ofstream report_parameters, report_times;
+void simulate_poly_multi ( int start, int end, std::string folder ) {
+	std::ofstream report_parameters;
 	std::stringstream ss;
-	ss << "datasets/dicho-multi-tests/escenario1/estimation" << start << "-" << end << ".txt";
+	ss << folder << "/estimation" << start << "-" << end << ".csv";
 	std::string parameters = ss.str();
-	ss.str("");
-	ss << "datasets/dicho-multi-tests/escenario1/times" << start << "-" << end << ".txt";
-	std::string times = ss.str();
 	report_parameters.open(parameters.c_str());
-	report_times.open(times.c_str());
-
 	report_parameters.precision(4);
-	report_times.precision(4);
 
-	const std::string base_name = "datasets/dicho-multi-tests/escenario1/dicho-multi";
+	ss.str("");
+	ss << folder << "/poly-multi";
+	const std::string base_name = ss.str();
 	for ( int i = start; i <= end; ++i ) {
 		matrix<char> Y;
 		input<char> in(';');
@@ -62,22 +58,17 @@ void simulate_dicho_multi ( int start, int end ) {
 		clock_t stop = clock();
 		double elapsed = (double)(stop - start) / CLOCKS_PER_SEC;
 
-		report_parameters << "ITERATION " << i << '\n';
-		e.print_results(report_parameters);
-		report_parameters << "\n\n";
-
-		report_times << "ITERATION " << i << " - " << elapsed << "s." << '\n';
-
-		cout << "Iteration " << i << " - " << elapsed << "s." << '\n';
+		//e.print_results();
+		std::cout << elapsed << "s." << std::endl;
+		e.print_results(report_parameters, elapsed);
 	}
 
 	report_parameters.close();
-	report_times.close();
 }
 
-void simulate_dicho_multi ( int iterations ) {
-	for ( int i = 13; i <= iterations; i += 10 ) {
-		simulate_dicho_multi(i, i + 9);
+void simulate_poly_multi ( int iterations, std::string folder ) {
+	for ( int i = 1; i <= iterations; i += 20 ) {
+		simulate_poly_multi(i, i + 19, folder);
 	}
 }
 
@@ -86,5 +77,6 @@ int main() {
 	//cout.precision(5);
 
 	improveIO();
-	simulate_dicho_multi(100);
+	simulate_poly_multi(100, "datasets/poly-multi-tests/escenario1");
+	simulate_poly_multi(100, "datasets/poly-multi-tests/escenario1.1");
 }
