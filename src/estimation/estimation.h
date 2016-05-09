@@ -137,7 +137,7 @@ class estimation {
 		 * Values for alphas and d's
 		 * */
 		void print_results();
-		void print_results(std::ofstream &, int);
+		void print_results(std::ofstream &, double);
 };
 
 } /* namespace mirt */

@@ -23,7 +23,7 @@ inline void improveIO () {
 	//std::cin.tie(0); std::cout.tie(0);
 }
 
-void simulate_poly_multi ( int start, int end, std::string folder ) {
+void simulate ( int start, int end, std::string folder, std::string name ) {
 	std::ofstream report_parameters;
 	std::stringstream ss;
 	ss << folder << "/estimation" << start << "-" << end << ".csv";
@@ -32,7 +32,7 @@ void simulate_poly_multi ( int start, int end, std::string folder ) {
 	report_parameters.precision(4);
 
 	ss.str("");
-	ss << folder << "/poly-multi";
+	ss << folder << "/" << name;
 	const std::string base_name = ss.str();
 	for ( int i = start; i <= end; ++i ) {
 		matrix<char> Y;
@@ -53,6 +53,10 @@ void simulate_poly_multi ( int start, int end, std::string folder ) {
 		number_of_items.push_back(25);
 		estimation e(2, Y, 2, 0.001, number_of_items);
 
+		//Unidimensional configuration
+		//estimation e(2, Y, 1, 0.001);
+
+
 		e.EMAlgortihm();
 
 		clock_t stop = clock();
@@ -66,9 +70,17 @@ void simulate_poly_multi ( int start, int end, std::string folder ) {
 	report_parameters.close();
 }
 
-void simulate_poly_multi ( int iterations, std::string folder ) {
+/**
+ * Simulates the number of iterations
+ *
+ * And saves estimations each 20 iterations
+ *
+ *	Receives the number of iterations, the folder where the datasets will be loaded and estimation saved
+ *	and the name which each file of estimation will be saved
+ * */
+void simulate ( int iterations, std::string folder, std::string name ) {
 	for ( int i = 1; i <= iterations; i += 20 ) {
-		simulate_poly_multi(i, i + 19, folder);
+		simulate(i, i + 19, folder, name);
 	}
 }
 
@@ -77,6 +89,5 @@ int main() {
 	//cout.precision(5);
 
 	improveIO();
-	simulate_poly_multi(100, "datasets/poly-multi-tests/escenario1");
-	simulate_poly_multi(100, "datasets/poly-multi-tests/escenario1.1");
+	simulate(100, "datasets/dicho-multi-tests/escenario2", "dicho-multi");
 }
