@@ -201,7 +201,7 @@ for ( i in 1:100 ) {
 
 
 
-#PRIMER ESCENARIO 2000 INDIVIDUOS X 50 ITEMS, 2 DIMENSIONES
+#SEGUNDO ESCENARIO 2000 INDIVIDUOS X 50 ITEMS, 2 DIMENSIONES
 #un escenario particular:
 size.cluster=c(25,25)
 sims = list()
@@ -209,7 +209,7 @@ for ( i in 1:100 ) {
   sim=simulate.dic.multi(size.cluster=size.cluster,dim.data=2,model = "2PL", sample.size = 2000, seed_data = i)  
   Y = sim$data
   sims[[i]] = sim
-  write.table(Y, file = paste(c("dicho-multi-tests/escenario1/dicho-multi", i,".csv"), collapse = ""), sep = ";",col.names = FALSE, row.names = FALSE)
+  write.table(Y, file = paste(c("dicho-multi-tests/escenario2/dicho-multi", i,".csv"), collapse = ""), sep = ";",col.names = FALSE, row.names = FALSE)
 }
 
 sims[[6]]$param.items
