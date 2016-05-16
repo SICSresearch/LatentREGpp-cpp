@@ -324,7 +324,7 @@ void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 			fout << ( m.parameters != 1 ? zeta[i].alpha[j] : 1 );
 		}
 		for ( int j = 0; j < zeta[i].gammas; ++j ) {
-			fout << ';' << -zeta[i].gamma[j];
+			fout << ';' << zeta[i].gamma[j];
 		}
 		if ( zeta[i].guessing )
 			fout << ';' << std::max( zeta[i].c, 0.0 );
