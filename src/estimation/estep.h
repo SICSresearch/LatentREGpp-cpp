@@ -12,7 +12,7 @@
 #include "../model/model.h"
 #include "../util/matrix.h"
 
-namespace mirt {
+namespace irtpp {
 
 
 extern model m;
@@ -122,6 +122,6 @@ extern std::vector<double> denominator;
  * */
 void Estep();
 
-} /* namespace mirt */
+} /* namespace irtpp */
 
 #endif /* ESTIMATION_ESTEP_H_ */

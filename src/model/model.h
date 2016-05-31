@@ -16,7 +16,7 @@
 //including optimization files from dlib library
 #include <dlib/optimization.h>
 
-namespace mirt {
+namespace irtpp {
 
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
@@ -65,6 +65,6 @@ public:
 	double Pik(std::vector<double>&, item_parameter&, int k);
 };
 
-} /* namespace mirt */
+} /* namespace irtpp */
 
 #endif /* MODEL_MODEL_H_ */

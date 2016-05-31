@@ -11,7 +11,7 @@
 #include <vector>
 #include <iostream>
 
-namespace mirt {
+namespace irtpp {
 
 /**
  *	Matrix class.
@@ -194,6 +194,6 @@ std::ostream& operator<<(std::ostream &out, matrix<T> &m) {
 	return (out);
 }
 
-} /* namespace mirt */
+} /* namespace irtpp */
 
 #endif /* UTIL_MATRIX_H_ */

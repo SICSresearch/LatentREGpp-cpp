@@ -7,7 +7,7 @@
 
 #include "itemparameter.h"
 
-namespace mirt {
+namespace irtpp {
 
 item_parameter::item_parameter() {
 	// TODO Auto-generated constructor stub
@@ -77,4 +77,4 @@ short item_parameter::get_number_of_parameters() {
 	return number_of_parameters;
 }
 
-} /* namespace mirt */
+} /* namespace irtpp */

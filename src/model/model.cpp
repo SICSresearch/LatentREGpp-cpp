@@ -7,7 +7,7 @@
 
 #include "model.h"
 
-namespace mirt {
+namespace irtpp {
 
 model::model() {
 	// TODO Auto-generated constructor stub
@@ -147,4 +147,4 @@ model::~model() {
 	// TODO Auto-generated destructor stub
 }
 
-} /* namespace mirt */
+} /* namespace irtpp */

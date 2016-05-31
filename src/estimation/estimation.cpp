@@ -7,7 +7,7 @@
 
 #include "estimation.h"
 
-namespace mirt {
+namespace irtpp {
 
 estimation::estimation() {
 	// TODO Auto-generated constructor stub
@@ -120,7 +120,7 @@ matrix<double> pi;
 estimation::estimation(int themodel, matrix<char> &data, short d,
 					   double convergence_difference) {
 	// Setting the dimension
-	mirt::d = d;
+	irtpp::d = d;
 
 	//Finding the matrix of response patterns Y
 	//And its frequency
@@ -213,7 +213,7 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 	denominator = std::vector<double>(s);
 
 	//Configurations for the estimation
-	mirt::m = model(themodel);
+	irtpp::m = model(themodel);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
 
@@ -332,4 +332,4 @@ void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 	}
 }
 
-} /* namespace mirt */
+} /* namespace irtpp */

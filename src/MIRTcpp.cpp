@@ -9,7 +9,7 @@
 #include <cstdio>
 #include <set>
 
-using namespace mirt;
+using namespace irtpp;
 using std::cout;
 
 /**
@@ -90,7 +90,7 @@ void simulate ( int iterations, std::string folder, std::string name, int interv
 void run_single_dicho_uni ( ) {
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/LSAT.csv", Y);
+	in.importData("datasets/LSAT7.csv", Y);
 	std::cout << "Data imported" << std::endl;
 	clock_t start = clock();
 

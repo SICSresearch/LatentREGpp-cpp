@@ -17,7 +17,7 @@
 #include <vector>
 #include <cmath>
 
-namespace mirt {
+namespace irtpp {
 	/**
 	 * Functions to compute and save quadrature points and weights
 	 * based on gauss.quad() function from statmod library in R

@@ -17,7 +17,7 @@
 #include <map>
 #include <cmath>
 
-namespace mirt {
+namespace irtpp {
 
 extern model m;
 /**
@@ -140,6 +140,6 @@ class estimation {
 		void print_results(std::ofstream &, double);
 };
 
-} /* namespace mirt */
+} /* namespace irtpp */
 
 #endif /* ESTIMATION_ESTIMATION_H_ */

@@ -7,7 +7,7 @@
 
 #include "mstep.h"
 
-namespace mirt {
+namespace irtpp {
 
 /**
  * Variable to know where is the current item
@@ -161,5 +161,5 @@ double Mstep() {
 	return max_difference;
 }
 
-} /* namespace mirt */
+} /* namespace irtpp */
 

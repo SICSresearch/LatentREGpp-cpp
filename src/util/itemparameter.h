@@ -13,7 +13,7 @@
 #include <dlib/optimization.h>
 #include "../model/model.h"
 
-namespace mirt {
+namespace irtpp {
 
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
@@ -76,6 +76,6 @@ class item_parameter {
 		short get_number_of_parameters();
 };
 
-} /* namespace mirt */
+} /* namespace irtpp */
 
 #endif /* UTIL_ITEMPARAMETER_H_ */

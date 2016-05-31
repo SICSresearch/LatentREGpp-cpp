@@ -11,7 +11,7 @@
 #include "../test/test.h"
 #include <ctime>
 
-namespace mirt {
+namespace irtpp {
 
 /**********************************
  *  E STEP						  *
@@ -133,4 +133,4 @@ void Estep ( ) {
 //	assert(("Sum of elements in r must be N x p", r_ok));
 }
 
-} /* namespace mirt */
+} /* namespace irtpp */

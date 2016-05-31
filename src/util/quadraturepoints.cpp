@@ -9,7 +9,7 @@
 #include "input.h"
 #include "matrix.h"
 
-namespace mirt {
+namespace irtpp {
 
 	void compute_latent_trait ( std::vector<double> &q, int r,
 								std::vector<double> &current_trait,

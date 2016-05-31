@@ -18,7 +18,7 @@
 //including optimization files from dlib library
 #include <dlib/optimization.h>
 
-namespace mirt {
+namespace irtpp {
 
 extern double C;
 
@@ -83,6 +83,6 @@ double Mstep();
 	 * Function to be maximized
 	 * */
 
-} /* namespace mirt */
+} /* namespace irtpp */
 
 #endif /* ESTIMATION_MSTEP_H_ */
