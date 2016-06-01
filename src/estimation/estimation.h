@@ -9,6 +9,7 @@
 #define ESTIMATION_ESTIMATION_H_
 
 #include "../model/model.h"
+#include "../model/twopl.h"
 #include "../util/matrix.h"
 #include "../util/itemparameter.h"
 #include "../util/quadraturepoints.h"

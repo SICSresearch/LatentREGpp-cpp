@@ -213,7 +213,12 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 	denominator = std::vector<double>(s);
 
 	//Configurations for the estimation
-	irtpp::m = model(themodel);
+	switch ( themodel ) {
+	case 2:
+		irtpp::m = twopl();
+	default:
+		irtpp::m = model(themodel);
+	}
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
 
