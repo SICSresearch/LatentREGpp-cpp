@@ -6,6 +6,11 @@
  */
 
 #include "simulation.h"
+#define START_CLOCK		clock_t start = clock();
+#define END_CLOCK		clock_t stop = clock();
+#define REPORT_TIME     double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;\
+						std::cout << "Time elapsed: " << elapsed << " ms." << '\n';
+
 
 namespace irtpp {
 
@@ -31,24 +36,14 @@ void simulation::simulate ( int start, int end, std::string folder, std::string 
 		in.importData(file_name, Y);
 		std::cout << file_name << " imported" << std::endl;
 
-		clock_t start = clock();
+		START_CLOCK
 
-		//Multidimensional configuration
-		std::vector<int> number_of_items;
-		number_of_items.push_back(25);
-		number_of_items.push_back(25);
-		estimation e(2, Y, 2, 0.001, number_of_items);
-
-		//Unidimensional configuration
-		//estimation e(2, Y, 1, 0.001);
-
+		estimation e(2, Y, 2, 0.001);
 		e.EMAlgortihm();
 
-		clock_t stop = clock();
-		double elapsed = (double)(stop - start) / CLOCKS_PER_SEC;
+		END_CLOCK
+		REPORT_TIME
 
-		//e.print_results();
-		std::cout << elapsed << "s." << std::endl;
 		e.print_results(report_parameters, elapsed);
 	}
 
@@ -73,40 +68,55 @@ void simulation::simulate ( int iterations, std::string folder, std::string name
 	}
 }
 
-void simulation::run_single_dicho_uni ( ) {
+void simulation::run_single_unidimensional ( int model, std::string filename, double dif ) {
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/LSAT.csv", Y);
+	in.importData(filename, Y);
 	std::cout << "Data imported" << std::endl;
-	clock_t start = clock();
 
-	/**
-	 * Estimation with
-	 * 	Model: 1PL, 2PL, 3PL
-	 * 	Y matrix as dataset
-	 * 	N dimension
-	 * 	0.001 as convergence difference
-	 *
-	 * 	If it is multidimensional you can specify the number of items for dimension
-	 * 	using a vector
-	 * */
+	START_CLOCK
 
-	//Multidimensional example
-//	std::vector<int> number_of_items;
-//	number_of_items.push_back(15);
-//	number_of_items.push_back(15);
-//
-//	estimation e(2, Y, 2, 0.001, number_of_items);
-
-	//Unidimensional
-	estimation e(2, Y, 1, 0.001);
+	estimation e(model, Y, 1, dif);
 	e.EMAlgortihm();
 
-	clock_t stop = clock();
-	double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
+	END_CLOCK
 
 	e.print_results();
-	std::cout << "Time elapsed: " << elapsed << " ms." << '\n';
+	REPORT_TIME
+}
+
+void simulation::run_single_multidimensional ( int model, std::string filename, int d, double dif ) {
+	matrix<char> Y;
+	input<char> in(';');
+	in.importData(filename, Y);
+	std::cout << "Data imported" << std::endl;
+
+	START_CLOCK
+
+	estimation e(model, Y, d, dif);
+	e.EMAlgortihm();
+
+	END_CLOCK
+
+	e.print_results();
+	REPORT_TIME
+}
+
+void simulation::run_single_multidimensional ( int model, std::string filename, int d, double dif, std::vector<int> &items ) {
+	matrix<char> Y;
+	input<char> in(';');
+	in.importData(filename, Y);
+	std::cout << "Data imported" << std::endl;
+
+	START_CLOCK
+
+	estimation e(model, Y, d, dif, items);
+	e.EMAlgortihm();
+
+	END_CLOCK
+
+	e.print_results();
+	REPORT_TIME
 }
 
 

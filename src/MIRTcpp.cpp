@@ -21,5 +21,6 @@ int main() {
 
 	improveIO();
 	simulation sim;
-	sim.run_single_dicho_uni();
+
+	sim.run_single_unidimensional(2, "datasets/LSAT.csv", 0.001);
 }

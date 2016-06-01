@@ -17,6 +17,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cstdio>
+#include <vector>
 #include <set>
 
 namespace irtpp {
@@ -25,7 +26,9 @@ class simulation {
 public:
 	void simulate ( int start, int end, std::string folder, std::string name );
 	void simulate ( int iterations, std::string folder, std::string name, int interval );
-	void run_single_dicho_uni ( );
+	void run_single_unidimensional ( int, std::string, double );
+	void run_single_multidimensional ( int, std::string, int d, double );
+	void run_single_multidimensional ( int, std::string, int d, double, std::vector<int>& );
 	simulation();
 	virtual ~simulation();
 };
