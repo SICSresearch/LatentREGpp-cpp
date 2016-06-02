@@ -14,10 +14,10 @@
 
 namespace irtpp {
 
-void simulation::simulate ( int start, int end, std::string folder, std::string name ) {
+void simulation::simulate ( int model, int d, int start, int end, std::string folder, std::string name ) {
 	std::ofstream report_parameters;
 	std::stringstream ss;
-	ss << folder << "/estimation" << start << "-" << end << ".csv";
+	ss << folder << "/estimation-" << name << '-' << start << '-' << end << ".csv";
 	std::string parameters = ss.str();
 	report_parameters.open(parameters.c_str());
 	report_parameters.precision(4);
@@ -38,33 +38,26 @@ void simulation::simulate ( int start, int end, std::string folder, std::string 
 
 		START_CLOCK
 
-		estimation e(2, Y, 2, 0.001);
+		estimation e(model, Y, d, 0.001);
 		e.EMAlgortihm();
 
 		END_CLOCK
 		REPORT_TIME
 
+		/**
+		 * The order which parameters are saved is given by print_results
+		 *
+		 * 			a0, a1, ..., ad, d0, d1, ..., dk, c
+		 * */
 		e.print_results(report_parameters, elapsed);
 	}
 
 	report_parameters.close();
 }
 
-/**
- * Simulates the number of iterations
- *
- * And saves estimations each 'interval' iterations
- *
- *	Receives the number of iterations, the folder where the datasets will be loaded and estimation saved
- *	and the name with each file of estimation will be saved
- *
- *
- *	Example:
- *		simulate(100, "datasets/dicho-multi-tests/escenario2", "dicho-multi", 20);
- * */
-void simulation::simulate ( int iterations, std::string folder, std::string name, int interval ) {
+void simulation::simulate ( int model, int d, int iterations, std::string folder, std::string name, int interval ) {
 	for ( int i = 1; i <= iterations; i += interval ) {
-		simulate(i, i + interval - 1, folder, name);
+		simulate(model, d, i, i + interval - 1, folder, name);
 	}
 }
 

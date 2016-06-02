@@ -80,9 +80,7 @@ extern const int MAX_NUMBER_OF_QUADRATURE_POINTS;
 class estimation {
 	private:
 		short iterations;
-		/**
-		 *
-		 * */
+
 		double convergence_difference;
 
 		/**
@@ -138,6 +136,10 @@ class estimation {
 		 * Values for alphas and d's
 		 * */
 		void print_results();
+
+		/**
+		 * Prints the results to a specific output stream, including time elapsed
+		 * */
 		void print_results(std::ofstream &, double);
 };
 

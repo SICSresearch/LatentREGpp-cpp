@@ -65,7 +65,7 @@ matrix<double> theta;
 // Weights
 std::vector<double> w;
 
-//Setting size of matrix r
+//Matrix r
 std::vector<matrix<double> > r;
 
 const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;

@@ -5,7 +5,7 @@ using namespace irtpp;
 using std::cout;
 
 /**
- * MIRTpp main
+ * IRTpp main
  * Main function used to test classes and implemented
  * algorithm.
  */
