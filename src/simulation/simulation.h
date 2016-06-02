@@ -43,7 +43,7 @@ public:
 	 *
 	 * And saves estimations each 'interval' iterations
 	 *
-	 *	Receives the number the model to be used and dimension of the problem,
+	 *	Receives the model to be used and dimension of the problem,
 	 *	number of iterations, the folder where the datasets will be loaded and estimation saved
 	 *	and the prefix of files allocated in 'folder'
 	 *
