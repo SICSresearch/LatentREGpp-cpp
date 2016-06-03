@@ -14,9 +14,11 @@
 #include "../model/model.h"
 #include "../util/itemparameter.h"
 #include <cmath>
+#include <cstdlib>
 
-//including optimization files from dlib library
-#include <dlib/optimization.h>
+//including optimization files from alglib library
+#include <alglib/stdafx.h>
+#include <alglib/optimization.h>
 
 namespace irtpp {
 
@@ -78,6 +80,7 @@ typedef dlib::matrix<double,0,1> column_vector;
  * M step of the EM Algorithm
  */
 double Mstep();
+double Mstep2();
 
 	/**
 	 * Function to be maximized

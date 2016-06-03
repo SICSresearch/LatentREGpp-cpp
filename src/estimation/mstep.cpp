@@ -77,6 +77,15 @@ const column_vector Qi_derivative (const column_vector& v) {
 	return res;
 }
 
+using namespace alglib;
+void alglib_function (const real_1d_array &x, double &func, void *ptr) {
+	column_vector starting_point(x.length());
+	for ( int i = 0; i < x.length(); ++i )
+		starting_point(i) = x[i];
+	func = -Qi(starting_point);
+}
+
+
 /**********************************
  *  M STEP						  *
  *								  *
@@ -99,7 +108,7 @@ double Mstep() {
 		/**
 		 * Starting point where optimization will start
 		 * */
-		column_vector starting_point(zeta[i].get_number_of_parameters());
+		column_vector starting_point (zeta[i].get_number_of_parameters());
 		int j = 0;
 		for ( int k = 0; k < zeta[i].alphas; ++k, ++j )
 			starting_point(j) = zeta[i].alpha[k];
@@ -153,6 +162,79 @@ double Mstep() {
 		if ( zeta[i].guessing ) {
 			dif = std::max(dif, std::abs(zeta[i].c - starting_point(j)));
 			zeta[i].c = starting_point(j);
+		}
+
+		max_difference = std::max(max_difference, dif);
+	}
+
+	return max_difference;
+}
+
+double Mstep2() {
+	double max_difference = 0.0;
+
+	/**
+	 * Log likelihood must be optimized for every item
+	 * */
+	for ( i = 0; i < p; ++i ) {
+		/**
+		 * If it is multidimensional and this is one of the pinned items
+		 * i.e the first item of a dimension
+		 * this item is just skipped
+		 * */
+		if ( d > 1 && pinned_items.count(i) ) continue;
+
+		/**
+		 * Starting point where optimization will start
+		 * */
+		real_1d_array starting_point;
+		starting_point.setlength(zeta[i].get_number_of_parameters());
+
+		int j = 0;
+		for ( int k = 0; k < zeta[i].alphas; ++k, ++j )
+			starting_point[j] = zeta[i].alpha[k];
+		for ( int k = 0; k < zeta[i].gammas; ++k, ++j )
+			starting_point[j] = zeta[i].gamma[k];
+		if ( zeta[i].guessing ) starting_point[j] = zeta[i].c;
+
+		double epsg = 0.0000000001;
+		double epsf = 0;
+		double epsx = 0;
+		double diffstep = 1.0e-6;
+		ae_int_t maxits = 0;
+		mincgstate state;
+		mincgreport rep;
+
+		mincgcreatef(starting_point, diffstep, state);
+		mincgsetcond(state, epsg, epsf, epsx, maxits);
+		alglib::mincgoptimize(state, alglib_function);
+		mincgresults(state, starting_point, rep);
+
+		//printf("%d\n", int(rep.terminationtype)); // EXPECTED: 4
+		//printf("%s\n", starting_point.tostring(2).c_str());
+
+
+		//Computing difference of current item
+		double dif = 0.0;
+
+		j = 0;
+		for ( int k = 0; k < zeta[i].alphas; ++k, ++j ) {
+			dif = std::max(dif, std::abs(zeta[i].alpha[k] - starting_point[j]));
+
+			//Updating new value for alpha k
+			zeta[i].alpha[k] = starting_point[j];
+		}
+
+		for ( int k = 0; k < zeta[i].gammas; ++k, ++j ) {
+			dif = std::max(dif, std::abs(zeta[i].gamma[k] - starting_point[j]));
+
+			//Updating new value for gamma k
+			zeta[i].gamma[k] = starting_point[j];
+		}
+
+		if ( zeta[i].guessing ) {
+			dif = std::max(dif, std::abs(zeta[i].c - starting_point[j]));
+			zeta[i].c = starting_point[j];
 		}
 
 		max_difference = std::max(max_difference, dif);
