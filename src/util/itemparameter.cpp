@@ -53,6 +53,16 @@ void item_parameter::build_item(const column_vector& v, int d, int mi, item_para
 		item.c = v(j);
 }
 
+void item_parameter::build_item(const alglib::real_1d_array& v, int d, int mi, item_parameter &item) {
+	int j = 0;
+	for ( int k = 0; k < item.alphas; ++k, ++j )
+		item.alpha[k] = v[j];
+	for ( int k = 0; k < item.gammas; ++k, ++j )
+		item.gamma[k] = v[j];
+	if ( item.guessing )
+		item.c = v[j];
+}
+
 item_parameter::~item_parameter() {
 	// TODO Auto-generated destructor stub
 }

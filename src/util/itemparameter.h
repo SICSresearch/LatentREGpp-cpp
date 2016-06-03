@@ -13,6 +13,10 @@
 #include <dlib/optimization.h>
 #include "../model/model.h"
 
+#include <alglib/stdafx.h>
+#include <alglib/optimization.h>
+
+
 namespace irtpp {
 
 // Necessary typedef to be able to maximize using dlib
@@ -60,6 +64,7 @@ class item_parameter {
 
 
 		static void build_item(const column_vector&, int, int, item_parameter&);
+		static void build_item(const alglib::real_1d_array &, int, int, item_parameter&);
 
 		/**
 		 * Receives dimension and number of categories of the item
