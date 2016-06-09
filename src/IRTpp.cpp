@@ -22,5 +22,5 @@ int main() {
 	improveIO();
 	simulation sim;
 
-	sim.run_single_unidimensional(2, "datasets/LSAT.csv", 0.001);
+	sim.run_single_multidimensional(2, "datasets/2D/escenario1/2D-poly-1000x50-1.csv", 2, 0.001);
 }

@@ -272,6 +272,7 @@ void estimation::initial_values() {
 			int items_for_dimension = p / d;
 			for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
 				item_parameter &item = zeta[i];
+				pinned_items.insert(i);
 				item.alpha = std::vector<double>(item.alphas);
 				item.gamma = std::vector<double>(item.gammas);
 				item.alpha[j] = 1;
