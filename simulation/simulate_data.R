@@ -215,7 +215,7 @@ simulate.poli.multi=function(size.cluster=c(25,25,25,25),
 
 simulate.data = function(size.cluster, dim.data, sample.size, ncatgs, folder, save = FALSE) {
   sims = list()
-  for ( i in 1:2 ) {
+  for ( i in 1:100 ) {
     sim=simulate.poli.multi(size.cluster=size.cluster,dim.data=dim.data, 
                             ncatgs = ncatgs, seed_data = i)  
     Y = sim$data
@@ -238,7 +238,7 @@ dim.data = 2
 
 simulate.data(size.cluster = c(25, 25), dim.data = dim.data, 
               sample.size = 1000, ncatgs = c(rep(2, 25), rep(3, 25)),
-              folder = "IRTpp/datasets/2D/escenario1/2D-poly-1000x50-", save = TRUE)
+              folder = "IRTpp/datasets/2D/escenario1/2D-poly-1000x50-", save = FALSE)
 
 # ESCENARIO 2
 # k = 1000
