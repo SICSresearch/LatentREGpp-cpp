@@ -279,8 +279,21 @@ simulate.data = function(size.cluster, dim.data, sample.size, ncatgs, folder, sa
       write.table(Y, file = paste(c(folder, i,".csv"), collapse = ""), sep = ";",col.names = FALSE, row.names = FALSE)
   }
   
-  #Just printing a single simulation parameters
-  sims[[1]]$params.it  
+  
+  longest = 0
+  for ( i in 1:length(sims[[1]]$params.it) ) {
+    if ( length((sims[[1]]$params.it)[[i]]) > longest )
+      longest = length((sims[[1]]$params.it)[[i]])
+  }
+  
+  params = matrix(NA, length(sims[[1]]$params.it), longest)
+  
+  for ( i in 1:length(sims[[1]]$params.it) ) {
+    for ( j in 1:length((sims[[1]]$params.it)[[i]]) )
+      params[i, j] = (sims[[1]]$params.it)[[i]][[j]]
+  }
+  
+  write.table(params, file = paste(c(folder, "parameters.csv"), collapse = ""), sep = ";",col.names = FALSE, row.names = FALSE)
 }
 
 
