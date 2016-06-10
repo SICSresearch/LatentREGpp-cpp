@@ -77,8 +77,47 @@ const column_vector Qi_derivative (const column_vector& v) {
 	return res;
 }
 
+const column_vector Qi_derivative2 (item_parameter &item_i) {
+	double tmp = 0;
+	double tmp2 = 0;
+	double tmp3 = 0;
+	double var = 0;
+	double kmax = zeta[i].get_categories();
+
+
+	column_vector res(kmax);
+
+	//Lambda derivative for each item
+	for (int g = 0; g < G; ++g) {
+		std::vector<double> &theta_g = *theta.get_pointer_row(g);
+		tmp3 = 0;
+		for (int k = 0; k<kmax ;++k) {
+			tmp3 += (((r[g](i, k))/(m.Pik(theta_g,item_i,k)))*((m.Pstar_ik(theta_g,item_i,k-1))*(1-(m.Pstar_ik(theta_g,item_i,k-1)))-(m.Pstar_ik(theta_g,item_i,k))*(1-(m.Pstar_ik(theta_g,item_i,k)))));
+		}
+		tmp2 += (theta_g[0]*tmp3);
+	}
+	res(0) = tmp2;
+
+	tmp2 = 0;
+
+	//k derivatives for each item
+	for (int k = 0; k<kmax-1;++k) {
+		for (int g = 0; g < G; ++g) {
+			std::vector<double> &theta_g = *theta.get_pointer_row(g);
+
+			tmp = m.Pstar_ik(theta_g,item_i,k)*(1-(m.Pstar_ik(theta_g,item_i,k)));
+			tmp2 = ((-(r[g](i, k)))/(m.Pik(theta_g,item_i,k)))+(r[g](i, k+1))/(m.Pik(theta_g,item_i,k+1));
+
+			var += tmp*tmp2;
+		}
+		res(k+1) = var;
+		var = 0;
+	}
+	return res;
+}
+
 using namespace alglib;
-void alglib_function (const real_1d_array &x, double &func, void *ptr) {
+void alglib_function (const real_1d_array &x, double &func, real_1d_array &grad, void *ptr) {
 	/**
 	 * Computing value of Qi function
 	 * */
@@ -92,6 +131,10 @@ void alglib_function (const real_1d_array &x, double &func, void *ptr) {
 		for ( int k = 0; k < mi; ++k )
 			func -= r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
 	}
+
+	column_vector res = Qi_derivative2(item_i);
+	for ( int i = 0; i < res.size(); ++i )
+		grad[i] = -res(i);
 }
 
 
@@ -197,12 +240,11 @@ double Mstep2() {
 		double epsg = 0.0000000001;
 		double epsf = 0;
 		double epsx = 0;
-		double diffstep = 1.0e-6;
 		ae_int_t maxits = 0;
 		minlbfgsstate state;
 		minlbfgsreport rep;
 
-		minlbfgscreatef(starting_point.length(), starting_point, diffstep, state);
+		minlbfgscreate(starting_point.length(), starting_point, state);
 		minlbfgssetcond(state, epsg, epsf, epsx, maxits);
 		alglib::minlbfgsoptimize(state, alglib_function);
 		minlbfgsresults(state, starting_point, rep);
