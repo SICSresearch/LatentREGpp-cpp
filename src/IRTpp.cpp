@@ -17,10 +17,10 @@ inline void improveIO () {
 
 int main() {
 	cout.setf(std::ios_base::fixed);
-	cout.precision(3);
+	cout.precision(5);
 
 	improveIO();
 	simulation sim;
 
-	sim.run_single_multidimensional(2, "datasets/2D/escenario1/2D-poly-1000x50-1.csv", 2, 0.001);
+	sim.run_single_multidimensional(2, "datasets/1D/escenario3/2D-poly-5000x20-1.csv", 2, 0.001);
 }

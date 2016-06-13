@@ -31,7 +31,7 @@ item_parameter::item_parameter(model &m, short dimension, short categories) {
 		gammas = categories - 1;
 		guessing = false;
 		for ( int i = 0; i < alphas; ++i ) alpha.push_back(1);
-		for ( int i = 0; i < gammas; ++i ) gamma.push_back(1);
+		for ( int i = 0; i < gammas; ++i ) gamma.push_back(2 - i);
 	} else {
 		alphas = dimension;
 		gammas = categories - 1;
