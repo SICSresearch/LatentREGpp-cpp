@@ -22,5 +22,5 @@ int main() {
 	improveIO();
 	simulation sim;
 
-	sim.run_single_unidimensional(2, "datasets/1D/poly/escenario1/1D-poly-1000x10-1.csv", 0.001);
+	sim.run_single_unidimensional(2, "datasets/1D/poly/escenario5/1D-poly-20000x20-1.csv", 0.001);
 }

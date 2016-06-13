@@ -306,6 +306,7 @@ void estimation::EMAlgortihm() {
 		Estep();
 		dif = Mstep();
 		++iterations;
+		std::cout << iterations << ' ' << dif << std::endl;
 	} while ( dif > convergence_difference );
 }
 
