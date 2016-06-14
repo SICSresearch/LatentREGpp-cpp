@@ -6,12 +6,71 @@
  */
 
 #include "itemparameter.h"
+#include <iostream>
 
 namespace irtpp {
 
-item_parameter::item_parameter() {
-	// TODO Auto-generated constructor stub
+item_parameter::item_parameter(matrix<char> &Y, model &m, short dimension, short categories) {
+	/**
+	 * COMPUTING INITIAL VALUES
+	 *
+	 *
+	 * */
 
+	/**
+	 * Initial values for item parameters according to Andrade, Tavares & Valle (2000),
+	 *
+	 * */
+	if ( dimension == 1 ) {
+		if ( m.parameters == 1 ) {
+			alphas = 0;
+			gammas = categories - 1;
+			guessing = false;
+			for ( int i = 0; i < gammas; ++i ) gamma.push_back(1);
+		} else if ( m.parameters == 2 ) {
+			alphas = dimension;
+			gammas = categories - 1;
+			guessing = false;
+
+			std::vector<double> biserial_correlation;
+			compute_biserial_correlation(Y, biserial_correlation);
+			std::cout << "Biserial computed" << std::endl;
+			compute_alphas(biserial_correlation, alpha);
+			std::cout << "Alphas computed" << std::endl;
+			compute_gammas(Y, alpha, biserial_correlation, gamma);
+			std::cout << "Gammas computed" << std::endl;
+		} else {
+			alphas = dimension;
+			gammas = categories - 1;
+			guessing = true;
+			for ( int i = 0; i < alphas; ++i ) alpha.push_back(1);
+			for ( int i = 0; i < gammas; ++i ) gamma.push_back(1);
+			c = 1.0/categories;
+		}
+
+	} else {
+		if ( m.parameters == 1 ) {
+			alphas = 0;
+			gammas = categories - 1;
+			guessing = false;
+			for ( int i = 0; i < gammas; ++i ) gamma.push_back(1);
+		} else if ( m.parameters == 2 ) {
+			alphas = dimension;
+			gammas = categories - 1;
+			guessing = false;
+			for ( int i = 0; i < alphas; ++i ) alpha.push_back(1);
+			for ( int i = 0; i < gammas; ++i ) gamma.push_back(2 - i);
+		} else {
+			alphas = dimension;
+			gammas = categories - 1;
+			guessing = true;
+			for ( int i = 0; i < alphas; ++i ) alpha.push_back(1);
+			for ( int i = 0; i < gammas; ++i ) gamma.push_back(1);
+			c = 1.0/categories;
+		}
+	}
+
+	number_of_parameters = alphas + gammas + guessing;
 }
 
 item_parameter::item_parameter(model &m, short dimension, short categories) {
@@ -38,6 +97,7 @@ item_parameter::item_parameter(model &m, short dimension, short categories) {
 		guessing = true;
 		for ( int i = 0; i < alphas; ++i ) alpha.push_back(1);
 		for ( int i = 0; i < gammas; ++i ) gamma.push_back(1);
+		c = 1.0/categories;
 	}
 
 	number_of_parameters = alphas + gammas + guessing;
@@ -75,6 +135,14 @@ short item_parameter::get_dimension() {
 
 short item_parameter::get_number_of_parameters() {
 	return number_of_parameters;
+}
+
+void item_parameter::add_single_alpha(double a) {
+	alpha.push_back(a);
+}
+
+void item_parameter::add_single_gamma(double d) {
+	gamma.push_back(d);
 }
 
 } /* namespace irtpp */

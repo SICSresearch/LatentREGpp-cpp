@@ -50,6 +50,12 @@ std::vector<item_parameter> zeta;
 matrix<char> Y;
 
 /**
+ * Matrix of data of examinees
+ *
+ * */
+matrix<char> data;
+
+/**
  * Dichotomized matrix
  * */
 std::vector<matrix<int> > X;
@@ -121,6 +127,7 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 					   double convergence_difference) {
 	// Setting the dimension
 	irtpp::d = d;
+	irtpp::data = data;
 
 	//Finding the matrix of response patterns Y
 	//And its frequency
@@ -252,8 +259,23 @@ estimation::~estimation() {
 void estimation::initial_values() {
 	zeta = std::vector<item_parameter>();
 
-	for ( int i = 0; i < p; ++i )
+	std::vector<double> biserial_correlation, alphas, gammas;
+	compute_biserial_correlation(data, biserial_correlation);
+	std::cout << "Biserial computed" << std::endl;
+	compute_alphas(biserial_correlation, alphas);
+	std::cout << "Alphas computed" << std::endl;
+	compute_gammas(data, alphas, biserial_correlation, gammas);
+	std::cout << "Gammas computed" << std::endl;
+
+	for ( int i = 0; i < p; ++i ) {
 		zeta.push_back( item_parameter(m, d, categories_item[i]) );
+		item_parameter &item_i = zeta.back();
+
+		item_i.alpha[0] = alphas[i];
+		item_i.gamma[0] = gammas[i];
+
+		std::cout << i + 1 << ' ' << alphas[i] << ' ' << gammas[i] << std::endl;
+	}
 
 	/**
 	 * If it is multidimensional

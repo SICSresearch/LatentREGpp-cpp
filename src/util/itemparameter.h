@@ -12,6 +12,8 @@
 //including optimization files from dlib library
 #include <dlib/optimization.h>
 #include "../model/model.h"
+#include "initial_values.h"
+#include "matrix.h"
 
 namespace irtpp {
 
@@ -65,11 +67,15 @@ class item_parameter {
 		 * Receives dimension and number of categories of the item
 		 * */
 		item_parameter(model&, short, short);
+		item_parameter(matrix<char> &Y, model&, short, short);
 
 		virtual ~item_parameter();
 
 		std::vector<double> get_alpha();
 		std::vector<double> get_gamma();
+
+		void add_single_alpha(double a);
+		void add_single_gamma(double d);
 
 		short get_categories();
 		short get_dimension();

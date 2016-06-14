@@ -13,6 +13,7 @@
 #include "../util/matrix.h"
 #include "../util/itemparameter.h"
 #include "../util/quadraturepoints.h"
+#include "../util/initial_values.h"
 #include "estep.h"
 #include "mstep.h"
 #include <map>
