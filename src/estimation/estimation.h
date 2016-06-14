@@ -89,11 +89,6 @@ class estimation {
 		 * */
 		std::vector<int> categories_item;
 
-		/**
-		 * bool variable to know if data is polytomous or dichotomous
-		 * */
-		bool dichotomous;
-
 	public:
 		estimation();
 

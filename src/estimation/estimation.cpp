@@ -168,7 +168,7 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 		categories_item.push_back(max_category);
 	}
 
-	// If it's dichotomous, we add 1 to data
+	// If it's dichotomous, we add 1 to Y
 	if ( dichotomous ) {
 		for ( int i = 0; i < s; ++i )
 			for ( int j = 0; j < p; ++j )
@@ -259,22 +259,66 @@ estimation::~estimation() {
 void estimation::initial_values() {
 	zeta = std::vector<item_parameter>();
 
-	std::vector<double> biserial_correlation, alphas, gammas;
-	compute_biserial_correlation(data, biserial_correlation);
-	std::cout << "Biserial computed" << std::endl;
-	compute_alphas(biserial_correlation, alphas);
-	std::cout << "Alphas computed" << std::endl;
-	compute_gammas(data, alphas, biserial_correlation, gammas);
-	std::cout << "Gammas computed" << std::endl;
-
-	for ( int i = 0; i < p; ++i ) {
+	for ( int i = 0; i < p; ++i )
 		zeta.push_back( item_parameter(m, d, categories_item[i]) );
-		item_parameter &item_i = zeta.back();
 
-		item_i.alpha[0] = alphas[i];
-		item_i.gamma[0] = gammas[i];
+	if ( d == 1 ) {
+		if ( dichotomous ) {
+			std::vector<double> alpha, gamma;
+			find_initial_values(data, alpha, gamma);
 
-		std::cout << i + 1 << ' ' << alphas[i] << ' ' << gammas[i] << std::endl;
+			for ( int i = 0; i < p; ++i ) {
+				item_parameter &item_i = zeta[i];
+
+				//As there is only one alpha, item_i.alpha[0] is okay
+				item_i.alpha[0] = alpha[i];
+				//As there is only one gamma, item_i.gamma[0] is okay
+				item_i.gamma[0] = gamma[i];
+
+				std::cout << i + 1 << ' ' << alpha[i] << ' ' << gamma[i] << std::endl;
+			}
+		}
+		else {
+			/**
+			 * Polytomous case
+			 *
+			 * Here, it is necessary find dichotomous items for each polytomous item
+			 * */
+
+			for ( int i = 0; i < p; ++i ) {
+				item_parameter &item_i = zeta[i];
+				int mi = categories_item[i];
+
+				matrix<char> data_dicho(N, mi - 1);
+				for ( int k = 1; k < mi; ++k ) {
+					for ( int j = 0; j < N; ++j )
+						data_dicho(j, k - 1) = data(j, i) >= k + 1;
+				}
+
+				//std::cout << data << std::endl;
+				//std::cout << data_dicho << std::endl;
+
+				std::vector<double> alpha, gamma;
+				find_initial_values(data_dicho, alpha, gamma);
+
+				/**
+				 * Real alpha for this item will be the average among all alphas computed
+				 * */
+
+				double a = mean(alpha);
+
+				//As there is only one alpha, item_i.alpha[0] is okay
+				item_i.alpha[0] = a;
+				//As there is more than one gamma, it is necessary iterate over the number of categories
+				for ( int k = 0; k < mi - 1; ++k )
+					item_i.gamma[k] = gamma[k];
+
+				std::cout << i + 1 << ' ' << a;
+				for ( int k = 0; k < mi - 1; ++k )
+					std::cout << ' ' << gamma[k];
+				std::cout << std::endl;
+			}
+		}
 	}
 
 	/**
@@ -282,7 +326,7 @@ void estimation::initial_values() {
 	 *
 	 * here, the first item for each dimension is pinned
 	 * */
-	if ( d > 1 ) {
+	else {
 		/**
 		 * It is supposed that there are p / d items for each dimension
 		 * if the user does not specify them

@@ -11,20 +11,32 @@
 
 namespace irtpp {
 
-	template <class T>
-	inline double mean ( std::vector<T> &v ) {
+	inline double mean ( std::vector<double> &v ) {
 		double sum = 0;
 		for ( int i = 0; i < v.size(); ++i )
 			sum += v[i];
 		return sum / double(v.size());
 	}
 
-	template <class T>
-	inline double sd ( std::vector<T> &v ) {
+	inline double sd ( std::vector<double> &v ) {
 		double m = mean(v), sum = 0;
 		for ( int i = 0; i < v.size(); ++i )
 			sum += (m - v[i]) * (m - v[i]);
 		return std::sqrt(sum/v.size());
+	}
+
+	void find_initial_values ( matrix<char> &data, std::vector<double> &alpha, std::vector<double> &gamma ) {
+		/**
+		 * Computing biserial correlation of data
+		 * */
+		std::vector<double> biserial_correlation;
+		compute_biserial_correlation(data, biserial_correlation);
+
+		/**
+		 * Computing alpha and gamma starting from biserial correlation
+		 * */
+		compute_alphas(biserial_correlation, alpha);
+		compute_gammas(data, alpha, biserial_correlation, gamma);
 	}
 
 	void compute_biserial_correlation(matrix<char> &Y, std::vector<double> &ro) {
@@ -81,7 +93,13 @@ namespace irtpp {
 					++right_answers;
 
 			double pi = double(right_answers) / double(Y.rows());
-			double q = quantile(dist, pi);
+
+			double q = 0;
+			try {
+				q = quantile(dist, pi);
+			} catch (int e) {
+				std::cout << "Error trying to get quantile" << std::endl;
+			}
 
 			b[i] = -q / p[i];
 		}
