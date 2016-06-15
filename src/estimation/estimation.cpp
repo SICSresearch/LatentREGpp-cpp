@@ -321,12 +321,60 @@ void estimation::initial_values() {
 		}
 	}
 
-	/**
-	 * If it is multidimensional
-	 *
-	 * here, the first item for each dimension is pinned
-	 * */
 	else {
+
+		/**
+		 * If it is multidimensional
+		 *
+		 * here, the first item for each dimension is pinned
+		 * */
+
+		if ( dichotomous ) {
+			std::vector<double> alpha, gamma;
+			find_initial_values(data, alpha, gamma);
+
+			for ( int i = 0; i < p; ++i ) {
+				item_parameter &item_i = zeta[i];
+
+				//As there is only one gamma, item_i.gamma[0] is okay
+				item_i.gamma[0] = gamma[i];
+
+				std::cout << i + 1 << ' ' << gamma[i] << std::endl;
+			}
+		}
+		else {
+			/**
+			 * Polytomous case
+			 *
+			 * Here, it is necessary find dichotomous items for each polytomous item
+			 * */
+
+			for ( int i = 0; i < p; ++i ) {
+				item_parameter &item_i = zeta[i];
+				int mi = categories_item[i];
+
+				matrix<char> data_dicho(N, mi - 1);
+				for ( int k = 1; k < mi; ++k ) {
+					for ( int j = 0; j < N; ++j )
+						data_dicho(j, k - 1) = data(j, i) >= k + 1;
+				}
+
+				//std::cout << data << std::endl;
+				//std::cout << data_dicho << std::endl;
+
+				std::vector<double> alpha, gamma;
+				find_initial_values(data_dicho, alpha, gamma);
+
+				//As there is more than one gamma, it is necessary iterate over the number of categories
+				for ( int k = 0; k < mi - 1; ++k )
+					item_i.gamma[k] = gamma[k];
+
+				for ( int k = 0; k < mi - 1; ++k )
+					std::cout << ' ' << gamma[k];
+				std::cout << std::endl;
+			}
+		}
+
 		/**
 		 * It is supposed that there are p / d items for each dimension
 		 * if the user does not specify them

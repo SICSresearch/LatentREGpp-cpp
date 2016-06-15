@@ -367,6 +367,34 @@ simulate.data(size.cluster = c(25, 25), dim.data = 2,
 # k = 1000
 ################# 2000 x 50 ###########################
 
+simulate.data(size.cluster = c(25, 25), dim.data = 2, 
+              sample.size = 2000, ncatgs = c(rep(3, 25), rep(4, 25)),
+              folder = "IRTpp/datasets/2D/poly/escenario2/2D-poly-2000x50-", save = TRUE)
+
+# ESCENARIO 3
+# k = 1000
+################# 5000 x 100 ###########################
+
+simulate.data(size.cluster = c(50, 50), dim.data = 2, 
+              sample.size = 5000, ncatgs = c(rep(4, 50), rep(5, 50)),
+              folder = "IRTpp/datasets/2D/poly/escenario3/2D-poly-5000x100-", save = TRUE)
+
+
+# ESCENARIO 4
+# k = 1000
+################# 10000 x 100 ###########################
+
+simulate.data(size.cluster = c(50, 50), dim.data = 2, 
+              sample.size = 10000, ncatgs = c(rep(3, 50), rep(5, 50)),
+              folder = "IRTpp/datasets/2D/poly/escenario4/2D-poly-10000x100-", save = TRUE)
+
+# ESCENARIO 5
+# k = 1000
+################# 20000 x 100 ###########################
+
+simulate.data(size.cluster = c(50, 50), dim.data = 2, 
+              sample.size = 20000, ncatgs = c(rep(3, 50), rep(5, 50)),
+              folder = "IRTpp/datasets/2D/poly/escenario5/2D-poly-20000x100-", save = TRUE)
 
 #
 #
