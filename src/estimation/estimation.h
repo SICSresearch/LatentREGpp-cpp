@@ -80,6 +80,8 @@ extern const int MAX_NUMBER_OF_QUADRATURE_POINTS;
  * */
 class estimation {
 	private:
+		const int MAX_ITERATIONS = 500;
+
 		short iterations;
 
 		double convergence_difference;

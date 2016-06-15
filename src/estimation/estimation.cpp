@@ -275,7 +275,7 @@ void estimation::initial_values() {
 				//As there is only one gamma, item_i.gamma[0] is okay
 				item_i.gamma[0] = gamma[i];
 
-				std::cout << i + 1 << ' ' << alpha[i] << ' ' << gamma[i] << std::endl;
+				//std::cout << i + 1 << ' ' << alpha[i] << ' ' << gamma[i] << std::endl;
 			}
 		}
 		else {
@@ -313,10 +313,10 @@ void estimation::initial_values() {
 				for ( int k = 0; k < mi - 1; ++k )
 					item_i.gamma[k] = gamma[k];
 
-				std::cout << i + 1 << ' ' << a;
-				for ( int k = 0; k < mi - 1; ++k )
-					std::cout << ' ' << gamma[k];
-				std::cout << std::endl;
+//				std::cout << i + 1 << ' ' << a;
+//				for ( int k = 0; k < mi - 1; ++k )
+//					std::cout << ' ' << gamma[k];
+//				std::cout << std::endl;
 			}
 		}
 	}
@@ -339,7 +339,7 @@ void estimation::initial_values() {
 				//As there is only one gamma, item_i.gamma[0] is okay
 				item_i.gamma[0] = gamma[i];
 
-				std::cout << i + 1 << ' ' << gamma[i] << std::endl;
+				//std::cout << i + 1 << ' ' << gamma[i] << std::endl;
 			}
 		}
 		else {
@@ -369,9 +369,9 @@ void estimation::initial_values() {
 				for ( int k = 0; k < mi - 1; ++k )
 					item_i.gamma[k] = gamma[k];
 
-				for ( int k = 0; k < mi - 1; ++k )
-					std::cout << ' ' << gamma[k];
-				std::cout << std::endl;
+//				for ( int k = 0; k < mi - 1; ++k )
+//					std::cout << ' ' << gamma[k];
+//				std::cout << std::endl;
 			}
 		}
 
@@ -420,7 +420,7 @@ void estimation::EMAlgortihm() {
 		Estep();
 		dif = Mstep();
 		++iterations;
-	} while ( dif > convergence_difference );
+	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
 }
 
 void estimation::print_results ( ) {
