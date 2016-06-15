@@ -20,6 +20,11 @@ namespace irtpp {
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 
+//Necesary for using cesandoval BFGS
+typedef std::vector<double> Parameter;
+typedef void* Info;
+typedef std::vector<double> (*Function)(Parameter params, Info info);
+
 class model;
 
 class item_parameter {
