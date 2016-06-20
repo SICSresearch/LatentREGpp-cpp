@@ -14,64 +14,13 @@
 #include "../util/itemparameter.h"
 #include "../util/quadraturepoints.h"
 #include "../util/initial_values.h"
+#include "../util/estimationdata.h"
 #include "estep.h"
 #include "mstep.h"
 #include <map>
 #include <cmath>
 
 namespace irtpp {
-
-extern model m;
-/**
- * Dimension of the data
- * */
-extern short d;
-/**
- * Number of items
- * */
-extern int p;
-/**
- * Number of response patterns
- * */
-extern int s;
-
-/**
- * Number of examinees
- * */
-extern int N;
-
-/**
- * Vector of parameters
- * */
-extern std::vector<item_parameter> zeta;
-
-/**
- * Y , s x p, matrix of pattern responses.
- *
- * where s is the number of patterns s <= N (N, number of examinees)
- * p is the number of items
- * */
-extern matrix<char> Y;
-
-/**
- * Dichotomized matrix
- * */
-extern std::vector<matrix<int> > X;
-
-/**
- * nl, frequencies of each pattern allocated in Y
- * */
-extern std::vector<int> nl;
-
-// Latent trait vectors
-extern matrix<double> theta;
-
-// Weights
-extern std::vector<double> w;
-
-extern const int MAX_NUMBER_OF_QUADRATURE_POINTS;
-
-
 
 /*
  * Class to run the estimation process
@@ -86,10 +35,7 @@ class estimation {
 
 		double convergence_difference;
 
-		/**
-		 * vector to allocate the number of categories of each item
-		 * */
-		std::vector<int> categories_item;
+		estimation_data data;
 
 	public:
 		estimation();

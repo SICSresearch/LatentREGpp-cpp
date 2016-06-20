@@ -14,126 +14,48 @@ estimation::estimation() {
 
 }
 
-/**
- * Model to be used
- * */
-model m;
-/**
- * Dimension of the data
- * */
-short d;
-/**
- * Number of items
- * */
-int p;
-/**
- * Number of response patterns
- * */
-int s;
-
-/**
- * Number of examinees
- * */
-int N;
-
-/**
- * Vector of parameters
- * */
-std::vector<item_parameter> zeta;
-
-/**
- * Y , s x p, matrix of pattern responses.
- *
- * where s is the number of patterns s <= N (N, number of examinees)
- * p is the number of items
- * */
-matrix<char> Y;
-
-/**
- * Matrix of data of examinees
- *
- * */
-matrix<char> data;
-
-/**
- * Dichotomized matrix
- * */
-std::vector<matrix<int> > X;
-
-/**
- * nl, frequencies of each pattern allocated in Y
- * */
-std::vector<int> nl;
-
-// Latent trait vectors
-matrix<double> theta;
-
-// Weights
-std::vector<double> w;
-
-//Matrix r
-std::vector<matrix<double> > r;
-
-const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
-/**
- * Defining the number of quadrature points
- *
- * As max number of quadrature points is 40
- *
- * G will be in 1dimension = 40
- * 				2dimension = 20
- * 				3dimension = 10
- * 				> 4dimension = 5
- * */
-int G;
-
-/**
- * Probability matrix P
- *
- * P_gik
- *
- * P_gik means the probability that an individual has selected the category k
- * to item i and belongs to group g
- *
- *
- * The purpose of this matrix is to allocate the value of P_gik
- * to avoid recompute them while numerators and denominators in Estep are computed
- * */
-std::vector<matrix<double> > P;
-
-/**
- * Variable to know if data is dichotomous
- *
- * */
-bool dichotomous;
-
-/**
- * For multidimensional case
- *
- * set that contains what are the items that have to be pinned
- * */
-std::set<int> pinned_items;
-
-/**
- * Matrix of probabilities pi, denominators vector and matrix of numerators
- * needed in Estep
- * */
-matrix<double> numerator;
-std::vector<double> denominator;
-matrix<double> pi;
 
 
-estimation::estimation(int themodel, matrix<char> &data, short d,
+estimation::estimation(int themodel, matrix<char> &dataset, short d,
 					   double convergence_difference) {
-	// Setting the dimension
-	irtpp::d = d;
-	irtpp::data = data;
+	/**
+	 * Declaring object to allocate all data needed in estimation process
+	 * */
+	data = estimation_data(d);
+
+	/**
+	 * Saving pointer to the dataset
+	 * */
+	data.dataset = &dataset;
+
+
+	/**
+	 * Creating reference variables for all variables in data
+	 * */
+	matrix<char> &Y = data.Y;
+	std::vector<int> &nl = data.nl;
+	int &N = data.N;
+	int &s = data.s;
+	int &p = data.p;
+	bool &dichotomous = data.dichotomous;
+	int &G = data.G;
+	std::vector<int> &categories_item = data.categories_item;
+	matrix<double> &theta = data.theta;
+	std::vector<double> &w = data.w;
+	std::vector<matrix<double> > &r = data.r;
+	std::vector<matrix<double> > &P = data.P;
+	matrix<double> &pi = data.pi;
+	matrix<double> &numerator = data.numerator;
+	std::vector<double> &denominator = data.denominator;
+	model &m = data.m;
+	std::vector<matrix<int> > &X = data.X;
+
 
 	//Finding the matrix of response patterns Y
 	//And its frequency
 	std::map<std::vector<char>, int> freq;
-	for ( int i = 0; i < data.rows(); ++i )
-		++freq[data.get_row(i)];
+	for ( int i = 0; i < dataset.rows(); ++i )
+		++freq[dataset.get_row(i)];
 
 	Y = matrix<char>();
 	nl = std::vector<int>();
@@ -145,7 +67,7 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 	}
 
 	// Number of examinees
-	N = data.rows();
+	N = dataset.rows();
 
 	// Number of response patterns
 	s = Y.rows();
@@ -192,6 +114,7 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 		}
 	}
 
+	const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
 	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
 
 	// Latent trait vectors are loaded
@@ -220,24 +143,21 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 	denominator = std::vector<double>(s);
 
 	//Configurations for the estimation
-	switch ( themodel ) {
-	case 2:
-		irtpp::m = twopl();
-	default:
-		irtpp::m = model(themodel);
-	}
+	m = model(themodel);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
-
-	initial_values();
 }
 
-estimation::estimation(int themodel, matrix<char> &data, short d,
+estimation::estimation(int themodel, matrix<char> &dataset, short d,
 					   double convergence_difference, std::vector<int> &number_of_items) {
+
+	estimation(themodel, dataset, d, convergence_difference);
+
 	/**
 	 * Computing the items that will be pinned
 	 *
 	 * */
+	std::set<int> &pinned_items = data.pinned_items;
 
 	int before = 0;
 	pinned_items.insert(0);
@@ -245,8 +165,6 @@ estimation::estimation(int themodel, matrix<char> &data, short d,
 		before += number_of_items[i];
 		pinned_items.insert(before);
 	}
-
-	estimation(themodel, data, d, convergence_difference);
 
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
@@ -257,7 +175,17 @@ estimation::~estimation() {
 }
 
 void estimation::initial_values() {
-	zeta = std::vector<item_parameter>();
+	std::vector<item_parameter> &zeta = data.zeta;
+	int &d = data.d;
+	int &N = data.N;
+	int &p = data.p;
+	bool &dichotomous = data.dichotomous;
+	int &G = data.G;
+	std::vector<int> &categories_item = data.categories_item;
+	model &m = data.m;
+	matrix<char> &dataset = *data.dataset;
+	std::set<int> &pinned_items = data.pinned_items;
+
 
 	for ( int i = 0; i < p; ++i )
 		zeta.push_back( item_parameter(m, d, categories_item[i]) );
@@ -265,7 +193,7 @@ void estimation::initial_values() {
 	if ( d == 1 ) {
 		if ( dichotomous ) {
 			std::vector<double> alpha, gamma;
-			find_initial_values(data, alpha, gamma);
+			find_initial_values(dataset, alpha, gamma);
 
 			for ( int i = 0; i < p; ++i ) {
 				item_parameter &item_i = zeta[i];
@@ -292,7 +220,7 @@ void estimation::initial_values() {
 				matrix<char> data_dicho(N, mi - 1);
 				for ( int k = 1; k < mi; ++k ) {
 					for ( int j = 0; j < N; ++j )
-						data_dicho(j, k - 1) = data(j, i) >= k + 1;
+						data_dicho(j, k - 1) = dataset(j, i) >= k + 1;
 				}
 
 				//std::cout << data << std::endl;
@@ -331,7 +259,7 @@ void estimation::initial_values() {
 
 		if ( dichotomous ) {
 			std::vector<double> alpha, gamma;
-			find_initial_values(data, alpha, gamma);
+			find_initial_values(dataset, alpha, gamma);
 
 			for ( int i = 0; i < p; ++i ) {
 				item_parameter &item_i = zeta[i];
@@ -356,7 +284,7 @@ void estimation::initial_values() {
 				matrix<char> data_dicho(N, mi - 1);
 				for ( int k = 1; k < mi; ++k ) {
 					for ( int j = 0; j < N; ++j )
-						data_dicho(j, k - 1) = data(j, i) >= k + 1;
+						data_dicho(j, k - 1) = dataset(j, i) >= k + 1;
 				}
 
 				//std::cout << data << std::endl;
@@ -413,17 +341,21 @@ void estimation::initial_values() {
 }
 
 
-
 void estimation::EMAlgortihm() {
+	initial_values();
 	double dif;
 	do {
-		Estep();
-		dif = Mstep();
+		Estep(data);
+		dif = Mstep(data);
 		++iterations;
 	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
 }
 
 void estimation::print_results ( ) {
+	std::vector<item_parameter> &zeta = data.zeta;
+	int &d = data.d;
+	int &p = data.p;
+
 	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i + 1 << '\n';
@@ -438,6 +370,11 @@ void estimation::print_results ( ) {
 }
 
 void estimation::print_results ( std::ofstream &fout, double elapsed ) {
+	std::vector<item_parameter> &zeta = data.zeta;
+	int &d = data.d;
+	int &p = data.p;
+	model &m = data.m;
+
 	for ( int i = 0; i < p; ++i ) {
 		for ( int j = 0; j < d; ++j ) {
 			if ( j ) fout << ';';

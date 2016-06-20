@@ -18,7 +18,26 @@ namespace irtpp {
  *								  *
  **********************************/
 
-void Estep ( ) {
+void Estep ( estimation_data &data ) {
+
+	int &G = data.G;
+	int &p = data.p;
+	int &s = data.s;
+	model &m = data.m;
+	matrix<char> &Y = data.Y;
+	std::vector<int> &nl = data.nl;
+	matrix<double> &theta = data.theta;
+	std::vector<double> &w = data.w;
+	std::vector<item_parameter> &zeta = data.zeta;
+	matrix<double> &numerator = data.numerator;
+	std::vector<double> &denominator = data.denominator;
+	matrix<double> &pi = data.pi;
+	std::vector<matrix<double> > &P = data.P;
+	std::vector<matrix<double> > &r = data.r;
+
+
+
+
 	/**
 	 * Computing each element of matrix P_gik
 	 * */

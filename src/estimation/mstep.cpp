@@ -9,86 +9,112 @@
 
 namespace irtpp {
 
-/**
- * Variable to know where is the current item
- * */
-int i;
-
 /*****************************************
  * Log likelihood Function to maximize
  *
  * */
-double Qi (const column_vector& v) {
-	/**
-	 * Computing value of Qi function
-	 * */
-	double value = 0;
-	int mi = zeta[i].get_categories();
-	//Creating an item from a column_vector
-	item_parameter item_i(m, d, mi);
-	item_parameter::build_item(v, d, mi, item_i);
-	for ( int g = 0; g < G; ++g ) {
-		std::vector<double> &theta_g = *theta.get_pointer_row(g);
-		for ( int k = 0; k < mi; ++k )
-			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
-	}
-	return value;
-}
 
-const column_vector Qi_derivative (const column_vector& v) {
-	double tmp = 0;
-	double tmp2 = 0;
-	double tmp3 = 0;
-	double var = 0;
-	double kmax = zeta[i].get_categories();
+class Qi {
+public:
+    Qi (int n, estimation_data *d) : i(n), data(d) { }
 
-	//build item for each iteration
-	item_parameter item_i(m, d, kmax);
-	item_parameter::build_item(v, d, kmax, item_i);
+    double operator() ( const column_vector& v ) const {
+    	double value = 0;
+		int mi = data->zeta[i].get_categories();
+		int G = data->G;
+		std::vector<matrix<double> > &P = data->P;
+		std::vector<matrix<double> > &r = data->r;
+		model &m = data->m;
 
-	column_vector res(kmax);
-
-	//Lambda derivative for each item
-	for (int g = 0; g < G; ++g) {
-		std::vector<double> &theta_g = *theta.get_pointer_row(g);
-		tmp3 = 0;
-		for (int k = 0; k<kmax ;++k) {
-			tmp3 += (((r[g](i, k))/(m.Pik(theta_g,item_i,k)))*((m.Pstar_ik(theta_g,item_i,k-1))*(1-(m.Pstar_ik(theta_g,item_i,k-1)))-(m.Pstar_ik(theta_g,item_i,k))*(1-(m.Pstar_ik(theta_g,item_i,k)))));
+		//Creating an item from a column_vector
+		item_parameter item_i(m, data->d, mi);
+		item_parameter::build_item(v, data->d, mi, item_i);
+		for ( int g = 0; g < G; ++g ) {
+			std::vector<double> &theta_g = *data->theta.get_pointer_row(g);
+			for ( int k = 0; k < mi; ++k )
+				value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
 		}
-		tmp2 += (theta_g[0]*tmp3);
-	}
-	res(0) = tmp2;
+		return value;
+    }
 
-	tmp2 = 0;
+private:
+    int i;
+    estimation_data *data;
+};
 
-	//k derivatives for each item
-	for (int k = 0; k<kmax-1;++k) {
+
+class Qi_derivative {
+public:
+	Qi_derivative (int n, estimation_data *d) : i(n), data(d) { }
+
+	const column_vector operator() ( const column_vector& v ) const {
+    	double tmp = 0;
+		double tmp2 = 0;
+		double tmp3 = 0;
+		double var = 0;
+		double kmax = data->zeta[i].get_categories();
+		model &m = data->m;
+		std::vector<matrix<double> > &r = data->r;
+
+		//build item for each iteration
+		item_parameter item_i(m, data->d, kmax);
+		item_parameter::build_item(v, data->d, kmax, item_i);
+
+		column_vector res(kmax);
+
+		int G = data->G;
+		//Lambda derivative for each item
 		for (int g = 0; g < G; ++g) {
-			std::vector<double> &theta_g = *theta.get_pointer_row(g);
-
-			tmp = m.Pstar_ik(theta_g,item_i,k)*(1-(m.Pstar_ik(theta_g,item_i,k)));
-			tmp2 = ((-(r[g](i, k)))/(m.Pik(theta_g,item_i,k)))+(r[g](i, k+1))/(m.Pik(theta_g,item_i,k+1));
-
-			var += tmp*tmp2;
+			std::vector<double> &theta_g = *data->theta.get_pointer_row(g);
+			tmp3 = 0;
+			for (int k = 0; k<kmax ;++k) {
+				tmp3 += (((r[g](i, k))/(m.Pik(theta_g,item_i,k)))*((m.Pstar_ik(theta_g,item_i,k-1))*(1-(m.Pstar_ik(theta_g,item_i,k-1)))-(m.Pstar_ik(theta_g,item_i,k))*(1-(m.Pstar_ik(theta_g,item_i,k)))));
+			}
+			tmp2 += (theta_g[0]*tmp3);
 		}
-		res(k+1) = var;
-		var = 0;
-	}
-	return res;
-}
+		res(0) = tmp2;
+
+		tmp2 = 0;
+
+		//k derivatives for each item
+		for (int k = 0; k<kmax-1;++k) {
+			for (int g = 0; g < G; ++g) {
+				std::vector<double> &theta_g = *data->theta.get_pointer_row(g);
+
+				tmp = m.Pstar_ik(theta_g,item_i,k)*(1-(m.Pstar_ik(theta_g,item_i,k)));
+				tmp2 = ((-(r[g](i, k)))/(m.Pik(theta_g,item_i,k)))+(r[g](i, k+1))/(m.Pik(theta_g,item_i,k+1));
+
+				var += tmp*tmp2;
+			}
+			res(k+1) = var;
+			var = 0;
+		}
+		return res;
+    }
+
+private:
+    int i;
+    estimation_data *data;
+};
 
 /**********************************
  *  M STEP						  *
  *								  *
  **********************************/
 
-double Mstep() {
+double Mstep(estimation_data &data) {
 	double max_difference = 0.0;
+
+	int &p = data.p;
+	int &d = data.d;
+	model &m = data.m;
+	std::vector<item_parameter> &zeta = data.zeta;
+	std::set<int> &pinned_items = data.pinned_items;
 
 	/**
 	 * Log likelihood must be optimized for every item
 	 * */
-	for ( i = 0; i < p; ++i ) {
+	for ( int i = 0; i < p; ++i ) {
 		/**
 		 * If it is multidimensional and this is one of the pinned items
 		 * i.e the first item of a dimension
@@ -118,18 +144,18 @@ double Mstep() {
 			if ( m.parameters < 3 ) {
 				dlib::find_max(dlib::bfgs_search_strategy(),
 											   dlib::objective_delta_stop_strategy(1e-4),
-											   Qi,
-											   Qi_derivative,starting_point,-1);
+											   Qi(i, &data),
+											   Qi_derivative(i, &data),starting_point,-1);
 			} else {
 				dlib::find_max_using_approximate_derivatives(dlib::lbfgs_search_strategy(6),
 											   dlib::objective_delta_stop_strategy(1e-4),
-											   Qi,
+											   Qi(i, &data),
 											   starting_point,-1);
 			}
 		} else {
 			dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
 						   dlib::objective_delta_stop_strategy(1e-4),
-						   Qi,starting_point,-1);
+						   Qi(i, &data),starting_point,-1);
 		}
 
 		//Computing difference of current item

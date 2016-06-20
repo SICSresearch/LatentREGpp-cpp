@@ -30,13 +30,6 @@ class model;
  * Might be 1PL, 2PL, 3PL
  * */
 
-/**
- * Variable to know if data is dichotomous
- *
- * */
-extern bool dichotomous;
-extern model m;
-
 class model {
 
 public:
