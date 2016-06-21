@@ -44,7 +44,7 @@ class estimation {
 	private:
 
 		/**
-		 * Variable to count the actual number of iterations
+		 * Counts the actual number of iterations
 		 * */
 		short iterations;
 
@@ -54,7 +54,7 @@ class estimation {
 		double convergence_difference;
 
 		/**
-		 * Object that saves all data need in the estimation process
+		 * Saves all data need in the estimation process
 		 * */
 		estimation_data data;
 
