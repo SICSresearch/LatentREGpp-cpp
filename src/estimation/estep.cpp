@@ -7,39 +7,52 @@
 
 #include "estep.h"
 
-//Includes for testing
-#include "../test/test.h"
-#include <ctime>
-
 namespace irtpp {
 
-/**********************************
- *  E STEP						  *
- *								  *
- **********************************/
-
 void Estep ( estimation_data &data ) {
-
-	int &G = data.G;
+	//Number of items
 	int &p = data.p;
+	//Number of response patterns
 	int &s = data.s;
+	//Number of quadrature points
+	int &G = data.G;
+	//Model used
 	model &m = data.m;
+	//Matrix of response patterns
 	matrix<char> &Y = data.Y;
+	//Frequency of each pattern
 	std::vector<int> &nl = data.nl;
+	//Latent trait vectors
 	matrix<double> &theta = data.theta;
+	//Weights
 	std::vector<double> &w = data.w;
+	//Vector of parameters of the items
 	std::vector<item_parameter> &zeta = data.zeta;
+
+	//Matrix of numerators of each position of pi matrix
 	matrix<double> &numerator = data.numerator;
+	//vector of denominators of each column of pi matrix
 	std::vector<double> &denominator = data.denominator;
+
+	//pi matrix
 	matrix<double> &pi = data.pi;
-	std::vector<matrix<double> > &P = data.P;
-	std::vector<matrix<double> > &r = data.r;
-
-
-
 
 	/**
-	 * Computing each element of matrix P_gik
+	 * Probability matrix P
+	 *
+	 * P_gik
+	 *
+	 * P_gik means the probability that an individual has selected the category k
+	 * to item i and belongs to group g
+	 * */
+	std::vector<matrix<double> > &P = data.P;
+
+	//r matrix
+	std::vector<matrix<double> > &r = data.r;
+
+	/**
+	 * Computing each element of matrix P
+	 * P_gik
 	 * */
 	for ( int g = 0; g < G; ++g ) {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
@@ -141,11 +154,7 @@ void Estep ( estimation_data &data ) {
 				r[g](i, k) += nl[l] * pi(g, l);
 			}
 		}
-		//std::cout << "r" << g+1 << std::endl;
-		//std::cout << r[g] << std::endl;
 	}
-
-
 
 	//Asserting r correctness
 //	bool r_ok = test_r(r, N, p);

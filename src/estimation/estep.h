@@ -8,10 +8,16 @@
 #ifndef ESTIMATION_ESTEP_H_
 #define ESTIMATION_ESTEP_H_
 
-#include <iostream>
 #include "../model/model.h"
+
 #include "../util/matrix.h"
 #include "../util/estimationdata.h"
+
+//Includes for testing
+#include "../test/test.h"
+#include <ctime>
+
+#include <iostream>
 
 namespace irtpp {
 
@@ -19,6 +25,8 @@ namespace irtpp {
 /**
  * Estep of the EMAlgortihm
  *
+ * Receives an estimation_data reference that MUST bring all the
+ * data needed to run the Estep
  * */
 void Estep(estimation_data&);
 

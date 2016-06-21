@@ -8,53 +8,68 @@
 #ifndef ESTIMATION_ESTIMATION_H_
 #define ESTIMATION_ESTIMATION_H_
 
+#include "estep.h"
+#include "mstep.h"
+
 #include "../model/model.h"
 #include "../model/twopl.h"
+
 #include "../util/matrix.h"
 #include "../util/itemparameter.h"
 #include "../util/quadraturepoints.h"
 #include "../util/initial_values.h"
 #include "../util/estimationdata.h"
-#include "estep.h"
-#include "mstep.h"
+
 #include <map>
 #include <cmath>
 
 namespace irtpp {
 
 /*
- * Class to run the estimation process
+ * Class to set up and run the estimation process
  *
  * The main method is EMAlgorithm
  * */
+
+
+/**
+ * Max number of iterations of EMAlgorithm
+ * */
+const int MAX_ITERATIONS = 500;
+
+const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
+
+
 class estimation {
 	private:
-		const int MAX_ITERATIONS = 500;
 
+		/**
+		 * Variable to count the actual number of iterations
+		 * */
 		short iterations;
 
+		/**
+		 * Epsilon to stop the EMAlgorithm
+		 * */
 		double convergence_difference;
 
+		/**
+		 * Object that saves all data need in the estimation process
+		 * */
 		estimation_data data;
 
 	public:
-		estimation();
-
 		/**
-		 * This constructor receives a specific model to use
-		 * and a matrix containing the answers of examinees
-		 *
-		 * Optional parameters are number of iterations
-		 * and convergence difference (between an iteration and before)
-		 *
-		 * If convergence difference is not defined its default value is 0.0001
-		 * If number of iterations is not defined its default value is -1
-		 * 		which means that the EMalgorithm does not take into account
-		 * 		iterations, it finishes when the convergence difference is reached
+		 * Receives:
+		 * 	1. A specific model to use -> [1, 3] that means 1PL, 2PL, or 3PL
+		 *  2. A matrix containing the answers of examinees
+		 *  3. The dimension of the problem
+		 *	4. The epsilon (convergences difference) that the algoritm will use
+		 *		as a criterion to stop
 		 *
 		 *
+		 *  Then it sets up all the data needed to start the estimation process
 		 *
-		 * Then it builds the matrix of pattern responses and its frequency
 		 * */
 		estimation(int, matrix<char>&, short, double);
 
@@ -62,29 +77,44 @@ class estimation {
 		/**
 		 * Constructor of multidimensional case
 		 *
-		 * A vector that stores the number of items that each dimension has
+		 * Receives:
+		 * 	1. A specific model to use -> [1, 3] that means 1PL, 2PL, or 3PL
+		 *  2. A matrix containing the answers of examinees
+		 *  3. The dimension of the problem
+		 *	4. The epsilon (convergences difference) that the algoritm will use
+		 *		as a criterion to stop
+		 *	5. A vector that stores the number of items that each dimension has
+		 *
+		 *	   Vector's size MUST BE equal to the dimension
+		 *
+		 *
+		 *  Then it sets up all the data needed to start the estimation process
+		 *
 		 * */
 		estimation(int, matrix<char>&, short, double, std::vector<int>&);
 
 		virtual ~estimation();
 
+		/**
+		 * Finds the initial values for every parameter of the items to start the estimation
+		 * */
 		void initial_values();
 		/*
 		 * Runs the EMAlgorithm to find out the parameters
-		 * depending on what is the model used
 		 * */
 		void EMAlgortihm();
 
 		/**
 		 * Prints the results
-		 * Values for alphas and d's
+		 * Values of the estimated parameters
 		 * */
 		void print_results();
 
 		/**
-		 * Prints the results to a specific output stream, including time elapsed
+		 * Prints the results to a specific output stream,
+		 * including time elapsed in ms
 		 * */
-		void print_results(std::ofstream &, double);
+		void print_results(std::ofstream &, int);
 };
 
 } /* namespace irtpp */

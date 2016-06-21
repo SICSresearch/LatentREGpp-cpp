@@ -8,12 +8,14 @@
 #ifndef ESTIMATION_MSTEP_H_
 #define ESTIMATION_MSTEP_H_
 
-#include <iostream>
-#include <vector>
-#include "../util/matrix.h"
 #include "../model/model.h"
+
+#include "../util/matrix.h"
 #include "../util/itemparameter.h"
 #include "../util/estimationdata.h"
+
+#include <iostream>
+#include <vector>
 #include <cmath>
 #include <set>
 
@@ -27,12 +29,45 @@ typedef dlib::matrix<double,0,1> column_vector;
 
 /**
  * M step of the EM Algorithm
+ *
+ * Receives an estimation_data reference that MUST bring all the
+ * data needed to run the Mstep
  */
 double Mstep(estimation_data&);
 
+/**
+ * Log likelihood Function to maximize
+ * */
+class Qi {
+public:
 	/**
-	 * Function to be maximized
+	 * Receives the number of the current item (i)
+	 * and the estimation_data pointer
 	 * */
+    Qi (int, estimation_data*);
+    //Evaluates the function
+    double operator() (const column_vector&) const;
+private:
+    int i;
+    estimation_data *data;
+};
+
+/**
+ * Derivative for Log likelihood
+ * */
+class Qi_derivative {
+public:
+	/**
+	 * Receives the number of the current item (i)
+	 * and the estimation_data pointer
+	 * */
+	Qi_derivative (int, estimation_data*);
+	const column_vector operator() (const column_vector&) const;
+private:
+    int i;
+    estimation_data *data;
+};
+
 
 } /* namespace irtpp */
 

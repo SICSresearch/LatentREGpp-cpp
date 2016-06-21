@@ -9,98 +9,88 @@
 
 namespace irtpp {
 
-/*****************************************
- * Log likelihood Function to maximize
- *
- * */
+Qi::Qi (int i, estimation_data *d) : i(i), data(d) { }
 
-class Qi {
-public:
-    Qi (int n, estimation_data *d) : i(n), data(d) { }
+double Qi::operator() ( const column_vector& v ) const {
+	//Value of Qi
+	double value = 0;
+	//Number of categories
+	int mi = data->zeta[i].get_categories();
+	//Number of quadrature points
+	int G = data->G;
+	//Matrix P
+	std::vector<matrix<double> > &P = data->P;
+	//Matrix r
+	std::vector<matrix<double> > &r = data->r;
+	//Model used
+	model &m = data->m;
+	//Latent trait vectors
+	matrix<double> &theta = data->theta;
 
-    double operator() ( const column_vector& v ) const {
-    	double value = 0;
-		int mi = data->zeta[i].get_categories();
-		int G = data->G;
-		std::vector<matrix<double> > &P = data->P;
-		std::vector<matrix<double> > &r = data->r;
-		model &m = data->m;
+	//Creating an item from a column_vector
+	item_parameter item_i(m, data->d, mi);
+	item_parameter::build_item(v, data->d, mi, item_i);
 
-		//Creating an item from a column_vector
-		item_parameter item_i(m, data->d, mi);
-		item_parameter::build_item(v, data->d, mi, item_i);
-		for ( int g = 0; g < G; ++g ) {
-			std::vector<double> &theta_g = *data->theta.get_pointer_row(g);
-			for ( int k = 0; k < mi; ++k )
-				value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
+	for ( int g = 0; g < G; ++g ) {
+		std::vector<double> &theta_g = *theta.get_pointer_row(g);
+		for ( int k = 0; k < mi; ++k )
+			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
+	}
+
+	return value;
+}
+
+Qi_derivative::Qi_derivative (int i, estimation_data *d) : i(i), data(d) { }
+
+const column_vector Qi_derivative::operator() ( const column_vector& v ) const {
+	double tmp = 0;
+	double tmp2 = 0;
+	double tmp3 = 0;
+	double var = 0;
+	double kmax = data->zeta[i].get_categories();
+	//Model used
+	model &m = data->m;
+	//Matrix r
+	std::vector<matrix<double> > &r = data->r;
+
+	//Latent trait vectors
+	matrix<double> &theta = data->theta;
+
+	//build item for each iteration
+	item_parameter item_i(m, data->d, kmax);
+	item_parameter::build_item(v, data->d, kmax, item_i);
+
+	column_vector res(kmax);
+
+	int G = data->G;
+	//Lambda derivative for each item
+	for (int g = 0; g < G; ++g) {
+		std::vector<double> &theta_g = *theta.get_pointer_row(g);
+		tmp3 = 0;
+		for (int k = 0; k<kmax ;++k) {
+			tmp3 += (((r[g](i, k))/(m.Pik(theta_g,item_i,k)))*((m.Pstar_ik(theta_g,item_i,k-1))*(1-(m.Pstar_ik(theta_g,item_i,k-1)))-(m.Pstar_ik(theta_g,item_i,k))*(1-(m.Pstar_ik(theta_g,item_i,k)))));
 		}
-		return value;
-    }
+		tmp2 += (theta_g[0]*tmp3);
+	}
+	res(0) = tmp2;
 
-private:
-    int i;
-    estimation_data *data;
-};
+	tmp2 = 0;
 
-
-class Qi_derivative {
-public:
-	Qi_derivative (int n, estimation_data *d) : i(n), data(d) { }
-
-	const column_vector operator() ( const column_vector& v ) const {
-    	double tmp = 0;
-		double tmp2 = 0;
-		double tmp3 = 0;
-		double var = 0;
-		double kmax = data->zeta[i].get_categories();
-		model &m = data->m;
-		std::vector<matrix<double> > &r = data->r;
-
-		//build item for each iteration
-		item_parameter item_i(m, data->d, kmax);
-		item_parameter::build_item(v, data->d, kmax, item_i);
-
-		column_vector res(kmax);
-
-		int G = data->G;
-		//Lambda derivative for each item
+	//k derivatives for each item
+	for (int k = 0; k<kmax-1;++k) {
 		for (int g = 0; g < G; ++g) {
-			std::vector<double> &theta_g = *data->theta.get_pointer_row(g);
-			tmp3 = 0;
-			for (int k = 0; k<kmax ;++k) {
-				tmp3 += (((r[g](i, k))/(m.Pik(theta_g,item_i,k)))*((m.Pstar_ik(theta_g,item_i,k-1))*(1-(m.Pstar_ik(theta_g,item_i,k-1)))-(m.Pstar_ik(theta_g,item_i,k))*(1-(m.Pstar_ik(theta_g,item_i,k)))));
-			}
-			tmp2 += (theta_g[0]*tmp3);
+			std::vector<double> &theta_g = *theta.get_pointer_row(g);
+
+			tmp = m.Pstar_ik(theta_g,item_i,k)*(1-(m.Pstar_ik(theta_g,item_i,k)));
+			tmp2 = ((-(r[g](i, k)))/(m.Pik(theta_g,item_i,k)))+(r[g](i, k+1))/(m.Pik(theta_g,item_i,k+1));
+
+			var += tmp*tmp2;
 		}
-		res(0) = tmp2;
-
-		tmp2 = 0;
-
-		//k derivatives for each item
-		for (int k = 0; k<kmax-1;++k) {
-			for (int g = 0; g < G; ++g) {
-				std::vector<double> &theta_g = *data->theta.get_pointer_row(g);
-
-				tmp = m.Pstar_ik(theta_g,item_i,k)*(1-(m.Pstar_ik(theta_g,item_i,k)));
-				tmp2 = ((-(r[g](i, k)))/(m.Pik(theta_g,item_i,k)))+(r[g](i, k+1))/(m.Pik(theta_g,item_i,k+1));
-
-				var += tmp*tmp2;
-			}
-			res(k+1) = var;
-			var = 0;
-		}
-		return res;
-    }
-
-private:
-    int i;
-    estimation_data *data;
-};
-
-/**********************************
- *  M STEP						  *
- *								  *
- **********************************/
+		res(k+1) = var;
+		var = 0;
+	}
+	return res;
+}
 
 double Mstep(estimation_data &data) {
 	double max_difference = 0.0;
