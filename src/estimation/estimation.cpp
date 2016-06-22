@@ -266,7 +266,8 @@ void estimation::initial_values() {
 				double a = mean(alpha);
 
 				//As there is only one alpha, item_i.alpha[0] is okay
-				item_i.alpha[0] = a;
+				if(m.parameters>1)
+					item_i.alpha[0] = a;
 				//As there is more than one gamma, it is necessary iterate over the number of categories
 				for ( int k = 0; k < mi - 1; ++k )
 					item_i.gamma[k] = gamma[k];

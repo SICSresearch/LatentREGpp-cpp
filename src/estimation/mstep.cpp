@@ -72,7 +72,8 @@ const column_vector Qi_derivative::operator() ( const column_vector& v ) const {
 		}
 		tmp2 += (theta_g[0]*tmp3);
 	}
-	res(0) = tmp2;
+	if(m.parameters>1)
+		res(0) = tmp2;
 
 	tmp2 = 0;
 
@@ -86,7 +87,10 @@ const column_vector Qi_derivative::operator() ( const column_vector& v ) const {
 
 			var += tmp*tmp2;
 		}
-		res(k+1) = var;
+		if (m.parameters>1)
+			res(k+1) = var;
+		else
+			res(k) = var;
 		var = 0;
 	}
 	return res;
