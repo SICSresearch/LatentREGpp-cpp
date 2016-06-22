@@ -226,8 +226,10 @@ void estimation::initial_values() {
 			for ( int i = 0; i < p; ++i ) {
 				item_parameter &item_i = zeta[i];
 
-				//As there is only one alpha, item_i.alpha[0] is okay
-				item_i.alpha[0] = alpha[i];
+				if ( m.parameters > 1 )
+					//As there is only one alpha, item_i.alpha[0] is okay
+					item_i.alpha[0] = alpha[i];
+
 				//As there is only one gamma, item_i.gamma[0] is okay
 				item_i.gamma[0] = gamma[i];
 
@@ -379,6 +381,7 @@ void estimation::EMAlgortihm() {
 		Estep(data);
 		dif = Mstep(data);
 		++iterations;
+		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
 	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
 }
 
