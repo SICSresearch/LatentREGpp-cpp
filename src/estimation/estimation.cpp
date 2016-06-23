@@ -75,9 +75,6 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	matrix<double> &numerator = data.numerator;
 	std::vector<double> &denominator = data.denominator;
 
-	//Dichotomized matrix for multidimensional case
-	std::vector<matrix<int> > &X = data.X;
-
 	bool &dichotomous = data.dichotomous;
 
 	//-------------------------------------------------------------------------------------
@@ -125,16 +122,6 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 			++categories_item[i];
 	}
 
-
-	// Dichotomized matrix
-	X = std::vector<matrix<int> >(s);
-	for ( int l = 0; l < s; ++l ) {
-		for ( int i = 0; i < p; ++i ) {
-			std::vector<int> row(categories_item[i]);
-			row[Y(l, i) - 1] = 1;
-			X[l].add_row(row);
-		}
-	}
 	/**
 	 * Number of quadrature points (G) is computed based on
 	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way

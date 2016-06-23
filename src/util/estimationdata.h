@@ -33,7 +33,6 @@ public:
 	matrix<double> pi;
 	matrix<double> numerator;
 	std::vector<double> denominator;
-	std::vector<matrix<int> > X;
 	std::set<int> pinned_items;
 	std::vector<item_parameter> zeta;
 	model m;
