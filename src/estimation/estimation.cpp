@@ -351,9 +351,8 @@ void estimation::initial_values() {
 				item_parameter &item = zeta[i];
 				pinned_items.insert(i);
 				item.alpha = std::vector<double>(item.alphas);
-				item.gamma = std::vector<double>(item.gammas);
 				item.alpha[j] = 1;
-				if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
+				//if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
 			}
 		}
 
@@ -369,7 +368,7 @@ void estimation::initial_values() {
 				item_parameter &item = zeta[*it];
 				item.alpha = std::vector<double>(item.alphas);
 				item.alpha[j] = 1;
-				item.gamma[(item.gammas) / 2] = 0;
+				//item.gamma[(item.gammas) / 2] = 0;
 			}
 		}
 	}
