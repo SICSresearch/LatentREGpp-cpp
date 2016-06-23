@@ -277,6 +277,18 @@ void estimation::initial_values() {
 //					std::cout << ' ' << gamma[k];
 //				std::cout << std::endl;
 			}
+
+
+			//Here one item (with maximum number of categories) is pinned
+			int item_to_pin = 0, max_categories = 0;
+			for ( int i = 0; i < p; ++i ) {
+				if ( data.categories_item[i] > max_categories ) {
+					max_categories = data.categories_item[i];
+					item_to_pin = i;
+				}
+			}
+
+			data.pinned_items.insert(item_to_pin);
 		}
 	}
 
