@@ -263,9 +263,9 @@ simulate.poly.uni = function (n = 1000, nitems = 10, ncatgs = c(rep(3, 5), rep(4
 
 # It calls functions above 'simulate.poli.multi' and 'simulate.poli.uni'
 
-simulate.data = function(size.cluster, dim.data, sample.size, ncatgs, folder, save = FALSE) {
+simulate.data = function(size.cluster, dim.data, sample.size, ncatgs, folder, save = FALSE, replicas = 100) {
   sims = list()
-  for ( i in 1:100 ) {
+  for ( i in 1:replicas ) {
     sim = list()
     if ( dim.data > 1 )
       sim = simulate.poly.multi(sample.size = sample.size, size.cluster = size.cluster, dim.data = dim.data,
@@ -401,6 +401,13 @@ simulate.data(size.cluster = c(50, 50), dim.data = 2,
 #
 #
 
+
+
+################# 1000 x 100 ###########################
+
+simulate.data(size.cluster = c(20, 20, 20, 20, 20), dim.data = 5, 
+              sample.size = 1000, ncatgs = c(rep(2, 100)),
+              folder = "IRTpp/datasets/5D-dicho-1000x100-", save = TRUE, replicas = 1)
 
 
 
