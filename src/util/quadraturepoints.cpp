@@ -70,7 +70,7 @@ namespace irtpp {
 
 		std::ofstream out;
 		ss.str("");
-		ss << G;
+		ss << d;
 		filename = "data/quadrature" + ss.str() + "_computed.data";
 		out.open(filename.c_str());
 		for ( int i = 0; i < latent_trait.rows(); ++i ) {
@@ -128,7 +128,7 @@ namespace irtpp {
 
 		std::ofstream out;
 		ss.str("");
-		ss << G;
+		ss << d;
 		filename = "data/weights" + ss.str() + "_computed.data";
 		out.open(filename.c_str());
 		for ( int i = 0; i < weights.size(); ++i )
@@ -136,9 +136,9 @@ namespace irtpp {
 		out.close();
 	}
 
-	matrix<double> load_quadrature_points ( int G ) {
+	matrix<double> load_quadrature_points ( int d ) {
 		std::stringstream ss;
-		ss << G;
+		ss << d;
 		std::string filename = "data/quadrature" + ss.str() + "_computed.data";
 
 		matrix<double> m;
@@ -147,9 +147,9 @@ namespace irtpp {
 		return m;
 	}
 
-	std::vector<double> load_weights ( int G ) {
+	std::vector<double> load_weights ( int d ) {
 		std::stringstream ss;
-		ss << G;
+		ss << d;
 		std::string filename = "data/weights" + ss.str() + "_computed.data";
 
 		std::vector<double> v;

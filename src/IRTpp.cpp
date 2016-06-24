@@ -1,6 +1,8 @@
 #include <iostream>
 #include "simulation/simulation.h"
 
+#include "util/quadraturepoints.h"
+
 using namespace irtpp;
 using std::cout;
 
@@ -22,6 +24,19 @@ int main() {
 	improveIO();
 	simulation sim;
 
+//	compute_and_save_quadrature_points(40, 1);
+//	compute_and_save_quadrature_points(20, 2);
+//	compute_and_save_quadrature_points(10, 3);
+//	compute_and_save_quadrature_points(5, 4);
+//	compute_and_save_quadrature_points(5, 5);
+//	compute_and_save_quadrature_points(5, 6);
+//	compute_and_save_weights(40, 1);
+//	compute_and_save_weights(20, 2);
+//	compute_and_save_weights(10, 3);
+//	compute_and_save_weights(5, 4);
+//	compute_and_save_weights(5, 5);
+//	compute_and_save_weights(5, 6);
+
 	//sim.run_single_unidimensional(2, "datasets/1D/poly/escenario1/1D-poly-1000x10-1.csv", 0.001);
-	sim.run_single_multidimensional(2, "datasets/5D-dicho-1000x100-1.csv", 5, 0.001);
+	sim.run_single_multidimensional(2, "datasets/2D-dicho-1000x50-1.csv", 2, 0.01);
 }

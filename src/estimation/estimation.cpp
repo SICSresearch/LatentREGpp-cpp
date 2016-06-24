@@ -135,10 +135,10 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
 
 	// Latent trait vectors loaded from file
-	theta = load_quadrature_points(G);
+	theta = load_quadrature_points(d);
 
 	// Weights loaded from file
-	w = load_weights(G);
+	w = load_weights(d);
 
 	G = theta.rows();
 

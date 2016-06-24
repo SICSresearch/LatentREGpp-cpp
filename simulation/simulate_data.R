@@ -273,7 +273,7 @@ simulate.data = function(size.cluster, dim.data, sample.size, ncatgs, folder, sa
     else 
       sim = simulate.poly.uni(n = sample.size, nitems = sum(size.cluster), ncatgs = ncatgs, seed_data = i)
     
-    Y = sim$data
+    Y = sim$data - 1
     sims[[i]] = sim
     if ( save == TRUE )
       write.table(Y, file = paste(c(folder, i,".csv"), collapse = ""), sep = ";",col.names = FALSE, row.names = FALSE)
