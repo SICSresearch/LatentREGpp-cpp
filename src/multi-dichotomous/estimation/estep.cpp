@@ -59,27 +59,29 @@ void Estep ( estimation_data &data ) {
 	for ( int l = 0; l < s; ++l ) {
 		double denonimator_l = 0;
 		for ( int g = 0; g < G; ++g ) {
-			pi(g, l) = w[g];
+			double &pi_gl = pi(g, l);
+			pi_gl = w[g];
 			for ( int i = 0; i < p; ++i ) {
 				if ( Y(l, i) )
-					pi(g, l) *= P(g, i);
+					pi_gl *= P(g, i);
 				else
-					pi(g, l) *= 1 - P(g, i);
+					pi_gl *= 1 - P(g, i);
 			}
 			/**
 			 * As denominator for a response pattern l is the summation over the latent traits
 			 * here pi(g, l) is added to denominator_l
 			 * */
-			denonimator_l += pi(g, l);
+			denonimator_l += pi_gl;
 		}
 
 		for ( int g = 0; g < G; ++g ) {
-			pi(g, l) /= denonimator_l;
+			double &pi_gl = pi(g, l);
+			pi_gl /= denonimator_l;
 
-			f[g] += nl[l] * pi(g, l);
+			f[g] += nl[l] * pi_gl;
 			for ( int i = 0; i < p; ++i ) {
 				if ( Y(l, i) )
-					r(g, i) += nl[l] * pi(g, l);
+					r(g, i) += nl[l] * pi_gl;
 			}
 		}
 	}
