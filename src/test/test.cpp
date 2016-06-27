@@ -34,6 +34,16 @@ namespace irtpp {
 		return N * p == int(sum + eps);
 	}
 
+	bool test_r ( matrix<double> &r, int N, int p ) {
+		double sum = 0;
+		for ( int j = 0; j < r.rows(); ++j )
+			for ( int k = 0; k < r.columns(j); ++k )
+					sum += r(j, k);
+		const double eps = 1e-5;
+
+		return N * p == int(sum + eps);
+	}
+
 }
 
 

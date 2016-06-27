@@ -24,6 +24,7 @@ namespace irtpp {
 	 * N x p
 	 * */
 	bool test_r ( std::vector<matrix<double> > &r, int N, int p );
+	bool test_r ( matrix<double> &r, int N, int p );
 }
 
 

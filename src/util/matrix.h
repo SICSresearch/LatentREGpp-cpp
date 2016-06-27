@@ -61,6 +61,8 @@ class matrix {
 		 * */
 		void reset_row(int);
 
+		void reset();
+
 		/**
 		 * Adds an element to the last row
 		 * */
@@ -135,6 +137,14 @@ template<class T>
 void matrix<T>::add_row() {
 	data.push_back(std::vector<T>());
 }
+
+template<class T>
+void matrix<T>::reset() {
+	for ( int i = 0; i < data.size(); ++i )
+		for ( int j = 0; j < data[i].size(); ++j )
+			data[i][j] = 0;
+}
+
 
 template<class T>
 void matrix<T>::add_row(int size) {
