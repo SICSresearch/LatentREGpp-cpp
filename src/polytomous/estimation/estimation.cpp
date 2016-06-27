@@ -72,8 +72,6 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	 * needed in Estep
 	 * */
 	matrix<double> &pi = data.pi;
-	matrix<double> &numerator = data.numerator;
-	std::vector<double> &denominator = data.denominator;
 
 	bool &dichotomous = data.dichotomous;
 
@@ -157,8 +155,6 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 
 	//Matrixes needed in Estep
 	pi = matrix<double>(G, s);
-	numerator = matrix<double>(G, s);
-	denominator = std::vector<double>(s);
 
 	//Configurations for the estimation
 	m = model(themodel);

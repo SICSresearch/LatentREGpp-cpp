@@ -29,11 +29,6 @@ void Estep ( estimation_data &data ) {
 	//Vector of parameters of the items
 	std::vector<item_parameter> &zeta = data.zeta;
 
-	//Matrix of numerators of each position of pi matrix
-	matrix<double> &numerator = data.numerator;
-	//vector of denominators of each column of pi matrix
-	std::vector<double> &denominator = data.denominator;
-
 	//pi matrix
 	matrix<double> &pi = data.pi;
 
@@ -75,12 +70,12 @@ void Estep ( estimation_data &data ) {
 	 * */
 
 	for ( int l = 0; l < s; ++l ) {
-		double &denonimator_l = denominator[l] = 0;
+		double denonimator_l = 0;
 		for ( int g = 0; g < G; ++g ) {
 			/**
 			 * Computing numerator for (g, l) position
 			 * */
-			double &numerator_gl = numerator(g, l) = w[g];
+			double &pi_gl = pi(g, l) = w[g];
 
 			/**
 			 * Here, P_gik is requested to the model
@@ -106,12 +101,17 @@ void Estep ( estimation_data &data ) {
 			 *
 			 * */
 			for ( int i = 0; i < p; ++i )
-				numerator_gl *= P[g](i, Y(l, i) - 1);
+				pi_gl *= P[g](i, Y(l, i) - 1);
 			/**
 			 * As denominator for a response pattern l is the summation over the latent traits
 			 * here numerator(g, l) is added to denominator[l]
 			 * */
-			denonimator_l += numerator_gl;
+			denonimator_l += pi_gl;
+		}
+
+		for ( int g = 0; g < G; ++g ) {
+			double &pi_gl = pi(g, l);
+			pi_gl /= denonimator_l;
 		}
 	}
 
@@ -125,16 +125,6 @@ void Estep ( estimation_data &data ) {
 	 * pi(g, l) is the probability that a response pattern belongs to
 	 * 			group g
 	 * */
-
-	for ( int g = 0; g < G; ++g ) {
-		for ( int l = 0; l < s; ++l ) {
-			/**
-			 * Computing each element of the matrix
-			 * pi(g, l)
-			 * */
-			pi(g, l) = numerator(g, l) / denominator[l];
-		}
-	}
 
 	//Asserting pi correctness
 //	bool pi_ok = test_pi(pi);
