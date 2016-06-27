@@ -11,7 +11,7 @@
 #include <iostream>
 #include "../util/matrix.h"
 #include "../util/input.h"
-#include "../estimation/estimation.h"
+#include "../polytomous/estimation/estimation.h"
 #include "../util/quadraturepoints.h"
 #include <fstream>
 #include <cstdlib>

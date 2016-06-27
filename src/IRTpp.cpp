@@ -37,6 +37,6 @@ int main() {
 //	compute_and_save_weights(5, 5);
 //	compute_and_save_weights(5, 6);
 
-	//sim.run_single_unidimensional(2, "datasets/1D/poly/escenario1/1D-poly-1000x10-1.csv", 0.001);
-	sim.run_single_multidimensional(2, "datasets/2D-dicho-1000x50-1.csv", 2, 0.01);
+	sim.run_single_unidimensional(2, "datasets/1D/poly/escenario1/1D-poly-1000x10-1.csv", 0.01);
+	//sim.run_single_multidimensional(2, "datasets/2D-dicho-1000x50-1.csv", 2, 0.01);
 }
