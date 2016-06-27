@@ -18,6 +18,9 @@
 
 namespace irtpp {
 
+const double LOWER_BOUND_ = 1e-08;
+const double UPPER_BOUND_ = 0.999999;
+
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 

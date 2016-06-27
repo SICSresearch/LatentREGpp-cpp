@@ -36,9 +36,7 @@ namespace irtpp {
  * Max number of iterations of EMAlgorithm
  * */
 const int MAX_ITERATIONS = 500;
-
 const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
-
 
 class estimation {
 	private:

@@ -35,6 +35,7 @@ public:
 	matrix<double> r;
 	matrix<double> P;
 	matrix<double> pi;
+	std::vector<double> f;
 	std::set<int> pinned_items;
 	std::vector<item_parameter> zeta;
 	model m;

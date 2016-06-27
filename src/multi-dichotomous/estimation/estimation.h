@@ -9,10 +9,11 @@
 #define ESTIMATION_ESTIMATION_H_
 
 #include "estep.h"
-//#include "mstep.h
+#include "mstep.h"
 
 #include "../model/model.h"
 
+#include "../../util/initial_values.h"
 #include "../../util/matrix.h"
 #include "../../util/quadraturepoints.h"
 

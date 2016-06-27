@@ -30,6 +30,9 @@ void Estep ( estimation_data &data ) {
 	std::vector<double> &w = data.w;
 	//Vector of parameters of the items
 	std::vector<item_parameter> &zeta = data.zeta;
+	//f
+	std::vector<double> &f = data.f;
+	f.assign(f.size(), 0);
 
 	//pi matrix
 	matrix<double> &pi = data.pi;
@@ -73,8 +76,11 @@ void Estep ( estimation_data &data ) {
 		for ( int g = 0; g < G; ++g ) {
 			pi(g, l) /= denonimator_l;
 
-			for ( int i = 0; i < p; ++i )
-				r(g, i) += nl[l] * pi(g, l);
+			f[g] += nl[l] * pi(g, l);
+			for ( int i = 0; i < p; ++i ) {
+				if ( Y(l, i) )
+					r(g, i) += nl[l] * pi(g, l);
+			}
 		}
 	}
 
@@ -83,8 +89,8 @@ void Estep ( estimation_data &data ) {
 	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
 	//Asserting r correctness
-	bool r_ok = test_r(r, data.N, p);
-	assert(("Sum of elements in r must be N x p", r_ok));
+//	bool r_ok = test_r(r, data.N, p);
+//	assert(("Sum of elements in r must be N x p", r_ok));
 }
 
 }

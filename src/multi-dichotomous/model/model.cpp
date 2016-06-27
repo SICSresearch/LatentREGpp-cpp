@@ -20,7 +20,7 @@ model::model(int parameters) {
 	this->parameters = parameters;
 }
 
-double model::P(std::vector<double> &theta, item_parameter &parameters) {
+double model::P(std::vector<double> &theta, const item_parameter &parameters) {
 	if ( this->parameters == 1 ) {
 		/**
 		 * 1PL Approach
@@ -34,7 +34,10 @@ double model::P(std::vector<double> &theta, item_parameter &parameters) {
 		for ( short i = 0; i < theta.size(); ++i )
 			eta += 1 * theta[i]; //no alpha in this model
 
-		return 1.0 / (1.0 + std::exp(-eta));
+		double P = 1.0 / (1.0 + std::exp(-eta));
+		P = std::max(P, LOWER_BOUND_);
+		P = std::min(P, UPPER_BOUND_);
+		return P;
 	}
 	if ( this->parameters == 2 ) {
 		/**
@@ -48,7 +51,10 @@ double model::P(std::vector<double> &theta, item_parameter &parameters) {
 		for ( short i = 0; i < theta.size(); ++i )
 			eta += parameters(i) * theta[i];
 
-		return 1.0 / (1.0 + std::exp(-eta));
+		double P = 1.0 / (1.0 + std::exp(-eta));
+		P = std::max(P, LOWER_BOUND_);
+		P = std::min(P, UPPER_BOUND_);
+		return P;
 	}
 	//TODO 3PL
 

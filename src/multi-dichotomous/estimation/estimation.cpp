@@ -71,6 +71,8 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	 * needed in Estep
 	 * */
 	matrix<double> &pi = data.pi;
+	//f
+	std::vector<double> &f = data.f;
 
 	//-------------------------------------------------------------------------------------
 
@@ -117,6 +119,7 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	P = matrix<double>(G, p);
 	pi = matrix<double>(G, s);
 	r = matrix<double>(G, p);
+	f = std::vector<double>(G);
 
 	//Configurations for the estimation
 	m = model(themodel);
@@ -166,55 +169,29 @@ void estimation::initial_values() {
 			zeta[i](j) = 1.0;
 	}
 
-//	std::vector<double> alpha, gamma;
-//	find_initial_values(dataset, alpha, gamma);
-//
-//	for ( int i = 0; i < p; ++i ) {
-//		item_parameter &item_i = zeta[i];
-//
-//		//As there is only one gamma, item_i.gamma[0] is okay
-//		item_i.gamma[0] = gamma[i];
-//
-//		//std::cout << i + 1 << ' ' << gamma[i] << std::endl;
-//	}
+	std::vector<double> alpha, gamma;
+	find_initial_values(dataset, alpha, gamma);
 
+	for ( int i = 0; i < p; ++i ) {
+		item_parameter &item_i = zeta[i];
+
+		//As there is only one gamma, item_i.gamma[0] is okay
+		item_i(item_i.size() - 1) = gamma[i];
+	}
 
 	//Items that will not be estimated
 	std::set<int> &pinned_items = data.pinned_items;
 
-	/**
-	 * It is supposed that there are p / d items for each dimension
-	 * if the user does not specify them
-	 *
-	 *
-	 * */
-
-//	if ( pinned_items.empty() ) {
-//		int items_for_dimension = p / d;
-//		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
-//			item_parameter &item = zeta[i];
-//			pinned_items.insert(i);
-//			item.alpha = std::vector<double>(item.alphas);
-//			item.alpha[j] = 1;
-//			//if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
-//		}
-//	}
-//
-//	/**
-//	 * If user specify the number of items for each dimension, then
-//	 * the first item of each dimension will be pinned
-//	 * */
-//
-//	else {
-//		std::set<int>::iterator it;
-//		int j = 0;
-//		for ( it = pinned_items.begin(); it != pinned_items.end(); ++it, ++j ) {
-//			item_parameter &item = zeta[*it];
-//			item.alpha = std::vector<double>(item.alphas);
-//			item.alpha[j] = 1;
-//			//item.gamma[(item.gammas) / 2] = 0;
-//		}
-//	}
+	if ( pinned_items.empty() ) {
+		int items_for_dimension = p / d;
+		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
+			item_parameter &item = zeta[i];
+			pinned_items.insert(i);
+			for ( int h = 0; h < d; ++h )
+				item(h) = 0;
+			item(j) = 1;
+		}
+	}
 }
 
 void estimation::EMAlgortihm() {
@@ -222,7 +199,7 @@ void estimation::EMAlgortihm() {
 	double dif = 0.0;
 	do {
 		Estep(data);
-		//dif = Mstep(data);
+		dif = Mstep(data);
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
 	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
@@ -236,7 +213,7 @@ void estimation::print_results ( ) {
 	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i + 1 << '\n';
-		for ( int j = 0; j < m.parameters; ++j )
+		for ( int j = 0; j < zeta[i].size(); ++j )
 			std::cout << zeta[i](j) << ' ';
 		std::cout << '\n';
 	}
@@ -249,7 +226,7 @@ void estimation::print_results ( std::ofstream &fout, int elapsed ) {
 	model &m = data.m;
 
 	for ( int i = 0; i < p; ++i ) {
-		for ( int j = 0; j < m.parameters; ++j ) {
+		for ( int j = 0; j < zeta[i].size(); ++j ) {
 			if ( j ) fout << ';';
 			fout << zeta[i](j);
 		}

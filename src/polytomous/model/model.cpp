@@ -113,8 +113,6 @@ double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k)
 	 * Equation (86) from Doc1
 	 *
 	 * */
-	static const double LOWER_BOUND_ = 1e-08;
-	static const double UPPER_BOUND_ = 0.999999;
 
 //	if ( dichotomous && m.parameters == 3 ) {
 //		short d = parameters.get_dimension();
