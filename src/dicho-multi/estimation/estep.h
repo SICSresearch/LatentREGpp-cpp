@@ -5,8 +5,8 @@
  *      Author: Milder
  */
 
-#ifndef ESTIMATION_ESTEP_H_
-#define ESTIMATION_ESTEP_H_
+#ifndef DICHOMULTI_ESTIMATION_ESTEP_H_
+#define DICHOMULTI_ESTIMATION_ESTEP_H_
 
 #include "../../util/matrix.h"
 #include "../../test/test.h"

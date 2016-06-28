@@ -5,8 +5,8 @@
  *      Author: Milder
  */
 
-#ifndef MODEL_MODEL_H_
-#define MODEL_MODEL_H_
+#ifndef DICHOMULTI_MODEL_MODEL_H_
+#define DICHOMULTI_MODEL_MODEL_H_
 
 #include <vector>
 #include <cmath>

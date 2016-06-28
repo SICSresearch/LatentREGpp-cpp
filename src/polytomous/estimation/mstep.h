@@ -5,8 +5,8 @@
  *      Author: Milder
  */
 
-#ifndef ESTIMATION_MSTEP_H_
-#define ESTIMATION_MSTEP_H_
+#ifndef POLYTOMOUS_ESTIMATION_MSTEP_H_
+#define POLYTOMOUS_ESTIMATION_MSTEP_H_
 
 #include "../model/model.h"
 

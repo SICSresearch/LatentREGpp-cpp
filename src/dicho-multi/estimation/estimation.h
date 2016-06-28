@@ -5,8 +5,8 @@
  *      Author: Milder
  */
 
-#ifndef ESTIMATION_ESTIMATION_H_
-#define ESTIMATION_ESTIMATION_H_
+#ifndef DICHOMULTI_ESTIMATION_ESTIMATION_H_
+#define DICHOMULTI_ESTIMATION_ESTIMATION_H_
 
 #include "../../util/initial_values.h"
 #include "../../util/matrix.h"
@@ -15,10 +15,10 @@
 #include <map>
 #include <cmath>
 
-#include "../../dicho-multi/estimation/estep.h"
-#include "../../dicho-multi/estimation/mstep.h"
-#include "../../dicho-multi/model/model.h"
-#include "../../dicho-multi/type/estimationdata.h"
+#include "../estimation/estep.h"
+#include "../estimation/mstep.h"
+#include "../model/model.h"
+#include "../type/estimationdata.h"
 
 namespace irtpp {
 

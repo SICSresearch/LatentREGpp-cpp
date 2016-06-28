@@ -5,8 +5,8 @@
  *      Author: Milder
  */
 
-#ifndef UTIL_ESTIMATIONDATA_H_
-#define UTIL_ESTIMATIONDATA_H_
+#ifndef POLYTOMOUS_UTIL_ESTIMATIONDATA_H_
+#define POLYTOMOUS_UTIL_ESTIMATIONDATA_H_
 #include <vector>
 #include <set>
 #include "../model/model.h"

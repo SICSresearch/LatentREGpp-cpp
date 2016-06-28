@@ -14,9 +14,12 @@
 
 namespace irtpp {
 
-using namespace irtpp::polytomous;
+simulation::simulation() {
+	// TODO Auto-generated constructor stub
 
-void simulation::simulate ( int model, int d, int start, int end, std::string folder, std::string name ) {
+}
+
+void simulation::simulate ( int model, int d, int start, int end, std::string folder, std::string name, bool dicho ) {
 	std::ofstream report_parameters;
 	std::stringstream ss;
 	ss << folder << "/estimation-" << name << '-' << start << '-' << end << ".csv";
@@ -38,32 +41,43 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 		in.importData(file_name, Y);
 		std::cout << file_name << " imported" << std::endl;
 
-		START_CLOCK
+		if ( dicho ) {
+			START_CLOCK
 
-		estimation e(model, Y, d, 0.001);
-		e.EMAlgortihm();
+			dichomulti::estimation e(model, Y, d, 0.001);
+			e.EMAlgortihm();
 
-		END_CLOCK
-		REPORT_TIME
+			END_CLOCK
+			REPORT_TIME
+			e.print_results(report_parameters, elapsed);
+		} else {
+			START_CLOCK
 
-		/**
-		 * The order which parameters are saved is given by print_results
-		 *
-		 * 			a0, a1, ..., ad, d0, d1, ..., dk, c
-		 * */
-		e.print_results(report_parameters, elapsed);
+			polytomous::estimation e(model, Y, d, 0.001);
+			e.EMAlgortihm();
+
+			END_CLOCK
+			REPORT_TIME
+			e.print_results(report_parameters, elapsed);
+		}
 	}
 
 	report_parameters.close();
 }
 
-void simulation::simulate ( int model, int d, int iterations, std::string folder, std::string name, int interval ) {
+void simulation::simulate ( int model, int d, int iterations, std::string folder,
+							std::string name, int interval, bool dicho ) {
 	for ( int i = 1; i <= iterations; i += interval ) {
-		simulate(model, d, i, i + interval - 1, folder, name);
+		simulate(model, d, i, i + interval - 1, folder, name, dicho);
 	}
 }
 
-void simulation::run_single_unidimensional ( int model, std::string filename, double dif ) {
+void simulation::run_single ( int model, int d, std::string filename, double dif, bool dicho ) {
+	if ( dicho ) run_single_dichotomous(model, d, filename, dif);
+	else		 run_single_polytomous(model, d, filename, dif);
+}
+
+void simulation::run_single_polytomous ( int model, int d, std::string filename, double dif ) {
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData(filename, Y);
@@ -71,7 +85,7 @@ void simulation::run_single_unidimensional ( int model, std::string filename, do
 
 	START_CLOCK
 
-	estimation e(model, Y, 1, dif);
+	polytomous::estimation e(model, Y, 1, dif);
 	e.EMAlgortihm();
 
 	END_CLOCK
@@ -80,7 +94,7 @@ void simulation::run_single_unidimensional ( int model, std::string filename, do
 	REPORT_TIME
 }
 
-void simulation::run_single_multidimensional ( int model, std::string filename, int d, double dif ) {
+void simulation::run_single_dichotomous ( int model, int d, std::string filename, double dif ) {
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData(filename, Y);
@@ -88,36 +102,13 @@ void simulation::run_single_multidimensional ( int model, std::string filename, 
 
 	START_CLOCK
 
-	estimation e(model, Y, d, dif);
+	dichomulti::estimation e(model, Y, 2, dif);
 	e.EMAlgortihm();
 
 	END_CLOCK
 
 	e.print_results();
 	REPORT_TIME
-}
-
-void simulation::run_single_multidimensional ( int model, std::string filename, int d, double dif, std::vector<int> &items ) {
-	matrix<char> Y;
-	input<char> in(';');
-	in.importData(filename, Y);
-	std::cout << "Data imported" << std::endl;
-
-	START_CLOCK
-
-	estimation e(model, Y, d, dif, items);
-	e.EMAlgortihm();
-
-	END_CLOCK
-
-	e.print_results();
-	REPORT_TIME
-}
-
-
-simulation::simulation() {
-	// TODO Auto-generated constructor stub
-
 }
 
 simulation::~simulation() {

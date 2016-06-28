@@ -5,8 +5,8 @@
  *      Author: Milder
  */
 
-#ifndef MODEL_MODEL_H_
-#define MODEL_MODEL_H_
+#ifndef POLYTOMOUS_MODEL_MODEL_H_
+#define POLYTOMOUS_MODEL_MODEL_H_
 
 #include <vector>
 #include <cmath>
