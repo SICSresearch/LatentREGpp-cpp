@@ -37,7 +37,7 @@ public:
 	 *
 	 * 		and it's called iterations/interval times
 	 * */
-	void simulate ( int model, int d, int start, int end, std::string folder, std::string name, bool );
+	void simulate ( int model, int d, int start, int end, std::string folder, std::string name, double, bool );
 
 	/**
 	 * Simulates the number of iterations
@@ -55,13 +55,14 @@ public:
 	 *		Iterations: 100
 	 *		Folder where data is: "datasets/dicho-multi-tests/escenario2"
 	 *		Prefix of files in folder: "dicho-multi"
+	 *		Convergence difference
 	 *		Saves each 20 iterations.
 	 *		Data is dichotomous
 	 *
-	 *		simulate(2, 2, 100, "datasets/dicho-multi-tests/escenario2", "dicho-multi", 20, true);
+	 *		simulate(2, 2, 100, "datasets/dicho-multi-tests/escenario2", "dicho-multi", 20, 0.001, true);
 	 *
 	 * */
-	void simulate ( int model, int d, int iterations, std::string folder, std::string name, int interval, bool );
+	void simulate ( int model, int d, int iterations, std::string folder, std::string name, int interval, double, bool );
 
 	/**
 	 * Runs a single test

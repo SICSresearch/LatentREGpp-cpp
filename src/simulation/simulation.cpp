@@ -19,7 +19,8 @@ simulation::simulation() {
 
 }
 
-void simulation::simulate ( int model, int d, int start, int end, std::string folder, std::string name, bool dicho ) {
+void simulation::simulate ( int model, int d, int start, int end, std::string folder,
+							std::string name, double dif, bool dicho ) {
 	std::ofstream report_parameters;
 	std::stringstream ss;
 	ss << folder << "/estimation-" << name << '-' << start << '-' << end << ".csv";
@@ -44,7 +45,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 		if ( dicho ) {
 			START_CLOCK
 
-			dichomulti::estimation e(model, Y, d, 0.001);
+			dichomulti::estimation e(model, Y, d, dif);
 			e.EMAlgortihm();
 
 			END_CLOCK
@@ -53,7 +54,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 		} else {
 			START_CLOCK
 
-			polytomous::estimation e(model, Y, d, 0.001);
+			polytomous::estimation e(model, Y, d, dif);
 			e.EMAlgortihm();
 
 			END_CLOCK
@@ -66,9 +67,9 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 }
 
 void simulation::simulate ( int model, int d, int iterations, std::string folder,
-							std::string name, int interval, bool dicho ) {
+							std::string name, int interval, double dif, bool dicho ) {
 	for ( int i = 1; i <= iterations; i += interval ) {
-		simulate(model, d, i, i + interval - 1, folder, name, dicho);
+		simulate(model, d, i, i + interval - 1, folder, name, dif, dicho);
 	}
 }
 
@@ -85,7 +86,7 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 
 	START_CLOCK
 
-	polytomous::estimation e(model, Y, 1, dif);
+	polytomous::estimation e(model, Y, d, dif);
 	e.EMAlgortihm();
 
 	END_CLOCK
@@ -102,7 +103,7 @@ void simulation::run_single_dichotomous ( int model, int d, std::string filename
 
 	START_CLOCK
 
-	dichomulti::estimation e(model, Y, 2, dif);
+	dichomulti::estimation e(model, Y, d, dif);
 	e.EMAlgortihm();
 
 	END_CLOCK
