@@ -20,6 +20,8 @@ namespace irtpp {
 const double LOWER_BOUND_ = 1e-08;
 const double UPPER_BOUND_ = 0.999999;
 
+namespace polytomous {
+
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 
@@ -61,6 +63,8 @@ public:
 	 * */
 	double Pik(std::vector<double>&, const item_parameter&, int i, int k);
 };
+
+}
 
 } /* namespace irtpp */
 

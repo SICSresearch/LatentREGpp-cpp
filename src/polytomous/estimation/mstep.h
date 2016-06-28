@@ -24,6 +24,8 @@
 
 namespace irtpp {
 
+namespace polytomous {
+
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 
@@ -68,6 +70,7 @@ private:
     estimation_data *data;
 };
 
+}
 
 } /* namespace irtpp */
 

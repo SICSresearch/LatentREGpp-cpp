@@ -17,7 +17,7 @@
 
 namespace irtpp {
 
-namespace multidichotomous {
+namespace dichomulti {
 
 const double LOWER_BOUND_ = 1e-08;
 const double UPPER_BOUND_ = 0.999999;

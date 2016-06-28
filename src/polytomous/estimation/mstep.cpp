@@ -9,6 +9,8 @@
 
 namespace irtpp {
 
+namespace polytomous {
+
 Qi::Qi (int i, estimation_data *d) : i(i), data(d) { }
 
 double Qi::operator() ( const column_vector& item_i ) const {
@@ -135,6 +137,8 @@ double Mstep(estimation_data &data) {
 	}
 
 	return max_difference;
+}
+
 }
 
 } /* namespace irtpp */

@@ -9,6 +9,8 @@
 
 namespace irtpp {
 
+namespace polytomous {
+
 model::model() {
 	// TODO Auto-generated constructor stub
 
@@ -111,6 +113,8 @@ double model::Pik(std::vector<double> &theta, const item_parameter &parameters, 
 
 model::~model() {
 	// TODO Auto-generated destructor stub
+}
+
 }
 
 } /* namespace irtpp */

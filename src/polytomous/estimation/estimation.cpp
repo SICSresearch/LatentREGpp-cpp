@@ -9,6 +9,8 @@
 
 namespace irtpp {
 
+namespace polytomous {
+
 estimation::estimation(int themodel, matrix<char> &dataset, short d,
 					   double convergence_difference) {
 	/**
@@ -402,6 +404,8 @@ void estimation::print_results ( std::ofstream &fout, int elapsed ) {
 }
 
 estimation::~estimation() {
+
+}
 
 }
 

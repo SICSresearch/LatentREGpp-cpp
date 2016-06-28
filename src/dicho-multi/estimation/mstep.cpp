@@ -9,7 +9,7 @@
 
 namespace irtpp {
 
-namespace multidichotomous {
+namespace dichomulti {
 
 Qi::Qi (int i, estimation_data *d) : i(i), data(d) { }
 

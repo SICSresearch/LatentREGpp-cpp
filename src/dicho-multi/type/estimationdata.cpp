@@ -9,7 +9,7 @@
 
 namespace irtpp {
 
-namespace multidichotomous {
+namespace dichomulti {
 
 estimation_data::estimation_data(int d) {
 	this->d = d;

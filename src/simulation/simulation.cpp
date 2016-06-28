@@ -14,6 +14,8 @@
 
 namespace irtpp {
 
+using namespace irtpp::polytomous;
+
 void simulation::simulate ( int model, int d, int start, int end, std::string folder, std::string name ) {
 	std::ofstream report_parameters;
 	std::stringstream ss;

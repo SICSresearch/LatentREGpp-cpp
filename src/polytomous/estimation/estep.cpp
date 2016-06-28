@@ -9,6 +9,8 @@
 
 namespace irtpp {
 
+namespace polytomous {
+
 void Estep ( estimation_data &data ) {
 	//Number of items
 	int &p = data.p;
@@ -151,6 +153,8 @@ void Estep ( estimation_data &data ) {
 	//Asserting r correctness
 //	bool r_ok = test_r(r, N, p);
 //	assert(("Sum of elements in r must be N x p", r_ok));
+}
+
 }
 
 } /* namespace irtpp */

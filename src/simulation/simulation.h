@@ -22,6 +22,8 @@
 
 namespace irtpp {
 
+using namespace irtpp::polytomous;
+
 class simulation {
 public:
 

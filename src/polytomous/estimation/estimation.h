@@ -24,6 +24,7 @@
 
 namespace irtpp {
 
+namespace polytomous {
 /*
  * Class to set up and run the estimation process
  *
@@ -113,7 +114,7 @@ class estimation {
 		 * */
 		void print_results(std::ofstream &, int);
 };
-
+}
 } /* namespace irtpp */
 
 #endif /* ESTIMATION_ESTIMATION_H_ */

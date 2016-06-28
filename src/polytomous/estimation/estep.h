@@ -21,6 +21,8 @@
 
 namespace irtpp {
 
+namespace polytomous {
+
 
 /**
  * Estep of the EMAlgortihm
@@ -31,5 +33,7 @@ namespace irtpp {
 void Estep(estimation_data&);
 
 } /* namespace irtpp */
+
+}
 
 #endif /* ESTIMATION_ESTEP_H_ */

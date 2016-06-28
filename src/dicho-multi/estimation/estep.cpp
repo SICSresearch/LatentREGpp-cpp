@@ -9,7 +9,7 @@
 
 namespace irtpp {
 
-namespace multidichotomous {
+namespace dichomulti {
 
 void Estep ( estimation_data &data ) {
 	//Number of items

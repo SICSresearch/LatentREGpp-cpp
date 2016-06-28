@@ -19,7 +19,7 @@
 
 namespace irtpp {
 
-namespace multidichotomous {
+namespace dichomulti {
 
 /**
  * M step of the EM Algorithm

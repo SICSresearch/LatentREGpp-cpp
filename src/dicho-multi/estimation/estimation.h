@@ -22,7 +22,7 @@
 
 namespace irtpp {
 
-namespace multidichotomous {
+namespace dichomulti {
 
 /*
  * Class to set up and run the estimation process

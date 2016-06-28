@@ -16,6 +16,8 @@
 
 namespace irtpp {
 
+namespace polytomous {
+
 typedef dlib::matrix<double,0,1> item_parameter;
 
 class estimation_data {
@@ -43,6 +45,8 @@ public:
 	estimation_data();
 	virtual ~estimation_data();
 };
+
+}
 
 } /* namespace irtpp */
 

@@ -9,7 +9,7 @@
 
 namespace irtpp {
 
-namespace multidichotomous {
+namespace dichomulti {
 
 model::model() {
 	// TODO Auto-generated constructor stub

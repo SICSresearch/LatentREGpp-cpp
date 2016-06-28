@@ -19,7 +19,7 @@
 
 namespace irtpp {
 
-namespace multidichotomous {
+namespace dichomulti {
 
 typedef dlib::matrix<double,0,1> item_parameter;
 
