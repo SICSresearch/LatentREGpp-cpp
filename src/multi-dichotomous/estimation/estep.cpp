@@ -56,14 +56,19 @@ void Estep ( estimation_data &data ) {
 			P(g, i) = m.P(theta_g, zeta[i]);
 	}
 
+	std::vector<int> correct(p);
+	int correct_size;
 	for ( int l = 0; l < s; ++l ) {
 		double denonimator_l = 0;
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
 			pi_gl = w[g];
+			correct_size = 0;
 			for ( int i = 0; i < p; ++i ) {
-				if ( Y(l, i) )
+				if ( Y(l, i) ) {
 					pi_gl *= P(g, i);
+					correct[correct_size++] = i;
+				}
 				else
 					pi_gl *= 1 - P(g, i);
 			}
@@ -79,16 +84,14 @@ void Estep ( estimation_data &data ) {
 			pi_gl /= denonimator_l;
 
 			f[g] += nl[l] * pi_gl;
-			for ( int i = 0; i < p; ++i ) {
-				if ( Y(l, i) )
-					r(g, i) += nl[l] * pi_gl;
-			}
+			for ( int i = 0; i < correct_size; ++i )
+				r(g, correct[i]) += nl[l] * pi_gl;
 		}
 	}
 
 	//Asserting pi correctness
-	bool pi_ok = test_pi(pi);
-	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+//	bool pi_ok = test_pi(pi);
+//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
 	//Asserting r correctness
 //	bool r_ok = test_r(r, data.N, p);
