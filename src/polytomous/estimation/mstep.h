@@ -12,7 +12,6 @@
 
 #include "../../util/matrix.h"
 
-#include "../type/itemparameter.h"
 #include "../type/estimationdata.h"
 
 #include <iostream>

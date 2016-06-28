@@ -28,6 +28,8 @@ void Estep ( estimation_data &data ) {
 	std::vector<double> &w = data.w;
 	//Vector of parameters of the items
 	std::vector<item_parameter> &zeta = data.zeta;
+	//Number of categories
+	std::vector<int> &categories_item = data.categories_item;
 
 	//pi matrix
 	matrix<double> &pi = data.pi;
@@ -52,9 +54,9 @@ void Estep ( estimation_data &data ) {
 	for ( int g = 0; g < G; ++g ) {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
 		for ( int i = 0; i < p; ++i ) {
-			int mi = zeta[i].get_categories();
+			int mi = categories_item[i];
 			for ( int k = 0; k < mi; ++k )
-				P[g](i, k) = m.Pik(theta_g, zeta[i], k);
+				P[g](i, k) = m.Pik(theta_g, zeta[i], i, k);
 		}
 	}
 

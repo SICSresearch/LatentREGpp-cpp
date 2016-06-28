@@ -9,10 +9,14 @@
 #define UTIL_ESTIMATIONDATA_H_
 #include <vector>
 #include <set>
+#include "../model/model.h"
 #include "../../util/matrix.h"
-#include "../type/itemparameter.h"
+
+#include <dlib/optimization.h>
 
 namespace irtpp {
+
+typedef dlib::matrix<double,0,1> item_parameter;
 
 class estimation_data {
 public:

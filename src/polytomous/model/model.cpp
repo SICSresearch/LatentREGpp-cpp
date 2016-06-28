@@ -14,11 +14,14 @@ model::model() {
 
 }
 
-model::model(int parameters) {
+model::model(int parameters, int d, std::vector<int> *categories_item) {
 	this->parameters = parameters;
+	this->categories_item = categories_item;
+	this->d = d;
 }
 
-double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, int k) {
+double model::Pstar_ik(std::vector<double> &theta, const item_parameter &parameters, int i, int k) {
+	int mi = (*categories_item)[i];
 	/**
 	 * Base cases
 	 *
@@ -27,25 +30,18 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 	 * */
 
 	if ( k == -1 ) return 1;
-	if ( k == parameters.get_categories() - 1 ) return 0;
+	if ( k == mi - 1 ) return 0;
 
 	if ( this->parameters == 1 ) {
 		/**
 		 * 1PL Approach
 		 *
 		 * */
-		/**
-		 * Dimensions
-		 * */
-		short d = parameters.get_dimension();
 
 		/**
 		 * Initialized with gamma_k value
 		 * */
-		//std::cout << "Lel " << parameters.gamma.size() << std::endl;
-		//std::cout << k << std::endl;
-
-		double eta = parameters.gamma[k];
+		double eta = parameters(k);
 
 		//Computing dot product
 		for ( short i = 0; i < theta.size(); ++i )
@@ -57,57 +53,29 @@ double model::Pstar_ik(std::vector<double> &theta, item_parameter &parameters, i
 		return 1.0 / (1.0 + std::exp(-eta));
 
 	}
-	if ( this->parameters == 2 ) {
-		/**
-		 * 2PL Approach
-		 *
-		 *
-		 *
-		 * */
-
-		/**
-		 * Dimensions
-		 * */
-		short d = parameters.get_dimension();
-
-		/**
-		 * Initialized with gamma_k value
-		 * */
-		double eta = parameters.gamma[k];
-
-		//Computing dot product
-		for ( short i = 0; i < theta.size(); ++i )
-			eta += parameters.alpha[i] * theta[i];
-
-		/**
-		 * Equation (82) from Doc1
-		 * */
-		return 1.0 / (1.0 + std::exp(-eta));
-	}
 	/**
-	 * 3PL Approach
+	 * 2PL Approach
+	 *
+	 *
 	 *
 	 * */
-	/**
-	 * Dimensions
-	 * */
-	short d = parameters.get_dimension();
 
 	/**
 	 * Initialized with gamma_k value
 	 * */
-	double eta = parameters.gamma[k];
+	double eta = parameters(d + k);
 
 	//Computing dot product
-	for ( short i = 0; i < d; ++i )
-		eta += parameters.alpha[i] * theta[i];
+	for ( short i = 0; i < theta.size(); ++i )
+		eta += parameters(i) * theta[i];
 
-	double c = parameters.c; //guessing parameter
-
-	return c + ((1.0 - c)/ (1.0 + std::exp(-eta)));
+	/**
+	 * Equation (82) from Doc1
+	 * */
+	return 1.0 / (1.0 + std::exp(-eta));
 }
 
-double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k) {
+double model::Pik(std::vector<double> &theta, const item_parameter &parameters, int i, int k) {
 	// TODO Should be loaded from file
 	/**
 	 * Equation (86) from Doc1
@@ -134,7 +102,7 @@ double model::Pik(std::vector<double> &theta, item_parameter &parameters, int k)
 //		return P_ik;
 //	}
 
-	double P_ik = Pstar_ik(theta, parameters, k - 1) - Pstar_ik(theta, parameters, k);
+	double P_ik = Pstar_ik(theta, parameters, i, k - 1) - Pstar_ik(theta, parameters, i, k);
 
 	P_ik = std::max(P_ik, LOWER_BOUND_);
 	P_ik = std::min(P_ik, UPPER_BOUND_);

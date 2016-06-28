@@ -11,11 +11,11 @@ namespace irtpp {
 
 Qi::Qi (int i, estimation_data *d) : i(i), data(d) { }
 
-double Qi::operator() ( const column_vector& v ) const {
+double Qi::operator() ( const column_vector& item_i ) const {
 	//Value of Qi
 	double value = 0;
 	//Number of categories
-	int mi = data->zeta[i].get_categories();
+	int mi = data->categories_item[i];
 	//Number of quadrature points
 	int G = data->G;
 	//Matrix P
@@ -27,14 +27,10 @@ double Qi::operator() ( const column_vector& v ) const {
 	//Latent trait vectors
 	matrix<double> &theta = data->theta;
 
-	//Creating an item from a column_vector
-	item_parameter item_i(m, data->d, mi);
-	item_parameter::build_item(v, data->d, mi, item_i);
-
 	for ( int g = 0; g < G; ++g ) {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
 		for ( int k = 0; k < mi; ++k )
-			value += r[g](i, k) * log( m.Pik(theta_g, item_i, k) );
+			value += r[g](i, k) * log( m.Pik(theta_g, item_i, i, k) );
 	}
 
 	return value;
@@ -42,12 +38,12 @@ double Qi::operator() ( const column_vector& v ) const {
 
 Qi_derivative::Qi_derivative (int i, estimation_data *d) : i(i), data(d) { }
 
-const column_vector Qi_derivative::operator() ( const column_vector& v ) const {
+const column_vector Qi_derivative::operator() ( const column_vector& item_i ) const {
 	double tmp = 0;
 	double tmp2 = 0;
 	double tmp3 = 0;
 	double var = 0;
-	double kmax = data->zeta[i].get_categories();
+	double kmax = data->categories_item[i];
 	//Model used
 	model &m = data->m;
 	//Matrix r
@@ -55,10 +51,6 @@ const column_vector Qi_derivative::operator() ( const column_vector& v ) const {
 
 	//Latent trait vectors
 	matrix<double> &theta = data->theta;
-
-	//build item for each iteration
-	item_parameter item_i(m, data->d, kmax);
-	item_parameter::build_item(v, data->d, kmax, item_i);
 
 	column_vector res(kmax);
 
@@ -68,7 +60,7 @@ const column_vector Qi_derivative::operator() ( const column_vector& v ) const {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
 		tmp3 = 0;
 		for (int k = 0; k<kmax ;++k) {
-			tmp3 += (((r[g](i, k))/(m.Pik(theta_g,item_i,k)))*((m.Pstar_ik(theta_g,item_i,k-1))*(1-(m.Pstar_ik(theta_g,item_i,k-1)))-(m.Pstar_ik(theta_g,item_i,k))*(1-(m.Pstar_ik(theta_g,item_i,k)))));
+			tmp3 += (((r[g](i, k))/(m.Pik(theta_g,item_i,i,k)))*((m.Pstar_ik(theta_g,item_i,i,k-1))*(1-(m.Pstar_ik(theta_g,item_i,i,k-1)))-(m.Pstar_ik(theta_g,item_i,i,k))*(1-(m.Pstar_ik(theta_g,item_i,i,k)))));
 		}
 		tmp2 += (theta_g[0]*tmp3);
 	}
@@ -82,8 +74,8 @@ const column_vector Qi_derivative::operator() ( const column_vector& v ) const {
 		for (int g = 0; g < G; ++g) {
 			std::vector<double> &theta_g = *theta.get_pointer_row(g);
 
-			tmp = m.Pstar_ik(theta_g,item_i,k)*(1-(m.Pstar_ik(theta_g,item_i,k)));
-			tmp2 = ((-(r[g](i, k)))/(m.Pik(theta_g,item_i,k)))+(r[g](i, k+1))/(m.Pik(theta_g,item_i,k+1));
+			tmp = m.Pstar_ik(theta_g,item_i,i,k)*(1-(m.Pstar_ik(theta_g,item_i,i,k)));
+			tmp2 = ((-(r[g](i, k)))/(m.Pik(theta_g,item_i,i,k)))+(r[g](i, k+1))/(m.Pik(theta_g,item_i,i,k+1));
 
 			var += tmp*tmp2;
 		}
@@ -116,16 +108,8 @@ double Mstep(estimation_data &data) {
 		 * */
 		if ( pinned_items.count(i) ) continue;
 
-		/**
-		 * Starting point where optimization will start
-		 * */
-		column_vector starting_point(zeta[i].get_number_of_parameters());
-		int j = 0;
-		for ( int k = 0; k < zeta[i].alphas; ++k, ++j )
-			starting_point(j) = zeta[i].alpha[k];
-		for ( int k = 0; k < zeta[i].gammas; ++k, ++j )
-			starting_point(j) = zeta[i].gamma[k];
-		if ( zeta[i].guessing ) starting_point(j) = zeta[i].c;
+		column_vector &item_i = zeta[i];
+		column_vector before = item_i;
 
 		/**
 		 *	Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
@@ -135,47 +119,19 @@ double Mstep(estimation_data &data) {
 		 * If the dimension is 1, the optimization is done with explicit derivatives
 		 * */
 		if ( d == 1 ) {
-			if ( m.parameters < 3 ) {
-				dlib::find_max(dlib::bfgs_search_strategy(),
-											   dlib::objective_delta_stop_strategy(1e-4),
-											   Qi(i, &data),
-											   Qi_derivative(i, &data),starting_point,-1);
-			} else {
-				dlib::find_max_using_approximate_derivatives(dlib::lbfgs_search_strategy(6),
-											   dlib::objective_delta_stop_strategy(1e-4),
-											   Qi(i, &data),
-											   starting_point,-1);
-			}
+			dlib::find_max(dlib::bfgs_search_strategy(),
+										   dlib::objective_delta_stop_strategy(1e-4),
+										   Qi(i, &data),
+										   Qi_derivative(i, &data),item_i,-1);
 		} else {
 			dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
 						   dlib::objective_delta_stop_strategy(1e-4),
-						   Qi(i, &data),starting_point,-1);
+						   Qi(i, &data),item_i,-1);
 		}
 
 		//Computing difference of current item
-		double dif = 0.0;
-
-		j = 0;
-		for ( int k = 0; k < zeta[i].alphas; ++k, ++j ) {
-			dif = std::max(dif, std::abs(zeta[i].alpha[k] - starting_point(j)));
-
-			//Updating new value for alpha k
-			zeta[i].alpha[k] = starting_point(j);
-		}
-
-		for ( int k = 0; k < zeta[i].gammas; ++k, ++j ) {
-			dif = std::max(dif, std::abs(zeta[i].gamma[k] - starting_point(j)));
-
-			//Updating new value for gamma k
-			zeta[i].gamma[k] = starting_point(j);
-		}
-
-		if ( zeta[i].guessing ) {
-			dif = std::max(dif, std::abs(zeta[i].c - starting_point(j)));
-			zeta[i].c = starting_point(j);
-		}
-
-		max_difference = std::max(max_difference, dif);
+		for ( int j = 0; j < before.size(); ++j )
+			max_difference = std::max(max_difference, std::abs(before(j) - item_i(j)));
 	}
 
 	return max_difference;

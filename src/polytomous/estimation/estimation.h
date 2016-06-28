@@ -17,7 +17,6 @@
 #include "../../util/quadraturepoints.h"
 #include "../../util/initial_values.h"
 
-#include "../type/itemparameter.h"
 #include "../type/estimationdata.h"
 
 #include <map>

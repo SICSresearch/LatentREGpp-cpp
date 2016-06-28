@@ -157,7 +157,7 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	pi = matrix<double>(G, s);
 
 	//Configurations for the estimation
-	m = model(themodel);
+	m = model(themodel, d, &categories_item);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
 }
@@ -199,8 +199,14 @@ void estimation::initial_values() {
 	//Matrix of answers of the examinees
 	matrix<char> &dataset = *data.dataset;
 
-	for ( int i = 0; i < p; ++i )
-		zeta.push_back( item_parameter(m, d, categories_item[i]) );
+	zeta = std::vector<item_parameter>(p);
+
+	for ( int i = 0; i < p; ++i ) {
+		int total_parameters = m.parameters == 1 ? categories_item[i] - 1 : categories_item[i] - 1 + d;
+		zeta[i] = item_parameter(total_parameters);
+		for ( int j = 0; j < total_parameters; ++j )
+			zeta[i](j) = 1.0;
+	}
 
 	if ( d == 1 ) {
 		if ( dichotomous ) {
@@ -210,13 +216,12 @@ void estimation::initial_values() {
 			for ( int i = 0; i < p; ++i ) {
 				item_parameter &item_i = zeta[i];
 
-				if ( m.parameters > 1 )
-					//As there is only one alpha, item_i.alpha[0] is okay
-					item_i.alpha[0] = alpha[i];
-
-				//As there is only one gamma, item_i.gamma[0] is okay
-				item_i.gamma[0] = gamma[i];
-
+				if ( m.parameters > 1 ) {
+					item_i(0) = alpha[i];
+					item_i(1) = gamma[i];
+				} else {
+					item_i(0) = gamma[i];
+				}
 				//std::cout << i + 1 << ' ' << alpha[i] << ' ' << gamma[i] << std::endl;
 			}
 		}
@@ -249,12 +254,15 @@ void estimation::initial_values() {
 
 				double a = mean(alpha);
 
-				//As there is only one alpha, item_i.alpha[0] is okay
-				if(m.parameters>1)
-					item_i.alpha[0] = a;
-				//As there is more than one gamma, it is necessary iterate over the number of categories
-				for ( int k = 0; k < mi - 1; ++k )
-					item_i.gamma[k] = gamma[k];
+				if ( m.parameters > 1 ) {
+					item_i(0) = a;
+					for ( int k = 0; k < mi - 1; ++k )
+						item_i(k + 1) = gamma[k];
+				} else {
+					for ( int k = 0; k < mi - 1; ++k )
+						item_i(k) = gamma[k];
+				}
+
 
 //				std::cout << i + 1 << ' ' << a;
 //				for ( int k = 0; k < mi - 1; ++k )
@@ -284,6 +292,7 @@ void estimation::initial_values() {
 		 * Multidimensional case
 		 * */
 
+		int alphas = m.parameters == 2 ? d : 0;
 
 		if ( dichotomous ) {
 			std::vector<double> alpha, gamma;
@@ -292,10 +301,7 @@ void estimation::initial_values() {
 			for ( int i = 0; i < p; ++i ) {
 				item_parameter &item_i = zeta[i];
 
-				//As there is only one gamma, item_i.gamma[0] is okay
-				item_i.gamma[0] = gamma[i];
-
-				//std::cout << i + 1 << ' ' << gamma[i] << std::endl;
+				item_i(item_i.size() - 1) = gamma[i];
 			}
 		}
 		else {
@@ -323,7 +329,7 @@ void estimation::initial_values() {
 
 				//As there is more than one gamma, it is necessary iterate over the number of categories
 				for ( int k = 0; k < mi - 1; ++k )
-					item_i.gamma[k] = gamma[k];
+					item_i(alphas + k) = gamma[k];
 
 //				for ( int k = 0; k < mi - 1; ++k )
 //					std::cout << ' ' << gamma[k];
@@ -346,25 +352,10 @@ void estimation::initial_values() {
 			for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
 				item_parameter &item = zeta[i];
 				pinned_items.insert(i);
-				item.alpha = std::vector<double>(item.alphas);
-				item.alpha[j] = 1;
+				for ( int h = 0; h < alphas; ++h )
+					item(h) = 0.0;
+				item(j) = 1.0;
 				//if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
-			}
-		}
-
-		/**
-		 * If user specify the number of items for each dimension, then
-		 * the first item of each dimension will be pinned
-		 * */
-
-		else {
-			std::set<int>::iterator it;
-			int j = 0;
-			for ( it = pinned_items.begin(); it != pinned_items.end(); ++it, ++j ) {
-				item_parameter &item = zeta[*it];
-				item.alpha = std::vector<double>(item.alphas);
-				item.alpha[j] = 1;
-				//item.gamma[(item.gammas) / 2] = 0;
 			}
 		}
 	}
@@ -383,18 +374,14 @@ void estimation::EMAlgortihm() {
 
 void estimation::print_results ( ) {
 	std::vector<item_parameter> &zeta = data.zeta;
-	int &d = data.d;
 	int &p = data.p;
+	model &m = data.m;
 
 	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i + 1 << '\n';
-		for ( int j = 0; j < d; ++j )
-			std::cout << 'a' << j + 1 << ": " << ( zeta[i].alphas ? zeta[i].alpha[j] : 1 ) << ' ';
-		for ( int j = 0; j < zeta[i].gammas; ++j )
-			std::cout << 'd' << j + 1 << ": " << zeta[i].gamma[j] << ' ';
-		if ( zeta[i].guessing )
-			std::cout << "c: " << std::max( zeta[i].c, 0.0 );
+		for ( int j = 0; j < zeta[i].size(); ++j )
+			std::cout << zeta[i](j) << ' ';
 		std::cout << '\n';
 	}
 }
@@ -406,15 +393,10 @@ void estimation::print_results ( std::ofstream &fout, int elapsed ) {
 	model &m = data.m;
 
 	for ( int i = 0; i < p; ++i ) {
-		for ( int j = 0; j < d; ++j ) {
+		for ( int j = 0; j < zeta[i].size(); ++j ) {
 			if ( j ) fout << ';';
-			fout << ( m.parameters != 1 ? zeta[i].alpha[j] : 1 );
+			fout << zeta[i](j);
 		}
-		for ( int j = 0; j < zeta[i].gammas; ++j ) {
-			fout << ';' << zeta[i].gamma[j];
-		}
-		if ( zeta[i].guessing )
-			fout << ';' << std::max( zeta[i].c, 0.0 );
 		fout << ';' << elapsed << '\n';
 	}
 }

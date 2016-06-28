@@ -11,7 +11,6 @@
 #include <vector>
 #include <cmath>
 #include <cassert>
-#include "../type/itemparameter.h"
 
 //including optimization files from dlib library
 #include <dlib/optimization.h>
@@ -24,9 +23,6 @@ const double UPPER_BOUND_ = 0.999999;
 // Necessary typedef to be able to maximize using dlib
 typedef dlib::matrix<double,0,1> column_vector;
 
-class item_parameter;
-class model;
-
 /*
  * Model class
  * It represents what is the model approach to use
@@ -35,30 +31,35 @@ class model;
 
 class model {
 
+typedef dlib::matrix<double,0,1> item_parameter;
+
 public:
 	/**
 	 * Number of parameters of the model
 	 * */
 	int parameters;
 
+	std::vector<int> *categories_item;
+	int d;
+
 	model();
 
 	/**
 	 * This receives 1, 2 or 3. Depending on the model to use
 	 * */
-	model(int);
+	model(int, int, std::vector<int>*);
 	virtual ~model();
 
 	/**
 	 * Probability in dichotomous case
 	 * */
-	double Pstar_ik(std::vector<double>&, item_parameter&, int k);
+	double Pstar_ik(std::vector<double>&, const item_parameter&, int i, int k);
 
 	/**
 	 * This method computes the probability that a response pattern U_l has the category k to item
 	 * i, given that its latent trait vector theta, and the item paramters
 	 * */
-	double Pik(std::vector<double>&, item_parameter&, int k);
+	double Pik(std::vector<double>&, const item_parameter&, int i, int k);
 };
 
 } /* namespace irtpp */
