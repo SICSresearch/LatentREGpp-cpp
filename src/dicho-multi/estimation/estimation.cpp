@@ -169,27 +169,47 @@ void estimation::initial_values() {
 			zeta[i](j) = 1.0;
 	}
 
-	std::vector<double> alpha, gamma;
-	find_initial_values(dataset, alpha, gamma);
+	if ( d == 1 ) {
+		std::vector<double> alpha, gamma;
+		find_initial_values(dataset, alpha, gamma);
 
-	for ( int i = 0; i < p; ++i ) {
-		item_parameter &item_i = zeta[i];
+		for ( int i = 0; i < p; ++i ) {
+			item_parameter &item_i = zeta[i];
 
-		//As there is only one gamma, item_i.gamma[0] is okay
-		item_i(item_i.size() - 1) = gamma[i];
-	}
+			if ( m.parameters > 1 ) {
+				item_i(0) = alpha[i];
+				item_i(1) = gamma[i];
+				if ( m.parameters == 3 ) item_i(2) = 0.5;
+			} else {
+				item_i(0) = gamma[i];
+			}
+		}
+	} else {
+		std::vector<double> alpha, gamma;
+		find_initial_values(dataset, alpha, gamma);
 
-	//Items that will not be estimated
-	std::set<int> &pinned_items = data.pinned_items;
+		for ( int i = 0; i < p; ++i ) {
+			item_parameter &item_i = zeta[i];
 
-	if ( pinned_items.empty() ) {
-		int items_for_dimension = p / d;
-		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
-			item_parameter &item = zeta[i];
-			pinned_items.insert(i);
-			for ( int h = 0; h < d; ++h )
-				item(h) = 0;
-			item(j) = 1;
+			if ( m.parameters < 3 ) item_i(item_i.size() - 1) = gamma[i];
+			else {
+				item_i(item_i.size() - 2) = gamma[i];
+				item_i(item_i.size() - 1) = 0.5;
+			}
+		}
+
+		//Items that will not be estimated
+		std::set<int> &pinned_items = data.pinned_items;
+
+		if ( pinned_items.empty() ) {
+			int items_for_dimension = p / d;
+			for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
+				item_parameter &item = zeta[i];
+				pinned_items.insert(i);
+				for ( int h = 0; h < d; ++h )
+					item(h) = 0;
+				item(j) = 1;
+			}
 		}
 	}
 }

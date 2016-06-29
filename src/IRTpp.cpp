@@ -22,10 +22,12 @@ int main() {
 	improveIO();
 	simulation sim;
 
+	sim.run_single_dichotomous(2, 1, "datasets/LSAT.csv", 0.001);
+
 	//simulation
 	//Params:
 	//2PL, 1D, 100 iter, folder, filename, saves each 20 iter, dif, is data dicho?
-	sim.simulate(2, 1, 100, "datasets/1D/poly/escenario1", "1D-poly-1000x10-", 20, 0.001, false);
+	//sim.simulate(2, 1, 100, "datasets/1D/poly/escenario1", "1D-poly-1000x10-", 20, 0.001, false);
 
 
 //	//Runs single test, with dichotomous approach
