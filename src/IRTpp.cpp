@@ -22,7 +22,7 @@ int main() {
 	improveIO();
 	simulation sim;
 
-	sim.run_single_dichotomous(2, 1, "datasets/LSAT.csv", 0.001);
+	sim.run_single_dichotomous(3, 1, "datasets/3PL-1D-1000x10.csv", 0.0001);
 
 	//simulation
 	//Params:

@@ -179,7 +179,7 @@ void estimation::initial_values() {
 			if ( m.parameters > 1 ) {
 				item_i(0) = alpha[i];
 				item_i(1) = gamma[i];
-				if ( m.parameters == 3 ) item_i(2) = 0.5;
+				if ( m.parameters == 3 ) item_i(2) = -0.1;
 			} else {
 				item_i(0) = gamma[i];
 			}
@@ -194,7 +194,7 @@ void estimation::initial_values() {
 			if ( m.parameters < 3 ) item_i(item_i.size() - 1) = gamma[i];
 			else {
 				item_i(item_i.size() - 2) = gamma[i];
-				item_i(item_i.size() - 1) = 0.5;
+				item_i(item_i.size() - 1) = -0.1;
 			}
 		}
 
@@ -231,10 +231,16 @@ void estimation::print_results ( ) {
 	model &m = data.m;
 
 	std::cout << "Finished after " << iterations << " iterations.\n";
+
+	bool guessing_parameter = m.parameters == 3;
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i + 1 << '\n';
-		for ( int j = 0; j < zeta[i].size(); ++j )
+		for ( int j = 0; j < zeta[i].size() - guessing_parameter; ++j )
 			std::cout << zeta[i](j) << ' ';
+		if ( guessing_parameter ) {
+			double c = zeta[i](zeta[i].size() - 1);
+			std::cout << 1.0 / (1.0 + exp(-c));
+		}
 		std::cout << '\n';
 	}
 }
@@ -245,10 +251,15 @@ void estimation::print_results ( std::ofstream &fout, int elapsed ) {
 	int &p = data.p;
 	model &m = data.m;
 
+	bool guessing_parameter = m.parameters == 3;
 	for ( int i = 0; i < p; ++i ) {
-		for ( int j = 0; j < zeta[i].size(); ++j ) {
+		for ( int j = 0; j < zeta[i].size() - guessing_parameter; ++j ) {
 			if ( j ) fout << ';';
 			fout << zeta[i](j);
+		}
+		if ( guessing_parameter ) {
+			double c = zeta[i](zeta[i].size() - 1);
+			fout << 1.0 / (1.0 + exp(-c));
 		}
 		fout << ';' << elapsed << '\n';
 	}

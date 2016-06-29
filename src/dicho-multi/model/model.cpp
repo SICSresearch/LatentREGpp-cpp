@@ -56,9 +56,23 @@ double model::P(std::vector<double> &theta, const item_parameter &parameters) {
 		P = std::min(P, UPPER_BOUND_);
 		return P;
 	}
-	//TODO 3PL
+	/**
+	 * 3PL Approach
+	 * */
+	double c = parameters(parameters.size() - 1);
+	c = 1.0 / (1.0 + exp(-c));
 
-	return 0.5;
+	//Initialized with gamma value
+	double eta = parameters(parameters.size() - 2);
+
+	//Computing dot product
+	for ( short i = 0; i < theta.size(); ++i )
+		eta += parameters(i) * theta[i];
+
+	double P = c + (1.0 - c) / (1.0 + exp(-eta));
+	P = std::max(P, LOWER_BOUND_);
+	P = std::min(P, UPPER_BOUND_);
+	return P;
 }
 
 model::~model() {
