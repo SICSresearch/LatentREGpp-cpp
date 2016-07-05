@@ -75,8 +75,6 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	 * */
 	matrix<double> &pi = data.pi;
 
-	bool &dichotomous = data.dichotomous;
-
 	//-------------------------------------------------------------------------------------
 
 
@@ -100,29 +98,15 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 
 	//Number of categories of each item
 	categories_item = std::vector<int>(p);
-	//Is the data dichotomous?
-	dichotomous = false;
 	for ( int j = 0; j < p; ++j ) {
 		int max_category = -1;
 		for ( int i = 0; i < s; ++i ) {
 			//Number of categories of an item is defined as the max category found in the answers
 			if ( Y(i, j) > max_category )
 				max_category = Y(i, j);
-			//If the dataset has zeros means that is dichotomous
-			dichotomous |= Y(i, j) == 0;
 		}
 		categories_item[j] = max_category;
 	}
-
-	// If data is dichotomous, here 1 is added to become this as a polytomous problem
-	if ( dichotomous ) {
-		for ( int i = 0; i < s; ++i )
-			for ( int j = 0; j < p; ++j )
-				++Y(i, j);
-		for ( int i = 0; i < p; ++i )
-			++categories_item[i];
-	}
-
 	/**
 	 * Number of quadrature points (G) is computed based on
 	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
@@ -192,8 +176,6 @@ void estimation::initial_values() {
 	int &N = data.N;
 	//Number of items
 	int &p = data.p;
-	//Is data dichotomous?
-	bool &dichotomous = data.dichotomous;
 	//Number of categories of each item
 	std::vector<int> &categories_item = data.categories_item;
 	//Model used in the problem
@@ -211,79 +193,52 @@ void estimation::initial_values() {
 	}
 
 	if ( d == 1 ) {
-		if ( dichotomous ) {
-			std::vector<double> alpha, gamma;
-			find_initial_values(dataset, alpha, gamma);
+		/**
+		 * Here, it is necessary find dichotomous items for each polytomous item
+		 * */
 
-			for ( int i = 0; i < p; ++i ) {
-				item_parameter &item_i = zeta[i];
+		for ( int i = 0; i < p; ++i ) {
+			item_parameter &item_i = zeta[i];
+			int mi = categories_item[i];
 
-				if ( m.parameters > 1 ) {
-					item_i(0) = alpha[i];
-					item_i(1) = gamma[i];
-				} else {
-					item_i(0) = gamma[i];
-				}
-				//std::cout << i + 1 << ' ' << alpha[i] << ' ' << gamma[i] << std::endl;
+			matrix<char> data_dicho(N, mi - 1);
+			for ( int k = 1; k < mi; ++k ) {
+				for ( int j = 0; j < N; ++j )
+					data_dicho(j, k - 1) = dataset(j, i) >= k + 1;
 			}
-		}
-		else {
+
+			//std::cout << data << std::endl;
+			//std::cout << data_dicho << std::endl;
+
+			std::vector<double> alpha, gamma;
+			find_initial_values(data_dicho, alpha, gamma);
+
 			/**
-			 * Polytomous case
-			 *
-			 * Here, it is necessary find dichotomous items for each polytomous item
+			 * Real alpha for this item will be the average among all alphas computed
 			 * */
 
-			for ( int i = 0; i < p; ++i ) {
-				item_parameter &item_i = zeta[i];
-				int mi = categories_item[i];
+			double a = mean(alpha);
 
-				matrix<char> data_dicho(N, mi - 1);
-				for ( int k = 1; k < mi; ++k ) {
-					for ( int j = 0; j < N; ++j )
-						data_dicho(j, k - 1) = dataset(j, i) >= k + 1;
-				}
-
-				//std::cout << data << std::endl;
-				//std::cout << data_dicho << std::endl;
-
-				std::vector<double> alpha, gamma;
-				find_initial_values(data_dicho, alpha, gamma);
-
-				/**
-				 * Real alpha for this item will be the average among all alphas computed
-				 * */
-
-				double a = mean(alpha);
-
-				if ( m.parameters > 1 ) {
-					item_i(0) = a;
-					for ( int k = 0; k < mi - 1; ++k )
-						item_i(k + 1) = gamma[k];
-				} else {
-					for ( int k = 0; k < mi - 1; ++k )
-						item_i(k) = gamma[k];
-				}
-
-
-//				std::cout << i + 1 << ' ' << a;
-//				for ( int k = 0; k < mi - 1; ++k )
-//					std::cout << ' ' << gamma[k];
-//				std::cout << std::endl;
+			if ( m.parameters > 1 ) {
+				item_i(0) = a;
+				for ( int k = 0; k < mi - 1; ++k )
+					item_i(k + 1) = gamma[k];
+			} else {
+				for ( int k = 0; k < mi - 1; ++k )
+					item_i(k) = gamma[k];
 			}
-
-
-			//Here one item (with maximum number of categories) is pinned
-			int item_to_pin = 0, max_categories = 0;
-			for ( int i = 0; i < p; ++i ) {
-				if ( data.categories_item[i] > max_categories ) {
-					max_categories = data.categories_item[i];
-					item_to_pin = i;
-				}
-			}
-
-			data.pinned_items.insert(item_to_pin);
 		}
+
+		//Here one item (with maximum number of categories) is pinned
+		int item_to_pin = 0, max_categories = 0;
+		for ( int i = 0; i < p; ++i ) {
+			if ( data.categories_item[i] > max_categories ) {
+				max_categories = data.categories_item[i];
+				item_to_pin = i;
+			}
+		}
+
+		data.pinned_items.insert(item_to_pin);
 	}
 
 	else {
@@ -295,48 +250,28 @@ void estimation::initial_values() {
 		 * */
 
 		int alphas = m.parameters == 2 ? d : 0;
+		/**
+		 * Polytomous case
+		 *
+		 * Here, it is necessary find dichotomous items for each polytomous item
+		 * */
 
-		if ( dichotomous ) {
+		for ( int i = 0; i < p; ++i ) {
+			item_parameter &item_i = zeta[i];
+			int mi = categories_item[i];
+
+			matrix<char> data_dicho(N, mi - 1);
+			for ( int k = 1; k < mi; ++k ) {
+				for ( int j = 0; j < N; ++j )
+					data_dicho(j, k - 1) = dataset(j, i) >= k + 1;
+			}
+
 			std::vector<double> alpha, gamma;
-			find_initial_values(dataset, alpha, gamma);
+			find_initial_values(data_dicho, alpha, gamma);
 
-			for ( int i = 0; i < p; ++i ) {
-				item_parameter &item_i = zeta[i];
-
-				item_i(item_i.size() - 1) = gamma[i];
-			}
-		}
-		else {
-			/**
-			 * Polytomous case
-			 *
-			 * Here, it is necessary find dichotomous items for each polytomous item
-			 * */
-
-			for ( int i = 0; i < p; ++i ) {
-				item_parameter &item_i = zeta[i];
-				int mi = categories_item[i];
-
-				matrix<char> data_dicho(N, mi - 1);
-				for ( int k = 1; k < mi; ++k ) {
-					for ( int j = 0; j < N; ++j )
-						data_dicho(j, k - 1) = dataset(j, i) >= k + 1;
-				}
-
-				//std::cout << data << std::endl;
-				//std::cout << data_dicho << std::endl;
-
-				std::vector<double> alpha, gamma;
-				find_initial_values(data_dicho, alpha, gamma);
-
-				//As there is more than one gamma, it is necessary iterate over the number of categories
-				for ( int k = 0; k < mi - 1; ++k )
-					item_i(alphas + k) = gamma[k];
-
-//				for ( int k = 0; k < mi - 1; ++k )
-//					std::cout << ' ' << gamma[k];
-//				std::cout << std::endl;
-			}
+			//As there is more than one gamma, it is necessary iterate over the number of categories
+			for ( int k = 0; k < mi - 1; ++k )
+				item_i(alphas + k) = gamma[k];
 		}
 
 		//Items that will not be estimated
@@ -357,7 +292,6 @@ void estimation::initial_values() {
 				for ( int h = 0; h < alphas; ++h )
 					item(h) = 0.0;
 				item(j) = 1.0;
-				//if ( item.gammas > 2 ) item.gamma[(item.gammas + 1) / 2] = 1;
 			}
 		}
 	}

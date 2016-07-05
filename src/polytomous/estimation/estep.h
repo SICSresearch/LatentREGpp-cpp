@@ -13,7 +13,6 @@
 #include "../../util/matrix.h"
 #include "../type/estimationdata.h"
 
-//Includes for testing
 #include "../../test/test.h"
 #include <ctime>
 

@@ -58,9 +58,9 @@ double Mstep(estimation_data &data) {
 
 		item_parameter before = zeta[i];
 
-		//Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
+		//Calling BFGS from dlib to optimize Qi with approximate derivatives (Log likelihood)
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-					   dlib::objective_delta_stop_strategy(1e-4),
+					   dlib::objective_delta_stop_strategy(1e-7),
 					   Qi(i, &data), zeta[i], -1);
 
 		//Computing difference of current item

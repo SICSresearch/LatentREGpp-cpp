@@ -21,24 +21,47 @@ namespace dichomulti {
 
 typedef dlib::matrix<double,0,1> item_parameter;
 
+/**
+ * Contains the information needed to execute the estimation
+ * */
 class estimation_data {
 public:
+	//Matrix of answers
 	matrix<char> *dataset;
+	//Dimension
 	int d;
+	//Matrix of response patterns
 	matrix<char> Y;
+	//Frequencies of each response pattern
 	std::vector<int> nl;
+	//Number of examines
 	int N;
+	//Number of response patterns
 	int s;
+	//Number of items
 	int p;
+	//Number of quadrature points
 	int G;
+	//Latent traits vectors
 	matrix<double> theta;
+	//Weights
 	std::vector<double> w;
+	//Matrix r
 	matrix<double> r;
+	/**
+	 * Probability matrix P
+	 * P_gi means the probability that an individual has selected the correct answer
+	 */
 	matrix<double> P;
+	//Matrix pi
 	matrix<double> pi;
+	//Vector f (Number of individuals in group g)
 	std::vector<double> f;
+	//Pinned items (won't be estimated)
 	std::set<int> pinned_items;
+	//Vector or item parameters
 	std::vector<item_parameter> zeta;
+	//Model to use
 	model m;
 
 	estimation_data(int);

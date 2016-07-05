@@ -22,9 +22,6 @@ const double UPPER_BOUND_ = 0.999999;
 
 namespace polytomous {
 
-// Necessary typedef to be able to maximize using dlib
-typedef dlib::matrix<double,0,1> column_vector;
-
 /*
  * Model class
  * It represents what is the model approach to use

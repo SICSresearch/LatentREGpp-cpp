@@ -33,9 +33,6 @@ void Estep ( estimation_data &data ) {
 	//Number of categories
 	std::vector<int> &categories_item = data.categories_item;
 
-	//pi matrix
-	matrix<double> &pi = data.pi;
-
 	/**
 	 * Probability matrix P
 	 *
@@ -45,6 +42,18 @@ void Estep ( estimation_data &data ) {
 	 * to item i and belongs to group g
 	 * */
 	std::vector<matrix<double> > &P = data.P;
+
+	/**
+	 * Probability matrix pi
+	 *
+	 * pi(g, l) with g = 1, ..., G; l = 1, ..., s
+	 * 		i.e, the size of pi is
+	 * 			 Number of Quadrature points X Number of response patterns
+	 *
+	 * pi(g, l) is the probability that a response pattern belongs to
+	 * 			group g
+	 * */
+	matrix<double> &pi = data.pi;
 
 	//r matrix
 	std::vector<matrix<double> > &r = data.r;
@@ -120,21 +129,6 @@ void Estep ( estimation_data &data ) {
 	}
 
 	/**
-	 * Probability matrix pi
-	 *
-	 * pi(g, l) with g = 1, ..., G; l = 1, ..., s
-	 * 		i.e, the size of pi is
-	 * 			 Number of Quadrature points X Number of response patterns
-	 *
-	 * pi(g, l) is the probability that a response pattern belongs to
-	 * 			group g
-	 * */
-
-	//Asserting pi correctness
-//	bool pi_ok = test_pi(pi);
-//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
-
-	/**
 	 * Expected number of examinees for each group g
 	 * who answered category k to item i
 	 *
@@ -149,6 +143,10 @@ void Estep ( estimation_data &data ) {
 			}
 		}
 	}
+
+	//Asserting pi correctness
+//	bool pi_ok = test_pi(pi);
+//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
 	//Asserting r correctness
 //	bool r_ok = test_r(r, N, p);

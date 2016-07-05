@@ -55,21 +55,17 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	/**
 	 * Probability matrix P
 	 *
-	 * P_gik
+	 * P_gi
 	 *
-	 * P_gik means the probability that an individual has selected the category k
-	 * to item i and belongs to group g
+	 * P_gi means the probability that an individual has selected the correct answer
 	 *
 	 *
-	 * The purpose of this matrix is to allocate the value of P_gik
-	 * to avoid recompute them while numerators and denominators in Estep are computed
+	 * The purpose of this matrix is to allocate the value of P_gi
+	 * to avoid recompute them while matrix Pi and r are computed in EStep
 	 * */
 	matrix<double> &P = data.P;
 
-	/**
-	 * Matrix of probabilities pi, denominators vector and matrix of numerators
-	 * needed in Estep
-	 * */
+	//Matrix pi
 	matrix<double> &pi = data.pi;
 	//f
 	std::vector<double> &f = data.f;

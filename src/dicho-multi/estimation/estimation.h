@@ -23,14 +23,6 @@
 namespace irtpp {
 
 namespace dichomulti {
-
-/*
- * Class to set up and run the estimation process
- *
- * The main method is EMAlgorithm
- * */
-
-
 /**
  * Max number of iterations of EMAlgorithm
  * */
@@ -38,6 +30,11 @@ const int MAX_ITERATIONS = 500;
 
 const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
 
+/*
+ * Class to set up and run the estimation process
+ *
+ * The main method is EMAlgorithm
+ * */
 
 class estimation {
 	private:
@@ -63,7 +60,7 @@ class estimation {
 		 * 	1. A specific model to use -> [1, 3] that means 1PL, 2PL, or 3PL
 		 *  2. A matrix containing the answers of examinees
 		 *  3. The dimension of the problem
-		 *	4. The epsilon (convergences difference) that the algoritm will use
+		 *	4. The epsilon (convergence difference) that the algoritm will use
 		 *		as a criterion to stop
 		 *
 		 *

@@ -25,18 +25,17 @@
 namespace irtpp {
 
 namespace polytomous {
-/*
- * Class to set up and run the estimation process
- *
- * The main method is EMAlgorithm
- * */
-
-
 /**
  * Max number of iterations of EMAlgorithm
  * */
 const int MAX_ITERATIONS = 500;
 const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40;
+
+/*
+ * Class to set up and run the estimation process
+ *
+ * The main method is EMAlgorithm
+ * */
 
 class estimation {
 	private:

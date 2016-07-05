@@ -37,9 +37,8 @@ void Estep ( estimation_data &data ) {
 	//pi matrix
 	matrix<double> &pi = data.pi;
 
-	/**
-	 * Probability matrix P
-	 * */
+
+	// Probability matrix P
 	matrix<double> &P = data.P;
 
 	//r matrix
@@ -58,12 +57,15 @@ void Estep ( estimation_data &data ) {
 
 	std::vector<int> correct(p);
 	int correct_size;
+	//Patterns
 	for ( int l = 0; l < s; ++l ) {
 		double denonimator_l = 0;
+		//Quadrature points
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
 			pi_gl = w[g];
 			correct_size = 0;
+			//Items
 			for ( int i = 0; i < p; ++i ) {
 				if ( Y(l, i) ) {
 					pi_gl *= P(g, i);
