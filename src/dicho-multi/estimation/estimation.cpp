@@ -175,7 +175,7 @@ void estimation::initial_values() {
 			if ( m.parameters > 1 ) {
 				item_i(0) = alpha[i];
 				item_i(1) = gamma[i];
-				if ( m.parameters == 3 ) item_i(2) = -0.1;
+				if ( m.parameters == 3 ) item_i(2) = -1.1;
 			} else {
 				item_i(0) = gamma[i];
 			}
@@ -190,7 +190,7 @@ void estimation::initial_values() {
 			if ( m.parameters < 3 ) item_i(item_i.size() - 1) = gamma[i];
 			else {
 				item_i(item_i.size() - 2) = gamma[i];
-				item_i(item_i.size() - 1) = -0.1;
+				item_i(item_i.size() - 1) = -1.1;
 			}
 		}
 
