@@ -22,7 +22,7 @@ int main() {
 	improveIO();
 	simulation sim;
 
-	sim.run_single_dichotomous(3, 1, "datasets/3PL-1D-1000x10.csv", 0.0001);
+	sim.run_single_dichotomous(2, 6, "datasets/6D-dicho-1000x60-1.csv", 0.01);
 
 	//simulation
 	//Params:

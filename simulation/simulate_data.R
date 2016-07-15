@@ -20,7 +20,7 @@
 
 #normal truncada y funcion que normaliza vectores:
 
-source("E:/SICS/workspace/MIRTcpp/simulation/rtnorm.r")
+source("/home/milder/Documents/workspace/MIRTcpp/simulation/rtnorm.r")
 
 
 simulate.poly.multi=function(size.cluster=c(25,25,25,25),
@@ -59,7 +59,7 @@ simulate.poly.multi=function(size.cluster=c(25,25,25,25),
   ##betas, vectores directores de cada item
   betas.1 = matrix(NA,K,dim.data)
   
-  # semilla para generar los vectores directores de cada Ã?tem.
+  # semilla para generar los vectores directores de cada ??tem.
   seed_beta <- 100L
   set.seed(seed_beta)
   
@@ -263,7 +263,7 @@ simulate.poly.uni = function (n = 1000, nitems = 10, ncatgs = c(rep(3, 5), rep(4
 
 # It calls functions above 'simulate.poli.multi' and 'simulate.poli.uni'
 
-simulate.data = function(size.cluster, dim.data, sample.size, ncatgs, folder, save = FALSE, replicas = 100) {
+simulate.data = function(size.cluster, dim.data, sample.size, ncatgs, folder, save = FALSE, replicas = 100, dicho = FALSE) {
   sims = list()
   for ( i in 1:replicas ) {
     sim = list()
@@ -273,7 +273,11 @@ simulate.data = function(size.cluster, dim.data, sample.size, ncatgs, folder, sa
     else 
       sim = simulate.poly.uni(n = sample.size, nitems = sum(size.cluster), ncatgs = ncatgs, seed_data = i)
     
-    Y = sim$data - 1
+    Y = list()
+    if ( dicho == TRUE )
+      Y = sim$data - 1
+    else
+      Y = sim$data
     sims[[i]] = sim
     if ( save == TRUE )
       write.table(Y, file = paste(c(folder, i,".csv"), collapse = ""), sep = ";",col.names = FALSE, row.names = FALSE)
@@ -410,7 +414,20 @@ simulate.data(size.cluster = c(20, 20, 20, 20, 20), dim.data = 5,
               folder = "IRTpp/datasets/5D-dicho-1000x100-", save = TRUE, replicas = 1)
 
 
+##################################################################################
+##################################################################################
+##################################################################################
+#                                                                                #
+#                                     6D                                         #
+#                                 Dichotomous                                    #
+##################################################################################
+##################################################################################
+##################################################################################                           
 
+
+simulate.data(size.cluster = c(10, 10, 10, 10, 10, 10), dim.data = 6, 
+              sample.size = 1000, ncatgs = c(rep(2, 60)),
+              folder = "/home/milder/Documents/workspace/MIRTcpp/6D-dicho-1000x60-", save = TRUE, replicas = 1, dicho = TRUE)
 
 
 
