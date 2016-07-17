@@ -51,7 +51,7 @@ class estimation {
 
 	public:
 		/**
-		 * Saves all data need in the estimation process
+		 * Saves all data needed in the estimation process
 		 * */
 		estimation_data data;
 
