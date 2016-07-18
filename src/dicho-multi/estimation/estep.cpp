@@ -55,6 +55,8 @@ void Estep ( estimation_data &data ) {
 			P(g, i) = m.P(theta_g, zeta[i]);
 	}
 
+	std::ofstream integrals("datasets/sobol.txt");
+
 	std::vector<int> correct(p);
 	int correct_size;
 	//Patterns
@@ -81,6 +83,8 @@ void Estep ( estimation_data &data ) {
 			denonimator_l += pi_gl;
 		}
 
+		integrals << denonimator_l << '\n';
+
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
 			pi_gl /= denonimator_l;
@@ -91,9 +95,11 @@ void Estep ( estimation_data &data ) {
 		}
 	}
 
+	integrals.close();
+
 	//Asserting pi correctness
-//	bool pi_ok = test_pi(pi);
-//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+	bool pi_ok = test_pi(pi);
+	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
 	//Asserting r correctness
 //	bool r_ok = test_r(r, data.N, p);

@@ -91,25 +91,32 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	s = Y.rows();
 	p = Y.columns(0);
 
-	/**
-	 * Number of quadrature points (G) is computed based on
-	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
-	 *
-	 *
-	 * G will be in 1dimension = 40 ---> 40^1 = 40
-	 * 				2dimension = 20 ---> 20^2 = 400
-	 * 				3dimension = 10 ---> 10^3 = 1000
-	 * 				> 4dimension = 5 ---> 5^d
-	 * */
-	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
+//	/**
+//	 * Number of quadrature points (G) is computed based on
+//	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
+//	 *
+//	 *
+//	 * G will be in 1dimension = 40 ---> 40^1 = 40
+//	 * 				2dimension = 20 ---> 20^2 = 400
+//	 * 				3dimension = 10 ---> 10^3 = 1000
+//	 * 				> 4dimension = 5 ---> 5^d
+//	 * */
+//	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
+//
+//	// Latent trait vectors loaded from file
+//	theta = load_quadrature_points(d);
+//
+//	// Weights loaded from file
+//	w = load_weights(d);
+//
+//	G = theta.rows();
 
-	// Latent trait vectors loaded from file
-	theta = load_quadrature_points(d);
-
-	// Weights loaded from file
-	w = load_weights(d);
+	input<double> in;
+	in.importData("data/sobol6.data", theta);
 
 	G = theta.rows();
+
+	w = std::vector<double>(G, 1.0/double(G));
 
 	//Builds r and P matrixes
 	P = matrix<double>(G, p);
@@ -235,11 +242,12 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	initial_values();
+	//initial_values();
+	custom_initial_values("datasets/6D-dicho-1000x60-parameters.csv");
 	double dif = 0.0;
 	do {
 		Estep(data);
-		dif = Mstep(data);
+		//dif = Mstep(data);
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
 	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
