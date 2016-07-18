@@ -198,7 +198,7 @@ template<class T>
 std::ostream& operator<<(std::ostream &out, matrix<T> &m) {
 	for (int i = 0; i < m.rows(); ++i) {
 		for (int j = 0; j < m.columns(i); j++)
-			out << (int)m(i, j) << '\t';
+			out << (double)m(i, j) << '\t';
 		out << '\n';
 	}
 	return (out);

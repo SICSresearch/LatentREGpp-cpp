@@ -107,25 +107,34 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 		}
 		categories_item[j] = max_category;
 	}
-	/**
-	 * Number of quadrature points (G) is computed based on
-	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
-	 *
-	 *
-	 * G will be in 1dimension = 40 ---> 40^1 = 40
-	 * 				2dimension = 20 ---> 20^2 = 400
-	 * 				3dimension = 10 ---> 10^3 = 1000
-	 * 				> 4dimension = 5 ---> 5^d
-	 * */
-	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
+//	/**
+//	 * Number of quadrature points (G) is computed based on
+//	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
+//	 *
+//	 *
+//	 * G will be in 1dimension = 40 ---> 40^1 = 40
+//	 * 				2dimension = 20 ---> 20^2 = 400
+//	 * 				3dimension = 10 ---> 10^3 = 1000
+//	 * 				> 4dimension = 5 ---> 5^d
+//	 * */
+//	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
+//
+//	// Latent trait vectors loaded from file
+//	theta = load_quadrature_points(d);
+//
+//	// Weights loaded from file
+//	w = load_weights(d);
+//
+//	G = theta.rows();
 
-	// Latent trait vectors loaded from file
-	theta = load_quadrature_points(d);
-
-	// Weights loaded from file
-	w = load_weights(d);
+	input<double> in(' ');
+	in.importData("data/sobol6.data", theta);
 
 	G = theta.rows();
+
+	w = std::vector<double>(G, 1.0/double(G));
+//
+//	//std::cout << theta << std::endl;
 
 	//Builds r and P matrixes
 	r = std::vector<matrix<double> >(G);
@@ -166,6 +175,34 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
 }
+
+
+void estimation::custom_initial_values ( std::string filename ) {
+	matrix<double> mt;
+	input<double> in(';');
+	in.importData(filename, mt);
+
+	//Dimension
+	int &d = data.d;
+	//Parameters of the items
+	std::vector<item_parameter> &zeta = data.zeta;
+	//Number of items
+	int &p = data.p;
+	//Model used in the problem
+	model &m = data.m;
+	//Number of categories of each item
+	std::vector<int> &categories_item = data.categories_item;
+
+	zeta = std::vector<item_parameter>(p);
+
+	for ( int i = 0; i < p; ++i ) {
+		int total_parameters = m.parameters == 1 ? categories_item[i] - 1 : categories_item[i] - 1 + d;
+		zeta[i] = item_parameter(total_parameters);
+		for ( int j = 0; j < total_parameters; ++j )
+			zeta[i](j) = mt(i, j);
+	}
+}
+
 
 void estimation::initial_values() {
 	//Parameters of the items
@@ -298,11 +335,12 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	initial_values();
-	double dif;
+	//initial_values();
+	custom_initial_values("datasets/6D-poly-1000x60-parameters.csv");
+	double dif = 0.0;
 	do {
 		Estep(data);
-		dif = Mstep(data);
+		//dif = Mstep(data);
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
 	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );

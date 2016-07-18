@@ -111,12 +111,14 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 //
 //	G = theta.rows();
 
-	input<double> in;
+	input<double> in(' ');
 	in.importData("data/sobol6.data", theta);
 
 	G = theta.rows();
 
 	w = std::vector<double>(G, 1.0/double(G));
+
+	//std::cout << theta << std::endl;
 
 	//Builds r and P matrixes
 	P = matrix<double>(G, p);

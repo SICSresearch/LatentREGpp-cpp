@@ -19,10 +19,14 @@ int main() {
 	cout.setf(std::ios_base::fixed);
 	cout.precision(5);
 
+	//compute_and_save_quadrature_points(5, 7);
+	//compute_and_save_weights(5, 7);
+
 	improveIO();
 	simulation sim;
 
-	sim.run_single_dichotomous(2, 6, "datasets/6D-dicho-1000x60-1.csv", 0.001);
+	//sim.run_single_dichotomous(2, 6, "datasets/6D-dicho-1000x60-1.csv", 0.001);
+	sim.run_single_polytomous(2, 6, "datasets/6D-poly-1000x60-1.csv", 0.001);
 
 	//simulation
 	//Params:
