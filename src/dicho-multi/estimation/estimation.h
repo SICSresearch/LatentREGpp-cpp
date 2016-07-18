@@ -10,6 +10,7 @@
 
 #include "../../util/initial_values.h"
 #include "../../util/matrix.h"
+#include "../../util/input.h"
 #include "../../util/quadraturepoints.h"
 
 #include <map>
@@ -95,6 +96,7 @@ class estimation {
 		 * Finds the initial values for every parameter of the items to start the estimation
 		 * */
 		void initial_values();
+		void custom_initial_values(std::string);
 		/*
 		 * Runs the EMAlgorithm to find out the parameters
 		 * */

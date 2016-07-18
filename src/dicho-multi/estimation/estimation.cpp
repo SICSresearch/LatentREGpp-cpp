@@ -142,6 +142,30 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	this->iterations = 0;
 }
 
+void estimation::custom_initial_values ( std::string filename ) {
+	matrix<double> mt;
+	input<double> in(';');
+	in.importData(filename, mt);
+
+	//Dimension
+	int &d = data.d;
+	//Parameters of the items
+	std::vector<item_parameter> &zeta = data.zeta;
+	//Number of items
+	int &p = data.p;
+	//Model used in the problem
+	model &m = data.m;
+
+	zeta = std::vector<item_parameter>(p);
+	int total_parameters = m.parameters == 1 ? 1 : m.parameters - 1 + d;
+
+	for ( int i = 0; i < p; ++i ) {
+		zeta[i] = item_parameter(total_parameters);
+		for ( int j = 0; j < total_parameters; ++j )
+			zeta[i](j) = mt(i, j);
+	}
+}
+
 void estimation::initial_values() {
 	//Parameters of the items
 	std::vector<item_parameter> &zeta = data.zeta;
