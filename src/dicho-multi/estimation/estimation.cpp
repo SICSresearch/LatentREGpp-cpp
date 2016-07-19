@@ -206,6 +206,20 @@ void estimation::custom_initial_values ( std::string filename ) {
 		for ( int j = 0; j < total_parameters; ++j )
 			zeta[i](j) = mt(i, j);
 	}
+
+	//Items that will not be estimated
+	std::set<int> &pinned_items = data.pinned_items;
+
+	if ( pinned_items.empty() ) {
+		int items_for_dimension = p / d;
+		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
+			item_parameter &item = zeta[i];
+			pinned_items.insert(i);
+			for ( int h = 0; h < d; ++h )
+				item(h) = 0;
+			item(j) = 1;
+		}
+	}
 }
 
 void estimation::initial_values() {
@@ -277,12 +291,12 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	//initial_values();
-	custom_initial_values("datasets/6D-dicho-1000x60-parameters.csv");
+	initial_values();
+	//custom_initial_values("datasets/6D-dicho-1000x60-parameters.csv");
 	double dif = 0.0;
 	do {
 		Estep(data);
-		//dif = Mstep(data);
+		dif = Mstep(data);
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
 	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );

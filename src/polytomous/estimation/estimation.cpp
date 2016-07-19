@@ -385,8 +385,8 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	//initial_values();
-	custom_initial_values("datasets/4D-poly-1000x100-parameters.csv");
+	//custom_initial_values("datasets/4D-poly-1000x100-parameters.csv");
+	initial_values();
 	double dif = 0.0;
 	do {
 		Estep(data);
