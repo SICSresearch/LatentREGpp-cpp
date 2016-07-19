@@ -23,7 +23,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 							std::string name, double dif, bool dicho, int G ) {
 	std::ofstream report_parameters;
 	std::stringstream ss;
-	ss << folder << "/estimation-" << name << '-' << start << '-' << end << ".csv";
+	ss << folder << "/estimation-" << name << '-' << start << '-' << end << "-G=" << G << ".csv";
 	std::string parameters = ss.str();
 	report_parameters.open(parameters.c_str());
 	report_parameters.precision(4);
