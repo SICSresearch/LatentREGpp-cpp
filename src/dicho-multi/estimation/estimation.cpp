@@ -12,7 +12,7 @@ namespace irtpp {
 namespace dichomulti {
 
 estimation::estimation(int themodel, matrix<char> &dataset, short d,
-					   double convergence_difference) {
+					   double convergence_difference, int quadrature_points ) {
 	/**
 	 * Object to allocate all data needed in estimation process
 	 * */
@@ -91,34 +91,8 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	s = Y.rows();
 	p = Y.columns(0);
 
-//	/**
-//	 * Number of quadrature points (G) is computed based on
-//	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
-//	 *
-//	 *
-//	 * G will be in 1dimension = 40 ---> 40^1 = 40
-//	 * 				2dimension = 20 ---> 20^2 = 400
-//	 * 				3dimension = 10 ---> 10^3 = 1000
-//	 * 				> 4dimension = 5 ---> 5^d
-//	 * */
-//	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
-//
-//	// Latent trait vectors loaded from file
-//	theta = load_quadrature_points(d);
-//
-//	// Weights loaded from file
-//	w = load_weights(d);
-//
-//	G = theta.rows();
-
-	input<double> in(' ');
-	in.importData("data/sobol6.data", theta);
-
-	G = theta.rows();
-
-	w = std::vector<double>(G, 1.0/double(G));
-
-	//std::cout << theta << std::endl;
+	if ( d >= 4 ) sobol_quadrature(quadrature_points);
+	else		  gaussian_quadrature();
 
 	//Builds r and P matrixes
 	P = matrix<double>(G, p);
@@ -130,6 +104,65 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	m = model(themodel);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
+}
+
+
+void estimation::sobol_quadrature (int g) {
+	//Dimension
+	int &d = data.d;
+
+	//Number of quadrature points
+	int &G = data.G;
+
+	//Latent trait vectors
+	matrix<double> &theta = data.theta;
+
+	//Weights
+	std::vector<double> &w = data.w;
+
+	input<double> in(' ');
+	std::stringstream ss;
+	ss << "data/sobol" << d << ".data";
+	in.importData(ss.str(), theta);
+
+	G = g;
+
+	w = std::vector<double>(G, 1.0/double(G));
+}
+
+void estimation::gaussian_quadrature () {
+	//Dimension
+	int &d = data.d;
+
+	//Number of quadrature points
+	int &G = data.G;
+
+	//Latent trait vectors
+	matrix<double> &theta = data.theta;
+
+	//Weights
+	std::vector<double> &w = data.w;
+
+	/**
+	 * Number of quadrature points (G) is computed based on
+	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
+	 *
+	 *
+	 * G will be in 1dimension = 40 ---> 40^1 = 40
+	 * 				2dimension = 20 ---> 20^2 = 400
+	 * 				3dimension = 10 ---> 10^3 = 1000
+	 * 				> 4dimension = 5 ---> 5^d
+	 * */
+
+	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
+
+	// Latent trait vectors loaded from file
+	theta = load_quadrature_points(d);
+
+	// Weights loaded from file
+	w = load_weights(d);
+
+	G = theta.rows();
 }
 
 estimation::estimation(int themodel, matrix<char> &dataset, short d,

@@ -20,8 +20,6 @@ double Qi::operator() ( const column_vector& item_i ) const {
 	int mi = data->categories_item[i];
 	//Number of quadrature points
 	int G = data->G;
-	//Matrix P
-	std::vector<matrix<double> > &P = data->P;
 	//Matrix r
 	std::vector<matrix<double> > &r = data->r;
 	//Model used
@@ -95,9 +93,14 @@ double Mstep(estimation_data &data) {
 
 	int &p = data.p;
 	int &d = data.d;
-	model &m = data.m;
 	std::vector<item_parameter> &zeta = data.zeta;
 	std::set<int> &pinned_items = data.pinned_items;
+
+//	std::ofstream Qs("datasets/Qs_classic.csv");
+//	for ( int i = 0; i < p; ++i ) {
+//		Qs << Qi(i, &data)(zeta[i]) << '\n';
+//	}
+//	Qs.close();
 
 	/**
 	 * Log likelihood must be optimized for every item
@@ -122,12 +125,12 @@ double Mstep(estimation_data &data) {
 		 * */
 		if ( d == 1 ) {
 			dlib::find_max(dlib::bfgs_search_strategy(),
-										   dlib::objective_delta_stop_strategy(1e-4),
+										   dlib::objective_delta_stop_strategy(1e-5),
 										   Qi(i, &data),
 										   Qi_derivative(i, &data),item_i,-1);
 		} else {
 			dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-						   dlib::objective_delta_stop_strategy(1e-4),
+						   dlib::objective_delta_stop_strategy(1e-5),
 						   Qi(i, &data),item_i,-1);
 		}
 

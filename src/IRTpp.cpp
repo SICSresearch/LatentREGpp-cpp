@@ -26,7 +26,7 @@ int main() {
 	simulation sim;
 
 	//sim.run_single_dichotomous(2, 6, "datasets/6D-dicho-1000x60-1.csv", 0.001);
-	sim.run_single_polytomous(2, 6, "datasets/6D-poly-1000x60-1.csv", 0.001);
+	sim.simulate(2, 4, 1, "datasets", "4D-poly-1000x100-", 1, 0.01, false, 500);
 
 	//simulation
 	//Params:
