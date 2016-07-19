@@ -426,7 +426,7 @@ simulate.data(size.cluster = c(20, 20, 20, 20, 20), dim.data = 5,
 
 simulate.data(size.cluster = c(25, 25, 25, 25), dim.data = 4, 
               sample.size = 1000, ncatgs = c(rep(3, 100)),
-              folder = "/home/milder/Documents/workspace/MIRTcpp/datasets/6D-poly-1000x60-", save = TRUE, replicas = 1)
+              folder = "/home/milder/Documents/workspace/MIRTcpp/datasets/4D-poly-1000x100-", save = TRUE, replicas = 1)
 
 
 
