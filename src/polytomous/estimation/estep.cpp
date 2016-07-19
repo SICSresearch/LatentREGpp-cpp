@@ -82,8 +82,10 @@ void Estep ( estimation_data &data ) {
 	 *
 	 * */
 
+
 	for ( int l = 0; l < s; ++l ) {
 		double denonimator_l = 0;
+
 		for ( int g = 0; g < G; ++g ) {
 			/**
 			 * Computing numerator for (g, l) position

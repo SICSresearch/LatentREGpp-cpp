@@ -22,6 +22,8 @@
 //including optimization files from dlib library
 #include <dlib/optimization.h>
 
+#include <omp.h>
+
 namespace irtpp {
 
 namespace polytomous {

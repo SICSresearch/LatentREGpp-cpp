@@ -102,6 +102,7 @@ double Mstep(estimation_data &data) {
 	/**
 	 * Log likelihood must be optimized for every item
 	 * */
+
 	for ( int i = 0; i < p; ++i ) {
 		/**
 		 * If it is multidimensional and this is one of the pinned items
