@@ -21,6 +21,7 @@ simulation::simulation() {
 
 void simulation::simulate ( int model, int d, int start, int end, std::string folder,
 							std::string name, double dif, bool dicho, int G ) {
+
 	std::ofstream report_parameters;
 	std::stringstream ss;
 	ss << folder << "/estimation-" << name << '-' << start << '-' << end << "-G=" << G << ".csv";
@@ -44,7 +45,6 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 
 		if ( dicho ) {
 			START_CLOCK
-
 			dichomulti::estimation e(model, Y, d, dif, G);
 			e.EMAlgortihm();
 

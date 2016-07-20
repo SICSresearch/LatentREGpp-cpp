@@ -43,12 +43,6 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	//Number of quadrature points
 	int &G = data.G;
 
-	//Latent trait vectors
-	matrix<double> &theta = data.theta;
-
-	//Weights
-	std::vector<double> &w = data.w;
-
 	//Matrix r. Needed in Estep and Mstep
 	matrix<double> &r = data.r;
 
@@ -90,6 +84,7 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	N = dataset.rows();
 	s = Y.rows();
 	p = Y.columns(0);
+
 
 	if ( d >= 4 ) sobol_quadrature(quadrature_points);
 	else		  gaussian_quadrature();
