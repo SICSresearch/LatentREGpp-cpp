@@ -18,6 +18,8 @@
 
 #include <iostream>
 
+#include <omp.h>
+
 namespace irtpp {
 
 namespace polytomous {

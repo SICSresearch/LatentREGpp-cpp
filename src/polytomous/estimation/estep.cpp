@@ -12,6 +12,8 @@ namespace irtpp {
 namespace polytomous {
 
 void Estep ( estimation_data &data ) {
+	//examines
+	int &N = data.N;
 	//Number of items
 	int &p = data.p;
 	//Number of response patterns
@@ -58,10 +60,12 @@ void Estep ( estimation_data &data ) {
 	//r matrix
 	std::vector<matrix<double> > &r = data.r;
 
+	//clock_t start = clock();
 	/**
 	 * Computing each element of matrix P
 	 * P_gik
 	 * */
+    #pragma omp parallel for schedule(dynamic)
 	for ( int g = 0; g < G; ++g ) {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
 		for ( int i = 0; i < p; ++i ) {
@@ -81,14 +85,14 @@ void Estep ( estimation_data &data ) {
 	 * and the denominators are the summation of numerators by columns
 	 *
 	 * */
+	double denonimator_l = 0;
+	//int g,i;
 
-	//std::ofstream phi("datasets/phi_6_poly_sobol.csv");
-	//std::ofstream integral("datasets/4D_poly_classic.csv");
-
+	#pragma omp parallel for schedule(dynamic) reduction(+:denonimator_l)
 	for ( int l = 0; l < s; ++l ) {
-		double denonimator_l = 0;
+		denonimator_l = 0;
 
-		for ( int g = 0; g < G; ++g ) {
+		for (int g = 0; g < G; ++g ) {
 			/**
 			 * Computing numerator for (g, l) position
 			 * */
@@ -98,7 +102,7 @@ void Estep ( estimation_data &data ) {
 			 * Here, P_gik is requested to the model
 			 *
 			 * Using X (dichotomized matrix) to compute the numerator is NOT efficient
-			 * because most of numbers in X[l](i) are zeror
+			 * because most of numbers in X[l](i) are zero
 			 * 		Example:
 			 * 			If an individual answered category 3 for an item with 5 categories
 			 *			X[l](i) will be:
@@ -117,7 +121,7 @@ void Estep ( estimation_data &data ) {
 			 * 			k = Y(l, i) - 1
 			 *
 			 * */
-			for ( int i = 0; i < p; ++i )
+			for (int i = 0; i < p; ++i )
 				pi_gl *= P[g](i, Y(l, i) - 1);
 			/**
 			 * As denominator for a response pattern l is the summation over the latent traits
@@ -126,22 +130,18 @@ void Estep ( estimation_data &data ) {
 			denonimator_l += pi_gl;
 		}
 
-		//integral << denonimator_l << '\n';
-
-		for ( int g = 0; g < G; ++g ) {
+		for (int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
 			pi_gl /= denonimator_l;
 		}
 	}
-
-	//integral.close();
-
 	/**
 	 * Expected number of examinees for each group g
 	 * who answered category k to item i
 	 *
 	 * Matrix r
 	 * */
+	#pragma omp parallel for schedule(dynamic) collapse(2)
 	for ( int g = 0; g < G; ++g ) {
 		for ( int i = 0; i < p; ++i ) {
 			r[g].reset_row(i);
@@ -152,13 +152,17 @@ void Estep ( estimation_data &data ) {
 		}
 	}
 
-//	Asserting pi correctness
-//	bool pi_ok = test_pi(pi);
-//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
-//
-////	Asserting r correctness
-//	bool r_ok = test_r(r, data.N, p);
-//	assert(("Sum of elements in r must be N x p", r_ok));
+	//clock_t stop = clock();
+	//double elapsed = (double)(stop - start);
+	//std::cout << "Time elapsed: " << elapsed << " ms." << '\n';
+
+	//Asserting pi correctness
+	bool pi_ok = test_pi(pi);
+	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+
+	//Asserting r correctness
+	bool r_ok = test_r(r, N, p);
+	assert(("Sum of elements in r must be N x p", r_ok));
 }
 
 }

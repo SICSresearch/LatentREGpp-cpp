@@ -14,6 +14,8 @@
 
 #include <iostream>
 
+#include <omp.h>
+
 #include "../../dicho-multi/model/model.h"
 #include "../../dicho-multi/type/estimationdata.h"
 
