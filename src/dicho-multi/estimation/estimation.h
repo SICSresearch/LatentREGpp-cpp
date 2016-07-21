@@ -10,6 +10,7 @@
 
 #include "../../util/initial_values.h"
 #include "../../util/matrix.h"
+#include "../../util/input.h"
 #include "../../util/quadraturepoints.h"
 
 #include <map>
@@ -67,7 +68,7 @@ class estimation {
 		 *  Then it sets up all the data needed to start the estimation process
 		 *
 		 * */
-		estimation(int, matrix<char>&, short, double);
+		estimation(int, matrix<char>&, short, double, int quadrature_points = 2000);
 
 
 		/**
@@ -95,6 +96,12 @@ class estimation {
 		 * Finds the initial values for every parameter of the items to start the estimation
 		 * */
 		void initial_values();
+		void custom_initial_values(std::string);
+
+		void sobol_quadrature (int);
+
+		void gaussian_quadrature ();
+
 		/*
 		 * Runs the EMAlgorithm to find out the parameters
 		 * */

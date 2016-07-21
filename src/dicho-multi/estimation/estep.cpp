@@ -92,8 +92,8 @@ void Estep ( estimation_data &data ) {
 	}
 
 	//Asserting pi correctness
-//	bool pi_ok = test_pi(pi);
-//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+	bool pi_ok = test_pi(pi);
+	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
 	//Asserting r correctness
 //	bool r_ok = test_r(r, data.N, p);

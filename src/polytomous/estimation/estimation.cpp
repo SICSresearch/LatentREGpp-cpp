@@ -11,8 +11,8 @@ namespace irtpp {
 
 namespace polytomous {
 
-estimation::estimation(int themodel, matrix<char> &dataset, short d,
-					   double convergence_difference) {
+estimation::estimation ( int themodel, matrix<char> &dataset, short d,
+					   double convergence_difference, int quadrature_points ) {
 	/**
 	 * Object to allocate all data needed in estimation process
 	 * */
@@ -45,12 +45,6 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 
 	//Number of categories by item
 	std::vector<int> &categories_item = data.categories_item;
-
-	//Latent trait vectors
-	matrix<double> &theta = data.theta;
-
-	//Weights
-	std::vector<double> &w = data.w;
 
 	//Matrix r. Needed in Estep and Mstep
 	std::vector<matrix<double> > &r = data.r;
@@ -107,25 +101,9 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 		}
 		categories_item[j] = max_category;
 	}
-	/**
-	 * Number of quadrature points (G) is computed based on
-	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
-	 *
-	 *
-	 * G will be in 1dimension = 40 ---> 40^1 = 40
-	 * 				2dimension = 20 ---> 20^2 = 400
-	 * 				3dimension = 10 ---> 10^3 = 1000
-	 * 				> 4dimension = 5 ---> 5^d
-	 * */
-	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
 
-	// Latent trait vectors loaded from file
-	theta = load_quadrature_points(d);
-
-	// Weights loaded from file
-	w = load_weights(d);
-
-	G = theta.rows();
+	if ( d >= 4 ) sobol_quadrature(quadrature_points);
+	else 		  gaussian_quadrature();
 
 	//Builds r and P matrixes
 	r = std::vector<matrix<double> >(G);
@@ -148,6 +126,64 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	this->iterations = 0;
 }
 
+void estimation::sobol_quadrature (int g) {
+	//Dimension
+	int &d = data.d;
+
+	//Number of quadrature points
+	int &G = data.G;
+
+	//Latent trait vectors
+	matrix<double> &theta = data.theta;
+
+	//Weights
+	std::vector<double> &w = data.w;
+
+	input<double> in(' ');
+	std::stringstream ss;
+	ss << "data/sobol" << d << ".data";
+	in.importData(ss.str(), theta);
+
+	G = g;
+
+	w = std::vector<double>(G, 1.0/double(G));
+}
+
+void estimation::gaussian_quadrature () {
+	//Dimension
+	int &d = data.d;
+
+	//Number of quadrature points
+	int &G = data.G;
+
+	//Latent trait vectors
+	matrix<double> &theta = data.theta;
+
+	//Weights
+	std::vector<double> &w = data.w;
+
+	/**
+	 * Number of quadrature points (G) is computed based on
+	 * MAX_NUMBER_OF_QUADRATURE_POINTS and dimension of the problem, in this way
+	 *
+	 *
+	 * G will be in 1dimension = 40 ---> 40^1 = 40
+	 * 				2dimension = 20 ---> 20^2 = 400
+	 * 				3dimension = 10 ---> 10^3 = 1000
+	 * 				> 4dimension = 5 ---> 5^d
+	 * */
+
+	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
+
+	// Latent trait vectors loaded from file
+	theta = load_quadrature_points(d);
+
+	// Weights loaded from file
+	w = load_weights(d);
+
+	G = theta.rows();
+}
+
 estimation::estimation(int themodel, matrix<char> &dataset, short d,
 					   double convergence_difference, std::vector<int> &number_of_items) {
 
@@ -166,6 +202,57 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
 }
+
+
+void estimation::custom_initial_values ( std::string filename ) {
+	matrix<double> mt;
+	input<double> in(';');
+	in.importData(filename, mt);
+
+	//Dimension
+	int &d = data.d;
+	//Parameters of the items
+	std::vector<item_parameter> &zeta = data.zeta;
+	//Number of items
+	int &p = data.p;
+	//Model used in the problem
+	model &m = data.m;
+	//Number of categories of each item
+	std::vector<int> &categories_item = data.categories_item;
+
+	zeta = std::vector<item_parameter>(p);
+
+	for ( int i = 0; i < p; ++i ) {
+		int total_parameters = m.parameters == 1 ? categories_item[i] - 1 : categories_item[i] - 1 + d;
+		zeta[i] = item_parameter(total_parameters);
+		for ( int j = 0; j < total_parameters; ++j )
+			zeta[i](j) = mt(i, j);
+	}
+
+	int alphas = m.parameters == 2 ? d : 0;
+
+	//Items that will not be estimated
+	std::set<int> &pinned_items = data.pinned_items;
+
+	/**
+	 * It is supposed that there are p / d items for each dimension
+	 * if the user does not specify them
+	 *
+	 *
+	 * */
+
+	if ( pinned_items.empty() ) {
+		int items_for_dimension = p / d;
+		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
+			item_parameter &item = zeta[i];
+			pinned_items.insert(i);
+			for ( int h = 0; h < alphas; ++h )
+				item(h) = 0.0;
+			item(j) = 1.0;
+		}
+	}
+}
+
 
 void estimation::initial_values() {
 	//Parameters of the items
@@ -298,8 +385,9 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
+	//custom_initial_values("datasets/4D-poly-1000x100-parameters.csv");
 	initial_values();
-	double dif;
+	double dif = 0.0;
 	do {
 		Estep(data);
 		dif = Mstep(data);

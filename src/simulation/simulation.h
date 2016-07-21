@@ -37,7 +37,7 @@ public:
 	 *
 	 * 		and it's called iterations/interval times
 	 * */
-	void simulate ( int model, int d, int start, int end, std::string folder, std::string name, double, bool );
+	void simulate ( int model, int d, int start, int end, std::string folder, std::string name, double, bool, int );
 
 	/**
 	 * Simulates the number of iterations
@@ -62,7 +62,8 @@ public:
 	 *		simulate(2, 2, 100, "datasets/dicho-multi-tests/escenario2", "dicho-multi", 20, 0.001, true);
 	 *
 	 * */
-	void simulate ( int model, int d, int iterations, std::string folder, std::string name, int interval, double, bool );
+	void simulate ( int model, int d, int iterations, std::string folder,
+				    std::string name, int interval, double, bool, int G = 2000 );
 
 	/**
 	 * Runs a single test
@@ -72,7 +73,7 @@ public:
 	 * 			the convergence difference to use
 	 * 			bool to indicate if data is dichotomous or not
 	 * */
-	void run_single ( int, int, std::string, double, bool );
+	void run_single ( int, int, std::string, double, bool, int G = 2000 );
 
 	/**
 	 * Runs a single polytomous test
@@ -81,7 +82,7 @@ public:
 	 * 			the filename of the dataset
 	 * 			the convergence difference to use
 	 * */
-	void run_single_polytomous ( int, int, std::string, double );
+	void run_single_polytomous ( int, int, std::string, double, int G = 2000 );
 
 	/**
 	 * Runs a single polytomous test
@@ -90,7 +91,7 @@ public:
 	 * 			the filename of the dataset
 	 * 			the convergence difference to use
 	 * */
-	void run_single_dichotomous ( int, int, std::string, double );
+	void run_single_dichotomous ( int, int, std::string, double, int G = 2000 );
 
 	simulation();
 	virtual ~simulation();

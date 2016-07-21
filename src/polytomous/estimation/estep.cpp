@@ -82,6 +82,8 @@ void Estep ( estimation_data &data ) {
 	 *
 	 * */
 
+	//std::ofstream phi("datasets/phi_6_poly_sobol.csv");
+	//std::ofstream integral("datasets/4D_poly_classic.csv");
 
 	for ( int l = 0; l < s; ++l ) {
 		double denonimator_l = 0;
@@ -96,7 +98,7 @@ void Estep ( estimation_data &data ) {
 			 * Here, P_gik is requested to the model
 			 *
 			 * Using X (dichotomized matrix) to compute the numerator is NOT efficient
-			 * because most of numbers in X[l](i) are zero
+			 * because most of numbers in X[l](i) are zeror
 			 * 		Example:
 			 * 			If an individual answered category 3 for an item with 5 categories
 			 *			X[l](i) will be:
@@ -124,11 +126,15 @@ void Estep ( estimation_data &data ) {
 			denonimator_l += pi_gl;
 		}
 
+		//integral << denonimator_l << '\n';
+
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
 			pi_gl /= denonimator_l;
 		}
 	}
+
+	//integral.close();
 
 	/**
 	 * Expected number of examinees for each group g
@@ -146,12 +152,12 @@ void Estep ( estimation_data &data ) {
 		}
 	}
 
-	//Asserting pi correctness
+//	Asserting pi correctness
 //	bool pi_ok = test_pi(pi);
 //	assert(("Each column of pi matrix must sum 1.0", pi_ok));
-
-	//Asserting r correctness
-//	bool r_ok = test_r(r, N, p);
+//
+////	Asserting r correctness
+//	bool r_ok = test_r(r, data.N, p);
 //	assert(("Sum of elements in r must be N x p", r_ok));
 }
 

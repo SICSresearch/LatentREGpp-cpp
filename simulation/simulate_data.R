@@ -445,7 +445,19 @@ simulate.data(size.cluster = c(25, 25, 25, 25), dim.data = 4,
 
 simulate.data(size.cluster = c(10, 10, 10, 10, 10, 10), dim.data = 6, 
               sample.size = 1000, ncatgs = c(rep(2, 60)),
-              folder = "/home/milder/Documents/workspace/MIRTcpp/6D-dicho-1000x60-", save = TRUE, replicas = 1, dicho = TRUE)
+              folder = "/home/milder/Documents/workspace/MIRTcpp/datasets/6D-dicho-1000x60-", save = TRUE, replicas = 1, dicho = TRUE)
+
+
+##################################################################################
+#                                                                                #
+#                                     6D                                         #
+#                                 Polytomous                                     #
+##################################################################################
+##################################################################################
+##################################################################################     
 
 
 
+simulate.data(size.cluster = c(10, 10, 10, 10, 10, 10), dim.data = 6, 
+              sample.size = 1000, ncatgs = c(rep(3, 60)),
+              folder = "/home/milder/Documents/workspace/MIRTcpp/datasets/6D-poly-1000x60-", save = TRUE, replicas = 1)
