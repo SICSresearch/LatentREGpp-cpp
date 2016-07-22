@@ -93,11 +93,11 @@ void Estep ( estimation_data &data ) {
 		#pragma omp parallel for schedule(dynamic)
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
-			pi_gl /= denonimator_l;
+			pi_gl *= nl[l] / denonimator_l;
 
-			f[g] += nl[l] * pi_gl;
+			f[g] += pi_gl;
 			for ( int i = 0; i < correct_size; ++i )
-				r(g, correct[i]) += nl[l] * pi_gl;
+				r(g, correct[i]) += pi_gl;
 		}
 	}
 

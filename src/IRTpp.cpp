@@ -25,25 +25,25 @@ int main() {
 	improveIO();
 	simulation sim;
 
-	sim.simulate(2, 4, 10, "datasets/4D", "4D-dicho-1000x80-", 10, 0.001, true, 2000);
-	sim.simulate(2, 4, 10, "datasets/4D", "4D-dicho-1000x80-", 10, 0.001, true, 4000);
-	sim.simulate(2, 4, 10, "datasets/4D", "4D-dicho-1000x80-", 10, 0.001, true, 5000);
+//	sim.simulate(2, 4, 10, "datasets/4D", "4D-dicho-1000x80-", 10, 0.001, true, 2000);
+//	sim.simulate(2, 4, 10, "datasets/4D", "4D-dicho-1000x80-", 10, 0.001, true, 4000);
+//	sim.simulate(2, 4, 10, "datasets/4D", "4D-dicho-1000x80-", 10, 0.001, true, 5000);
 
 	sim.simulate(2, 4, 10, "datasets/4D", "4D-poly-1000x80-", 10, 0.001, false, 2000);
 	sim.simulate(2, 4, 10, "datasets/4D", "4D-poly-1000x80-", 10, 0.001, false, 4000);
 	sim.simulate(2, 4, 10, "datasets/4D", "4D-poly-1000x80-", 10, 0.001, false, 5000);
 
-	sim.simulate(2, 4, 10, "datasets/7D", "7D-dicho-1000x140-", 5, 0.001, true, 2000);
-	sim.simulate(2, 4, 10, "datasets/7D", "7D-dicho-1000x140-", 5, 0.001, true, 4000);
-	sim.simulate(2, 4, 10, "datasets/7D", "7D-dicho-1000x140-", 5, 0.001, true, 5000);
+//	sim.simulate(2, 4, 10, "datasets/7D", "7D-dicho-1000x140-", 2, 0.001, true, 2000);
+//	sim.simulate(2, 4, 10, "datasets/7D", "7D-dicho-1000x140-", 2, 0.001, true, 4000);
+//	sim.simulate(2, 4, 10, "datasets/7D", "7D-dicho-1000x140-", 2, 0.001, true, 5000);
 
-	sim.simulate(2, 7, 10, "datasets/7D", "7D-poly-1000x140-", 5, 0.001, false, 2000);
-	sim.simulate(2, 7, 10, "datasets/7D", "7D-poly-1000x140-", 5, 0.001, false, 4000);
-	sim.simulate(2, 7, 10, "datasets/7D", "7D-poly-1000x140-", 5, 0.001, false, 5000);
+	sim.simulate(2, 7, 10, "datasets/7D", "7D-poly-1000x140-", 2, 0.001, false, 2000);
+	sim.simulate(2, 7, 10, "datasets/7D", "7D-poly-1000x140-", 2, 0.001, false, 4000);
+	sim.simulate(2, 7, 10, "datasets/7D", "7D-poly-1000x140-", 2, 0.001, false, 5000);
 
-	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x200-", 1, 0.001, true, 2000);
-	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x200-", 1, 0.001, true, 4000);
-	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x200-", 1, 0.001, true, 5000);
+//	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x200-", 1, 0.001, true, 2000);
+//	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x200-", 1, 0.001, true, 4000);
+//	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x200-", 1, 0.001, true, 5000);
 
 	sim.simulate(2, 10, 10, "datasets/10D", "10D-poly-1000x200-", 1, 0.001, false, 2000);
 	sim.simulate(2, 10, 10, "datasets/10D", "10D-poly-1000x200-", 1, 0.001, false, 4000);
