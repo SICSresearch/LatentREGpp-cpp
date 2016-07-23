@@ -67,6 +67,12 @@ class matrix {
 		 * Adds an element to the last row
 		 * */
 		void add_element(T e);
+
+		/**
+		 * Adds an element to a specific row
+		 * */
+		void add_element(int row, T e);
+
 		virtual ~matrix();
 
 		/**
@@ -160,6 +166,11 @@ void matrix<T>::reset_row(int idx) {
 template<class T>
 void matrix<T>::add_element(T e) {
 	data.back().push_back(e);
+}
+
+template<class T>
+void matrix<T>::add_element(int row, T e) {
+	data[row].push_back(e);
 }
 
 template<class T>

@@ -34,6 +34,9 @@ void Estep ( estimation_data &data ) {
 	std::vector<double> &f = data.f;
 	f.assign(f.size(), 0);
 
+	//Matrix correct that has been answered correctly
+	matrix<int> &correct = data.correct;
+
 	//pi matrix
 	matrix<double> &pi = data.pi;
 
@@ -44,8 +47,6 @@ void Estep ( estimation_data &data ) {
 	//r matrix
 	matrix<double> &r = data.r;
 	r.reset();
-
-	clock_t start = clock();
 
 	/**
 	 * Computing each element of matrix P
@@ -59,30 +60,18 @@ void Estep ( estimation_data &data ) {
 		}
 	}
 
-	std::vector<int> correct(p);
-	int correct_size;
-
 	double denonimator_l = 0;
 
 	//Patterns
-    //#pragma omp parallel for
-	//#pragma omp parallel for schedule(dynamic) reduction(+:denonimator_l)
+	#pragma omp parallel for schedule(dynamic) reduction(+:denonimator_l)
 	for ( int l = 0; l < s; ++l ) {
 		denonimator_l = 0;
 		//Quadrature points
-		//#pragma omp parallel for schedule(dynamic)
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l) = w[g];
-			correct_size = 0;
 			//Items
-			for ( int i = 0; i < p; ++i ) {
-				if ( Y(l, i) ) {
-					pi_gl *= P(g, i);
-					correct[correct_size++] = i;
-				}
-				else
-					pi_gl *= 1 - P(g, i);
-			}
+			for ( int i = 0; i < p; ++i )
+				pi_gl *= Y(l, i) ? P(g, i) : 1 - P(g, i);
 			/**
 			 * As denominator for a response pattern l is the summation over the latent traits
 			 * here pi(g, l) is added to denominator_l
@@ -90,24 +79,25 @@ void Estep ( estimation_data &data ) {
 			denonimator_l += pi_gl;
 		}
 
-		#pragma omp parallel for schedule(dynamic)
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
 			pi_gl *= nl[l] / denonimator_l;
-
-			f[g] += pi_gl;
-			for ( int i = 0; i < correct_size; ++i )
-				r(g, correct[i]) += pi_gl;
 		}
 	}
 
-	clock_t stop = clock();
-	double elapsed = (double)(stop - start);
-	std::cout << "Time elapsed: (suit drims) " << elapsed << " ms." << '\n';
+	#pragma omp parallel for schedule(dynamic)
+	for ( int g = 0; g < G; ++g ) {
+		for ( int l = 0; l < s; ++l ) {
+			double &pi_gl = pi(g, l);
+			f[g] += pi_gl;
+			for ( int i = 0; i < correct.columns(l); ++i )
+				r(g, correct(l, i)) += pi_gl;
+		}
+	}
 
 	//Asserting pi correctness
-	bool pi_ok = test_pi(pi);
-	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+//	bool pi_ok = test_pi(pi);
+//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 }
 
 }

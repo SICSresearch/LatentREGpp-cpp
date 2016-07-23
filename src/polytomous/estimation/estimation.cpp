@@ -146,7 +146,7 @@ void estimation::sobol_quadrature (int g) {
 
 	G = g;
 
-	w = std::vector<double>(G, 1.0/double(G));
+	w = std::vector<double>(G, 1.0);
 }
 
 void estimation::gaussian_quadrature () {

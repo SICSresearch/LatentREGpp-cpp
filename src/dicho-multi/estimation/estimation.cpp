@@ -63,6 +63,8 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	matrix<double> &pi = data.pi;
 	//f
 	std::vector<double> &f = data.f;
+	//Matrix correct that has been answered correctly
+	matrix<int> &correct = data.correct;
 
 	//-------------------------------------------------------------------------------------
 
@@ -85,6 +87,11 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	s = Y.rows();
 	p = Y.columns(0);
 
+	correct = matrix<int>(s);
+	for ( int l = 0; l < s; ++l )
+		for ( int i = 0; i < p; ++i )
+			if ( Y(l, i) )
+				correct.add_element(l, i);
 
 	if ( d >= 4 ) sobol_quadrature(quadrature_points);
 	else		  gaussian_quadrature();
@@ -122,7 +129,7 @@ void estimation::sobol_quadrature (int g) {
 
 	G = g;
 
-	w = std::vector<double>(G, 1.0/double(G));
+	w = std::vector<double>(G, 1.0);
 }
 
 void estimation::gaussian_quadrature () {

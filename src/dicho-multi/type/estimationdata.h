@@ -28,6 +28,8 @@ class estimation_data {
 public:
 	//Matrix of answers
 	matrix<char> *dataset;
+	//Matrix that contains what items have been answered correctly for each response pattern
+	matrix<int> correct;
 	//Dimension
 	int d;
 	//Matrix of response patterns
