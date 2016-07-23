@@ -21,6 +21,7 @@
 #include <cstdio>
 #include <vector>
 #include <set>
+#include <omp.h>
 
 namespace irtpp {
 

@@ -6,10 +6,10 @@
  */
 
 #include "simulation.h"
-#define START_CLOCK		clock_t start = clock();
-#define END_CLOCK		clock_t stop = clock();
-#define REPORT_TIME     double elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;\
-						std::cout << "Time elapsed: " << elapsed << " ms." << '\n';
+#define START_CLOCK		double start = omp_get_wtime();
+#define END_CLOCK		double stop = omp_get_wtime();
+#define REPORT_TIME     double elapsed = stop - start;\
+						std::cout << "Time elapsed: " << elapsed << "s." << '\n';
 
 
 namespace irtpp {
