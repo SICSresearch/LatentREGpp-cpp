@@ -96,16 +96,11 @@ double Mstep(estimation_data &data) {
 	std::vector<item_parameter> &zeta = data.zeta;
 	std::set<int> &pinned_items = data.pinned_items;
 
-//	std::ofstream Qs("datasets/Qs_classic.csv");
-//	for ( int i = 0; i < p; ++i ) {
-//		Qs << Qi(i, &data)(zeta[i]) << '\n';
-//	}
-//	Qs.close();
-
 	/**
 	 * Log likelihood must be optimized for every item
 	 * */
 
+	#pragma omp parallel for schedule(dynamic)
 	for ( int i = 0; i < p; ++i ) {
 		/**
 		 * If it is multidimensional and this is one of the pinned items
