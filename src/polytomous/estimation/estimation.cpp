@@ -74,6 +74,19 @@ estimation::estimation ( int themodel, matrix<char> &dataset, short d,
 
 	//-------------------------------------------------------------------------------------
 
+	bool dichotomous = false;
+	for ( int i = 0; i < dataset.rows(); ++i ) {
+		for ( int j = 0; j < dataset.columns(i); ++j )
+			dichotomous |= dataset(i, j) == 0;
+	}
+
+	//If dataset is dichotomous, it's converted to polytomous with two categories
+	if ( dichotomous ) {
+		for ( int i = 0; i < dataset.rows(); ++i )
+			for ( int j = 0; j < dataset.columns(i); ++j )
+				++dataset(i, j);
+	}
+
 
 	//Matrix of response patterns and their frequency
 	std::map<std::vector<char>, int> freq;
@@ -95,15 +108,18 @@ estimation::estimation ( int themodel, matrix<char> &dataset, short d,
 
 	//Number of categories of each item
 	categories_item = std::vector<int>(p);
-	for ( int j = 0; j < p; ++j ) {
+	for ( int i = 0; i < p; ++i ) {
 		int max_category = -1;
-		for ( int i = 0; i < s; ++i ) {
+		for ( int l = 0; l < s; ++l ) {
 			//Number of categories of an item is defined as the max category found in the answers
-			if ( Y(i, j) > max_category )
-				max_category = Y(i, j);
+			if ( Y(l, i) > max_category )
+				max_category = Y(l, i);
+			//Checking if data is dichotomous
 		}
-		categories_item[j] = max_category;
+		categories_item[i] = max_category;
 	}
+
+
 
 	if ( quadrature_technique == SOBOL_QUADRATURE )
 		sobol_quadrature(quadrature_points);
