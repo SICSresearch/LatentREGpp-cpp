@@ -2,7 +2,7 @@
  * constants.h
  *
  *  Created on: Jul 22, 2016
- *      Author: root
+ *      Author: Milder
  */
 
 #ifndef UTIL_CONSTANTS_H_

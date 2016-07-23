@@ -51,7 +51,7 @@ class estimation {
 		 * */
 		double convergence_difference;
 
-		std::string custom_initial;
+		std::string custom_initial_values_filename;
 
 	public:
 		/**
@@ -71,7 +71,7 @@ class estimation {
 		 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
 		 *		quadrature_points: 	  Custom number of quadrature points
 		 *		cluster: 			  Vector that contains the number of item for each dimension
-		 *		custom_initial:		  Custom initial values filename
+		 *		custom_initial_values_filename:		  Custom initial values filename
 		 *
 		 *  Then it sets up all the data needed to start the estimation process
 		 *
@@ -80,7 +80,7 @@ class estimation {
 						std::string quadrature_technique = GAUSSIAN_QUADRATURE,
 						int quadrature_points = DEFAULT_SOBOL_POINTS,
 						std::vector<int> cluster = std::vector<int>(),
-						std::string custom_initial = NONE );
+						std::string custom_initial_values_filename = NONE );
 
 		virtual ~estimation();
 

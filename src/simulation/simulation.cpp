@@ -22,7 +22,7 @@ simulation::simulation() {
 void simulation::simulate ( int model, int d, int start, int end, std::string folder,
 							std::string name, double dif, bool dicho,
 							std::string quadrature_technique, int G, std::vector<int> cluster,
-							std::string custom_initial ) {
+							std::string custom_initial_values_filename ) {
 
 	std::ofstream report_parameters;
 	std::stringstream ss;
@@ -49,7 +49,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 
 		if ( dicho ) {
 			START_CLOCK
-			dichomulti::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial);
+			dichomulti::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial_values_filename);
 			e.EMAlgortihm();
 
 			END_CLOCK
@@ -57,7 +57,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 			e.print_results(report_parameters, elapsed);
 		} else {
 			START_CLOCK
-			polytomous::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial);
+			polytomous::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial_values_filename);
 			e.EMAlgortihm();
 
 			END_CLOCK
@@ -72,23 +72,23 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 void simulation::simulate ( int model, int d, int iterations, std::string folder,
 							std::string name, int interval, double dif, bool dicho,
 							std::string quadrature_technique, int G,
-							std::vector<int> cluster, std::string custom_initial) {
+							std::vector<int> cluster, std::string custom_initial_values_filename) {
 	for ( int i = 1; i <= iterations; i += interval ) {
 		simulate(model, d, i, i + interval - 1, folder, name, dif, dicho,
-				 quadrature_technique, G, cluster, custom_initial);
+				 quadrature_technique, G, cluster, custom_initial_values_filename);
 	}
 }
 
 void simulation::run_single ( int model, int d, std::string filename, double dif, bool dicho,
 							   std::string quadrature_technique, int G, std::vector<int> cluster,
-							   std::string custom_initial ) {
-	if ( dicho ) run_single_dichotomous(model, d, filename, dif, quadrature_technique, G, cluster, custom_initial );
-	else		 run_single_polytomous(model, d, filename, dif, quadrature_technique, G, cluster, custom_initial );
+							   std::string custom_initial_values_filename ) {
+	if ( dicho ) run_single_dichotomous(model, d, filename, dif, quadrature_technique, G, cluster, custom_initial_values_filename );
+	else		 run_single_polytomous(model, d, filename, dif, quadrature_technique, G, cluster, custom_initial_values_filename );
 }
 
 void simulation::run_single_polytomous ( int model, int d, std::string filename, double dif,
 										std::string quadrature_technique, int G, std::vector<int> cluster,
-									    std::string custom_initial ) {
+									    std::string custom_initial_values_filename ) {
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData(filename, Y);
@@ -96,7 +96,7 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 
 	START_CLOCK
 
-	polytomous::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial);
+	polytomous::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial_values_filename);
 	e.EMAlgortihm();
 
 	END_CLOCK
@@ -107,7 +107,7 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 
 void simulation::run_single_dichotomous ( int model, int d, std::string filename, double dif,
 										  std::string quadrature_technique, int G, std::vector<int> cluster,
-										  std::string custom_initial ) {
+										  std::string custom_initial_values_filename ) {
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData(filename, Y);
@@ -115,7 +115,7 @@ void simulation::run_single_dichotomous ( int model, int d, std::string filename
 
 	START_CLOCK
 
-	dichomulti::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial);
+	dichomulti::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial_values_filename);
 	e.EMAlgortihm();
 
 	END_CLOCK

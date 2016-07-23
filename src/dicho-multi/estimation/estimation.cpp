@@ -16,7 +16,7 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 					   std::string quadrature_technique,
 					   int quadrature_points,
 					   std::vector<int> number_of_items,
-					   std::string custom_initial ) {
+					   std::string custom_initial_values_filename ) {
 	/**
 	 * Object to allocate all data needed in estimation process
 	 * */
@@ -125,7 +125,7 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	m = model(themodel);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
-	this->custom_initial = custom_initial;
+	this->custom_initial_values_filename = custom_initial_values_filename;
 }
 
 
@@ -290,8 +290,8 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	if ( custom_initial == NONE || custom_initial == BUILD ) initial_values();
-	else load_initial_values(custom_initial);
+	if ( custom_initial_values_filename == NONE || custom_initial_values_filename == BUILD ) initial_values();
+	else load_initial_values(custom_initial_values_filename);
 	double dif = 0.0;
 	do {
 		Estep(data);

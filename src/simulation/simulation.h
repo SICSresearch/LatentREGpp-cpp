@@ -68,14 +68,14 @@ public:
 	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
 	 *		G: 					  Custom number of quadrature points
 	 *		cluster: 			  Vector that contains the number of item for each dimension
-	 *		custom_initial:		  Custom initial values filename
+	 *		custom_initial_values_filename:		  Custom initial values filename
 	 * */
 	void simulate ( int model, int d, int iterations, std::string folder,
 				    std::string name, int interval, double, bool,
 					std::string quadrature_technique = SOBOL_QUADRATURE,
 					int G = DEFAULT_SOBOL_POINTS,
 					std::vector<int> cluster = std::vector<int>(),
-					std::string custom_initial = BUILD );
+					std::string custom_initial_values_filename = BUILD );
 
 	/**
 	 * Runs a single test
@@ -89,12 +89,12 @@ public:
 	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
 	 *		G: 					  Custom number of quadrature points
 	 *		cluster: 			  Vector that contains the number of item for each dimension
-	 *		custom_initial:		  Custom initial values filename
+	 *		custom_initial_values_filename:		  Custom initial values filename
 	 * */
 	void run_single ( int, int, std::string, double, bool,
 					  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 					  std::vector<int> cluster = std::vector<int>(),
-					  std::string custom_initial = NONE );
+					  std::string custom_initial_values_filename = NONE );
 
 	/**
 	 * Runs a single polytomous test
@@ -107,12 +107,12 @@ public:
 	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
 	 *		G: 					  Custom number of quadrature points
 	 *		cluster: 			  Vector that contains the number of item for each dimension
-	 *		custom_initial:		  Custom initial values filename
+	 *		custom_initial_values_filename:		  Custom initial values filename
 	 * */
 	void run_single_polytomous ( int, int, std::string, double,
 								 std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 								 std::vector<int> cluster = std::vector<int>(),
-								 std::string custom_initial = NONE );
+								 std::string custom_initial_values_filename = NONE );
 
 	/**
 	 * Runs a single polytomous test
@@ -125,12 +125,12 @@ public:
 	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
 	 *		G: 					  Custom number of quadrature points
 	 *		cluster: 			  Vector that contains the number of item for each dimension
-	 *		custom_initial:		  Custom initial values filename
+	 *		custom_initial_values_filename:		  Custom initial values filename
 	 * */
 	void run_single_dichotomous ( int, int, std::string, double,
 								  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 								  std::vector<int> cluster = std::vector<int>(),
-								  std::string custom_initial = NONE );
+								  std::string custom_initial_values_filename = NONE );
 
 	simulation();
 	virtual ~simulation();

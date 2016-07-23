@@ -60,12 +60,12 @@ void Estep ( estimation_data &data ) {
 		}
 	}
 
-	double denonimator_l = 0;
+	double integral_l = 0;
 
 	//Patterns
-	#pragma omp parallel for schedule(dynamic) reduction(+:denonimator_l)
+	#pragma omp parallel for schedule(dynamic) reduction(+:integral_l)
 	for ( int l = 0; l < s; ++l ) {
-		denonimator_l = 0;
+		integral_l = 0;
 		//Quadrature points
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l) = w[g];
@@ -74,14 +74,14 @@ void Estep ( estimation_data &data ) {
 				pi_gl *= Y(l, i) ? P(g, i) : 1 - P(g, i);
 			/**
 			 * As denominator for a response pattern l is the summation over the latent traits
-			 * here pi(g, l) is added to denominator_l
+			 * here pi(g, l) is added to integral_l
 			 * */
-			denonimator_l += pi_gl;
+			integral_l += pi_gl;
 		}
 
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
-			pi_gl *= nl[l] / denonimator_l;
+			pi_gl *= nl[l] / integral_l;
 		}
 	}
 
