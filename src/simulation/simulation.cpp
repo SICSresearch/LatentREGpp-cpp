@@ -48,7 +48,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 
 		if ( dicho ) {
 			START_CLOCK
-			dichomulti::estimation e(model, Y, d, dif, G);
+			dichomulti::estimation e(model, Y, d, dif, custom_initial, quadrature_technique, G, cluster);
 			e.EMAlgortihm();
 
 			END_CLOCK
@@ -117,7 +117,7 @@ void simulation::run_single_dichotomous ( int model, int d, std::string filename
 
 	START_CLOCK
 
-	dichomulti::estimation e(model, Y, d, dif, G);
+	dichomulti::estimation e(model, Y, d, dif, custom_initial, quadrature_technique, G);
 	e.EMAlgortihm();
 
 	END_CLOCK

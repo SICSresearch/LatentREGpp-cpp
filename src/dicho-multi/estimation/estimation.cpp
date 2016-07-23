@@ -12,13 +12,16 @@ namespace irtpp {
 namespace dichomulti {
 
 estimation::estimation(int themodel, matrix<char> &dataset, short d,
-					   double convergence_difference, int quadrature_points ) {
+					   double convergence_difference,
+					   std::string custom_initial,
+					   std::string quadrature_technique,
+					   int quadrature_points,
+					   std::vector<int> number_of_items ) {
 	/**
 	 * Object to allocate all data needed in estimation process
 	 * */
 	data = estimation_data(d);
 	data.dataset = &dataset;
-
 
 	//-------------------------------------------------------------------------------------
 
@@ -93,8 +96,10 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 			if ( Y(l, i) )
 				correct.add_element(l, i);
 
-	if ( d >= 4 ) sobol_quadrature(quadrature_points);
-	else		  gaussian_quadrature();
+	if ( quadrature_technique == SOBOL_QUADRATURE )
+		sobol_quadrature(quadrature_points);
+	else
+		gaussian_quadrature();
 
 	//Builds r and P matrixes
 	P = matrix<double>(G, p);
@@ -102,10 +107,25 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	r = matrix<double>(G, p);
 	f = std::vector<double>(G);
 
+	//Pinned items in multidimensional case (the first of each dimension)
+	std::set<int> &pinned_items = data.pinned_items;
+
+
+	//Number of items size MUST be equal to the number of dimensions
+	if ( number_of_items.size() == d ) {
+		int before = 0;
+		pinned_items.insert(0);
+		for ( unsigned int i = 0; i < number_of_items.size() - 1; ++i ) {
+			before += number_of_items[i];
+			pinned_items.insert(before);
+		}
+	}
+
 	//Configurations for the estimation
 	m = model(themodel);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
+	this->custom_initial = custom_initial;
 }
 
 
@@ -167,25 +187,6 @@ void estimation::gaussian_quadrature () {
 	G = theta.rows();
 }
 
-estimation::estimation(int themodel, matrix<char> &dataset, short d,
-					   double convergence_difference, std::vector<int> &number_of_items) {
-
-	estimation(themodel, dataset, d, convergence_difference);
-
-	//Pinned items in multidimensional case (the first of each dimension)
-	std::set<int> &pinned_items = data.pinned_items;
-
-	int before = 0;
-	pinned_items.insert(0);
-	for ( unsigned int i = 0; i < number_of_items.size() - 1; ++i ) {
-		before += number_of_items[i];
-		pinned_items.insert(before);
-	}
-
-	this->convergence_difference = convergence_difference;
-	this->iterations = 0;
-}
-
 void estimation::custom_initial_values ( std::string filename ) {
 	matrix<double> mt;
 	input<double> in(';');
@@ -230,8 +231,6 @@ void estimation::initial_values() {
 	//Dimension
 	int &d = data.d;
 	//Number of examinees
-	int &N = data.N;
-	//Number of items
 	int &p = data.p;
 	//Model used in the problem
 	model &m = data.m;
@@ -293,8 +292,8 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	initial_values();
-	//custom_initial_values("datasets/6D-dicho-1000x60-parameters.csv");
+	if ( custom_initial == NONE || custom_initial == BUILD ) initial_values();
+	else custom_initial_values(custom_initial);
 	double dif = 0.0;
 	do {
 		Estep(data);

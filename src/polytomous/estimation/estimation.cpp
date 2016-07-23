@@ -397,7 +397,6 @@ void estimation::EMAlgortihm() {
 void estimation::print_results ( ) {
 	std::vector<item_parameter> &zeta = data.zeta;
 	int &p = data.p;
-	model &m = data.m;
 
 	std::cout << "Finished after " << iterations << " iterations.\n";
 	for ( int i = 0; i < p; ++i ) {
