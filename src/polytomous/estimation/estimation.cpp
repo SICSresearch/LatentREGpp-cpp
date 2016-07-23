@@ -12,7 +12,11 @@ namespace irtpp {
 namespace polytomous {
 
 estimation::estimation ( int themodel, matrix<char> &dataset, short d,
-					   double convergence_difference, int quadrature_points ) {
+					   double convergence_difference,
+					   std::string custom_initial,
+					   std::string quadrature_technique,
+					   int quadrature_points,
+					   std::vector<int> number_of_items ) {
 	/**
 	 * Object to allocate all data needed in estimation process
 	 * */
@@ -102,8 +106,10 @@ estimation::estimation ( int themodel, matrix<char> &dataset, short d,
 		categories_item[j] = max_category;
 	}
 
-	if ( d >= 4 ) sobol_quadrature(quadrature_points);
-	else 		  gaussian_quadrature();
+	if ( quadrature_technique == SOBOL_QUADRATURE )
+		sobol_quadrature(quadrature_points);
+	else
+		gaussian_quadrature();
 
 	//Builds r and P matrixes
 	r = std::vector<matrix<double> >(G);
@@ -117,6 +123,19 @@ estimation::estimation ( int themodel, matrix<char> &dataset, short d,
 		}
 	}
 
+	//Pinned items in multidimensional case (the first of each dimension)
+	std::set<int> &pinned_items = data.pinned_items;
+
+	//Number of items size MUST be equal to the number of dimensions
+	if ( number_of_items.size() == d ) {
+		int before = 0;
+		pinned_items.insert(0);
+		for ( unsigned int i = 0; i < number_of_items.size() - 1; ++i ) {
+			before += number_of_items[i];
+			pinned_items.insert(before);
+		}
+	}
+
 	//Matrixes needed in Estep
 	pi = matrix<double>(G, s);
 
@@ -124,6 +143,7 @@ estimation::estimation ( int themodel, matrix<char> &dataset, short d,
 	m = model(themodel, d, &categories_item);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
+	this->custom_initial = custom_initial;
 }
 
 void estimation::sobol_quadrature (int g) {
@@ -173,8 +193,6 @@ void estimation::gaussian_quadrature () {
 	 * 				> 4dimension = 5 ---> 5^d
 	 * */
 
-	G = MAX_NUMBER_OF_QUADRATURE_POINTS / (std::min(1 << (d - 1), 8));
-
 	// Latent trait vectors loaded from file
 	theta = load_quadrature_points(d);
 
@@ -183,26 +201,6 @@ void estimation::gaussian_quadrature () {
 
 	G = theta.rows();
 }
-
-estimation::estimation(int themodel, matrix<char> &dataset, short d,
-					   double convergence_difference, std::vector<int> &number_of_items) {
-
-	estimation(themodel, dataset, d, convergence_difference);
-
-	//Pinned items in multidimensional case (the first of each dimension)
-	std::set<int> &pinned_items = data.pinned_items;
-
-	int before = 0;
-	pinned_items.insert(0);
-	for ( unsigned int i = 0; i < number_of_items.size() - 1; ++i ) {
-		before += number_of_items[i];
-		pinned_items.insert(before);
-	}
-
-	this->convergence_difference = convergence_difference;
-	this->iterations = 0;
-}
-
 
 void estimation::custom_initial_values ( std::string filename ) {
 	matrix<double> mt;
@@ -385,8 +383,8 @@ void estimation::initial_values() {
 }
 
 void estimation::EMAlgortihm() {
-	//custom_initial_values("datasets/4D-poly-1000x100-parameters.csv");
-	initial_values();
+	if ( custom_initial == NONE || custom_initial == BUILD ) initial_values();
+	else custom_initial_values(custom_initial);
 	double dif = 0.0;
 	do {
 		Estep(data);

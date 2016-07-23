@@ -11,6 +11,7 @@
 #include <iostream>
 #include "../util/matrix.h"
 #include "../util/input.h"
+#include "../util/constants.h"
 #include "../util/quadraturepoints.h"
 #include "../polytomous/estimation/estimation.h"
 #include "../dicho-multi/estimation/estimation.h"
@@ -37,7 +38,9 @@ public:
 	 *
 	 * 		and it's called iterations/interval times
 	 * */
-	void simulate ( int model, int d, int start, int end, std::string folder, std::string name, double, bool, int );
+	void simulate ( int model, int d, int start, int end, std::string folder, std::string name, double, bool,
+			std::vector<int> cluster,
+			std::string, std::string, int );
 
 	/**
 	 * Simulates the number of iterations
@@ -63,7 +66,11 @@ public:
 	 *
 	 * */
 	void simulate ( int model, int d, int iterations, std::string folder,
-				    std::string name, int interval, double, bool, int G = 2000 );
+				    std::string name, int interval, double, bool,
+					std::vector<int> cluster = std::vector<int>(),
+					std::string custom_initial = BUILD,
+					std::string quadrature_technique = SOBOL_QUADRATURE,
+					int G = DEFAULT_SOBOL_POINTS );
 
 	/**
 	 * Runs a single test
@@ -73,7 +80,10 @@ public:
 	 * 			the convergence difference to use
 	 * 			bool to indicate if data is dichotomous or not
 	 * */
-	void run_single ( int, int, std::string, double, bool, int G = 2000 );
+	void run_single ( int, int, std::string, double, bool,
+					  std::vector<int> cluster = std::vector<int>(),
+					  std::string custom_initial = NONE,
+					  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS );
 
 	/**
 	 * Runs a single polytomous test
@@ -82,7 +92,10 @@ public:
 	 * 			the filename of the dataset
 	 * 			the convergence difference to use
 	 * */
-	void run_single_polytomous ( int, int, std::string, double, int G = 2000 );
+	void run_single_polytomous ( int, int, std::string, double,
+								 std::vector<int> cluster = std::vector<int>(),
+								 std::string custom_initial = NONE,
+								 std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS );
 
 	/**
 	 * Runs a single polytomous test
@@ -91,7 +104,10 @@ public:
 	 * 			the filename of the dataset
 	 * 			the convergence difference to use
 	 * */
-	void run_single_dichotomous ( int, int, std::string, double, int G = 2000 );
+	void run_single_dichotomous ( int, int, std::string, double,
+								  std::vector<int> cluster = std::vector<int>(),
+								  std::string custom_initial = NONE,
+								  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS );
 
 	simulation();
 	virtual ~simulation();

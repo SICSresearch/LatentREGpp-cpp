@@ -17,6 +17,7 @@
 #include "../../util/input.h"
 #include "../../util/quadraturepoints.h"
 #include "../../util/initial_values.h"
+#include "../../util/constants.h"
 
 #include "../type/estimationdata.h"
 
@@ -51,6 +52,9 @@ class estimation {
 		 * */
 		double convergence_difference;
 
+
+		std::string custom_initial;
+
 	public:
 		/**
 		 * Saves all data needed in the estimation process
@@ -69,27 +73,12 @@ class estimation {
 		 *  Then it sets up all the data needed to start the estimation process
 		 *
 		 * */
-		estimation(int, matrix<char>&, short, double, int quadrature_points = 2000);
+		estimation(int, matrix<char>&, short, double,
+				std::string custom_initial = NONE,
+				std::string quadrature_technique = GAUSSIAN_QUADRATURE,
+				int quadrature_points = DEFAULT_SOBOL_POINTS,
+				std::vector<int> = std::vector<int>() );
 
-
-		/**
-		 * Constructor of multidimensional case
-		 *
-		 * Receives:
-		 * 	1. A specific model to use -> [1, 3] that means 1PL, 2PL, or 3PL
-		 *  2. A matrix containing the answers of examinees
-		 *  3. The dimension of the problem
-		 *	4. The epsilon (convergences difference) that the algoritm will use
-		 *		as a criterion to stop
-		 *	5. A vector that stores the number of items that each dimension has
-		 *
-		 *	   Vector's size MUST BE equal to the dimension
-		 *
-		 *
-		 *  Then it sets up all the data needed to start the estimation process
-		 *
-		 * */
-		estimation(int, matrix<char>&, short, double, std::vector<int>&);
 
 		virtual ~estimation();
 

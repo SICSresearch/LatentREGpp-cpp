@@ -95,7 +95,6 @@ double Mstep(estimation_data &data) {
 	int &d = data.d;
 	std::vector<item_parameter> &zeta = data.zeta;
 	std::set<int> &pinned_items = data.pinned_items;
-
 	/**
 	 * Log likelihood must be optimized for every item
 	 * */

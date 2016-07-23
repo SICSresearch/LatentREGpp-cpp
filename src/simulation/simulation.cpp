@@ -20,11 +20,14 @@ simulation::simulation() {
 }
 
 void simulation::simulate ( int model, int d, int start, int end, std::string folder,
-							std::string name, double dif, bool dicho, int G ) {
+							std::string name, double dif, bool dicho,
+							std::vector<int> cluster,
+							std::string custom_initial, std::string quadrature_technique, int G ) {
 
 	std::ofstream report_parameters;
 	std::stringstream ss;
-	ss << folder << "/estimation-" << name << '-' << start << '-' << end << "-G=" << G << ".csv";
+	ss << folder << "/estimation-" << name << '-' << start << '-' << end;
+	if ( quadrature_technique == SOBOL_QUADRATURE ) ss << "-G=" << G << ".csv";
 	std::string parameters = ss.str();
 	report_parameters.open(parameters.c_str());
 	report_parameters.precision(4);
@@ -53,8 +56,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 			e.print_results(report_parameters, elapsed);
 		} else {
 			START_CLOCK
-
-			polytomous::estimation e(model, Y, d, dif, G);
+			polytomous::estimation e(model, Y, d, dif, custom_initial, quadrature_technique, G, cluster);
 			e.EMAlgortihm();
 
 			END_CLOCK
@@ -67,18 +69,27 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 }
 
 void simulation::simulate ( int model, int d, int iterations, std::string folder,
-							std::string name, int interval, double dif, bool dicho, int G ) {
+							std::string name, int interval, double dif, bool dicho,
+							std::vector<int> cluster,
+							std::string custom_initial, std::string quadrature_technique, int G ) {
 	for ( int i = 1; i <= iterations; i += interval ) {
-		simulate(model, d, i, i + interval - 1, folder, name, dif, dicho, G);
+		simulate(model, d, i, i + interval - 1, folder, name, dif, dicho, cluster,
+				custom_initial, quadrature_technique, G);
 	}
 }
 
-void simulation::run_single ( int model, int d, std::string filename, double dif, bool dicho, int G ) {
-	if ( dicho ) run_single_dichotomous(model, d, filename, dif, G);
-	else		 run_single_polytomous(model, d, filename, dif, G);
+void simulation::run_single ( int model, int d, std::string filename, double dif, bool dicho,
+							  std::vector<int> cluster,
+							  std::string custom_initial, std::string quadrature_technique,
+							  int G ) {
+	if ( dicho ) run_single_dichotomous(model, d, filename, dif, cluster, custom_initial, quadrature_technique, G);
+	else		 run_single_polytomous(model, d, filename, dif, cluster, custom_initial, quadrature_technique, G);
 }
 
-void simulation::run_single_polytomous ( int model, int d, std::string filename, double dif, int G ) {
+void simulation::run_single_polytomous ( int model, int d, std::string filename, double dif,
+										std::vector<int> cluster,
+										std::string custom_initial, std::string quadrature_technique,
+									    int G ) {
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData(filename, Y);
@@ -86,7 +97,7 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 
 	START_CLOCK
 
-	polytomous::estimation e(model, Y, d, dif, G);
+	polytomous::estimation e(model, Y, d, dif);
 	e.EMAlgortihm();
 
 	END_CLOCK
@@ -95,7 +106,10 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 	REPORT_TIME
 }
 
-void simulation::run_single_dichotomous ( int model, int d, std::string filename, double dif, int G ) {
+void simulation::run_single_dichotomous ( int model, int d, std::string filename, double dif,
+										  std::vector<int> cluster,
+										  std::string custom_initial, std::string quadrature_technique,
+									      int G ) {
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData(filename, Y);

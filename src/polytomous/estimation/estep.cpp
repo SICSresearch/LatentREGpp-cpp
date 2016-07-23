@@ -60,7 +60,6 @@ void Estep ( estimation_data &data ) {
 	//r matrix
 	std::vector<matrix<double> > &r = data.r;
 
-	//clock_t start = clock();
 	/**
 	 * Computing each element of matrix P
 	 * P_gik
@@ -152,17 +151,13 @@ void Estep ( estimation_data &data ) {
 		}
 	}
 
-	//clock_t stop = clock();
-	//double elapsed = (double)(stop - start);
-	//std::cout << "Time elapsed: " << elapsed << " ms." << '\n';
-
 	//Asserting pi correctness
-	bool pi_ok = test_pi(pi);
-	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+//	bool pi_ok = test_pi(pi);
+//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
 	//Asserting r correctness
-	bool r_ok = test_r(r, N, p);
-	assert(("Sum of elements in r must be N x p", r_ok));
+//	bool r_ok = test_r(r, N, p);
+//	assert(("Sum of elements in r must be N x p", r_ok));
 }
 
 }
