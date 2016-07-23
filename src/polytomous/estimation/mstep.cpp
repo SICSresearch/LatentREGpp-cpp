@@ -95,9 +95,8 @@ double Mstep(estimation_data &data) {
 	int &d = data.d;
 	std::vector<item_parameter> &zeta = data.zeta;
 	std::set<int> &pinned_items = data.pinned_items;
-	/**
-	 * Log likelihood must be optimized for every item
-	 * */
+
+	// Log likelihood must be optimized for every item
 
 	#pragma omp parallel for schedule(dynamic)
 	for ( int i = 0; i < p; ++i ) {
@@ -111,13 +110,8 @@ double Mstep(estimation_data &data) {
 		column_vector &item_i = zeta[i];
 		column_vector before = item_i;
 
-		/**
-		 *	Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
-		 * */
-
-		/**
-		 * If the dimension is 1, the optimization is done with explicit derivatives
-		 * */
+		// Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
+		// If the dimension is 1, the optimization is done with explicit derivatives
 		if ( d == 1 ) {
 			dlib::find_max(dlib::bfgs_search_strategy(),
 										   dlib::objective_delta_stop_strategy(1e-5),

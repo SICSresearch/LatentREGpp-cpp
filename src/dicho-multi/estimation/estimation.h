@@ -67,15 +67,20 @@ class estimation {
 		 *	4. The epsilon (convergence difference) that the algoritm will use
 		 *		as a criterion to stop
 		 *
+		 *	Optional parameters:
+		 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
+		 *		quadrature_points: 	  Custom number of quadrature points
+		 *		cluster: 			  Vector that contains the number of item for each dimension
+		 *		custom_initial:		  Custom initial values filename
 		 *
 		 *  Then it sets up all the data needed to start the estimation process
 		 *
 		 * */
 		estimation(int, matrix<char>&, short, double,
-						std::string custom_initial = NONE,
 						std::string quadrature_technique = GAUSSIAN_QUADRATURE,
 						int quadrature_points = DEFAULT_SOBOL_POINTS,
-						std::vector<int> = std::vector<int>() );
+						std::vector<int> cluster = std::vector<int>(),
+						std::string custom_initial = NONE );
 
 		virtual ~estimation();
 
@@ -83,7 +88,12 @@ class estimation {
 		 * Finds the initial values for every parameter of the items to start the estimation
 		 * */
 		void initial_values();
-		void custom_initial_values(std::string);
+
+		/**
+		 * Loads the initial values for every parameter of the items to start the estimation
+		 * from file
+		 * */
+		void load_initial_values(std::string);
 
 		void sobol_quadrature (int);
 

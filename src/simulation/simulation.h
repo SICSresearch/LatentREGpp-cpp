@@ -39,8 +39,7 @@ public:
 	 * 		and it's called iterations/interval times
 	 * */
 	void simulate ( int model, int d, int start, int end, std::string folder, std::string name, double, bool,
-			std::vector<int> cluster,
-			std::string, std::string, int );
+					std::string, int, std::vector<int> cluster, std::string );
 
 	/**
 	 * Simulates the number of iterations
@@ -64,13 +63,18 @@ public:
 	 *
 	 *		simulate(2, 2, 100, "datasets/dicho-multi-tests/escenario2", "dicho-multi", 20, 0.001, true);
 	 *
+	 *	Optional parameters:
+	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
+	 *		G: 					  Custom number of quadrature points
+	 *		cluster: 			  Vector that contains the number of item for each dimension
+	 *		custom_initial:		  Custom initial values filename
 	 * */
 	void simulate ( int model, int d, int iterations, std::string folder,
 				    std::string name, int interval, double, bool,
-					std::vector<int> cluster = std::vector<int>(),
-					std::string custom_initial = BUILD,
 					std::string quadrature_technique = SOBOL_QUADRATURE,
-					int G = DEFAULT_SOBOL_POINTS );
+					int G = DEFAULT_SOBOL_POINTS,
+					std::vector<int> cluster = std::vector<int>(),
+					std::string custom_initial = BUILD );
 
 	/**
 	 * Runs a single test
@@ -79,11 +83,17 @@ public:
 	 * 			the filename of the dataset
 	 * 			the convergence difference to use
 	 * 			bool to indicate if data is dichotomous or not
+	 *
+	 *	Optional parameters:
+	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
+	 *		G: 					  Custom number of quadrature points
+	 *		cluster: 			  Vector that contains the number of item for each dimension
+	 *		custom_initial:		  Custom initial values filename
 	 * */
 	void run_single ( int, int, std::string, double, bool,
+					  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 					  std::vector<int> cluster = std::vector<int>(),
-					  std::string custom_initial = NONE,
-					  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS );
+					  std::string custom_initial = NONE );
 
 	/**
 	 * Runs a single polytomous test
@@ -91,11 +101,17 @@ public:
 	 * 			the dimensions of the problem
 	 * 			the filename of the dataset
 	 * 			the convergence difference to use
+	 *
+	 *	Optional parameters:
+	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
+	 *		G: 					  Custom number of quadrature points
+	 *		cluster: 			  Vector that contains the number of item for each dimension
+	 *		custom_initial:		  Custom initial values filename
 	 * */
 	void run_single_polytomous ( int, int, std::string, double,
+								 std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 								 std::vector<int> cluster = std::vector<int>(),
-								 std::string custom_initial = NONE,
-								 std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS );
+								 std::string custom_initial = NONE );
 
 	/**
 	 * Runs a single polytomous test
@@ -103,11 +119,17 @@ public:
 	 * 			the dimensions of the problem
 	 * 			the filename of the dataset
 	 * 			the convergence difference to use
+	 *
+	 *	Optional parameters:
+	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
+	 *		G: 					  Custom number of quadrature points
+	 *		cluster: 			  Vector that contains the number of item for each dimension
+	 *		custom_initial:		  Custom initial values filename
 	 * */
 	void run_single_dichotomous ( int, int, std::string, double,
+								  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 								  std::vector<int> cluster = std::vector<int>(),
-								  std::string custom_initial = NONE,
-								  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS );
+								  std::string custom_initial = NONE );
 
 	simulation();
 	virtual ~simulation();

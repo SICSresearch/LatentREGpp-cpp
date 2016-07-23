@@ -13,16 +13,15 @@ namespace polytomous {
 
 estimation::estimation ( int themodel, matrix<char> &dataset, short d,
 					   double convergence_difference,
-					   std::string custom_initial,
 					   std::string quadrature_technique,
 					   int quadrature_points,
-					   std::vector<int> number_of_items ) {
+					   std::vector<int> number_of_items,
+					   std::string custom_initial ) {
 	/**
 	 * Object to allocate all data needed in estimation process
 	 * */
 	data = estimation_data(d);
 	data.dataset = &dataset;
-
 
 	//-------------------------------------------------------------------------------------
 
@@ -202,7 +201,7 @@ void estimation::gaussian_quadrature () {
 	G = theta.rows();
 }
 
-void estimation::custom_initial_values ( std::string filename ) {
+void estimation::load_initial_values ( std::string filename ) {
 	matrix<double> mt;
 	input<double> in(';');
 	in.importData(filename, mt);
@@ -384,7 +383,7 @@ void estimation::initial_values() {
 
 void estimation::EMAlgortihm() {
 	if ( custom_initial == NONE || custom_initial == BUILD ) initial_values();
-	else custom_initial_values(custom_initial);
+	else load_initial_values(custom_initial);
 	double dif = 0.0;
 	do {
 		Estep(data);

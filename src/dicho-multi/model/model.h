@@ -12,15 +12,14 @@
 #include <cmath>
 #include <cassert>
 
+#include "../../util/constants.h"
+
 //including optimization files from dlib library
 #include <dlib/optimization.h>
 
 namespace irtpp {
 
 namespace dichomulti {
-
-const double LOWER_BOUND_ = 1e-08;
-const double UPPER_BOUND_ = 0.999999;
 
 typedef dlib::matrix<double,0,1> item_parameter;
 

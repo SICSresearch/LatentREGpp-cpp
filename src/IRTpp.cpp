@@ -25,7 +25,7 @@ int main() {
 	improveIO();
 	simulation sim;
 
-	sim.simulate(2, 4, 1, "datasets/4D", "4D-dicho-1000x80-", 1, 0.001, true);
+	sim.simulate(2, 4, 1, "datasets/4D", "4D-dicho-1000x80-", 1, 0.001, true, "Sobol", 600);
 
 //	sim.simulate(2, 4, 10, "datasets/4D", "4D-dicho-1000x80-", 10, 0.001, true, 2000);
 //	sim.simulate(2, 4, 10, "datasets/4D", "4D-dicho-1000x80-", 10, 0.001, true, 4000);
