@@ -26,26 +26,26 @@ void simulation1 ( ) {
 	cluster[10] = {20, 20, 10, 15, 15, 15, 25, 20, 25, 10};
 
 	//3D
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 5, 0.001, true, "Gaussian", -1, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 5, 0.001, true, "Sobol", 2000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 5, 0.001, true, "Sobol", 5000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 5, 0.001, false, "Gaussian", -1, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 5, 0.001, false, "Sobol", 2000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 5, 0.001, false, "Sobol", 5000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 2, 0.001, true, "Gaussian", -1, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 2, 0.001, true, "Sobol", 2000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 2, 0.001, true, "Sobol", 5000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 2, 0.001, false, "Gaussian", -1, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 2, 0.001, false, "Sobol", 2000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-1000x55-", 2, 0.001, false, "Sobol", 5000, cluster[3], BUILD);
 
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 5, 0.001, true, "Gaussian", -1, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 5, 0.001, true, "Sobol", 2000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 5, 0.001, true, "Sobol", 5000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 5, 0.001, false, "Gaussian", -1, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 5, 0.001, false, "Sobol", 2000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 5, 0.001, false, "Sobol", 5000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 2, 0.001, true, "Gaussian", -1, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 2, 0.001, true, "Sobol", 2000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 2, 0.001, true, "Sobol", 5000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 2, 0.001, false, "Gaussian", -1, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 2, 0.001, false, "Sobol", 2000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-2000x55-", 2, 0.001, false, "Sobol", 5000, cluster[3], BUILD);
 
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 5, 0.001, true, "Gaussian", -1, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 5, 0.001, true, "Sobol", 2000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 5, 0.001, true, "Sobol", 5000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 5, 0.001, false, "Gaussian", -1, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 5, 0.001, false, "Sobol", 2000, cluster[3], BUILD);
-	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 5, 0.001, false, "Sobol", 5000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 2, 0.001, true, "Gaussian", -1, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 2, 0.001, true, "Sobol", 2000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 2, 0.001, true, "Sobol", 5000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 2, 0.001, false, "Gaussian", -1, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 2, 0.001, false, "Sobol", 2000, cluster[3], BUILD);
+	sim.simulate(2, 3, 10, "datasets/3D", "3D-dicho-5000x55-", 2, 0.001, false, "Sobol", 5000, cluster[3], BUILD);
 
 	//6D
 	sim.simulate(2, 6, 10, "datasets/6D", "6D-dicho-1000x115-", 1, 0.001, true, "Sobol", 2000, cluster[6], BUILD);
@@ -78,6 +78,22 @@ void simulation1 ( ) {
 	sim.simulate(2, 7, 10, "datasets/7D", "7D-dicho-5000x125-", 1, 0.001, true, "Sobol", 5000, cluster[7], BUILD);
 	sim.simulate(2, 7, 10, "datasets/7D", "7D-dicho-5000x125-", 1, 0.001, false, "Sobol", 2000, cluster[7], BUILD);
 	sim.simulate(2, 7, 10, "datasets/7D", "7D-dicho-5000x125-", 1, 0.001, false, "Sobol", 5000, cluster[7], BUILD);
+
+	//10D
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x175-", 1, 0.001, true, "Sobol", 2000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x175-", 1, 0.001, true, "Sobol", 5000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x175-", 1, 0.001, false, "Sobol", 2000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-1000x175-", 1, 0.001, false, "Sobol", 5000, cluster[10], BUILD);
+
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-2000x175-", 1, 0.001, true, "Sobol", 2000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-2000x175-", 1, 0.001, true, "Sobol", 5000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-2000x175-", 1, 0.001, false, "Sobol", 2000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-2000x175-", 1, 0.001, false, "Sobol", 5000, cluster[10], BUILD);
+
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-5000x175-", 1, 0.001, true, "Sobol", 2000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-5000x175-", 1, 0.001, true, "Sobol", 5000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-5000x175-", 1, 0.001, false, "Sobol", 2000, cluster[10], BUILD);
+	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-5000x175-", 1, 0.001, false, "Sobol", 5000, cluster[10], BUILD);
 }
 
 int main() {
