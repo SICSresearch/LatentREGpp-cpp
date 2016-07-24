@@ -219,7 +219,7 @@ void estimation::gaussian_quadrature () {
 
 void estimation::load_initial_values ( std::string filename ) {
 	matrix<double> mt;
-	input<double> in(';');
+	input<double> in(',');
 	in.importData(filename, mt);
 
 	//Dimension

@@ -75,7 +75,7 @@ public:
 					std::string quadrature_technique = SOBOL_QUADRATURE,
 					int G = DEFAULT_SOBOL_POINTS,
 					std::vector<int> cluster = std::vector<int>(),
-					std::string custom_initial_values_filename = BUILD );
+					std::string custom_initial_values_filename = NONE );
 
 	/**
 	 * Runs a single test

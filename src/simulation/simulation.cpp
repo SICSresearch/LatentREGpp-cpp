@@ -27,7 +27,8 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 	std::ofstream report_parameters;
 	std::stringstream ss;
 	ss << folder << "/estimation-" << name << '-' << start << '-' << end;
-	if ( quadrature_technique == SOBOL_QUADRATURE ) ss << "-G=" << G << ".csv";
+	if ( quadrature_technique == SOBOL_QUADRATURE ) ss << "-G=" << G;
+	ss << (dicho ? "-dicho-package" : "-poly-package") << ".csv";
 
 	std::string parameters = ss.str();
 	report_parameters.open(parameters.c_str());
@@ -45,12 +46,28 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 
 		std::string file_name = ss.str();
 		in.importData(file_name, Y);
-		std::cout << file_name << " imported" << std::endl;
+
+		ss << " imported. Running with " << (dicho ? "dichotomous" : "polytomus") << " package";
+		if ( quadrature_technique == SOBOL_QUADRATURE )
+			ss << " and Sobol G=" << G;
+		else
+			ss << " and Gaussian";
+
+		std::cout << ss.str() << std::endl;
+
+		if ( custom_initial_values_filename == BUILD ) {
+			ss.str("");
+			ss << folder << "/INI/INITIAL-" << name << i << ".csv";
+			custom_initial_values_filename = ss.str();
+		}
+
+		std::cout << ss.str() << std::endl;
 
 		if ( dicho ) {
 			START_CLOCK
 			dichomulti::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial_values_filename);
 			e.EMAlgortihm();
+			std::cout << "ajksdh" << std::endl;
 
 			END_CLOCK
 			REPORT_TIME
