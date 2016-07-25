@@ -23,10 +23,15 @@ void simulation2 ( ) {
 	cluster[3] = {15, 20, 20};
 
 	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, true, "Gaussian", -1, cluster[3], NONE);
+	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, false, "Gaussian", -1, cluster[3], NONE);
 	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, true, "Gaussian", -1, cluster[3],
-							  "datasets/Nueva carpeta/NEG_INITIAL-3D-dicho-1000x55-1.csv");
+								  "datasets/Nueva carpeta/NEG_INITIAL-3D-dicho-1000x55-1.csv");
+	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, false, "Gaussian", -1, cluster[3],
+								  "datasets/Nueva carpeta/NEG_INITIAL-3D-dicho-1000x55-1.csv");
 	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, true, "Gaussian", -1, cluster[3],
-							  "datasets/Nueva carpeta/SUM_INITIAL-3D-dicho-1000x55-1.csv");
+								  "datasets/Nueva carpeta/SUM_INITIAL-3D-dicho-1000x55-1.csv");
+	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, false, "Gaussian", -1, cluster[3],
+								  "datasets/Nueva carpeta/SUM_INITIAL-3D-dicho-1000x55-1.csv");
 }
 
 void simulation1 ( ) {

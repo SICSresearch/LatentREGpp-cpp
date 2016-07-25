@@ -143,11 +143,10 @@ estimation::estimation ( int themodel, matrix<char> &dataset, short d,
 
 	//Number of items size MUST be equal to the number of dimensions
 	if ( number_of_items.size() == d ) {
-		int before = 0;
-		pinned_items.insert(0);
-		for ( unsigned int i = 0; i < number_of_items.size() - 1; ++i ) {
-			before += number_of_items[i];
-			pinned_items.insert(before);
+		int pinned = 0;
+		for ( unsigned int i = 0; i < number_of_items.size(); ++i ) {
+			pinned_items.insert(pinned);
+			pinned += number_of_items[i];
 		}
 	}
 
@@ -256,13 +255,8 @@ void estimation::load_initial_values ( std::string filename ) {
 
 	if ( pinned_items.empty() ) {
 		int items_for_dimension = p / d;
-		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
-			item_parameter &item = zeta[i];
+		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j )
 			pinned_items.insert(i);
-			for ( int h = 0; h < alphas; ++h )
-				item(h) = 0.0;
-			item(j) = 1.0;
-		}
 	}
 }
 
@@ -386,13 +380,17 @@ void estimation::initial_values() {
 
 		if ( pinned_items.empty() ) {
 			int items_for_dimension = p / d;
-			for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j ) {
-				item_parameter &item = zeta[i];
+			for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j )
 				pinned_items.insert(i);
-				for ( int h = 0; h < alphas; ++h )
-					item(h) = 0.0;
-				item(j) = 1.0;
-			}
+		}
+
+		int j = 0;
+		for ( auto pinned : pinned_items ) {
+			item_parameter &item = zeta[pinned];
+			for ( int h = 0; h < d; ++h )
+				item(h) = 0;
+			item(j) = 1;
+			++j;
 		}
 	}
 }
