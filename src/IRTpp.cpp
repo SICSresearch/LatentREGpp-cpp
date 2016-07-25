@@ -15,6 +15,20 @@ inline void improveIO () {
 	//std::cin.tie(0); std::cout.tie(0);
 }
 
+void simulation2 ( ) {
+	simulation sim;
+
+	std::map<int, std::vector<int> > cluster;
+
+	cluster[3] = {15, 20, 20};
+
+	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, true, "Gaussian", -1, cluster[3], NONE);
+	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, true, "Gaussian", -1, cluster[3],
+							  "datasets/Nueva carpeta/NEG_INITIAL-3D-dicho-1000x55-1.csv");
+	sim.simulate(2, 3, 1, "datasets/Nueva carpeta", "3D-dicho-1000x55-", 1, 0.001, true, "Gaussian", -1, cluster[3],
+							  "datasets/Nueva carpeta/SUM_INITIAL-3D-dicho-1000x55-1.csv");
+}
+
 void simulation1 ( ) {
 	simulation sim;
 
@@ -101,8 +115,8 @@ int main() {
 	cout.precision(5);
 	improveIO();
 
-	simulation1();
-
+	//simulation1();
+	simulation2();
 
 	//simulation
 	//Params:

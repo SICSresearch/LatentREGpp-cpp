@@ -114,7 +114,7 @@ class estimation {
 		 * Prints the results to a specific output stream,
 		 * including time elapsed in ms
 		 * */
-		void print_results(std::ofstream &, int);
+		void print_results(std::ofstream &, double);
 };
 
 }

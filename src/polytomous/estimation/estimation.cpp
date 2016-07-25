@@ -422,7 +422,7 @@ void estimation::print_results ( ) {
 	}
 }
 
-void estimation::print_results ( std::ofstream &fout, int elapsed ) {
+void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 	std::vector<item_parameter> &zeta = data.zeta;
 	int &d = data.d;
 	int &p = data.p;
@@ -433,7 +433,7 @@ void estimation::print_results ( std::ofstream &fout, int elapsed ) {
 			if ( j ) fout << ';';
 			fout << zeta[i](j);
 		}
-		fout << ';' << elapsed << '\n';
+		fout << ';' << iterations << ';' << elapsed << '\n';
 	}
 }
 

@@ -321,7 +321,7 @@ void estimation::print_results ( ) {
 	}
 }
 
-void estimation::print_results ( std::ofstream &fout, int elapsed ) {
+void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 	std::vector<item_parameter> &zeta = data.zeta;
 	int &d = data.d;
 	int &p = data.p;
@@ -337,7 +337,7 @@ void estimation::print_results ( std::ofstream &fout, int elapsed ) {
 			double c = zeta[i](zeta[i].size() - 1);
 			fout << 1.0 / (1.0 + exp(-c));
 		}
-		fout << ';' << elapsed << '\n';
+		fout << ';' << iterations << ';' << elapsed << '\n';
 	}
 }
 

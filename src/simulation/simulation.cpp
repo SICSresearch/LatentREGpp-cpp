@@ -37,11 +37,16 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 	ss.str("");
 	ss << folder << "/" << name;
 	const std::string base_name = ss.str();
+
+	ss.str("");
+	ss << folder << "/INI/INITIAL-" << name;
+	const std::string initial_base_name = ss.str();
+
 	for ( int i = start; i <= end; ++i ) {
 		matrix<char> Y;
 		input<char> in(';');
 
-		std::stringstream ss;
+		ss.str("");
 		ss << base_name << i << ".csv";
 
 		std::string file_name = ss.str();
@@ -55,26 +60,26 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 
 		std::cout << ss.str() << std::endl;
 
+		std::string initial_values = custom_initial_values_filename;
 		if ( custom_initial_values_filename == BUILD ) {
 			ss.str("");
-			ss << folder << "/INI/INITIAL-" << name << i << ".csv";
-			custom_initial_values_filename = ss.str();
+			ss << initial_base_name << i << ".csv";
+			initial_values = ss.str();
 		}
 
-		std::cout << ss.str() << std::endl;
+		std::cout << "Initial values from file: " << initial_values << std::endl;
 
 		if ( dicho ) {
 			START_CLOCK
-			dichomulti::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial_values_filename);
+			dichomulti::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, initial_values);
 			e.EMAlgortihm();
-			std::cout << "ajksdh" << std::endl;
 
 			END_CLOCK
 			REPORT_TIME
 			e.print_results(report_parameters, elapsed);
 		} else {
 			START_CLOCK
-			polytomous::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, custom_initial_values_filename);
+			polytomous::estimation e(model, Y, d, dif, quadrature_technique, G, cluster, initial_values);
 			e.EMAlgortihm();
 
 			END_CLOCK
