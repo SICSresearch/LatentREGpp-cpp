@@ -21,7 +21,7 @@ int main ( ) {
     bool dicho = true;
     int items = 175;
 
-    for ( int i = 0; i < 3; ++i ) {
+    for ( int i = 0; i < 1; ++i ) {
         for ( int j = 1; j <= 10; ++j ) {
             stringstream ss1, ss2;
             ss1 << "INI-" << D << "D-" << (dicho ? "dicho" : "poly") << "-" << ind[i] << "x" << items << "-" << j << ".csv";
@@ -35,17 +35,8 @@ int main ( ) {
             string s;
             in >> s;
 
-            cout << filename1 << endl;
-            cout << filename2 << endl;
-
             for ( int h = 0; h < items; ++h ) {
-
                 in >> s;
-                cout << s << endl;
-                int unnecessary = 0;
-                for ( ; s[unnecessary] != ','; ++unnecessary );
-
-                s = s.substr(unnecessary + 1, s.size() - unnecessary);
                 out << s << '\n';
             }
 
