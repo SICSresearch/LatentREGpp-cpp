@@ -35,17 +35,8 @@ int main ( ) {
             string s;
             in >> s;
 
-            cout << filename1 << endl;
-            cout << filename2 << endl;
-
             for ( int h = 0; h < items; ++h ) {
-
                 in >> s;
-                cout << s << endl;
-                int unnecessary = 0;
-                for ( ; s[unnecessary] != ','; ++unnecessary );
-
-                s = s.substr(unnecessary + 1, s.size() - unnecessary);
                 out << s << '\n';
             }
 
