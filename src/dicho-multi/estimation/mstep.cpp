@@ -38,18 +38,23 @@ double Qi::operator() ( const item_parameter& item_i ) const {
 	return value;
 }
 
-double Mstep(estimation_data &data) {
+double Mstep(estimation_data &data, double epsilon) {
 	double max_difference = 0.0;
 
 	int &p = data.p;
+	int &d = data.d;
 	std::vector<item_parameter> &zeta = data.zeta;
 	std::set<int> &pinned_items = data.pinned_items;
+	std::vector<bool> &active_items = data.active_items;
+	int &active_items_count = data.active_items_count;
 
 	/**
 	 * Log likelihood must be optimized for every item
 	 * */
 
-	#pragma omp parallel for schedule(dynamic)
+	int off = 0;
+
+	#pragma omp parallel for schedule(dynamic) reduction(+:off)
 	for ( int i = 0; i < p; ++i ) {
 		/**
 		 * If it is multidimensional and this is one of the pinned items
@@ -57,6 +62,9 @@ double Mstep(estimation_data &data) {
 		 * this item is just skipped
 		 * */
 		if ( pinned_items.count(i) ) continue;
+
+		//If this item is not active is also skipped
+		if ( !active_items[i] ) continue;
 
 		item_parameter before = zeta[i];
 
@@ -66,8 +74,28 @@ double Mstep(estimation_data &data) {
 					   Qi(i, &data), zeta[i], -1);
 
 		//Computing difference of current item
+		double max_difference_i = 0.0;
 		for ( int j = 0; j < before.size(); ++j )
-			max_difference = std::max(max_difference, std::abs(before(j) - zeta[i](j)));
+			max_difference_i = std::max(max_difference_i, std::abs(before(j) - zeta[i](j)));
+
+		max_difference = std::max(max_difference, max_difference_i);
+
+		if ( max_difference_i < epsilon ) {
+			active_items[i] = false;
+			++off;
+		}
+	}
+
+	if ( active_items_count != p - d && active_items_count == off ) {
+		active_items.assign(p, true);
+		active_items_count -= off;
+		std::cout << "Turning off: " << off << " Active: " << active_items_count << std::endl;
+		active_items_count = p - d;
+		std::cout << "Turning on all items, active: " << active_items_count << std::endl;
+		max_difference = Mstep(data, epsilon);
+	} else {
+		active_items_count -= off;
+		std::cout << "Turning off: " << off << " Active: " << active_items_count << std::endl;
 	}
 
 	return max_difference;

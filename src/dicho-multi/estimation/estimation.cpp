@@ -69,6 +69,15 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	//Matrix correct that has been answered correctly
 	matrix<int> &correct = data.correct;
 
+	//Active items
+	std::vector<bool> &active_items = data.active_items;
+
+	//Active items counter
+	int &active_items_count = data.active_items_count;
+
+	//Pinned items in multidimensional case (the first of each dimension)
+	std::set<int> &pinned_items = data.pinned_items;
+
 	//-------------------------------------------------------------------------------------
 
 
@@ -107,9 +116,10 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	r = matrix<double>(G, p);
 	f = std::vector<double>(G);
 
-	//Pinned items in multidimensional case (the first of each dimension)
-	std::set<int> &pinned_items = data.pinned_items;
 
+	//At the beginning every item is active
+	active_items = std::vector<bool>(p, true);
+	active_items_count = p - d;
 
 	//Number of items size MUST be equal to the number of dimensions
 	if ( number_of_items.size() == d ) {
@@ -290,13 +300,14 @@ void estimation::initial_values() {
 void estimation::EMAlgortihm() {
 	if ( custom_initial_values_filename == NONE || custom_initial_values_filename == BUILD ) initial_values();
 	else load_initial_values(custom_initial_values_filename);
+	iterations = 0;
 	double dif = 0.0;
 	do {
 		Estep(data);
-		dif = Mstep(data);
+		dif = Mstep(data, convergence_difference);
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
-	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
+	} while ( dif >= convergence_difference && iterations < MAX_ITERATIONS );
 }
 
 void estimation::print_results ( ) {

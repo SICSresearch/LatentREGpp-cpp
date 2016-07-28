@@ -65,6 +65,10 @@ public:
 	std::vector<item_parameter> zeta;
 	//Model to use
 	model m;
+	//Active items
+	std::vector<bool> active_items;
+	//Active items counter
+	int active_items_count;
 
 	estimation_data(int);
 	estimation_data();
