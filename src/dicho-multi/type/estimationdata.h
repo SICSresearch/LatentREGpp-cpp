@@ -10,6 +10,7 @@
 #include <vector>
 #include <set>
 #include "../../util/matrix.h"
+#include "../../util/constants.h"
 
 #include <dlib/optimization.h>
 
@@ -62,7 +63,7 @@ public:
 	//Pinned items (won't be estimated)
 	std::set<int> pinned_items;
 	//Vector or item parameters
-	std::vector<item_parameter> zeta;
+	std::vector<item_parameter> zeta[ZETA_STEP];
 	//Model to use
 	model m;
 

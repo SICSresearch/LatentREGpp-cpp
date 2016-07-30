@@ -11,7 +11,7 @@ namespace irtpp {
 
 namespace dichomulti {
 
-void Estep ( estimation_data &data ) {
+void Estep ( estimation_data &data, int current ) {
 	//Number of items
 	int &p = data.p;
 	//Number of response patterns
@@ -29,7 +29,7 @@ void Estep ( estimation_data &data ) {
 	//Weights
 	std::vector<double> &w = data.w;
 	//Vector of parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[current];
 	//f
 	std::vector<double> &f = data.f;
 	f.assign(f.size(), 0);

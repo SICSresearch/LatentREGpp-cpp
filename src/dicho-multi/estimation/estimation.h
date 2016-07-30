@@ -13,6 +13,8 @@
 #include "../../util/input.h"
 #include "../../util/quadraturepoints.h"
 #include "../../util/constants.h"
+#include "../../util/squarem.h"
+#include "../../util/ramsay.h"
 
 #include <map>
 #include <cmath>

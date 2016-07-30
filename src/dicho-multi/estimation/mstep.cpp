@@ -38,36 +38,44 @@ double Qi::operator() ( const item_parameter& item_i ) const {
 	return value;
 }
 
-double Mstep(estimation_data &data) {
+double Mstep(estimation_data &data, int current) {
 	double max_difference = 0.0;
+	int next = (current + 1) % ZETA_STEP;
 
 	int &p = data.p;
-	std::vector<item_parameter> &zeta = data.zeta;
+
+	if ( data.zeta[next].empty() ) {
+		for ( auto c : data.zeta[current] )
+			data.zeta[next].push_back(c);
+	}
+
 	std::set<int> &pinned_items = data.pinned_items;
 
 	/**
 	 * Log likelihood must be optimized for every item
 	 * */
 
-	#pragma omp parallel for schedule(dynamic)
+	#pragma omp parallel for schedule(dynamic) reduction(max:max_difference)
 	for ( int i = 0; i < p; ++i ) {
 		/**
 		 * If it is multidimensional and this is one of the pinned items
 		 * i.e the first item of a dimension
 		 * this item is just skipped
 		 * */
+
 		if ( pinned_items.count(i) ) continue;
 
-		item_parameter before = zeta[i];
+
+		data.zeta[next][i] = data.zeta[current][i];
 
 		//Calling BFGS from dlib to optimize Qi with approximate derivatives (Log likelihood)
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
 					   dlib::objective_delta_stop_strategy(1e-7),
-					   Qi(i, &data), zeta[i], -1);
+					   Qi(i, &data), data.zeta[next][i], -1);
 
 		//Computing difference of current item
-		for ( int j = 0; j < before.size(); ++j )
-			max_difference = std::max(max_difference, std::abs(before(j) - zeta[i](j)));
+		for ( int j = 0; j < data.zeta[next][i].size(); ++j )
+			max_difference = std::max(max_difference, std::abs(data.zeta[next][i](j) - data.zeta[current][i](j)));
 	}
 
 	return max_difference;

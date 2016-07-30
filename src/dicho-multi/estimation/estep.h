@@ -31,7 +31,7 @@ typedef dlib::matrix<double,0,1> item_parameter;
  * Receives an estimation_data reference that MUST bring all the
  * data needed to run the Estep
  * */
-void Estep(estimation_data&);
+void Estep(estimation_data&, int current);
 
 } /* namespace irtpp */
 

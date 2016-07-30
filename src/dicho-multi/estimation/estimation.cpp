@@ -192,7 +192,7 @@ void estimation::load_initial_values ( std::string filename ) {
 	//Dimension
 	int &d = data.d;
 	//Parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[0];
 	//Number of items
 	int &p = data.p;
 	//Model used in the problem
@@ -219,7 +219,7 @@ void estimation::load_initial_values ( std::string filename ) {
 
 void estimation::initial_values() {
 	//Parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[0];
 	//Dimension
 	int &d = data.d;
 	//Number of examinees
@@ -291,16 +291,25 @@ void estimation::EMAlgortihm() {
 	if ( custom_initial_values_filename == NONE || custom_initial_values_filename == BUILD ) initial_values();
 	else load_initial_values(custom_initial_values_filename);
 	double dif = 0.0;
+	iterations = 0;
+	int current;
 	do {
-		Estep(data);
-		dif = Mstep(data);
+		current = iterations % ZETA_STEP;
+		Estep(data, current);
+
+		if ( iterations > 0 && current == 2 ) {
+			ramsay(data.zeta, data.pinned_items);
+			//squarem(data.zeta, data.pinned_items);
+		}
+
+		dif = Mstep(data, current);
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
 	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
 }
 
 void estimation::print_results ( ) {
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[iterations % ZETA_STEP];
 	int &p = data.p;
 	model &m = data.m;
 
@@ -320,7 +329,7 @@ void estimation::print_results ( ) {
 }
 
 void estimation::print_results ( std::ofstream &fout, double elapsed ) {
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[iterations % ZETA_STEP];
 	int &d = data.d;
 	int &p = data.p;
 	model &m = data.m;

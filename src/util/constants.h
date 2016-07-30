@@ -27,6 +27,9 @@ namespace irtpp {
 
 	const double LOWER_BOUND_ = 1e-08;
 	const double UPPER_BOUND_ = 0.999999;
+
+	const int ZETA_STEP = 3;
+	const double MINIMUM_ACCEL = -5.0;
 }
 
 

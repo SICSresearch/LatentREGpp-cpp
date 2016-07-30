@@ -27,7 +27,7 @@ namespace dichomulti {
  * Receives an estimation_data reference that MUST bring all the
  * data needed to run the Mstep
  */
-double Mstep(estimation_data&);
+double Mstep(estimation_data&, int current_zeta);
 
 /**
  * Log likelihood Function to maximize
