@@ -114,7 +114,10 @@ int main() {
 	cout.precision(5);
 	improveIO();
 
-	simulation1();
+	//simulation1();
+
+	simulation sim;
+	sim.run_single_dichotomous(2, 1, "datasets/LSAT.csv", 0.0001);
 
 	//simulation
 	//Params:

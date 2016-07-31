@@ -16,7 +16,7 @@ double norm ( item_parameter &it ) {
 	return std::sqrt(sum);
 }
 
-void squarem ( std::vector<item_parameter> zeta[ZETA_STEP], std::set<int> &pinned ) {
+void squarem ( std::vector<item_parameter> zeta[ACCELERATION_PERIOD], std::set<int> &pinned ) {
 	int p = zeta[0].size();
 	double r, v, alpha;
 	for ( int i = 0; i < p; ++i ) {

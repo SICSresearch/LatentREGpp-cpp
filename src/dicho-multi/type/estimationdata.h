@@ -63,7 +63,7 @@ public:
 	//Pinned items (won't be estimated)
 	std::set<int> pinned_items;
 	//Vector or item parameters
-	std::vector<item_parameter> zeta[ZETA_STEP];
+	std::vector<item_parameter> zeta[ACCELERATION_PERIOD];
 	//Model to use
 	model m;
 

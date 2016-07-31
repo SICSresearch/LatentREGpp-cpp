@@ -18,7 +18,7 @@ namespace irtpp {
 
 typedef dlib::matrix<double,0,1> item_parameter;
 
-void squarem ( std::vector<item_parameter> zeta[ZETA_STEP], std::set<int> &pinned );
+void squarem ( std::vector<item_parameter> zeta[ACCELERATION_PERIOD], std::set<int> &pinned );
 
 
 } /* namespace irtpp */

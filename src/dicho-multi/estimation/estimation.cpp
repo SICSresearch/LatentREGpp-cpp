@@ -294,22 +294,21 @@ void estimation::EMAlgortihm() {
 	iterations = 0;
 	int current;
 	do {
-		current = iterations % ZETA_STEP;
-		Estep(data, current);
-
-		if ( iterations > 0 && current == 2 ) {
+		current = iterations % ACCELERATION_PERIOD;
+		if ( current == 2 ) {
 			ramsay(data.zeta, data.pinned_items);
 			//squarem(data.zeta, data.pinned_items);
 		}
 
+		Estep(data, current);
 		dif = Mstep(data, current);
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
-	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
+	} while ( dif >= convergence_difference && iterations < MAX_ITERATIONS );
 }
 
 void estimation::print_results ( ) {
-	std::vector<item_parameter> &zeta = data.zeta[iterations % ZETA_STEP];
+	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 	model &m = data.m;
 
@@ -329,7 +328,7 @@ void estimation::print_results ( ) {
 }
 
 void estimation::print_results ( std::ofstream &fout, double elapsed ) {
-	std::vector<item_parameter> &zeta = data.zeta[iterations % ZETA_STEP];
+	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &d = data.d;
 	int &p = data.p;
 	model &m = data.m;
