@@ -117,7 +117,7 @@ int main() {
 	//simulation1();
 
 	simulation sim;
-	sim.run_single_dichotomous(2, 1, "datasets/LSAT.csv", 0.0001);
+	sim.run_single_dichotomous(3, 1, "datasets/3PL-2D-1000x40.csv", 0.001);
 
 	//simulation
 	//Params:

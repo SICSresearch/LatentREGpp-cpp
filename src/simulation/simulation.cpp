@@ -122,9 +122,14 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 	e.EMAlgortihm();
 
 	END_CLOCK
-
 	e.print_results();
 	REPORT_TIME
+
+	std::stringstream ss;
+	ss << filename << "-estimation.csv";
+	std::ofstream out(ss.str());
+	e.print_results(out, elapsed);
+	out.close();
 }
 
 void simulation::run_single_dichotomous ( int model, int d, std::string filename, double dif,
@@ -141,9 +146,14 @@ void simulation::run_single_dichotomous ( int model, int d, std::string filename
 	e.EMAlgortihm();
 
 	END_CLOCK
-
 	e.print_results();
 	REPORT_TIME
+
+	std::stringstream ss;
+	ss << filename << "-estimation.csv";
+	std::ofstream out(ss.str());
+	e.print_results(out, elapsed);
+	out.close();
 }
 
 simulation::~simulation() {

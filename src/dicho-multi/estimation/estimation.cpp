@@ -341,7 +341,7 @@ void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 		}
 		if ( guessing_parameter ) {
 			double c = zeta[i](zeta[i].size() - 1);
-			fout << 1.0 / (1.0 + exp(-c));
+			fout << ';' << 1.0 / (1.0 + exp(-c));
 		}
 		fout << ';' << iterations << ';' << elapsed << '\n';
 	}
