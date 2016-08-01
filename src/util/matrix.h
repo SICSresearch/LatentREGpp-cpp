@@ -1,4 +1,4 @@
-/*
+/**
  * matrix.h
  *
  *  Created on: 14/04/2016
@@ -13,96 +13,137 @@
 
 namespace irtpp {
 
-/**
- *	Matrix class.
- *	Matrix class used to store information.
- * */
-
 template<class T>
+/**
+ * Matrix class used to store information.
+ */
 class matrix {
 	private:
-		std::vector<std::vector<T> > data;
+		std::vector<std::vector<T> > data; /**< Instance of vector of vectors with T template
+												where the information is saved*/
 
 	public:
-		matrix();
+
 		/**
-		 * Creates a new matrix with size rows * cols
-		 * */
+		 * Matrix default constructor. It's empty, don't use.
+		 */
+		matrix();
+
+		/**
+		 * Creates a new matrix with size rows x columns.
+		 * @param rows the number of rows in matrix.
+		 * @param cols the number of columns in matrix.
+		 */
 		matrix(int rows, int cols);
 
 		/**
-		 * Creates a new matrix specifying only the number of rows
-		 * rows can be added after using add_row(std::vector) method
-		 * */
-		matrix(int cols);
+		 * Creates a new matrix specifying only the number of rows,
+		 * rows can be added after using add_row(std::vector) method.
+		 * @param rows a integer with rows number.
+		 * @see add_row()
+		 */
+		matrix(int rows);
 
 		/**
-		 * Adds a new row to the current matrix
-		 * */
+		 * Adds a new row to the current matrix.
+		 * @param new_row a pointer from std vector library, this will be the new row in matrix.
+		 */
 		void add_row(std::vector<T> *new_row);
 
 		/**
-		 * Adds a new row to the current matrix
-		 * */
+		 * Adds a new row to the current matrix.
+		 * @param new_row a std vector library, this will be the new row in matrix.
+		 */
 		void add_row(std::vector<T> new_row);
-		void add_row(T* new_row, int size);
+
 		/**
-		 * Adds an empty row
-		 * */
+		 * Adds a new row to the current matrix setting size.
+		 * @param new_row a T template for new_row.
+		 * @param size the size for row.
+		 */
+		void add_row(T* new_row, int size);
+
+		/**
+		 * Adds an empty row to matrix by default with std vector library and T template.
+		 */
 		void add_row();
 
 		/**
-		 * Adds a empty row with specified size
-		 * */
+		 * Adds a empty row with specified size.
+		 * @param size the size for new row.
+		 */
 		void add_row(int);
 
 		/**
-		 * Clean the number of the specific row
-		 * */
+		 * Clean the number of the specific row, by default this row is set with zeros.
+		 * WARNING: be sure about the index row. No throw exception implemented for index array out of bounds.
+		 * @param idx the index of row.
+		 */
 		void reset_row(int);
 
+		/**
+		 * Clean all matrix with zeros by default.
+		 */
 		void reset();
 
 		/**
-		 * Adds an element to the last row
-		 * */
+		 * Adds an element to the last row.
+		 * @param e the T element.
+		 */
 		void add_element(T e);
 
 		/**
-		 * Adds an element to a specific row
-		 * */
+		 * Adds an element to a specific row.
+		 * @param row the number of row to add element.
+		 * @param e the T element to add.
+		 */
 		void add_element(int row, T e);
 
+		/**
+		 * Destructor for matrix class.
+		 */
 		virtual ~matrix();
 
 		/**
-		 * Returns the data
+		 * Getter method, returns the data.
+		 * @return the data. it is a vector of vectors from std library
 		 * */
 		std::vector<std::vector<T> > get_data();
 
 		/**
-		 * Returns the i-th row in the matrix
+		 * Returns the i-th row in the matrix.
+		 * WARNING: be sure about the index row. No throw exception implemented for index array out of bounds.
+		 * @param i the index of row to show.
+		 * @return std vector according the number of row
 		 * */
 		std::vector<T> get_row(int i);
 
 		/**
-		 * Returns the i-th row in the matrix
+		 * Returns the i-th row pointer in the matrix.
+		 * WARNING: be sure about the index row. No throw exception implemented for index array out of bounds.
+		 * @param i the index of row to show.
+		 * @return std vector according the number of row
 		 * */
 		std::vector<T>* get_pointer_row(int i);
 
 		/**
-		 * Returns number of rows of the matrix
+		 * Returns number of rows of the matrix.
+		 * @return an integer with number of row in matrix
 		 * */
 		int rows();
 
 		/**
-		 * Returns number of columns of a specific row
+		 * Returns number of columns of a specific row.
+		 * WARNING: be sure about the index row. No throw exception implemented for index array out of bounds.
+		 * @param row the index number of row matrix.
+		 * @return an integer with number of columns in ro.
 		 * */
 		int columns(int row);
 
 		/**
-		 *  Accessing operator for an element
-		 * */
+		 * Accessing operator for an element.
+		 * Overload parenthesis operator.
+		 */
 		inline T &operator()(const int row, const int col);
 };
 
