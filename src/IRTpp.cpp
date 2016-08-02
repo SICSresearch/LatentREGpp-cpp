@@ -109,15 +109,51 @@ void simulation1 ( ) {
 //	sim.simulate(2, 10, 10, "datasets/10D", "10D-dicho-5000x175-", 1, 0.001, false, "Sobol", 5000, cluster[10], BUILD);
 }
 
+int sum ( std::vector<int> &v ) {
+	int n = 0;
+	for ( auto x : v ) n += x;
+	return n;
+}
+
+void test_sobol ( ) {
+	simulation sim;
+
+	std::map<int, std::vector<int> > cluster;
+	std::map<int, int> items;
+	std::vector<int> sobol_points = {1000, 3000, 6000, 10000};
+
+	cluster[3] = {15, 20, 20};
+	cluster[6] = {15, 20, 15, 25, 20, 20};
+	cluster[9] = {20, 20, 10, 15, 15, 15, 25, 20, 25};
+	cluster[12] = {20, 20, 10, 15, 15, 15, 25, 20, 25, 10, 15, 20};
+	cluster[15] = {20, 20, 10, 15, 15, 15, 25, 20, 25, 10, 15, 20, 25, 10, 15};
+
+	for ( auto entry : cluster )
+		items[entry.first] = sum(entry.second);
+
+	for ( auto entry : items )
+		for ( auto G : sobol_points ) {
+			std::stringstream name;
+			int d = entry.first;
+			name << d << "D-dichopakage-3000x" << entry.second << "-";
+			sim.simulate(2, d, 1, "datasets/sobol_testing", name.str(), 1, 0.001, true, "Sobol", G, cluster[d], BUILD);
+		}
+}
+
 int main() {
 	cout.setf(std::ios_base::fixed);
 	cout.precision(5);
 	improveIO();
 
-	//simulation1();
+	test_sobol();
 
-	simulation sim;
-	sim.run_single_dichotomous(3, 1, "datasets/3PL-2D-1000x40.csv", 0.001);
+
+//	simulation sim;
+//	sim.run_single_dichotomous(3, 2, "datasets/3PL-2D-1000x40.csv", 0.001);
+
+
+
+
 
 	//simulation
 	//Params:

@@ -112,7 +112,7 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 
 
 	//Number of items size MUST be equal to the number of dimensions
-	if ( number_of_items.size() == d ) {
+	if ( d > 1 && number_of_items.size() == d ) {
 		int pinned = 0;
 		for ( unsigned int i = 0; i < number_of_items.size(); ++i ) {
 			pinned_items.insert(pinned);
@@ -186,7 +186,7 @@ void estimation::gaussian_quadrature () {
 
 void estimation::load_initial_values ( std::string filename ) {
 	matrix<double> mt;
-	input<double> in(',');
+	input<double> in(';');
 	in.importData(filename, mt);
 
 	//Dimension
@@ -210,7 +210,7 @@ void estimation::load_initial_values ( std::string filename ) {
 	//Items that will not be estimated
 	std::set<int> &pinned_items = data.pinned_items;
 
-	if ( pinned_items.empty() ) {
+	if ( d > 1 && pinned_items.empty() ) {
 		int items_for_dimension = p / d;
 		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j )
 			pinned_items.insert(i);
