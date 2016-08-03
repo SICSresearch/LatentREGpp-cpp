@@ -44,7 +44,7 @@ public:
 	matrix<double> pi; /**< Matrix pi*/
 	std::vector<double> f; /**< Vector f (Number of individuals in group g)*/
 	std::set<int> pinned_items; /**< Pinned items (won't be estimated)*/
-	std::vector<item_parameter> zeta[ACCELERATION_PERIOD]; /**< Vector or item parameters*/
+	std::vector<item_parameter> zeta[ACCELERATION_PERIOD]; /**< Vector of zeta item parameters*/
 	model m; /**< Model to use*/
 
 	/**

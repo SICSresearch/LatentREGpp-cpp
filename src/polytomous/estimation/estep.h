@@ -1,4 +1,4 @@
-/*
+/**
  * estep.h
  *
  *  Created on: 13/04/2016
@@ -26,11 +26,12 @@ namespace polytomous {
 
 
 /**
- * Estep of the EMAlgortihm
+ * Estep of the EMAlgortihm.
  *
  * Receives an estimation_data reference that MUST bring all the
- * data needed to run the Estep
- * */
+ * data needed to run the Estep.
+ * @param data a instance of estimation_data with all necessary data to do EMAlgorithm.
+ */
 void Estep(estimation_data&);
 
 } /* namespace irtpp */
