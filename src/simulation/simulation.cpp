@@ -38,7 +38,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 	const std::string base_name = ss.str();
 
 	ss.str("");
-	ss << folder << "/INI/INITIAL-" << name;
+	ss << folder << "/INI/INI" << name;
 	const std::string initial_base_name = ss.str();
 
 	for ( int i = start; i <= end; ++i ) {
@@ -113,7 +113,7 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData(filename, Y);
-	std::cout << "Data imported" << std::endl;
+	std::cout << "Data imported from " << filename << std::endl;
 
 	START_CLOCK
 
@@ -137,7 +137,7 @@ void simulation::run_single_dichotomous ( int model, int d, std::string filename
 	matrix<char> Y;
 	input<char> in(';');
 	in.importData(filename, Y);
-	std::cout << "Data imported" << std::endl;
+	std::cout << "Data imported from " << filename << std::endl;
 
 	START_CLOCK
 
