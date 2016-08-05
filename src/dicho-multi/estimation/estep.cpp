@@ -1,4 +1,4 @@
-/*
+/**
  * estep.cpp
  *
  *  Created on: 13/04/2016
@@ -51,7 +51,7 @@ void Estep ( estimation_data &data, int current ) {
 	/**
 	 * Computing each element of matrix P
 	 * P_gi
-	 * */
+	 */
 	#pragma omp parallel for schedule(dynamic)
 	for ( int g = 0; g < G; ++g ) {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
@@ -61,6 +61,11 @@ void Estep ( estimation_data &data, int current ) {
 	}
 
 	double integral_l = 0;
+
+	/**
+	 * Calcule the Pi_gl. Equation (7) from IRT_engineers document
+	 * this has a complexity O(G*s*p)
+	 */
 
 	//Patterns
 	#pragma omp parallel for schedule(dynamic) reduction(+:integral_l)

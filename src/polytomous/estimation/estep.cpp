@@ -1,4 +1,4 @@
-/*
+/**
  * estep.cpp
  *
  *  Created on: 13/04/2016
@@ -42,7 +42,7 @@ void Estep ( estimation_data &data ) {
 	 *
 	 * P_gik means the probability that an individual has selected the category k
 	 * to item i and belongs to group g
-	 * */
+	 */
 	std::vector<matrix<double> > &P = data.P;
 
 	/**
@@ -54,7 +54,7 @@ void Estep ( estimation_data &data ) {
 	 *
 	 * pi(g, l) is the probability that a response pattern belongs to
 	 * 			group g
-	 * */
+	 */
 	matrix<double> &pi = data.pi;
 
 	//r matrix
@@ -63,7 +63,7 @@ void Estep ( estimation_data &data ) {
 	/**
 	 * Computing each element of matrix P
 	 * P_gik
-	 * */
+	 */
     #pragma omp parallel for schedule(dynamic)
 	for ( int g = 0; g < G; ++g ) {
 		std::vector<double> &theta_g = *theta.get_pointer_row(g);
@@ -75,6 +75,11 @@ void Estep ( estimation_data &data ) {
 	}
 
 	double integral_l = 0;
+
+	/**
+	 * Calcule the Pi_glk. Equation (123) from IRT_engineers document
+	 * this has a complexity O(G*s*p)
+	 */
 
 	#pragma omp parallel for schedule(dynamic) reduction(+:integral_l)
 	for ( int l = 0; l < s; ++l ) {
@@ -123,12 +128,13 @@ void Estep ( estimation_data &data ) {
 			pi_gl /= integral_l;
 		}
 	}
+
 	/**
 	 * Expected number of examinees for each group g
 	 * who answered category k to item i
 	 *
-	 * Matrix r
-	 * */
+	 * Matrix r equation (124)
+	 */
 	#pragma omp parallel for schedule(dynamic) collapse(2)
 	for ( int g = 0; g < G; ++g ) {
 		for ( int i = 0; i < p; ++i ) {

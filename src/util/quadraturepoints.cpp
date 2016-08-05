@@ -1,4 +1,4 @@
-/*
+/**
  * quadraturepoints.cpp
  *
  *  Created on: 22/04/2016

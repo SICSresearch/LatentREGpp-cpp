@@ -1,4 +1,4 @@
-/*
+/**
  * estep.h
  *
  *  Created on: 13/04/2016
@@ -23,14 +23,16 @@ namespace irtpp {
 
 namespace dichomulti {
 
-typedef dlib::matrix<double,0,1> item_parameter;
+typedef dlib::matrix<double,0,1> item_parameter; /**< data type from dlib library*/
 
 /**
- * Estep of the EMAlgortihm
+ * Estep of the EMAlgortihm.
  *
  * Receives an estimation_data reference that MUST bring all the
  * data needed to run the Estep
- * */
+ * @param data a instance of estimation_data with all necessary data to do EMAlgorithm.
+ * @param current the current zeta estimation (Ramsay and Squarem accelerate)
+ */
 void Estep(estimation_data&, int current);
 
 } /* namespace irtpp */

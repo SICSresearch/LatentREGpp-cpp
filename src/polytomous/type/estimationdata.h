@@ -18,55 +18,46 @@ namespace irtpp {
 
 namespace polytomous {
 
-typedef dlib::matrix<double,0,1> item_parameter;
+typedef dlib::matrix<double,0,1> item_parameter; /**< data type from dlib library*/
 
 /**
- * Contains the information needed to execute the estimation
- * */
+ * estimation_data class contains all the information needed to execute the EM estimation in
+ * polytomous model
+ */
 class estimation_data {
 public:
-	//Matrix of answers
-	matrix<char> *dataset;
-	//Dimension
-	int d;
-	//Matrix of response patterns
-	matrix<char> Y;
-	//Frequencies of each response pattern
-	std::vector<int> nl;
-	//Number of examines
-	int N;
-	//Number of response patterns
-	int s;
-	//Number of items
-	int p;
-	//Number of quadrature points
-	int G;
-	//Number of categories for each item
-	std::vector<int> categories_item;
-	//Latent traits vectors
-	matrix<double> theta;
-	//Weights
-	std::vector<double> w;
-	//Matrix r
-	std::vector<matrix<double> > r;
-	/**
-	 * Probability matrix P
-	 *
-	 * P_gik means the probability that an individual has selected the category k
-	 * to item i and belongs to group g
-	 */
-	std::vector<matrix<double> > P;
-	//Matrix pi
-	matrix<double> pi;
-	//Pinned items (won't be estimated)
-	std::set<int> pinned_items;
-	//Vector or item parameters
-	std::vector<item_parameter> zeta;
-	//Model to use
-	model m;
+	matrix<char> *dataset; /**< Matrix of answers*/
+	int d; /**< Dimension*/
+	matrix<char> Y; /**< Matrix of response patterns*/
+	std::vector<int> nl; /**< Frequencies of each response pattern*/
+	int N; /**< Number of examines*/
+	int s; /**< Number of response patterns*/
+	int p; /**< Number of items*/
+	int G; /**< Number of quadrature points*/
+	std::vector<int> categories_item; /**< Number of categories for each item*/
+	matrix<double> theta; /**< Latent traits vectors*/
+	std::vector<double> w; /**< Weights*/
+	std::vector<matrix<double> > r; /**< Matrix r*/
+	std::vector<matrix<double> > P; /**< Probability matrix P, P_gik means the probability that an individual has selected the category k to item i and belongs to group g*/
+	matrix<double> pi; /**< Matrix pi*/
+	std::set<int> pinned_items; /**< Pinned items (won't be estimated)*/
+	std::vector<item_parameter> zeta; /**< Vector of zeta item parameters*/
+	model m; /**< Model to use*/
 
+	/**
+	 * Constructor for estimation_data class.
+	 * @param d the dimension.
+	 */
 	estimation_data(int);
+
+	/**
+	 * Default constructor for estimation_data. Is not working, don't use.
+	 */
 	estimation_data();
+
+	/**
+	 * Default destructor for estimation_data. Is not working, don't use.
+	 */
 	virtual ~estimation_data();
 };
 

@@ -1,4 +1,4 @@
-/*
+/**
  * input.h
  *
  *  Created on: 14/04/2016
@@ -19,33 +19,61 @@
 namespace irtpp {
 
 template<class T>
+/**
+ * Class for handle input data from \.csv files with a
+ * matrix content, by default it is separating the data
+ * by semicolon character but it can be modify through a constructor.
+ * This class uses T template, so you can define the data type for input
+ * the data, this should be the same data type of m matrix data type.
+ * Use char data type is more efficient in memory.
+ * @see matrix
+ */
 class input {
 	private:
-		/**
-		 * Delimiter to split each file line
-		 */
-		char delimiter;
+
+		char delimiter; /**< Delimiter to split each file line*/
 
 	public:
 
+		/**
+		 * Default constructor for input class.
+		 * Set delimiter with semicolon character.
+		 */
 		input();
+
+		/**
+		 * Constructor for input class.
+		 * @param del a char delimiter.
+		 */
 		input(char);
+
+		/**
+		 * Destructor for input class.
+		 */
 		virtual ~input();
 
 		/**
-		 * Imports matrixes from a csv
-		 * */
+		 * Imports matrixes from a csv.
+		 * @param filename a string with source file path to import.
+		 * @param m a matrix instance for save the data.
+		 */
 		bool importData(std::string filename, matrix<T>& m);
+
+		/**
+		 * Imports matrixes from a csv.
+		 * @param filename a string with source file path to import.
+		 * @param m a vector instance from std library for save the data.
+		 */
 		bool importData(std::string filename, std::vector<T>& m);
 
 		/**
-		 * Gets the delimiter used for inputting
-		 * */
+		 * Gets the delimiter used for inputting.
+		 */
 		char get_delimiter() const;
 
 		/**
-		 * Sets the delimiter for inputting text matrices
-		 * */
+		 * Sets the delimiter for inputting text matrices.
+		 */
 		void set_delimiter(char);
 };
 

@@ -25,6 +25,11 @@
 
 namespace irtpp {
 
+/**
+ * Simulation class has a collection of helper functions
+ * to simulate and testing dataset, model, package, precision, time
+ * and other statistics from IRT.
+ */
 class simulation {
 public:
 
@@ -34,16 +39,29 @@ public:
 	 * 									 1 <= end <= iterations
 	 * 									 start <= end
 	 *
-	 * Should be called from
+	 * Should be called from.
 	 * 		void simulate ( int model, int d, int iterations, std::string folder, std::string name, int interval );
 	 *
 	 * 		and it's called iterations/interval times
-	 * */
-	void simulate ( int model, int d, int start, int end, std::string folder, std::string name, double, bool,
+	 *
+	 * @param model integer number with model, 1 = "1PL", 2 = "2PL", 3 = "3PL".
+	 * @param d the dimension.
+	 * @param start the start iteration.
+	 * @param end the end iteration.
+	 * @param folder string path where are the datasets.
+	 * @param name relative path within folder with dataset(s) to estimate.
+	 * @param dif epsilon convergence.
+	 * @param dicho if true, the estimation is dichotomous.
+	 * @param quadrature_technique it can be "Gaussian" or "Sobol".
+	 * @param G number of points in Sobol technique.
+	 * @param cluster a std vector cluster with integer template for multidimensional cases.
+	 * @param custom_initial_values_filename BUILD if the dataset has custom initial values, else NONE.
+	 */
+	 void simulate ( int model, int d, int start, int end, std::string folder, std::string name, double, bool,
 					std::string, int, std::vector<int> cluster, std::string );
 
 	/**
-	 * Simulates the number of iterations
+	 * Simulates the number of iterations.
 	 *
 	 * And saves estimations each 'interval' iterations
 	 *
@@ -69,7 +87,20 @@ public:
 	 *		G: 					  Custom number of quadrature points
 	 *		cluster: 			  Vector that contains the number of item for each dimension
 	 *		custom_initial_values_filename:		  Custom initial values filename
-	 * */
+	 *
+	 * @param model integer number with model, 1 = "1PL", 2 = "2PL", 3 = "3PL".
+	 * @param d the dimension.
+	 * @param iterations the number of iterations.
+	 * @param folder string path where are the datasets.
+	 * @param name relative path within folder with dataset(s) to estimate.
+	 * @param interval save the estimations each interval number.
+	 * @param dif epsilon convergence.
+	 * @param dicho if true, the estimation is dichotomous.
+	 * @param quadrature_technique it can be "Gaussian" or "Sobol".
+	 * @param G number of points in Sobol technique.
+	 * @param cluster a std vector cluster with integer template for multidimensional cases.
+	 * @param custom_initial_values_filename BUILD if the dataset has custom initial values, else NONE.
+	 */
 	void simulate ( int model, int d, int iterations, std::string folder,
 				    std::string name, int interval, double, bool,
 					std::string quadrature_technique = SOBOL_QUADRATURE,
@@ -78,19 +109,31 @@ public:
 					std::string custom_initial_values_filename = NONE );
 
 	/**
-	 * Runs a single test
+	 * Runs a single test.
 	 * Receives the model to use
 	 * 			the dimensions of the problem
 	 * 			the filename of the dataset
 	 * 			the convergence difference to use
 	 * 			bool to indicate if data is dichotomous or not
 	 *
-	 *	Optional parameters:
+	 * Optional parameters:
 	 *		quadrature_technique: [GAUSSIAN_QUADRATURE, SOBOL_QUADRATURE]
 	 *		G: 					  Custom number of quadrature points
 	 *		cluster: 			  Vector that contains the number of item for each dimension
 	 *		custom_initial_values_filename:		  Custom initial values filename
-	 * */
+	 *
+	 * This function calls dichotomous or polytomous according bool variable
+	 *
+	 * @param model integer number with model, 1 = "1PL", 2 = "2PL", 3 = "3PL".
+	 * @param d the dimension.
+	 * @param filename string path where is the dataset.
+	 * @param dif epsilon convergence.
+	 * @param dicho if true, the estimation is dichotomous.
+	 * @param quadrature_technique it can be "Gaussian" or "Sobol".
+	 * @param G number of points in Sobol technique.
+	 * @param cluster a std vector cluster with integer template for multidimensional cases.
+	 * @param custom_initial_values_filename BUILD if the dataset has custom initial values, else NONE.
+	 */
 	void run_single ( int, int, std::string, double, bool,
 					  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 					  std::vector<int> cluster = std::vector<int>(),
@@ -108,7 +151,16 @@ public:
 	 *		G: 					  Custom number of quadrature points
 	 *		cluster: 			  Vector that contains the number of item for each dimension
 	 *		custom_initial_values_filename:		  Custom initial values filename
-	 * */
+	 *
+	 * @param model integer number with model, 1 = "1PL", 2 = "2PL", 3 = "3PL".
+	 * @param d the dimension.
+	 * @param filename string path where is the dataset.
+	 * @param dif epsilon convergence.
+	 * @param quadrature_technique it can be "Gaussian" or "Sobol".
+	 * @param G number of points in Sobol technique.
+	 * @param cluster a std vector cluster with integer template for multidimensional cases.
+	 * @param custom_initial_values_filename BUILD if the dataset has custom initial values, else NONE.
+	 */
 	void run_single_polytomous ( int, int, std::string, double,
 								 std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 								 std::vector<int> cluster = std::vector<int>(),
@@ -126,13 +178,29 @@ public:
 	 *		G: 					  Custom number of quadrature points
 	 *		cluster: 			  Vector that contains the number of item for each dimension
 	 *		custom_initial_values_filename:		  Custom initial values filename
-	 * */
+	 *
+	 * @param model integer number with model, 1 = "1PL", 2 = "2PL", 3 = "3PL".
+	 * @param d the dimension.
+	 * @param filename string path where is the dataset.
+	 * @param dif epsilon convergence.
+	 * @param quadrature_technique it can be "Gaussian" or "Sobol".
+	 * @param G number of points in Sobol technique.
+	 * @param cluster a std vector cluster with integer template for multidimensional cases.
+	 * @param custom_initial_values_filename BUILD if the dataset has custom initial values, else NONE.
+	 */
 	void run_single_dichotomous ( int, int, std::string, double,
 								  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
 								  std::vector<int> cluster = std::vector<int>(),
 								  std::string custom_initial_values_filename = NONE );
 
+	/**
+	 * Default constructor for simulation class. Is not working, don't use.
+	 */
 	simulation();
+
+	/**
+	 * Default destructor for simulation class. Is not working, don't use.
+	 */
 	virtual ~simulation();
 };
 

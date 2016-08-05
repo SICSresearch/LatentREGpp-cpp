@@ -16,8 +16,13 @@
 
 namespace irtpp {
 
-typedef dlib::matrix<double,0,1> item_parameter;
+typedef dlib::matrix<double,0,1> item_parameter; /**< data type from dlib library*/
 
+/**
+ * Ramsay is an accelerate method for EM algorithm.
+ * @params zeta a vector with previous zeta values z0,z1,z2 calculated in EM algorithm.
+ * @params pinned a set with int template that contains items that won't be estimated, pass by reference.
+ */
 void ramsay ( std::vector<item_parameter> zeta[ACCELERATION_PERIOD], std::set<int> &pinned );
 
 

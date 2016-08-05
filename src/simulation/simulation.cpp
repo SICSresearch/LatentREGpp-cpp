@@ -15,7 +15,6 @@
 namespace irtpp {
 
 simulation::simulation() {
-	// TODO Auto-generated constructor stub
 
 }
 
@@ -157,7 +156,7 @@ void simulation::run_single_dichotomous ( int model, int d, std::string filename
 }
 
 simulation::~simulation() {
-	// TODO Auto-generated destructor stub
+
 }
 
 } /* namespace irtpp */
