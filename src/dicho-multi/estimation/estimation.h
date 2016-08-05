@@ -18,6 +18,7 @@
 
 #include <map>
 #include <cmath>
+#include <functional>
 
 #include "../estimation/estep.h"
 #include "../estimation/mstep.h"
@@ -81,7 +82,7 @@ class estimation {
 		estimation(int, matrix<char>&, short, double,
 						std::string quadrature_technique = GAUSSIAN_QUADRATURE,
 						int quadrature_points = DEFAULT_SOBOL_POINTS,
-						std::vector<int> cluster = std::vector<int>(),
+						std::vector<int> cluster = EMPTY_INTEGER_VECTOR,
 						std::string custom_initial_values_filename = NONE );
 
 		virtual ~estimation();
@@ -105,6 +106,11 @@ class estimation {
 		 * Runs the EMAlgorithm to find out the parameters
 		 * */
 		void EMAlgortihm();
+
+		/*
+		 * EAP
+		 * */
+		void EAP(bool);
 
 		/**
 		 * Prints the results

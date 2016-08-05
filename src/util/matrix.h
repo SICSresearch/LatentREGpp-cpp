@@ -21,9 +21,9 @@ namespace irtpp {
 template<class T>
 class matrix {
 	private:
-		std::vector<std::vector<T> > data;
 
 	public:
+		std::vector<std::vector<T> > data;
 		matrix();
 		/**
 		 * Creates a new matrix with size rows * cols

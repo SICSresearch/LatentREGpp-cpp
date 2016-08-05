@@ -81,23 +81,23 @@ void Estep ( estimation_data &data, int current ) {
 
 		for ( int g = 0; g < G; ++g ) {
 			double &pi_gl = pi(g, l);
-			pi_gl *= nl[l] / integral_l;
+			pi_gl /= integral_l;
 		}
 	}
 
-	#pragma omp parallel for schedule(dynamic)
+	//#pragma omp parallel for schedule(dynamic)
 	for ( int g = 0; g < G; ++g ) {
 		for ( int l = 0; l < s; ++l ) {
 			double &pi_gl = pi(g, l);
-			f[g] += pi_gl;
+			f[g] += nl[l] * pi_gl;
 			for ( int i = 0; i < correct.columns(l); ++i )
-				r(g, correct(l, i)) += pi_gl;
+				r(g, correct(l, i)) += nl[l] * pi_gl;
 		}
 	}
 
 	//Asserting pi correctness
-//	bool pi_ok = test_pi(pi);
-//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+	bool pi_ok = test_pi(pi);
+	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 }
 
 }

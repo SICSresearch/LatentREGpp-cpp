@@ -464,3 +464,21 @@ simulate.data(size.cluster = c(10, 10, 10, 10, 10, 10), dim.data = 6,
 simulate.data(size.cluster = c(10, 10, 10, 10, 10, 10), dim.data = 6, 
               sample.size = 1000, ncatgs = c(rep(3, 60)),
               folder = "/home/milder/Documents/workspace/MIRTcpp/datasets/6D-poly-1000x60-", save = TRUE, replicas = 1)
+
+
+
+
+
+
+
+
+
+
+sim = simulate.poly.multi(sample.size = 1000, size.cluster = c(20, 20), dim.data = 2,
+                          ncatgs = rep(2, 40), seed_data = 834)
+
+sim$params.it
+sim$data = sim$data - 1
+sim$theta
+
+write.table(file = "/home/milder/Documents/workspace/MIRTcpp/datasets/2D-1000x40-params.csv", sep = ";", x = sim$params.it, row.names = FALSE, col.names = FALSE)

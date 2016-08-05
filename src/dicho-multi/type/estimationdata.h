@@ -14,6 +14,8 @@
 
 #include <dlib/optimization.h>
 
+#include <algorithm>
+
 #include "../../dicho-multi/model/model.h"
 
 namespace irtpp {
@@ -66,6 +68,12 @@ public:
 	std::vector<item_parameter> zeta[ACCELERATION_PERIOD];
 	//Model to use
 	model m;
+
+	//Frequencies
+	std::map<std::vector<char>, std::vector<int> > frequencies;
+
+	//Latent traits
+	matrix<double> latent_traits;
 
 	estimation_data(int);
 	estimation_data();

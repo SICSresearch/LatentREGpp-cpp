@@ -140,16 +140,31 @@ void test_sobol ( ) {
 		}
 }
 
+void test_EAP ( ) {
+	simulation sim;
+
+	sim.run_single_dichotomous(2, 2, "datasets/2D-1000x40.csv", 0.001, "Sobol", 2000);
+
+//	matrix<char> Y;
+//	input<char> in(';');
+//	in.importData("datasets/2D-1000x40.csv", Y);
+//	std::cout << "Data imported from " << "datasets/2D-1000x40.csv" << std::endl;
+//
+//	dichomulti::estimation e(2, Y, 2, 0.001, "Sobol", 2000);
+//	e.EMAlgortihm();
+//	e.print_results();
+//	e.EAP(true);
+}
+
 int main() {
 	cout.setf(std::ios_base::fixed);
 	cout.precision(5);
 	improveIO();
 
-	test_sobol();
+	//test_sobol();
 
 
-//	simulation sim;
-//	sim.run_single_dichotomous(3, 2, "datasets/3PL-2D-1000x40.csv", 0.001);
+	test_EAP();
 
 
 

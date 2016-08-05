@@ -19,6 +19,8 @@ namespace irtpp {
 			for ( int i = 0; i < pi.rows(); ++i )
 				sum += pi(i, j);
 			correct &= 100 == int((sum + eps) * 100);
+			if ( int((sum + eps) * 100) != 100 )
+			std::cout << sum << std::endl;
 		}
 
 		return correct;

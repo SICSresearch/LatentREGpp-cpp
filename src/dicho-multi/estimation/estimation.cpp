@@ -69,21 +69,21 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	//Matrix correct that has been answered correctly
 	matrix<int> &correct = data.correct;
 
+	//Matrix of response patterns and their frequency
+	std::map<std::vector<char>, std::vector<int> > &frequencies = data.frequencies;
+
 	//-------------------------------------------------------------------------------------
 
 
-	//Matrix of response patterns and their frequency
-	std::map<std::vector<char>, int> freq;
 	for ( int i = 0; i < dataset.rows(); ++i )
-		++freq[dataset.get_row(i)];
+		frequencies[dataset.get_row(i)].push_back(i);
 
 	Y = matrix<char>();
 	nl = std::vector<int>();
 
-	std::map<std::vector<char>, int>::iterator it;
-	for ( it = freq.begin(); it != freq.end(); ++it ) {
-		Y.add_row(it->first);
-		nl.push_back(it->second);
+	for ( auto it : frequencies ) {
+		Y.add_row(it.first);
+		nl.push_back(it.second.size());
 	}
 
 	N = dataset.rows();
@@ -305,6 +305,125 @@ void estimation::EMAlgortihm() {
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
 	} while ( dif >= convergence_difference && iterations < MAX_ITERATIONS );
+}
+
+void estimation::EAP ( bool all_factors ) {
+	//Number of items
+	int &p = data.p;
+	//Number of response patterns
+	int &s = data.s;
+	//Number of quadrature points
+	int &G = data.G;
+	//Model used
+	model &m = data.m;
+	//Number of individuals
+	int &N = data.N;
+	//Matrix of response patterns
+	matrix<char> &Y = data.Y;
+	//Weights
+	std::vector<double> &w = data.w;
+	//Dimension
+	int &d = data.d;
+	//Latent trait vectors
+	matrix<double> &theta = data.theta;
+	// Probability matrix P
+	matrix<double> &P = data.P;
+	//pi matrix
+	matrix<double> &pi = data.pi;
+	//Frequency of each pattern
+	std::vector<int> &nl = data.nl;
+
+	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
+
+
+	//sobol_quadrature(9000);
+
+	/**
+	 * Computing each element of matrix P
+	 * P_gi
+	 * */
+	#pragma omp parallel for schedule(dynamic)
+	for ( int g = 0; g < G; ++g ) {
+		std::vector<double> &theta_g = *theta.get_pointer_row(g);
+		for ( int i = 0; i < p; ++i ) {
+			P(g, i) = m.P(theta_g, zeta[i]);
+		}
+	}
+
+	double integral_l = 0.0;
+	std::vector<double> integrals(s);
+
+	//Patterns
+	#pragma omp parallel for schedule(dynamic) reduction(+:integral_l)
+	for ( int l = 0; l < s; ++l ) {
+		integral_l = 0;
+		//Quadrature points
+		for ( int g = 0; g < G; ++g ) {
+			double &pi_gl = pi(g, l) = w[g];
+			//Items
+			for ( int i = 0; i < p; ++i )
+				pi_gl *= Y(l, i) ? P(g, i) : 1 - P(g, i);
+			/**
+			 * As denominator for a response pattern l is the summation over the latent traits
+			 * here pi(g, l) is added to integral_l
+			 * */
+			integral_l += pi_gl;
+		}
+
+		for ( int g = 0; g < G; ++g ) {
+			double &pi_gl = pi(g, l);
+			pi_gl /= integral_l;
+		}
+
+		integrals[l] = integral_l;
+	}
+
+	//Asserting pi correctness
+	bool pi_ok = test_pi(pi);
+	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+
+	//Frequencies
+	std::map<std::vector<char>, std::vector<int> > &frequencies = data.frequencies;
+
+	//Latent traits
+	matrix<double> &latent_traits = data.latent_traits;
+	latent_traits = matrix<double>(all_factors ? N : s, d);
+
+	int l = 0;
+	for ( auto current_pattern : frequencies ) {
+		int c = all_factors ? current_pattern.second[0] : l;
+
+		std::vector<double> &theta_l = *latent_traits.get_pointer_row(c);
+		theta_l = std::vector<double>(d);
+
+		for ( int g = 0; g < G; ++g ) {
+			std::vector<double> theta_g = *theta.get_pointer_row(g);
+			for ( int h = 0; h < d; ++h )
+				theta_l[h] += theta_g[h] * pi(g, l);
+		}
+
+		if ( all_factors ) {
+			for ( int j = 1; j < current_pattern.second.size(); ++j ) {
+				std::vector<double> &theta_j = *latent_traits.get_pointer_row(current_pattern.second[j]);
+				theta_j = theta_l;
+			}
+		}
+
+		++l;
+	}
+
+	std::ofstream out("datasets/2D-1000x10-latent_traits-est-G=2000.csv");
+	for ( int l = 0; l < latent_traits.rows(); ++l ) {
+		if ( !all_factors ) { /*Print pattern here*/ }
+		std::cout << l + 1 << " ";
+		for ( int h = 0; h < d; ++h ) {
+			std::cout << latent_traits(l, h) << ' ';
+			if ( h ) out << ';';
+			out << latent_traits(l, h);
+		}
+		std::cout << std::endl;
+		out << '\n';
+	}
 }
 
 void estimation::print_results ( ) {
