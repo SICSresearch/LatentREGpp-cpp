@@ -40,7 +40,7 @@ namespace irtpp {
 		}
 
 		double f = sqrt(2);
-		for ( int i = 0; i < q.size(); ++i )
+		for ( size_t i = 0; i < q.size(); ++i )
 			q[i] *= f;
 
 
@@ -87,7 +87,7 @@ namespace irtpp {
 			weights.push_back(current_weight);
 			return;
 		}
-		for ( int i = 0; i < w.size(); ++i ) {
+		for ( size_t i = 0; i < w.size(); ++i ) {
 			current_weight *= w[i];
 			compute_weights(w, r - 1, current_weight, weights);
 			current_weight /= w[i];
@@ -109,7 +109,7 @@ namespace irtpp {
 
 		double pi = acos(-1);
 		double f = pow(sqrt(pi), d);
-		for ( int i = 0; i < w.size(); ++i )
+		for ( size_t i = 0; i < w.size(); ++i )
 			w[i] /= f;
 
 		/**
@@ -122,7 +122,7 @@ namespace irtpp {
 		compute_weights(w, d, current_weight, weights);
 
 		std::cout << "Weights. Total[" << weights.size() << "]\n";
-		for ( int i = 0; i < weights.size(); ++i ) {
+		for ( size_t i = 0; i < weights.size(); ++i ) {
 			std::cout << weights[i] << '\n';
 		}
 
@@ -131,7 +131,7 @@ namespace irtpp {
 		ss << d;
 		filename = "data/weights" + ss.str() + "_computed.data";
 		out.open(filename.c_str());
-		for ( int i = 0; i < weights.size(); ++i )
+		for ( size_t i = 0; i < weights.size(); ++i )
 			out << weights[i] << '\n';
 		out.close();
 	}

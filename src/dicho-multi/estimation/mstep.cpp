@@ -18,8 +18,6 @@ double Qi::operator() ( const item_parameter& item_i ) const {
 	double value = 0;
 	//Number of quadrature points
 	int G = data->G;
-	//Matrix P
-	matrix<double> &P = data->P;
 	//Matrix r
 	matrix<double> &r = data->r;
 	//Model used

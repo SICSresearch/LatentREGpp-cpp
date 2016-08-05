@@ -40,7 +40,7 @@ const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40; /**< Max number of quadrature po
 class estimation {
 	private:
 
-		short iterations; /**< Counts the actual number of iterations*/
+		unsigned int iterations; /**< Counts the actual number of iterations*/
 		double convergence_difference; /**< Epsilon to stop the EMAlgorithm*/
 		std::string custom_initial_values_filename; /**< path with custom initial values*/
 
@@ -73,7 +73,7 @@ class estimation {
 		 * @param cluster a std vector integer template with number of items for each dimension.
 		 * @param custom_initial_values_filename string with path for custom initial_values. Default is none.
 		 */
-		estimation(int, matrix<char>&, short, double,
+		estimation(int, matrix<char>&, unsigned int, double,
 						std::string quadrature_technique = GAUSSIAN_QUADRATURE,
 						int quadrature_points = DEFAULT_SOBOL_POINTS,
 						std::vector<int> cluster = EMPTY_INTEGER_VECTOR,
@@ -109,6 +109,7 @@ class estimation {
 		 * gaussian_quadrature. By default max points to use is 40.
 		 */
 		void gaussian_quadrature();
+		void build_matrixes();
 
 		/**
 		 * Runs the EMAlgorithm to find out the parameters.

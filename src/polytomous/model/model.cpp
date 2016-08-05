@@ -46,7 +46,7 @@ double model::Pstar_ik(std::vector<double> &theta, const item_parameter &paramet
 		double eta = parameters(k);
 
 		//Computing dot product
-		for ( short i = 0; i < theta.size(); ++i )
+		for ( size_t i = 0; i < theta.size(); ++i )
 			eta += 1 * theta[i]; //no alpha in this model
 
 		return 1.0 / (1.0 + std::exp(-eta));
@@ -63,7 +63,7 @@ double model::Pstar_ik(std::vector<double> &theta, const item_parameter &paramet
 	double eta = parameters(d + k);
 
 	//Computing dot product
-	for ( short i = 0; i < theta.size(); ++i )
+	for ( size_t i = 0; i < theta.size(); ++i )
 		eta += parameters(i) * theta[i];
 
 	return 1.0 / (1.0 + std::exp(-eta));

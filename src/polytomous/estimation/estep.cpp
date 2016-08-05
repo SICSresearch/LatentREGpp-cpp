@@ -12,8 +12,6 @@ namespace irtpp {
 namespace polytomous {
 
 void Estep ( estimation_data &data ) {
-	//examines
-	int &N = data.N;
 	//Number of items
 	int &p = data.p;
 	//Number of response patterns

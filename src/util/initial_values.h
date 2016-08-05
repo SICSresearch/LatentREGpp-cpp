@@ -66,7 +66,7 @@ namespace irtpp {
 	 * @param v a std vector with double template to calculate mean.
 	 * @return the mean of v vector
 	 */
-	inline double mean ( std::vector<double> &v );
+	double mean ( std::vector<double> & );
 
 	/**
 	 * Helper function to find standard deviation of an array.

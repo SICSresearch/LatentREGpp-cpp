@@ -100,9 +100,9 @@ void Estep ( estimation_data &data, int current ) {
 		}
 	}
 
-	//Asserting pi correctness
-	bool pi_ok = test_pi(pi);
-	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+//	//Asserting pi correctness
+//	bool pi_ok = test_pi(pi);
+//	assert(("Each column of pi matrix must sum 1.0", pi_ok));
 }
 
 }

@@ -11,7 +11,7 @@ namespace irtpp {
 
 namespace dichomulti {
 
-estimation::estimation(int themodel, matrix<char> &dataset, short d,
+estimation::estimation(int themodel, matrix<char> &dataset, unsigned int d,
 					   double convergence_difference,
 					   std::string quadrature_technique,
 					   int quadrature_points,
@@ -43,29 +43,6 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	//Frequency of each pattern
 	std::vector<int> &nl = data.nl;
 
-	//Number of quadrature points
-	int &G = data.G;
-
-	//Matrix r. Needed in Estep and Mstep
-	matrix<double> &r = data.r;
-
-	/**
-	 * Probability matrix P
-	 *
-	 * P_gi
-	 *
-	 * P_gi means the probability that an individual has selected the correct answer
-	 *
-	 *
-	 * The purpose of this matrix is to allocate the value of P_gi
-	 * to avoid recompute them while matrix Pi and r are computed in EStep
-	 * */
-	matrix<double> &P = data.P;
-
-	//Matrix pi
-	matrix<double> &pi = data.pi;
-	//f
-	std::vector<double> &f = data.f;
 	//Matrix correct that has been answered correctly
 	matrix<int> &correct = data.correct;
 
@@ -101,15 +78,10 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	else
 		gaussian_quadrature();
 
-	//Builds r and P matrixes
-	P = matrix<double>(G, p);
-	pi = matrix<double>(G, s);
-	r = matrix<double>(G, p);
-	f = std::vector<double>(G);
+	build_matrixes();
 
 	//Pinned items in multidimensional case (the first of each dimension)
 	std::set<int> &pinned_items = data.pinned_items;
-
 
 	//Number of items size MUST be equal to the number of dimensions
 	if ( d > 1 && number_of_items.size() == d ) {
@@ -127,6 +99,44 @@ estimation::estimation(int themodel, matrix<char> &dataset, short d,
 	this->custom_initial_values_filename = custom_initial_values_filename;
 }
 
+void estimation::build_matrixes() {
+	//Number of items
+	int &p = data.p;
+
+	//Number of response patterns (s <= N)
+	int &s = data.s;
+
+	//Number of quadrature points
+	int &G = data.G;
+
+	//Matrix r. Needed in Estep and Mstep
+	matrix<double> &r = data.r;
+
+	/**
+	 * Probability matrix P
+	 *
+	 * P_gi
+	 *
+	 * P_gi means the probability that an individual has selected the correct answer
+	 *
+	 *
+	 * The purpose of this matrix is to allocate the value of P_gi
+	 * to avoid recompute them while matrix Pi and r are computed in EStep
+	 * */
+	matrix<double> &P = data.P;
+
+	//Matrix pi
+	matrix<double> &pi = data.pi;
+	//f
+	std::vector<double> &f = data.f;
+
+	//Builds r and P matrixes
+	P = matrix<double>(G, p);
+	pi = matrix<double>(G, s);
+	r = matrix<double>(G, p);
+	f = std::vector<double>(G);
+}
+
 
 void estimation::sobol_quadrature (int g) {
 	//Dimension
@@ -137,6 +147,7 @@ void estimation::sobol_quadrature (int g) {
 
 	//Latent trait vectors
 	matrix<double> &theta = data.theta;
+	theta = matrix<double>(0, 0);
 
 	//Weights
 	std::vector<double> &w = data.w;
@@ -328,13 +339,12 @@ void estimation::EAP ( bool all_factors ) {
 	matrix<double> &P = data.P;
 	//pi matrix
 	matrix<double> &pi = data.pi;
-	//Frequency of each pattern
-	std::vector<int> &nl = data.nl;
 
 	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 
 
-	//sobol_quadrature(9000);
+//	sobol_quadrature(10000);
+//	build_matrixes();
 
 	/**
 	 * Computing each element of matrix P
@@ -377,10 +387,10 @@ void estimation::EAP ( bool all_factors ) {
 	}
 
 	//Asserting pi correctness
-	bool pi_ok = test_pi(pi);
-	assert(("Each column of pi matrix must sum 1.0", pi_ok));
+	//bool pi_ok = test_pi(pi);
+	//assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
-	//Frequencies
+	//Frequencies by pattern
 	std::map<std::vector<char>, std::vector<int> > &frequencies = data.frequencies;
 
 	//Latent traits
@@ -389,9 +399,7 @@ void estimation::EAP ( bool all_factors ) {
 
 	int l = 0;
 	for ( auto current_pattern : frequencies ) {
-		int c = all_factors ? current_pattern.second[0] : l;
-
-		std::vector<double> &theta_l = *latent_traits.get_pointer_row(c);
+		std::vector<double> &theta_l = *latent_traits.get_pointer_row(all_factors ? current_pattern.second[0] : l);
 		theta_l = std::vector<double>(d);
 
 		for ( int g = 0; g < G; ++g ) {
@@ -401,7 +409,7 @@ void estimation::EAP ( bool all_factors ) {
 		}
 
 		if ( all_factors ) {
-			for ( int j = 1; j < current_pattern.second.size(); ++j ) {
+			for ( size_t j = 1; j < current_pattern.second.size(); ++j ) {
 				std::vector<double> &theta_j = *latent_traits.get_pointer_row(current_pattern.second[j]);
 				theta_j = theta_l;
 			}
@@ -410,7 +418,7 @@ void estimation::EAP ( bool all_factors ) {
 		++l;
 	}
 
-	latent_traits.export_to_csv("datasets/2D-1000x10-latent_traits-est-G=2000.csv");
+	latent_traits.export_to_csv("datasets/2D-1000x10-latent_traits-est-G=300-4.csv");
 }
 
 void estimation::print_results ( ) {
@@ -435,7 +443,6 @@ void estimation::print_results ( ) {
 
 void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
-	int &d = data.d;
 	int &p = data.p;
 	model &m = data.m;
 

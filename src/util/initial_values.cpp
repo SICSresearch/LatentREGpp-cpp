@@ -11,16 +11,16 @@
 
 namespace irtpp {
 
-	inline double mean ( std::vector<double> &v ) {
+	double mean ( std::vector<double> &v ) {
 		double sum = 0;
-		for ( int i = 0; i < v.size(); ++i )
+		for ( size_t i = 0; i < v.size(); ++i )
 			sum += v[i];
 		return sum / double(v.size());
 	}
 
 	inline double sd ( std::vector<double> &v ) {
 		double m = mean(v), sum = 0;
-		for ( int i = 0; i < v.size(); ++i )
+		for ( size_t i = 0; i < v.size(); ++i )
 			sum += (m - v[i]) * (m - v[i]);
 		return std::sqrt(sum/v.size());
 	}
@@ -75,7 +75,7 @@ namespace irtpp {
 
 	void compute_alphas(std::vector<double> &p, std::vector<double> &a) {
 		a = std::vector<double>(p.size());
-		for ( int i = 0; i < p.size(); ++i ) {
+		for ( size_t i = 0; i < p.size(); ++i ) {
 			double p2 = p[i] * p[i];
 			double temp = p[i] * std::sqrt(p2 + 4);
 			a[i] = std::max(p2 + temp, p2 - temp) / 2.0;
@@ -86,7 +86,7 @@ namespace irtpp {
 		std::vector<double> b(p.size());
 		boost::math::normal dist(0.0, 1.0);
 
-		for ( int i = 0; i < p.size(); ++i ) {
+		for ( size_t i = 0; i < p.size(); ++i ) {
 			int right_answers = 0;
 			for ( int j = 0; j < Y.rows(); ++j )
 				if ( Y(j, i) == 1 )
@@ -105,7 +105,7 @@ namespace irtpp {
 		}
 
 		d = std::vector<double>(b.size());
-		for ( int i = 0; i < a.size(); ++i )
+		for ( size_t i = 0; i < a.size(); ++i )
 			d[i] = -a[i] * b[i];
 	}
 

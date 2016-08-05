@@ -19,8 +19,6 @@ namespace irtpp {
 			for ( int i = 0; i < pi.rows(); ++i )
 				sum += pi(i, j);
 			correct &= 100 == int((sum + eps) * 100);
-			if ( int((sum + eps) * 100) != 100 )
-			std::cout << sum << std::endl;
 		}
 
 		return correct;
@@ -28,7 +26,7 @@ namespace irtpp {
 
 	bool test_r ( std::vector<matrix<double> > &r, int N, int p ) {
 		double sum = 0;
-		for ( int i = 0; i < r.size(); ++i )
+		for ( size_t i = 0; i < r.size(); ++i )
 			for ( int j = 0; j < r[i].rows(); ++j )
 				for ( int k = 0; k < r[i].columns(j); ++k )
 					sum += r[i](j, k);

@@ -267,6 +267,7 @@ void matrix<T>::export_to_csv(std::string filename, char sep) {
 		for ( auto col : row ) {
 			if ( !first ) out << sep;
 			out << col;
+			first = false;
 		}
 		out << '\n';
 	}

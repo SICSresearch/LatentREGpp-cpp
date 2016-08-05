@@ -11,7 +11,7 @@ namespace irtpp {
 
 namespace polytomous {
 
-estimation::estimation ( int themodel, matrix<char> &dataset, short d,
+estimation::estimation ( int themodel, matrix<char> &dataset, unsigned int d,
 					   double convergence_difference,
 					   std::string quadrature_technique,
 					   int quadrature_points,
@@ -241,8 +241,6 @@ void estimation::load_initial_values ( std::string filename ) {
 			zeta[i](j) = mt(i, j);
 	}
 
-	int alphas = m.parameters == 2 ? d : 0;
-
 	//Items that will not be estimated
 	std::set<int> &pinned_items = data.pinned_items;
 
@@ -422,9 +420,7 @@ void estimation::print_results ( ) {
 
 void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 	std::vector<item_parameter> &zeta = data.zeta;
-	int &d = data.d;
 	int &p = data.p;
-	model &m = data.m;
 
 	for ( int i = 0; i < p; ++i ) {
 		for ( int j = 0; j < zeta[i].size(); ++j ) {

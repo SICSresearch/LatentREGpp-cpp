@@ -73,7 +73,7 @@ class estimation {
 		 * @param cluster a std vector integer template with number of items for each dimension.
 		 * @param custom_initial_values_filename string with path for custom initial_values. Default is none.
 		 */
-		estimation(int, matrix<char>&, short, double,
+		estimation(int, matrix<char>&, unsigned int, double,
 				std::string quadrature_technique = GAUSSIAN_QUADRATURE,
 				int quadrature_points = DEFAULT_SOBOL_POINTS,
 				std::vector<int> cluster = std::vector<int>(),
