@@ -295,10 +295,8 @@ void estimation::EMAlgortihm() {
 	int current;
 	do {
 		current = iterations % ACCELERATION_PERIOD;
-		if ( current == 2 ) {
+		if ( current == 2 )
 			ramsay(data.zeta, data.pinned_items);
-			//squarem(data.zeta, data.pinned_items);
-		}
 
 		Estep(data, current);
 		dif = Mstep(data, current);
@@ -412,18 +410,7 @@ void estimation::EAP ( bool all_factors ) {
 		++l;
 	}
 
-	std::ofstream out("datasets/2D-1000x10-latent_traits-est-G=2000.csv");
-	for ( int l = 0; l < latent_traits.rows(); ++l ) {
-		if ( !all_factors ) { /*Print pattern here*/ }
-		std::cout << l + 1 << " ";
-		for ( int h = 0; h < d; ++h ) {
-			std::cout << latent_traits(l, h) << ' ';
-			if ( h ) out << ';';
-			out << latent_traits(l, h);
-		}
-		std::cout << std::endl;
-		out << '\n';
-	}
+	latent_traits.export_to_csv("datasets/2D-1000x10-latent_traits-est-G=2000.csv");
 }
 
 void estimation::print_results ( ) {

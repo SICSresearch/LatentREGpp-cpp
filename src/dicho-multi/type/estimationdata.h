@@ -49,22 +49,6 @@ public:
 	std::vector<item_parameter> zeta[ACCELERATION_PERIOD]; /**< Vector of zeta item parameters*/
 	model m; /**< Model to use*/
 
-	/**
-	 * Constructor for estimation_data class.
-	 * @param d the dimension.
-	 */
-	matrix<double> P;
-	//Matrix pi
-	matrix<double> pi;
-	//Vector f (Number of individuals in group g)
-	std::vector<double> f;
-	//Pinned items (won't be estimated)
-	std::set<int> pinned_items;
-	//Vector or item parameters
-	std::vector<item_parameter> zeta[ACCELERATION_PERIOD];
-	//Model to use
-	model m;
-
 	//Frequencies
 	std::map<std::vector<char>, std::vector<int> > frequencies;
 

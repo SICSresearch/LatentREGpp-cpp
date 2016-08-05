@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 namespace irtpp {
 
@@ -136,6 +137,13 @@ class matrix {
 		int columns(int row);
 
 		/**
+		 * Exports the matrix to a .csv file
+		 * @param filename where the matrix will be saved
+		 * @param sep separator of .csv file
+		 * */
+		void export_to_csv (std::string, char sep = ';');
+
+		/**
 		 * Accessing operator for an element.
 		 * Overload parenthesis operator.
 		 */
@@ -249,6 +257,20 @@ std::ostream& operator<<(std::ostream &out, matrix<T> &m) {
 		out << '\n';
 	}
 	return (out);
+}
+
+template<class T>
+void matrix<T>::export_to_csv(std::string filename, char sep) {
+	std::ofstream out(filename);
+	for ( auto row : data ) {
+		bool first = true;
+		for ( auto col : row ) {
+			if ( !first ) out << sep;
+			out << col;
+		}
+		out << '\n';
+	}
+	out.close();
 }
 
 } /* namespace irtpp */
