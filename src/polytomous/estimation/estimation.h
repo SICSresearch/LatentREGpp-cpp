@@ -18,6 +18,7 @@
 #include "../../util/quadraturepoints.h"
 #include "../../util/initial_values.h"
 #include "../../util/constants.h"
+#include "../../util/ramsay.h"
 
 #include "../type/estimationdata.h"
 
@@ -109,6 +110,7 @@ class estimation {
 		 * gaussian_quadrature. By default max points to use is 40.
 		 */
 		void gaussian_quadrature ();
+		void build_matrixes();
 
 		/**
 		 * Runs the EMAlgorithm to find out the parameters.

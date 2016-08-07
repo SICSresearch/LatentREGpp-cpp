@@ -46,14 +46,10 @@ public:
 	matrix<double> pi; /**< Matrix pi*/
 	std::vector<double> f; /**< Vector f (Number of individuals in group g)*/
 	std::set<int> pinned_items; /**< Pinned items (won't be estimated)*/
-	std::vector<item_parameter> zeta[ACCELERATION_PERIOD]; /**< Vector of zeta item parameters*/
 	model m; /**< Model to use*/
-
-	//Frequencies
-	std::map<std::vector<char>, std::vector<int> > frequencies;
-
-	//Latent traits
-	matrix<double> latent_traits;
+	std::vector<item_parameter> zeta[ACCELERATION_PERIOD]; /**< Vector of zeta item parameters*/
+	std::map<std::vector<char>, std::vector<int> > patterns; /**< Patterns and their individuals*/
+	matrix<double> latent_traits; /**< Latent traits */
 
 	estimation_data(int);
 

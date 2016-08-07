@@ -90,7 +90,7 @@ void Estep ( estimation_data &data, int current ) {
 		}
 	}
 
-	//#pragma omp parallel for schedule(dynamic)
+	#pragma omp parallel for schedule(dynamic)
 	for ( int g = 0; g < G; ++g ) {
 		for ( int l = 0; l < s; ++l ) {
 			double &pi_gl = pi(g, l);

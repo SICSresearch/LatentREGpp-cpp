@@ -47,18 +47,18 @@ estimation::estimation(int themodel, matrix<char> &dataset, unsigned int d,
 	matrix<int> &correct = data.correct;
 
 	//Matrix of response patterns and their frequency
-	std::map<std::vector<char>, std::vector<int> > &frequencies = data.frequencies;
+	std::map<std::vector<char>, std::vector<int> > &patterns = data.patterns;
 
 	//-------------------------------------------------------------------------------------
 
 
 	for ( int i = 0; i < dataset.rows(); ++i )
-		frequencies[dataset.get_row(i)].push_back(i);
+		patterns[dataset.get_row(i)].push_back(i);
 
 	Y = matrix<char>();
 	nl = std::vector<int>();
 
-	for ( auto it : frequencies ) {
+	for ( auto it : patterns ) {
 		Y.add_row(it.first);
 		nl.push_back(it.second.size());
 	}
@@ -197,7 +197,7 @@ void estimation::gaussian_quadrature () {
 
 void estimation::load_initial_values ( std::string filename ) {
 	matrix<double> mt;
-	input<double> in(';');
+	input<double> in(',');
 	in.importData(filename, mt);
 
 	//Dimension
@@ -391,7 +391,7 @@ void estimation::EAP ( bool all_factors ) {
 	//assert(("Each column of pi matrix must sum 1.0", pi_ok));
 
 	//Frequencies by pattern
-	std::map<std::vector<char>, std::vector<int> > &frequencies = data.frequencies;
+	std::map<std::vector<char>, std::vector<int> > &frequencies = data.patterns;
 
 	//Latent traits
 	matrix<double> &latent_traits = data.latent_traits;

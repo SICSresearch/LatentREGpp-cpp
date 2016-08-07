@@ -43,6 +43,92 @@ estimation::estimation ( int themodel, matrix<char> &dataset, unsigned int d,
 	//Frequency of each pattern
 	std::vector<int> &nl = data.nl;
 
+	//Number of categories by item
+	std::vector<int> &categories_item = data.categories_item;
+
+	//Matrix of response patterns and their frequency
+	std::map<std::vector<char>, std::vector<int> > &patterns = data.patterns;
+
+	//-------------------------------------------------------------------------------------
+
+	bool dichotomous = false;
+	for ( int i = 0; i < dataset.rows(); ++i ) {
+		for ( int j = 0; j < dataset.columns(i); ++j )
+			dichotomous |= dataset(i, j) == 0;
+	}
+
+	//If dataset is dichotomous, it's converted to polytomous with two categories
+	if ( dichotomous ) {
+		for ( int i = 0; i < dataset.rows(); ++i )
+			for ( int j = 0; j < dataset.columns(i); ++j )
+				++dataset(i, j);
+	}
+
+
+	//Matrix of response patterns and their frequency
+	for ( int i = 0; i < dataset.rows(); ++i )
+		patterns[dataset.get_row(i)].push_back(i);
+
+	Y = matrix<char>();
+	nl = std::vector<int>();
+
+	for ( auto it : patterns ) {
+		Y.add_row(it.first);
+		nl.push_back(it.second.size());
+	}
+
+	N = dataset.rows();
+	s = Y.rows();
+	p = Y.columns(0);
+
+	//Number of categories of each item
+	categories_item = std::vector<int>(p);
+	for ( int i = 0; i < p; ++i ) {
+		int max_category = -1;
+		for ( int l = 0; l < s; ++l ) {
+			//Number of categories of an item is defined as the max category found in the answers
+			if ( Y(l, i) > max_category )
+				max_category = Y(l, i);
+			//Checking if data is dichotomous
+		}
+		categories_item[i] = max_category;
+	}
+
+	if ( quadrature_technique == SOBOL_QUADRATURE )
+		sobol_quadrature(quadrature_points);
+	else
+		gaussian_quadrature();
+
+	build_matrixes();
+
+	//Pinned items in multidimensional case (the first of each dimension)
+	std::set<int> &pinned_items = data.pinned_items;
+
+	//Number of items size MUST be equal to the number of dimensions
+	if ( number_of_items.size() == d ) {
+		int pinned = 0;
+		for ( unsigned int i = 0; i < number_of_items.size(); ++i ) {
+			pinned_items.insert(pinned);
+			pinned += number_of_items[i];
+		}
+	}
+
+	//Configurations for the estimation
+	m = model(themodel, d, &categories_item);
+	this->convergence_difference = convergence_difference;
+	this->iterations = 0;
+	this->custom_initial_values_filename = custom_initial_values_filename;
+}
+
+
+
+void estimation::build_matrixes() {
+	//Number of items
+	int &p = data.p;
+
+	//Number of response patterns (s <= N)
+	int &s = data.s;
+
 	//Number of quadrature points
 	int &G = data.G;
 
@@ -72,60 +158,6 @@ estimation::estimation ( int themodel, matrix<char> &dataset, unsigned int d,
 	 * */
 	matrix<double> &pi = data.pi;
 
-	//-------------------------------------------------------------------------------------
-
-	bool dichotomous = false;
-	for ( int i = 0; i < dataset.rows(); ++i ) {
-		for ( int j = 0; j < dataset.columns(i); ++j )
-			dichotomous |= dataset(i, j) == 0;
-	}
-
-	//If dataset is dichotomous, it's converted to polytomous with two categories
-	if ( dichotomous ) {
-		for ( int i = 0; i < dataset.rows(); ++i )
-			for ( int j = 0; j < dataset.columns(i); ++j )
-				++dataset(i, j);
-	}
-
-
-	//Matrix of response patterns and their frequency
-	std::map<std::vector<char>, int> freq;
-	for ( int i = 0; i < dataset.rows(); ++i )
-		++freq[dataset.get_row(i)];
-
-	Y = matrix<char>();
-	nl = std::vector<int>();
-
-	std::map<std::vector<char>, int>::iterator it;
-	for ( it = freq.begin(); it != freq.end(); ++it ) {
-		Y.add_row(it->first);
-		nl.push_back(it->second);
-	}
-
-	N = dataset.rows();
-	s = Y.rows();
-	p = Y.columns(0);
-
-	//Number of categories of each item
-	categories_item = std::vector<int>(p);
-	for ( int i = 0; i < p; ++i ) {
-		int max_category = -1;
-		for ( int l = 0; l < s; ++l ) {
-			//Number of categories of an item is defined as the max category found in the answers
-			if ( Y(l, i) > max_category )
-				max_category = Y(l, i);
-			//Checking if data is dichotomous
-		}
-		categories_item[i] = max_category;
-	}
-
-
-
-	if ( quadrature_technique == SOBOL_QUADRATURE )
-		sobol_quadrature(quadrature_points);
-	else
-		gaussian_quadrature();
-
 	//Builds r and P matrixes
 	r = std::vector<matrix<double> >(G);
 	P = std::vector<matrix<double> >(G);
@@ -137,28 +169,9 @@ estimation::estimation ( int themodel, matrix<char> &dataset, unsigned int d,
 			P[g].add_row(categories_item[i]);
 		}
 	}
-
-	//Pinned items in multidimensional case (the first of each dimension)
-	std::set<int> &pinned_items = data.pinned_items;
-
-	//Number of items size MUST be equal to the number of dimensions
-	if ( number_of_items.size() == d ) {
-		int pinned = 0;
-		for ( unsigned int i = 0; i < number_of_items.size(); ++i ) {
-			pinned_items.insert(pinned);
-			pinned += number_of_items[i];
-		}
-	}
-
-	//Matrixes needed in Estep
 	pi = matrix<double>(G, s);
-
-	//Configurations for the estimation
-	m = model(themodel, d, &categories_item);
-	this->convergence_difference = convergence_difference;
-	this->iterations = 0;
-	this->custom_initial_values_filename = custom_initial_values_filename;
 }
+
 
 void estimation::sobol_quadrature (int g) {
 	//Dimension
@@ -224,7 +237,7 @@ void estimation::load_initial_values ( std::string filename ) {
 	//Dimension
 	int &d = data.d;
 	//Parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[0];
 	//Number of items
 	int &p = data.p;
 	//Model used in the problem
@@ -261,7 +274,7 @@ void estimation::load_initial_values ( std::string filename ) {
 
 void estimation::initial_values() {
 	//Parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[0];
 	//Dimension
 	int &d = data.d;
 	//Number of examinees
@@ -397,16 +410,22 @@ void estimation::EMAlgortihm() {
 	if ( custom_initial_values_filename == NONE || custom_initial_values_filename == BUILD ) initial_values();
 	else load_initial_values(custom_initial_values_filename);
 	double dif = 0.0;
+	iterations = 0;
+	int current;
 	do {
-		Estep(data);
-		dif = Mstep(data);
+		current = iterations % ACCELERATION_PERIOD;
+		if ( current == 2 )
+			ramsay(data.zeta, data.pinned_items);
+
+		Estep(data, current);
+		dif = Mstep(data, current);
 		++iterations;
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
-	} while ( dif > convergence_difference && iterations < MAX_ITERATIONS );
+	} while ( dif >= convergence_difference && iterations < MAX_ITERATIONS );
 }
 
 void estimation::print_results ( ) {
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 
 	std::cout << "Finished after " << iterations << " iterations.\n";
@@ -419,7 +438,7 @@ void estimation::print_results ( ) {
 }
 
 void estimation::print_results ( std::ofstream &fout, double elapsed ) {
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 
 	for ( int i = 0; i < p; ++i ) {

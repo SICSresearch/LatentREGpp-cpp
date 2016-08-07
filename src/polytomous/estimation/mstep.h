@@ -38,7 +38,7 @@ typedef dlib::matrix<double,0,1> column_vector; /**< Necessary typedef to be abl
  * @param data a instance of estimation_data with all necessary data to do EMAlgorithm.
  * @return the max difference between current zeta optimized and previous zeta
  */
-double Mstep(estimation_data&);
+double Mstep(estimation_data&, int current);
 
 /**
  * Class with Log likelihood Function to maximize

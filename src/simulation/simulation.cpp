@@ -38,7 +38,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 	const std::string base_name = ss.str();
 
 	ss.str("");
-	ss << folder << "/INI/INI" << name;
+	ss << folder << "/INI/INITIAL-" << name;
 	const std::string initial_base_name = ss.str();
 
 	for ( int i = start; i <= end; ++i ) {

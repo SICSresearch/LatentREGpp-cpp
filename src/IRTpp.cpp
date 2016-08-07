@@ -141,19 +141,20 @@ void test_sobol ( ) {
 }
 
 void test_EAP ( ) {
-//	simulation sim;
+	simulation sim;
+
+	sim.run_single_dichotomous(2, 2, "datasets/2D-1000x40.csv", 0.0001, "Sobol", 300);
+	sim.run_single_polytomous(2, 2, "datasets/2D-1000x40.csv", 0.0001, "Sobol", 300);
+
+//	matrix<char> Y;
+//	input<char> in(';');
+//	in.importData("datasets/2D-1000x40.csv", Y);
+//	std::cout << "Data imported from " << "datasets/2D-1000x40.csv" << std::endl;
 //
-//	sim.run_single_dichotomous(2, 2, "datasets/2D-1000x40.csv", 0.001, "Sobol", 2000);
-
-	matrix<char> Y;
-	input<char> in(';');
-	in.importData("datasets/2D-1000x40.csv", Y);
-	std::cout << "Data imported from " << "datasets/2D-1000x40.csv" << std::endl;
-
-	dichomulti::estimation e(2, Y, 2, 0.001, "Sobol", 300);
-	e.EMAlgortihm();
-	e.print_results();
-	e.EAP(true);
+//	dichomulti::estimation e(2, Y, 2, 0.0001, "Sobol", 300);
+//	e.EMAlgortihm();
+//	e.print_results();
+	//e.EAP(true);
 }
 
 int main() {

@@ -88,17 +88,27 @@ const column_vector Qi_derivative::operator() ( const column_vector& item_i ) co
 	return res;
 }
 
-double Mstep(estimation_data &data) {
+double Mstep(estimation_data &data, int current) {
 	double max_difference = 0.0;
+	int &d = data.d;
+
+	int next = (current + 1) % ACCELERATION_PERIOD;
 
 	int &p = data.p;
-	int &d = data.d;
-	std::vector<item_parameter> &zeta = data.zeta;
+	std::vector<item_parameter> &current_zeta = data.zeta[current];
+	std::vector<item_parameter> &next_zeta = data.zeta[next];
+
+	if ( next_zeta.empty() ) {
+		for ( auto c : current_zeta )
+			next_zeta.push_back(c);
+	}
+
 	std::set<int> &pinned_items = data.pinned_items;
+
 
 	// Log likelihood must be optimized for every item
 
-	#pragma omp parallel for schedule(dynamic)
+	#pragma omp parallel for schedule(dynamic) reduction(max:max_difference)
 	for ( int i = 0; i < p; ++i ) {
 		/**
 		 * If it is multidimensional and this is one of the pinned items
@@ -107,25 +117,24 @@ double Mstep(estimation_data &data) {
 		 * */
 		if ( pinned_items.count(i) ) continue;
 
-		column_vector &item_i = zeta[i];
-		column_vector before = item_i;
+		next_zeta[i] = current_zeta[i];
 
 		// Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
 		// If the dimension is 1, the optimization is done with explicit derivatives
 		if ( d == 1 ) {
 			dlib::find_max(dlib::bfgs_search_strategy(),
-										   dlib::objective_delta_stop_strategy(1e-5),
+										   dlib::objective_delta_stop_strategy(1e-6),
 										   Qi(i, &data),
-										   Qi_derivative(i, &data),item_i,-1);
+										   Qi_derivative(i, &data), next_zeta[i],-1);
 		} else {
 			dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-						   dlib::objective_delta_stop_strategy(1e-5),
-						   Qi(i, &data),item_i,-1);
+						   dlib::objective_delta_stop_strategy(1e-6),
+						   Qi(i, &data),next_zeta[i],-1);
 		}
 
 		//Computing difference of current item
-		for ( int j = 0; j < before.size(); ++j )
-			max_difference = std::max(max_difference, std::abs(before(j) - item_i(j)));
+		for ( int j = 0; j < next_zeta[i].size(); ++j )
+			max_difference = std::max(max_difference, std::abs(next_zeta[i](j) - current_zeta[i](j)));
 	}
 
 	return max_difference;
