@@ -13,7 +13,7 @@ namespace polytomous {
 
 Qi::Qi (int i, estimation_data *d) : i(i), data(d) { }
 
-double Qi::operator() ( const column_vector& item_i ) const {
+double Qi::operator() ( const optimizer_vector& item_i ) const {
 	//Value of Qi
 	double value = 0;
 	//Number of categories
@@ -38,7 +38,7 @@ double Qi::operator() ( const column_vector& item_i ) const {
 
 Qi_derivative::Qi_derivative (int i, estimation_data *d) : i(i), data(d) { }
 
-const column_vector Qi_derivative::operator() ( const column_vector& item_i ) const {
+const optimizer_vector Qi_derivative::operator() ( const optimizer_vector& item_i ) const {
 	double tmp = 0;
 	double tmp2 = 0;
 	double tmp3 = 0;
@@ -52,7 +52,7 @@ const column_vector Qi_derivative::operator() ( const column_vector& item_i ) co
 	//Latent trait vectors
 	matrix<double> &theta = data->theta;
 
-	column_vector res(kmax);
+	optimizer_vector res(kmax);
 
 	int G = data->G;
 	//Lambda derivative for each item
@@ -95,8 +95,8 @@ double Mstep(estimation_data &data, int current) {
 	int next = (current + 1) % ACCELERATION_PERIOD;
 
 	int &p = data.p;
-	std::vector<item_parameter> &current_zeta = data.zeta[current];
-	std::vector<item_parameter> &next_zeta = data.zeta[next];
+	std::vector<optimizer_vector> &current_zeta = data.zeta[current];
+	std::vector<optimizer_vector> &next_zeta = data.zeta[next];
 
 	if ( next_zeta.empty() ) {
 		for ( auto c : current_zeta )

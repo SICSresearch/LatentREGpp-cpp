@@ -14,14 +14,9 @@
 
 #include "../../util/constants.h"
 
-//including optimization files from dlib library
-#include <dlib/optimization.h>
-
 namespace irtpp {
 
 namespace dichomulti {
-
-typedef dlib::matrix<double,0,1> item_parameter; /**< data type from dlib library*/
 
 /**
  * Model class
@@ -56,7 +51,8 @@ public:
 	 * @param parameters a typedef item_parameter to extract eta values.
 	 * @return the probability given the model. It can be 1PL, 2PL or 3PL
 	 */
-	double P(std::vector<double>&, const item_parameter&);
+	double P(const optimizer_vector &theta, const optimizer_vector &parameters);
+	double P(std::vector<double>&, const optimizer_vector&);
 };
 
 }

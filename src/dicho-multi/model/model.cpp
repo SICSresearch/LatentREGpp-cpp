@@ -18,7 +18,14 @@ model::model(int parameters) {
 	this->parameters = parameters;
 }
 
-double model::P(std::vector<double> &theta, const item_parameter &parameters) {
+double model::P(const optimizer_vector &theta, const optimizer_vector &parameters) {
+	std::vector<double> theta_temp(theta.size());
+	for ( size_t i = 0; i < theta.size(); ++i )
+		theta_temp[i] = theta(i);
+	return P(theta_temp, parameters);
+}
+
+double model::P(std::vector<double> &theta, const optimizer_vector &parameters) {
 	if ( this->parameters == 1 ) {
 		/**
 		 * 1PL Approach

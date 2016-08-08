@@ -10,7 +10,12 @@
 
 #include <string>
 
+//including optimization files from dlib library
+#include <dlib/optimization.h>
+
 namespace irtpp {
+
+	typedef dlib::matrix<double,0,1> optimizer_vector; /**< data type from dlib library*/
 
 	const std::string GAUSSIAN_QUADRATURE = "Gaussian";
 	const std::string SOBOL_QUADRATURE = "Sobol";
@@ -30,6 +35,8 @@ namespace irtpp {
 
 	const int ACCELERATION_PERIOD = 3;
 	const double MINIMUM_ACCEL = -5.0;
+
+	const double PI = std::acos(-1);
 }
 
 

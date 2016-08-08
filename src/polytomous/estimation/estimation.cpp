@@ -237,7 +237,7 @@ void estimation::load_initial_values ( std::string filename ) {
 	//Dimension
 	int &d = data.d;
 	//Parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta[0];
+	std::vector<optimizer_vector> &zeta = data.zeta[0];
 	//Number of items
 	int &p = data.p;
 	//Model used in the problem
@@ -245,11 +245,11 @@ void estimation::load_initial_values ( std::string filename ) {
 	//Number of categories of each item
 	std::vector<int> &categories_item = data.categories_item;
 
-	zeta = std::vector<item_parameter>(p);
+	zeta = std::vector<optimizer_vector>(p);
 
 	for ( int i = 0; i < p; ++i ) {
 		int total_parameters = m.parameters == 1 ? categories_item[i] - 1 : categories_item[i] - 1 + d;
-		zeta[i] = item_parameter(total_parameters);
+		zeta[i] = optimizer_vector(total_parameters);
 		for ( int j = 0; j < total_parameters; ++j )
 			zeta[i](j) = mt(i, j);
 	}
@@ -274,7 +274,7 @@ void estimation::load_initial_values ( std::string filename ) {
 
 void estimation::initial_values() {
 	//Parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta[0];
+	std::vector<optimizer_vector> &zeta = data.zeta[0];
 	//Dimension
 	int &d = data.d;
 	//Number of examinees
@@ -288,11 +288,11 @@ void estimation::initial_values() {
 	//Matrix of answers of the examinees
 	matrix<char> &dataset = *data.dataset;
 
-	zeta = std::vector<item_parameter>(p);
+	zeta = std::vector<optimizer_vector>(p);
 
 	for ( int i = 0; i < p; ++i ) {
 		int total_parameters = m.parameters == 1 ? categories_item[i] - 1 : categories_item[i] - 1 + d;
-		zeta[i] = item_parameter(total_parameters);
+		zeta[i] = optimizer_vector(total_parameters);
 		for ( int j = 0; j < total_parameters; ++j )
 			zeta[i](j) = 1.0;
 	}
@@ -303,7 +303,7 @@ void estimation::initial_values() {
 		 * */
 
 		for ( int i = 0; i < p; ++i ) {
-			item_parameter &item_i = zeta[i];
+			optimizer_vector &item_i = zeta[i];
 			int mi = categories_item[i];
 
 			matrix<char> data_dicho(N, mi - 1);
@@ -362,7 +362,7 @@ void estimation::initial_values() {
 		 * */
 
 		for ( int i = 0; i < p; ++i ) {
-			item_parameter &item_i = zeta[i];
+			optimizer_vector &item_i = zeta[i];
 			int mi = categories_item[i];
 
 			matrix<char> data_dicho(N, mi - 1);
@@ -397,7 +397,7 @@ void estimation::initial_values() {
 
 		int j = 0;
 		for ( auto pinned : pinned_items ) {
-			item_parameter &item = zeta[pinned];
+			optimizer_vector &item = zeta[pinned];
 			for ( int h = 0; h < d; ++h )
 				item(h) = 0;
 			item(j) = 1;
@@ -425,7 +425,7 @@ void estimation::EMAlgortihm() {
 }
 
 void estimation::print_results ( ) {
-	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
+	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 
 	std::cout << "Finished after " << iterations << " iterations.\n";
@@ -438,7 +438,7 @@ void estimation::print_results ( ) {
 }
 
 void estimation::print_results ( std::ofstream &fout, double elapsed ) {
-	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
+	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 
 	for ( int i = 0; i < p; ++i ) {

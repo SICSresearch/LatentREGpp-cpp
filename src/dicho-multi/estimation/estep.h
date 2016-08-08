@@ -23,8 +23,6 @@ namespace irtpp {
 
 namespace dichomulti {
 
-typedef dlib::matrix<double,0,1> item_parameter; /**< data type from dlib library*/
-
 /**
  * Estep of the EMAlgortihm.
  *

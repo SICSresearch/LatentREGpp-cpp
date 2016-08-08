@@ -50,7 +50,7 @@ public:
      * Overload parenthesis operator to evaluate
      * the Log likelihood function.
      */
-    double operator() (const item_parameter&) const;
+    double operator() (const optimizer_vector&) const;
 private:
     int i; /**< The current item*/
     estimation_data *data; /**< estimation_data pointer*/

@@ -13,7 +13,7 @@ namespace dichomulti {
 
 Qi::Qi (int i, estimation_data *d) : i(i), data(d) { }
 
-double Qi::operator() ( const item_parameter& item_i ) const {
+double Qi::operator() ( const optimizer_vector& item_i ) const {
 	//Value of Qi
 	double value = 0;
 	//Number of quadrature points
@@ -41,8 +41,8 @@ double Mstep(estimation_data &data, int current) {
 	int next = (current + 1) % ACCELERATION_PERIOD;
 
 	int &p = data.p;
-	std::vector<item_parameter> &current_zeta = data.zeta[current];
-	std::vector<item_parameter> &next_zeta = data.zeta[next];
+	std::vector<optimizer_vector> &current_zeta = data.zeta[current];
+	std::vector<optimizer_vector> &next_zeta = data.zeta[next];
 
 	if ( next_zeta.empty() ) {
 		for ( auto c : current_zeta )

@@ -44,6 +44,27 @@ class estimation {
 		double convergence_difference; /**< Epsilon to stop the EMAlgorithm*/
 		std::string custom_initial_values_filename; /**< path with custom initial values*/
 
+		class posterior {
+		public:
+			/**
+			 * Constructor that receives the number of the current item (i)
+			 * and the estimation_data pointer
+			 * @param i the current item
+			 * @param d estimation_data pointer
+			 */
+			posterior (int, int, estimation_data*);
+
+		    /**
+		     * Overload parenthesis operator to evaluate
+		     * the Log likelihood function.
+		     */
+		    double operator() (const optimizer_vector&) const;
+		private:
+		    int l; /**< The current latent trait*/
+		    int current_zeta;
+		    estimation_data *data; /**< estimation_data pointer*/
+		};
+
 	public:
 
 		estimation_data data; /**< Saves all data needed in the estimation process*/
@@ -120,6 +141,11 @@ class estimation {
 		 * EAP
 		 * */
 		void EAP(bool);
+
+		/*
+		 * 	MAP
+		 * */
+		void MAP(bool);
 
 		/**
 		 * Prints the results values of the estimated parameters.

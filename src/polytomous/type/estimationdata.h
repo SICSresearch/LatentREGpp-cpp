@@ -19,8 +19,6 @@ namespace irtpp {
 
 namespace polytomous {
 
-typedef dlib::matrix<double,0,1> item_parameter; /**< data type from dlib library*/
-
 /**
  * estimation_data class contains all the information needed to execute the EM estimation in
  * polytomous model
@@ -43,7 +41,7 @@ public:
 	matrix<double> pi; /**< Matrix pi*/
 	std::set<int> pinned_items; /**< Pinned items (won't be estimated)*/
 	model m; /**< Model to use*/
-	std::vector<item_parameter> zeta[ACCELERATION_PERIOD]; /**< Vector of zeta item parameters*/
+	std::vector<optimizer_vector> zeta[ACCELERATION_PERIOD]; /**< Vector of zeta item parameters*/
 	std::map<std::vector<char>, std::vector<int> > patterns; /**< Patterns and their individuals*/
 	matrix<double> latent_traits; /**< Latent traits */
 

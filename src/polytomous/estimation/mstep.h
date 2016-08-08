@@ -28,8 +28,6 @@ namespace irtpp {
 
 namespace polytomous {
 
-typedef dlib::matrix<double,0,1> column_vector; /**< Necessary typedef to be able to maximize using dlib*/
-
 /**
  * M step of the EM Algorithm
  *
@@ -57,7 +55,7 @@ public:
 	 * Overload parenthesis operator to evaluate
 	 * the Log likelihood function.
 	 */
-    double operator() (const column_vector&) const;
+    double operator() (const optimizer_vector&) const;
 private:
     int i; /**< The current item*/
     estimation_data *data; /**< estimation_data pointer*/
@@ -80,7 +78,7 @@ public:
 	 * Overload parenthesis operator to calculate lambda derivative
 	 * and k derivatives for Log likelihood function.
 	 */
-	const column_vector operator() (const column_vector&) const;
+	const optimizer_vector operator() (const optimizer_vector&) const;
 private:
     int i; /**< The current item*/
     estimation_data *data; /**< estimation_data pointer*/

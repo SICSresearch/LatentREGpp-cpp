@@ -203,17 +203,17 @@ void estimation::load_initial_values ( std::string filename ) {
 	//Dimension
 	int &d = data.d;
 	//Parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta[0];
+	std::vector<optimizer_vector> &zeta = data.zeta[0];
 	//Number of items
 	int &p = data.p;
 	//Model used in the problem
 	model &m = data.m;
 
-	zeta = std::vector<item_parameter>(p);
+	zeta = std::vector<optimizer_vector>(p);
 	int total_parameters = m.parameters == 1 ? 1 : m.parameters - 1 + d;
 
 	for ( int i = 0; i < p; ++i ) {
-		zeta[i] = item_parameter(total_parameters);
+		zeta[i] = optimizer_vector(total_parameters);
 		for ( int j = 0; j < total_parameters; ++j )
 			zeta[i](j) = mt(i, j);
 	}
@@ -230,7 +230,7 @@ void estimation::load_initial_values ( std::string filename ) {
 
 void estimation::initial_values() {
 	//Parameters of the items
-	std::vector<item_parameter> &zeta = data.zeta[0];
+	std::vector<optimizer_vector> &zeta = data.zeta[0];
 	//Dimension
 	int &d = data.d;
 	//Number of examinees
@@ -240,11 +240,11 @@ void estimation::initial_values() {
 	//Matrix of answers of the examinees
 	matrix<char> &dataset = *data.dataset;
 
-	zeta = std::vector<item_parameter>(p);
+	zeta = std::vector<optimizer_vector>(p);
 	int total_parameters = m.parameters == 1 ? 1 : m.parameters - 1 + d;
 
 	for ( int i = 0; i < p; ++i ) {
-		zeta[i] = item_parameter(total_parameters);
+		zeta[i] = optimizer_vector(total_parameters);
 		for ( int j = 0; j < total_parameters; ++j )
 			zeta[i](j) = 1.0;
 	}
@@ -254,7 +254,7 @@ void estimation::initial_values() {
 		find_initial_values(dataset, alpha, gamma);
 
 		for ( int i = 0; i < p; ++i ) {
-			item_parameter &item_i = zeta[i];
+			optimizer_vector &item_i = zeta[i];
 
 			if ( m.parameters > 1 ) {
 				item_i(0) = alpha[i];
@@ -269,7 +269,7 @@ void estimation::initial_values() {
 		find_initial_values(dataset, alpha, gamma);
 
 		for ( int i = 0; i < p; ++i ) {
-			item_parameter &item_i = zeta[i];
+			optimizer_vector &item_i = zeta[i];
 
 			if ( m.parameters < 3 ) item_i(item_i.size() - 1) = gamma[i];
 			else {
@@ -289,7 +289,7 @@ void estimation::initial_values() {
 
 		int j = 0;
 		for ( auto pinned : pinned_items ) {
-			item_parameter &item = zeta[pinned];
+			optimizer_vector &item = zeta[pinned];
 			for ( int h = 0; h < d; ++h )
 				item(h) = 0;
 			item(j) = 1;
@@ -340,7 +340,7 @@ void estimation::EAP ( bool all_factors ) {
 	//pi matrix
 	matrix<double> &pi = data.pi;
 
-	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
+	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 
 
 //	sobol_quadrature(10000);
@@ -394,23 +394,27 @@ void estimation::EAP ( bool all_factors ) {
 	std::map<std::vector<char>, std::vector<int> > &frequencies = data.patterns;
 
 	//Latent traits
-	matrix<double> &latent_traits = data.latent_traits;
-	latent_traits = matrix<double>(all_factors ? N : s, d);
+	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
+	latent_traits = std::vector<optimizer_vector>(all_factors ? N : s);
 
 	int l = 0;
 	for ( auto current_pattern : frequencies ) {
-		std::vector<double> &theta_l = *latent_traits.get_pointer_row(all_factors ? current_pattern.second[0] : l);
-		theta_l = std::vector<double>(d);
+		optimizer_vector &theta_l = latent_traits[all_factors ? current_pattern.second[0] : l];
+		theta_l = optimizer_vector(d);
 
 		for ( int g = 0; g < G; ++g ) {
-			std::vector<double> theta_g = *theta.get_pointer_row(g);
+			optimizer_vector theta_g(d);
+			std::vector<double> temp = *theta.get_pointer_row(g);
+			for ( size_t h = 0; h < temp.size(); ++h )
+				theta_g(h) = temp[h];
+
 			for ( int h = 0; h < d; ++h )
-				theta_l[h] += theta_g[h] * pi(g, l);
+				theta_l(h) += theta_g(h) * pi(g, l);
 		}
 
 		if ( all_factors ) {
 			for ( size_t j = 1; j < current_pattern.second.size(); ++j ) {
-				std::vector<double> &theta_j = *latent_traits.get_pointer_row(current_pattern.second[j]);
+				optimizer_vector &theta_j = latent_traits[current_pattern.second[j]];
 				theta_j = theta_l;
 			}
 		}
@@ -418,11 +422,64 @@ void estimation::EAP ( bool all_factors ) {
 		++l;
 	}
 
-	latent_traits.export_to_csv("datasets/2D-1000x10-latent_traits-est-G=300-4.csv");
+//	for ( int i = 0; i < latent_traits.size(); ++i ) {
+//		std::cout << i + 1 << ' ';
+//		for ( int j = 0; j < d; ++j ) {
+//			std::cout << latent_traits[i](j) << ' ';
+//		}
+//		std::cout << std::endl;
+//	}
+
+	//latent_traits.export_to_csv("datasets/2D-1000x10-latent_traits-est-G=300-4.csv");
+}
+
+
+estimation::posterior::posterior (int l, int cur, estimation_data *d) :
+		l(l), current_zeta(cur), data(d) { }
+
+double estimation::posterior::operator() ( const optimizer_vector& theta_l ) const {
+	int p = data->p;
+	int d = data->d;
+	matrix<char> &Y = data->Y;
+	model &m = data->m;
+	std::vector<optimizer_vector> &zeta = data->zeta[current_zeta];
+
+	double value = 0.0;
+	for ( int h = 0; h < d; ++h )
+		value += theta_l(h) * theta_l(h);
+	value = std::exp(-0.5 * value) / std::pow( std::sqrt(2.0 * PI), d );
+
+	for ( int i = 0; i < p; ++i )
+		value *= Y(l, i) ? m.P(theta_l, zeta[i]) : 1 - m.P(theta_l, zeta[i]);
+
+	return std::log(value);
+}
+
+void estimation::MAP ( bool all_factors ) {
+	EAP(false);
+	//Latent traits
+	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
+	int &s = data.s;
+	int &d = data.d;
+
+	int current_zeta = iterations % ACCELERATION_PERIOD;
+	for ( int l = 0; l < s; ++l ) {
+		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
+							   dlib::objective_delta_stop_strategy(1e-6),
+							   posterior(l, current_zeta, &data), latent_traits[l], -1);
+	}
+
+	for ( size_t i = 0; i < latent_traits.size(); ++i ) {
+		std::cout << i + 1 << ' ';
+		for ( int j = 0; j < d; ++j ) {
+			std::cout << latent_traits[i](j) << ' ';
+		}
+		std::cout << std::endl;
+	}
 }
 
 void estimation::print_results ( ) {
-	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
+	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 	model &m = data.m;
 
@@ -442,7 +499,7 @@ void estimation::print_results ( ) {
 }
 
 void estimation::print_results ( std::ofstream &fout, double elapsed ) {
-	std::vector<item_parameter> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
+	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 	model &m = data.m;
 

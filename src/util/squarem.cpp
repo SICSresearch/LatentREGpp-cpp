@@ -9,14 +9,14 @@
 
 namespace irtpp {
 
-double norm ( item_parameter &it ) {
+double norm ( optimizer_vector &it ) {
 	double sum = 0;
 	for ( auto x : it )
 		sum += x * x;
 	return std::sqrt(sum);
 }
 
-void squarem ( std::vector<item_parameter> zeta[ACCELERATION_PERIOD], std::set<int> &pinned ) {
+void squarem ( std::vector<optimizer_vector> zeta[ACCELERATION_PERIOD], std::set<int> &pinned ) {
 	int p = zeta[0].size();
 	double r, v, alpha;
 	for ( int i = 0; i < p; ++i ) {

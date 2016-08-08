@@ -9,7 +9,7 @@
 
 namespace irtpp {
 
-void ramsay(std::vector<item_parameter> zeta[ACCELERATION_PERIOD],
+void ramsay(std::vector<optimizer_vector> zeta[ACCELERATION_PERIOD],
 		std::set<int> &pinned) {
 
 	double num = 0, den = 0, accel = 0;
