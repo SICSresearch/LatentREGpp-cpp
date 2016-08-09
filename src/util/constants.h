@@ -40,6 +40,8 @@ namespace irtpp {
 	const double MINIMUM_ACCEL = -5.0;
 
 	const double PI = std::acos(-1);
+
+	const double NOT_COMPUTED = -INT_MAX;
 }
 
 

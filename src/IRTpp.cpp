@@ -147,15 +147,18 @@ void test_latent_traits ( ) {
 	std::cout << "Data imported from " << "datasets/2D-1000x40.csv" << std::endl;
 
 	dichomulti::estimation e(2, Y, 2, 0.001, "Sobol", 300);
-	//e.EMAlgortihm();
-	//e.print_item_parameters();
-	//e.print_item_parameters("datasets/2D-1000x40-estimation.csv");
-	e.load_initial_values("datasets/2D-1000x40-estimation.csv");
-	e.EAP(true);
-	e.print_latent_traits("datasets/2D-1000x40-LT-G=300-EAP2.csv");
-	e.MAP(true);
-	e.print_latent_traits("datasets/2D-1000x40-LT-G=300-MAP2.csv");
-	e.print_latent_traits();
+	e.EMAlgortihm();
+
+	e.print_item_parameters();
+	std::cout << e.log_likelihood() << std::endl;
+
+//	e.print_item_parameters("datasets/2D-1000x40-estimation.csv");
+//	e.load_initial_values("datasets/2D-1000x40-estimation.csv");
+//	e.EAP(true);
+//	e.print_latent_traits("datasets/2D-1000x40-LT-G=300-EAP2.csv");
+//	e.MAP(true);
+//	e.print_latent_traits("datasets/2D-1000x40-LT-G=300-MAP2.csv");
+//	e.print_latent_traits();
 }
 
 int main() {
@@ -166,23 +169,4 @@ int main() {
 	test_latent_traits();
 
 
-
-
-	//simulation
-	//Params:
-	//2PL, 1D, 100 iter, folder, filename, saves each 20 iter, dif, is data dicho?
-	//sim.simulate(2, 1, 100, "datasets/1D/poly/escenario1", "1D-poly-1000x10-", 20, 0.001, false);
-
-//	//Runs single test, with dichotomous approach
-//	//2PL, 2 dimensions
-//	sim.run_single(2, 2, "datasets/2D-dicho-1000x50-1.csv", 0.001, true);
-//	//This is the same than above
-//	sim.run_single_dichotomous(2, 2, "datasets/2D-dicho-1000x50-1.csv", 0.001);
-//
-//
-//	//Runs single test, with polytomous approach
-//	//2PL, 2 dimensions
-//	sim.run_single(2, 2, "datasets/2D-dicho-1000x50-1.csv", 0.001, true);
-//	//This is the same than above
-//	sim.run_single_polytomous(2, 2, "datasets/2D-dicho-1000x50-1.csv", 0.001);
 }
