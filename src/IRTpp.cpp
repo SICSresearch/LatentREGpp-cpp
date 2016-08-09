@@ -154,7 +154,7 @@ void test_EAP ( ) {
 	dichomulti::estimation e(2, Y, 2, 0.001, "Sobol", 300);
 	e.EMAlgortihm();
 	e.print_results();
-	e.MAP(true);
+	e.EAP(true);
 }
 
 int main() {

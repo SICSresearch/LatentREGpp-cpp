@@ -65,6 +65,8 @@ class estimation {
 		    estimation_data *data; /**< estimation_data pointer*/
 		};
 
+		void latent_traits_by_individuals();
+
 	public:
 
 		estimation_data data; /**< Saves all data needed in the estimation process*/

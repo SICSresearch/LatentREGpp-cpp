@@ -317,120 +317,58 @@ void estimation::EMAlgortihm() {
 }
 
 void estimation::EAP ( bool all_factors ) {
-	//Number of items
-	int &p = data.p;
 	//Number of response patterns
 	int &s = data.s;
 	//Number of quadrature points
 	int &G = data.G;
-	//Model used
-	model &m = data.m;
-	//Number of individuals
-	int &N = data.N;
-	//Matrix of response patterns
-	matrix<char> &Y = data.Y;
-	//Weights
-	std::vector<double> &w = data.w;
 	//Dimension
 	int &d = data.d;
 	//Latent trait vectors
 	matrix<double> &theta = data.theta;
-	// Probability matrix P
-	matrix<double> &P = data.P;
 	//pi matrix
 	matrix<double> &pi = data.pi;
-
-	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
-
 
 //	sobol_quadrature(10000);
 //	build_matrixes();
 
-	/**
-	 * Computing each element of matrix P
-	 * P_gi
-	 * */
-	#pragma omp parallel for schedule(dynamic)
-	for ( int g = 0; g < G; ++g ) {
-		std::vector<double> &theta_g = *theta.get_pointer_row(g);
-		for ( int i = 0; i < p; ++i ) {
-			P(g, i) = m.P(theta_g, zeta[i]);
-		}
-	}
-
-	double integral_l = 0.0;
-	std::vector<double> integrals(s);
-
-	//Patterns
-	#pragma omp parallel for schedule(dynamic) reduction(+:integral_l)
-	for ( int l = 0; l < s; ++l ) {
-		integral_l = 0;
-		//Quadrature points
-		for ( int g = 0; g < G; ++g ) {
-			double &pi_gl = pi(g, l) = w[g];
-			//Items
-			for ( int i = 0; i < p; ++i )
-				pi_gl *= Y(l, i) ? P(g, i) : 1 - P(g, i);
-			/**
-			 * As denominator for a response pattern l is the summation over the latent traits
-			 * here pi(g, l) is added to integral_l
-			 * */
-			integral_l += pi_gl;
-		}
-
-		for ( int g = 0; g < G; ++g ) {
-			double &pi_gl = pi(g, l);
-			pi_gl /= integral_l;
-		}
-
-		integrals[l] = integral_l;
-	}
-
-	//Asserting pi correctness
-	//bool pi_ok = test_pi(pi);
-	//assert(("Each column of pi matrix must sum 1.0", pi_ok));
+	Estep(data, iterations % ACCELERATION_PERIOD);
 
 	//Frequencies by pattern
-	std::map<std::vector<char>, std::vector<int> > &frequencies = data.patterns;
-
+	std::map<std::vector<char>, std::vector<int> > &patterns = data.patterns;
 	//Latent traits
 	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
-	latent_traits = std::vector<optimizer_vector>(all_factors ? N : s);
+	latent_traits = std::vector<optimizer_vector>(s);
 
 	int l = 0;
-	for ( auto current_pattern : frequencies ) {
-		optimizer_vector &theta_l = latent_traits[all_factors ? current_pattern.second[0] : l];
+	for ( auto pt : patterns ) {
+		optimizer_vector &theta_l = latent_traits[l];
 		theta_l = optimizer_vector(d);
 
 		for ( int g = 0; g < G; ++g ) {
-			optimizer_vector theta_g(d);
-			std::vector<double> temp = *theta.get_pointer_row(g);
-			for ( size_t h = 0; h < temp.size(); ++h )
-				theta_g(h) = temp[h];
-
+			std::vector<double> theta_g = *theta.get_pointer_row(g);
 			for ( int h = 0; h < d; ++h )
-				theta_l(h) += theta_g(h) * pi(g, l);
+				theta_l(h) += theta_g[h] * pi(g, l);
 		}
-
-		if ( all_factors ) {
-			for ( size_t j = 1; j < current_pattern.second.size(); ++j ) {
-				optimizer_vector &theta_j = latent_traits[current_pattern.second[j]];
-				theta_j = theta_l;
-			}
-		}
-
 		++l;
 	}
 
-//	for ( int i = 0; i < latent_traits.size(); ++i ) {
-//		std::cout << i + 1 << ' ';
-//		for ( int j = 0; j < d; ++j ) {
-//			std::cout << latent_traits[i](j) << ' ';
-//		}
-//		std::cout << std::endl;
-//	}
+	if ( all_factors ) latent_traits_by_individuals();
+}
 
-	//latent_traits.export_to_csv("datasets/2D-1000x10-latent_traits-est-G=300-4.csv");
+
+void estimation::MAP ( bool all_factors ) {
+	EAP(false);
+	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
+	int &s = data.s;
+
+	int current_zeta = iterations % ACCELERATION_PERIOD;
+	for ( int l = 0; l < s; ++l ) {
+		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
+							   dlib::objective_delta_stop_strategy(1e-6),
+							   posterior(l, current_zeta, &data), latent_traits[l], -1);
+	}
+
+	if ( all_factors ) latent_traits_by_individuals();
 }
 
 
@@ -455,26 +393,16 @@ double estimation::posterior::operator() ( const optimizer_vector& theta_l ) con
 	return std::log(value);
 }
 
-void estimation::MAP ( bool all_factors ) {
-	EAP(false);
-	//Latent traits
+void estimation::latent_traits_by_individuals () {
 	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
-	int &s = data.s;
-	int &d = data.d;
-
-	int current_zeta = iterations % ACCELERATION_PERIOD;
-	for ( int l = 0; l < s; ++l ) {
-		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-							   dlib::objective_delta_stop_strategy(1e-6),
-							   posterior(l, current_zeta, &data), latent_traits[l], -1);
-	}
-
-	for ( size_t i = 0; i < latent_traits.size(); ++i ) {
-		std::cout << i + 1 << ' ';
-		for ( int j = 0; j < d; ++j ) {
-			std::cout << latent_traits[i](j) << ' ';
-		}
-		std::cout << std::endl;
+	std::vector<optimizer_vector> temp_latent_traits = latent_traits;
+	latent_traits = std::vector<optimizer_vector>(data.N);
+	std::map<std::vector<char>, std::vector<int> > &patterns = data.patterns;
+	int l = 0;
+	for ( auto pt : patterns ) {
+		for ( size_t j = 0; j < pt.second.size(); ++j )
+			latent_traits[pt.second[j]] = temp_latent_traits[l];
+		++l;
 	}
 }
 
