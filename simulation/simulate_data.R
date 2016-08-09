@@ -474,11 +474,11 @@ simulate.data(size.cluster = c(10, 10, 10, 10, 10, 10), dim.data = 6,
 
 
 
-sim = simulate.poly.multi(sample.size = 1000, size.cluster = c(20, 20), dim.data = 2,
-                          ncatgs = rep(2, 40), seed_data = 834)
+sim = simulate.poly.multi(sample.size = 5000, size.cluster = c(20, 20), dim.data = 2,
+                          ncatgs = rep(2, 40), seed_data = 767)
 
 sim$params.it
 sim$data = sim$data - 1
 sim$theta
 
-write.table(file = "/home/milder/Documents/workspace/MIRTcpp/datasets/2D-1000x40-params.csv", sep = ";", x = sim$params.it, row.names = FALSE, col.names = FALSE)
+write.table(file = "/home/milder/Documents/workspace/MIRTcpp/datasets/2D-5000x40.csv", sep = ";", x = sim$data, row.names = FALSE, col.names = FALSE)

@@ -415,7 +415,7 @@ void estimation::print_results ( ) {
 
 	bool guessing_parameter = m.parameters == 3;
 	for ( int i = 0; i < p; ++i ) {
-		std::cout << "Item " << i + 1 << ": ";
+		std::cout << "Item " << i + 1 << ":\t";
 		for ( int j = 0; j < zeta[i].size() - guessing_parameter; ++j )
 			std::cout << zeta[i](j) << ' ';
 		if ( guessing_parameter ) {
@@ -448,7 +448,7 @@ void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 void estimation::print_latent_traits ( ) {
 	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
 	for ( size_t i = 0; i < latent_traits.size(); ++i ) {
-		std::cout << "Ind" << i + 1 << ": ";
+		std::cout << "Ind" << i + 1 << ":\t";
 		for ( int j = 0; j < latent_traits[i].size(); ++j )
 			std::cout << latent_traits[i](j) << ' ';
 		std::cout << std::endl;
@@ -463,7 +463,7 @@ void estimation::print_latent_traits ( std::string filename ) {
 			if ( j ) out << ';';
 			out << latent_traits[i](j);
 		}
-		std::cout << '\n';
+		out << '\n';
 	}
 }
 

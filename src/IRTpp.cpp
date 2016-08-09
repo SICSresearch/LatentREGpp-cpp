@@ -140,22 +140,21 @@ void test_sobol ( ) {
 		}
 }
 
-void test_EAP ( ) {
+void test_latent_traits ( ) {
 	simulation sim;
-
-//	sim.run_single_dichotomous(2, 2, "datasets/2D-1000x40.csv", 0.0001);
-	//sim.run_single_polytomous(2, 2, "datasets/2D-1000x40.csv", 0.0001, "Sobol", 300);
 
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/2D-1000x40.csv", Y);
-	std::cout << "Data imported from " << "datasets/2D-1000x40.csv" << std::endl;
+	in.importData("datasets/2D-5000x40.csv", Y);
+	std::cout << "Data imported from " << "datasets/2D-5000x40.csv" << std::endl;
 
-	dichomulti::estimation e(2, Y, 2, 0.001, "Sobol", 300);
+	dichomulti::estimation e(2, Y, 2, 0.001, "Sobol", 500);
 	e.EMAlgortihm();
 	e.print_results();
 	e.EAP(true);
-	e.print_latent_traits();
+	e.print_latent_traits("datasets/2D-5000x40-LT-G=500-EAP.csv");
+	e.MAP(true);
+	e.print_latent_traits("datasets/2D-5000x40-LT-G=500-MAP.csv");
 }
 
 int main() {
@@ -163,11 +162,7 @@ int main() {
 	cout.precision(5);
 	improveIO();
 
-	//test_sobol();
-
-
-	test_EAP();
-
+	test_latent_traits();
 
 
 
