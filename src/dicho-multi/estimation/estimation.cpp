@@ -197,7 +197,7 @@ void estimation::gaussian_quadrature () {
 
 void estimation::load_initial_values ( std::string filename ) {
 	matrix<double> mt;
-	input<double> in(',');
+	input<double> in(';');
 	in.importData(filename, mt);
 
 	//Dimension
@@ -222,7 +222,7 @@ void estimation::load_initial_values ( std::string filename ) {
 	std::set<int> &pinned_items = data.pinned_items;
 
 	if ( d > 1 && pinned_items.empty() ) {
-		int items_for_dimension = p / d;
+		int items_for_dimension = (p + d - 1) / d;
 		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j )
 			pinned_items.insert(i);
 	}
@@ -284,7 +284,7 @@ void estimation::initial_values() {
 		std::set<int> &pinned_items = data.pinned_items;
 
 		if ( pinned_items.empty() ) {
-			int items_for_dimension = p / d;
+			int items_for_dimension = (p + d - 1) / d;
 			for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j )
 				pinned_items.insert(i);
 		}

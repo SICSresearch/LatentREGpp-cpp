@@ -167,14 +167,14 @@ class estimation {
 		 * @param filename the filename of the where parameters will be saved
 		 * @param elapsed a double with time elapsed in EM estimation.
 		 */
-		void print_item_parameters(std::string, double);
+		void print_item_parameters(std::string, double elapsed = -1.0);
 
 		/**
 		 * Prints the results to a specific output stream, including time elapsed in ms.
 		 * @param fout the ofstream object from std library.
 		 * @param elapsed a double with time elpased in EM estimation.
 		 */
-		void print_item_parameters(std::ofstream &, double);
+		void print_item_parameters(std::ofstream &, double elapsed = -1.0);
 
 		/**
 		 * Prints the latent traits.
