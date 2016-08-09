@@ -193,6 +193,11 @@ class estimation {
 		 * @param fout the ofstream object from std library.
 		 */
 		void print_latent_traits(std::ofstream &);
+
+		/**
+		 * @return log_likehood of the estimation
+		 * */
+		double log_likelihood();
 };
 
 }

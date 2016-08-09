@@ -146,7 +146,7 @@ void test_latent_traits ( ) {
 	in.importData("datasets/2D-1000x40.csv", Y);
 	std::cout << "Data imported from " << "datasets/2D-1000x40.csv" << std::endl;
 
-	dichomulti::estimation e(2, Y, 2, 0.001, "Sobol", 300);
+	polytomous::estimation e(2, Y, 2, 0.001, "Sobol", 300);
 	e.EMAlgortihm();
 
 	e.print_item_parameters();

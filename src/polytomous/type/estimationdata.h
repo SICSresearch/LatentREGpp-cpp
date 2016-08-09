@@ -41,6 +41,7 @@ public:
 	matrix<double> pi; /**< Matrix pi*/
 	std::set<int> pinned_items; /**< Pinned items (won't be estimated)*/
 	model m; /**< Model to use*/
+	double loglikelihood; /**< Loglikelihood */
 	std::vector<optimizer_vector> zeta[ACCELERATION_PERIOD]; /**< Vector of zeta item parameters*/
 	std::map<std::vector<char>, std::vector<int> > patterns; /**< Patterns and their individuals*/
 	std::vector<optimizer_vector> latent_traits; /**< Latent traits */

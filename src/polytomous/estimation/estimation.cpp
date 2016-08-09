@@ -407,13 +407,17 @@ void estimation::initial_values() {
 		}
 	}
 }
-
 void estimation::EMAlgortihm() {
 	if ( custom_initial_values_filename == NONE || custom_initial_values_filename == BUILD ) initial_values();
 	else load_initial_values(custom_initial_values_filename);
 	double dif = 0.0;
+
+	double &loglikelihood = data.loglikelihood;
+	loglikelihood = NOT_COMPUTED;
+
 	iterations = 0;
 	int current;
+
 	do {
 		current = iterations % ACCELERATION_PERIOD;
 		if ( current == 2 )
@@ -422,8 +426,69 @@ void estimation::EMAlgortihm() {
 		Estep(data, current);
 		dif = Mstep(data, current);
 		++iterations;
+
 		std::cout << "Iteration: " << iterations << " \tMax-Change: " << dif << std::endl;
 	} while ( dif >= convergence_difference && iterations < MAX_ITERATIONS );
+}
+
+
+double estimation::log_likelihood() {
+	double &loglikelihood = data.loglikelihood;
+	if ( loglikelihood != NOT_COMPUTED ) return loglikelihood;
+
+	//Number of items
+	int &p = data.p;
+	//Number of response patterns
+	int &s = data.s;
+	//Number of quadrature points
+	int &G = data.G;
+	//Model used
+	model &m = data.m;
+	//Matrix of response patterns
+	matrix<char> &Y = data.Y;
+	//Frequency of each pattern
+	std::vector<int> &nl = data.nl;
+	//Latent trait vectors
+	matrix<double> &theta = data.theta;
+	//Weights
+	std::vector<double> &w = data.w;
+	//Vector of parameters of the items
+	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
+	//Number of categories
+	std::vector<int> &categories_item = data.categories_item;
+
+	// Probability matrix P
+	std::vector<matrix<double> > &P = data.P;
+
+	#pragma omp parallel for schedule(dynamic)
+	for ( int g = 0; g < G; ++g ) {
+		std::vector<double> &theta_g = *theta.get_pointer_row(g);
+		for ( int i = 0; i < p; ++i ) {
+			int mi = categories_item[i];
+			for ( int k = 0; k < mi; ++k )
+				P[g](i, k) = m.Pik(theta_g, zeta[i], i, k);
+		}
+	}
+
+	double integral_l = 0;
+	double loglikelihood_temp = 0;
+
+	//Patterns
+	#pragma omp parallel for schedule(dynamic) reduction(+:integral_l,loglikelihood_temp)
+	for ( int l = 0; l < s; ++l ) {
+		integral_l = 0;
+		//Quadrature points
+		for (int g = 0; g < G; ++g ) {
+			double pi_gl = w[g];
+			//Items
+			for (int i = 0; i < p; ++i )
+				pi_gl *= P[g](i, Y(l, i) - 1);
+			integral_l += pi_gl;
+		}
+		loglikelihood_temp += nl[l] * std::log(integral_l);
+	}
+
+	return loglikelihood = loglikelihood_temp;
 }
 
 void estimation::EAP ( bool all_factors ) {
