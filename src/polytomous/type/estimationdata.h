@@ -43,7 +43,7 @@ public:
 	model m; /**< Model to use*/
 	std::vector<optimizer_vector> zeta[ACCELERATION_PERIOD]; /**< Vector of zeta item parameters*/
 	std::map<std::vector<char>, std::vector<int> > patterns; /**< Patterns and their individuals*/
-	matrix<double> latent_traits; /**< Latent traits */
+	std::vector<optimizer_vector> latent_traits; /**< Latent traits */
 
 	/**
 	 * Constructor for estimation_data class.

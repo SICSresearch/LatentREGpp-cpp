@@ -143,16 +143,16 @@ void test_sobol ( ) {
 void test_latent_traits ( ) {
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/2D-5000x40.csv", Y);
-	std::cout << "Data imported from " << "datasets/2D-5000x40.csv" << std::endl;
+	in.importData("datasets/2D-1000x40.csv", Y);
+	std::cout << "Data imported from " << "datasets/2D-1000x40.csv" << std::endl;
 
-	dichomulti::estimation e(2, Y, 2, 0.001, "Sobol", 2000);
+	polytomous::estimation e(2, Y, 2, 0.001, "Sobol", 300);
 	e.EMAlgortihm();
 	e.print_item_parameters();
 	e.EAP(true);
-	e.print_latent_traits("datasets/2D-5000x40-LT-G=2000-EAP.csv");
+	e.print_latent_traits("datasets/2D-1000x40-LT-G=300-EAP-poly.csv");
 	e.MAP(true);
-	e.print_latent_traits("datasets/2D-5000x40-LT-G=2000-MAP.csv");
+	e.print_latent_traits("datasets/2D-1000x40-LT-G=300-MAP-poly.csv");
 }
 
 int main() {

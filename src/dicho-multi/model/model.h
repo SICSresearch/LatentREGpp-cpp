@@ -47,11 +47,19 @@ public:
 	/**
 	 * Function to calculate the probability according model to use and
 	 * equation 13 from IRT_engineers document.
-	 * @param theta a std vector double template with theta values.
-	 * @param parameters a typedef item_parameter to extract eta values.
+	 * @param theta a optimizer_vector with theta values.
+	 * @param parameters a optimizer_vector to extract eta values.
 	 * @return the probability given the model. It can be 1PL, 2PL or 3PL
 	 */
-	double P(const optimizer_vector &theta, const optimizer_vector &parameters);
+	double P(const optimizer_vector &, const optimizer_vector &);
+
+	/**
+	 * Function to calculate the probability according model to use and
+	 * equation 13 from IRT_engineers document.
+	 * @param theta a std vector double template with theta values.
+	 * @param parameters a optimizer_vector to extract eta values.
+	 * @return the probability given the model. It can be 1PL, 2PL or 3PL
+	 */
 	double P(std::vector<double>&, const optimizer_vector&);
 };
 

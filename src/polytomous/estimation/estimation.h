@@ -29,9 +29,6 @@ namespace irtpp {
 
 namespace polytomous {
 
-const int MAX_ITERATIONS = 500; /**< Max number of iterations of EMAlgorithm*/
-const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40; /**< Max number of quadrature points*/
-
 /**
  * Class to set up and run the estimation process
  * in polytomous models
@@ -44,6 +41,36 @@ class estimation {
 		short iterations; /**< Counts the actual number of iterations*/
 		double convergence_difference; /**< Epsilon to stop the EMAlgorithm*/
 		std::string custom_initial_values_filename; /**< path with custom initial values*/
+
+		/**
+		 * Class to maximize posterior function to estimate latent traits
+		 * in MAP approach
+		 * */
+		class posterior {
+		public:
+			/**
+			 * Constructor that receives the number of the current item (i)
+			 * and the estimation_data pointer
+			 * @param l the current latent trait
+			 * @param current_zeta the current zeta estimation
+			 * @param d estimation_data pointer
+			 */
+			posterior (int, int, estimation_data*);
+
+			/**
+			 * Overload parenthesis operator to evaluate the function
+			 */
+			double operator() (const optimizer_vector&) const;
+		private:
+			int l; /**< The current latent trait*/
+			int current_zeta; /**< The current zeta estimation (Ramsay and Squarem accelerate).*/
+			estimation_data *data; /**< estimation_data pointer*/
+		};
+
+		/**
+		 * Converts latent traits arranged by pattern to arranged by individuals
+		 * */
+		void latent_traits_by_individuals();
 
 	public:
 
@@ -110,6 +137,10 @@ class estimation {
 		 * gaussian_quadrature. By default max points to use is 40.
 		 */
 		void gaussian_quadrature ();
+
+		/**
+		 * Builds all necessary matrixes for the estimation process
+		 * */
 		void build_matrixes();
 
 		/**
@@ -117,17 +148,51 @@ class estimation {
 		 */
 		void EMAlgortihm();
 
+		/*
+		 * EAP
+		 * */
+		void EAP(bool);
+
+		/*
+		 * MAP
+		 * */
+		void MAP(bool);
+
 		/**
-		 * Prints the results values of the estimated parameters.
+		 * Prints the item parameters values of the estimated parameters.
 		 */
-		void print_results();
+		void print_item_parameters();
+
+		/**
+		 * Prints the item parameters to a specific file, including time elapsed in ms.
+		 * @param filename the filename of the where parameters will be saved
+		 * @param elapsed a double with time elapsed in EM estimation.
+		 */
+		void print_item_parameters(std::string, double);
 
 		/**
 		 * Prints the results to a specific output stream, including time elapsed in ms.
 		 * @param fout the ofstream object from std library.
 		 * @param elapsed a double with time elpased in EM estimation.
 		 */
-		void print_results(std::ofstream &, double);
+		void print_item_parameters(std::ofstream &, double);
+
+		/**
+		 * Prints the latent traits.
+		 */
+		void print_latent_traits();
+
+		/**
+		 * Prints the latent traits to a specific file
+		 * @param filename the filename of the where latent traits will be saved
+		 */
+		void print_latent_traits(std::string);
+
+		/**
+		 * Prints the latent traits to a specific output stream
+		 * @param fout the ofstream object from std library.
+		 */
+		void print_latent_traits(std::ofstream &);
 };
 
 }

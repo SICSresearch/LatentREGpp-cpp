@@ -269,6 +269,8 @@ void estimation::load_initial_values ( std::string filename ) {
 		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j )
 			pinned_items.insert(i);
 	}
+
+	iterations = 0;
 }
 
 
@@ -424,7 +426,98 @@ void estimation::EMAlgortihm() {
 	} while ( dif >= convergence_difference && iterations < MAX_ITERATIONS );
 }
 
-void estimation::print_results ( ) {
+void estimation::EAP ( bool all_factors ) {
+	//Number of response patterns
+	int &s = data.s;
+	//Number of quadrature points
+	int &G = data.G;
+	//Dimension
+	int &d = data.d;
+	//Latent trait vectors
+	matrix<double> &theta = data.theta;
+	//pi matrix
+	matrix<double> &pi = data.pi;
+
+//	sobol_quadrature(10000);
+//	build_matrixes();
+
+	Estep(data, iterations % ACCELERATION_PERIOD);
+
+	//Patterns
+	std::map<std::vector<char>, std::vector<int> > &patterns = data.patterns;
+	//Latent traits
+	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
+	latent_traits = std::vector<optimizer_vector>(s);
+
+	int l = 0;
+	for ( auto pt : patterns ) {
+		optimizer_vector &theta_l = latent_traits[l];
+		theta_l = optimizer_vector(d);
+
+		for ( int g = 0; g < G; ++g ) {
+			std::vector<double> theta_g = *theta.get_pointer_row(g);
+			for ( int h = 0; h < d; ++h )
+				theta_l(h) += theta_g[h] * pi(g, l);
+		}
+		++l;
+	}
+
+	if ( all_factors ) latent_traits_by_individuals();
+}
+
+
+void estimation::MAP ( bool all_factors ) {
+	EAP(false);
+	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
+	int &s = data.s;
+
+	int current_zeta = iterations % ACCELERATION_PERIOD;
+	for ( int l = 0; l < s; ++l ) {
+		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
+							   dlib::objective_delta_stop_strategy(1e-6),
+							   posterior(l, current_zeta, &data), latent_traits[l], -1);
+	}
+
+	if ( all_factors ) latent_traits_by_individuals();
+}
+
+
+estimation::posterior::posterior (int l, int cur, estimation_data *d) :
+		l(l), current_zeta(cur), data(d) { }
+
+double estimation::posterior::operator() ( const optimizer_vector& theta_l ) const {
+	int p = data->p;
+	int d = data->d;
+	matrix<char> &Y = data->Y;
+	model &m = data->m;
+	std::vector<optimizer_vector> &zeta = data->zeta[current_zeta];
+
+	double value = 0.0;
+	for ( int h = 0; h < d; ++h )
+		value += theta_l(h) * theta_l(h);
+	value = std::exp(-0.5 * value) / std::pow( std::sqrt(2.0 * PI), d );
+
+	for ( int i = 0; i < p; ++i )
+		value *= m.Pik(theta_l, zeta[i], i, Y(l, i) - 1);
+
+	return std::log(value);
+}
+
+void estimation::latent_traits_by_individuals () {
+	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
+	std::vector<optimizer_vector> temp_latent_traits = latent_traits;
+	latent_traits = std::vector<optimizer_vector>(data.N);
+	std::map<std::vector<char>, std::vector<int> > &patterns = data.patterns;
+	int l = 0;
+	for ( auto pt : patterns ) {
+		for ( size_t j = 0; j < pt.second.size(); ++j )
+			latent_traits[pt.second[j]] = temp_latent_traits[l];
+		++l;
+	}
+}
+
+
+void estimation::print_item_parameters ( ) {
 	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 
@@ -437,7 +530,13 @@ void estimation::print_results ( ) {
 	}
 }
 
-void estimation::print_results ( std::ofstream &fout, double elapsed ) {
+void estimation::print_item_parameters ( std::string filename, double elapsed ) {
+	std::ofstream fout(filename);
+	print_item_parameters(fout, elapsed);
+	fout.close();
+}
+
+void estimation::print_item_parameters ( std::ofstream &fout, double elapsed ) {
 	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 
@@ -450,9 +549,34 @@ void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 	}
 }
 
-estimation::~estimation() {
-
+void estimation::print_latent_traits ( ) {
+	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
+	for ( size_t i = 0; i < latent_traits.size(); ++i ) {
+		std::cout << i + 1 << "\t";
+		for ( int j = 0; j < latent_traits[i].size(); ++j )
+			std::cout << latent_traits[i](j) << ' ';
+		std::cout << std::endl;
+	}
 }
+
+void estimation::print_latent_traits ( std::string filename ) {
+	std::ofstream out(filename);
+	print_latent_traits(out);
+	out.close();
+}
+
+void estimation::print_latent_traits ( std::ofstream &out ) {
+	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
+	for ( size_t i = 0; i < latent_traits.size(); ++i ) {
+		for ( int j = 0; j < latent_traits[i].size(); ++j ) {
+			if ( j ) out << ';';
+			out << latent_traits[i](j);
+		}
+		out << '\n';
+	}
+}
+
+estimation::~estimation() {}
 
 }
 

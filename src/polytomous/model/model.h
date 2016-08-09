@@ -14,9 +14,6 @@
 
 #include "../../util/constants.h"
 
-//including optimization files from dlib library
-#include <dlib/optimization.h>
-
 namespace irtpp {
 
 namespace polytomous {
@@ -27,8 +24,6 @@ namespace polytomous {
  * Might be 1PL or 2PL.
  */
 class model {
-
-typedef dlib::matrix<double,0,1> item_parameter; /**< data type from dlib library*/
 
 public:
 	int parameters; /**< Number of parameters of the model*/
@@ -57,25 +52,26 @@ public:
 	/**
 	 * Probability in dichotomous case according to equation 82 in IRT_engineers document.
 	 * @param theta a std vector double template with theta values.
-	 * @param parameters a typedef item_parameter to extract eta values.
+	 * @param parameters a typedef optimizer_vector to extract eta values.
 	 * @param i number of items.
 	 * @param k number of categories.
 	 * @return the probability in dichotomous case according select model. it can be 1PL or 2PL
 	 */
-	double Pstar_ik(std::vector<double>&, const item_parameter&, int i, int k);
+	double Pstar_ik(std::vector<double>&, const optimizer_vector&, int i, int k);
 
 	/**
 	 * This method computes the probability that a response pattern U_l has the category k to item
 	 * i, given that its latent trait vector theta, and the item parameters. According to equation 89
 	 * in IRT_engineers document.
 	 * @param theta a std vector double template with theta values.
-	 * @param parameters a typedef item_parameter to extract eta values.
+	 * @param parameters a typedef optimizer_vector to extract eta values.
 	 * @param i number of items.
 	 * @param k number of categories.
 	 * @return the probability for polytomous.
 	 * @see Pstar_ik
 	 */
-	double Pik(std::vector<double>&, const item_parameter&, int i, int k);
+	double Pik(std::vector<double>&, const optimizer_vector&, int i, int k);
+	double Pik(const optimizer_vector&, const optimizer_vector&, int i, int k);
 };
 
 }

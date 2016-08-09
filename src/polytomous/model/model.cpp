@@ -22,7 +22,7 @@ model::model(int parameters, int d, std::vector<int> *categories_item) {
 	this->d = d;
 }
 
-double model::Pstar_ik(std::vector<double> &theta, const item_parameter &parameters, int i, int k) {
+double model::Pstar_ik(std::vector<double> &theta, const optimizer_vector &parameters, int i, int k) {
 	int mi = (*categories_item)[i];
 	/**
 	 * Base cases
@@ -69,7 +69,15 @@ double model::Pstar_ik(std::vector<double> &theta, const item_parameter &paramet
 	return 1.0 / (1.0 + std::exp(-eta));
 }
 
-double model::Pik(std::vector<double> &theta, const item_parameter &parameters, int i, int k) {
+double model::Pik(const optimizer_vector &theta, const optimizer_vector &parameters, int i, int k) {
+	std::vector<double> theta_temp(theta.size());
+	for ( int h = 0; h < theta.size(); ++h )
+		theta_temp[h] = theta(h);
+	return Pik(theta_temp, parameters, i, k);
+}
+
+
+double model::Pik(std::vector<double> &theta, const optimizer_vector &parameters, int i, int k) {
 	double P_ik = Pstar_ik(theta, parameters, i, k - 1) - Pstar_ik(theta, parameters, i, k);
 
 	P_ik = std::max(P_ik, LOWER_BOUND_);

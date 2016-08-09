@@ -83,7 +83,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 
 			END_CLOCK
 			REPORT_TIME
-			e.print_results(report_parameters, elapsed);
+			e.print_item_parameters(report_parameters, elapsed);
 		}
 	}
 
@@ -121,13 +121,13 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 	e.EMAlgortihm();
 
 	END_CLOCK
-	e.print_results();
+	e.print_item_parameters();
 	REPORT_TIME
 
 	std::stringstream ss;
 	ss << filename << "-estimation.csv";
 	std::ofstream out(ss.str());
-	e.print_results(out, elapsed);
+	e.print_item_parameters(out, elapsed);
 	out.close();
 }
 
