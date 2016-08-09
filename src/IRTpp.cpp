@@ -155,6 +155,7 @@ void test_EAP ( ) {
 	e.EMAlgortihm();
 	e.print_results();
 	e.EAP(true);
+	e.print_latent_traits();
 }
 
 int main() {

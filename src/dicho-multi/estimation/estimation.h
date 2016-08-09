@@ -160,6 +160,10 @@ class estimation {
 		 * @param elapsed a double with time elpased in EM estimation.
 		 */
 		void print_results(std::ofstream &, double);
+
+		void print_latent_traits();
+		void print_latent_traits(std::string);
+
 };
 
 }
