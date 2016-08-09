@@ -226,6 +226,8 @@ void estimation::load_initial_values ( std::string filename ) {
 		for ( int i = 0, j = 0; i < p; i += items_for_dimension, ++j )
 			pinned_items.insert(i);
 	}
+
+	iterations = 0;
 }
 
 void estimation::initial_values() {
@@ -333,7 +335,7 @@ void estimation::EAP ( bool all_factors ) {
 
 	Estep(data, iterations % ACCELERATION_PERIOD);
 
-	//Frequencies by pattern
+	//Patterns
 	std::map<std::vector<char>, std::vector<int> > &patterns = data.patterns;
 	//Latent traits
 	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
@@ -406,7 +408,7 @@ void estimation::latent_traits_by_individuals () {
 	}
 }
 
-void estimation::print_results ( ) {
+void estimation::print_item_parameters ( ) {
 	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 	model &m = data.m;
@@ -415,7 +417,7 @@ void estimation::print_results ( ) {
 
 	bool guessing_parameter = m.parameters == 3;
 	for ( int i = 0; i < p; ++i ) {
-		std::cout << "Item " << i + 1 << ":\t";
+		std::cout << i + 1 << ":\t";
 		for ( int j = 0; j < zeta[i].size() - guessing_parameter; ++j )
 			std::cout << zeta[i](j) << ' ';
 		if ( guessing_parameter ) {
@@ -426,7 +428,13 @@ void estimation::print_results ( ) {
 	}
 }
 
-void estimation::print_results ( std::ofstream &fout, double elapsed ) {
+void estimation::print_item_parameters ( std::string filename, double elapsed ) {
+	std::ofstream fout(filename);
+	print_item_parameters(fout, elapsed);
+	fout.close();
+}
+
+void estimation::print_item_parameters ( std::ofstream &fout, double elapsed ) {
 	std::vector<optimizer_vector> &zeta = data.zeta[iterations % ACCELERATION_PERIOD];
 	int &p = data.p;
 	model &m = data.m;
@@ -448,7 +456,7 @@ void estimation::print_results ( std::ofstream &fout, double elapsed ) {
 void estimation::print_latent_traits ( ) {
 	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
 	for ( size_t i = 0; i < latent_traits.size(); ++i ) {
-		std::cout << "Ind" << i + 1 << ":\t";
+		std::cout << i + 1 << ":\t";
 		for ( int j = 0; j < latent_traits[i].size(); ++j )
 			std::cout << latent_traits[i](j) << ' ';
 		std::cout << std::endl;
@@ -457,6 +465,11 @@ void estimation::print_latent_traits ( ) {
 
 void estimation::print_latent_traits ( std::string filename ) {
 	std::ofstream out(filename);
+	print_latent_traits(out);
+	out.close();
+}
+
+void estimation::print_latent_traits ( std::ofstream &out ) {
 	std::vector<optimizer_vector> &latent_traits = data.latent_traits;
 	for ( size_t i = 0; i < latent_traits.size(); ++i ) {
 		for ( int j = 0; j < latent_traits[i].size(); ++j ) {

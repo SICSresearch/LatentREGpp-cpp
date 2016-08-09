@@ -18,9 +18,9 @@ model::model(int parameters) {
 	this->parameters = parameters;
 }
 
-double model::P(const optimizer_vector &theta, const optimizer_vector &parameters) {
+double model::P ( const optimizer_vector &theta, const optimizer_vector &parameters ) {
 	std::vector<double> theta_temp(theta.size());
-	for ( size_t i = 0; i < theta.size(); ++i )
+	for ( int i = 0; i < theta.size(); ++i )
 		theta_temp[i] = theta(i);
 	return P(theta_temp, parameters);
 }
