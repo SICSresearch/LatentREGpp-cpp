@@ -11,11 +11,12 @@ namespace irtpp {
 
 namespace polytomous {
 
-estimation::estimation ( int themodel, matrix<char> &dataset, unsigned int d,
+estimation::estimation(matrix<char> &dataset, unsigned int d, int themodel,
 					   double convergence_difference,
+					   std::vector<int> number_of_items,
 					   std::string quadrature_technique,
 					   int quadrature_points,
-					   std::vector<int> number_of_items,
+					   std::vector<int> individual_weights,
 					   std::string custom_initial_values_filename ) {
 	/**
 	 * Object to allocate all data needed in estimation process
@@ -70,11 +71,15 @@ estimation::estimation ( int themodel, matrix<char> &dataset, unsigned int d,
 		patterns[dataset.get_row(i)].push_back(i);
 
 	Y = matrix<char>();
-	nl = std::vector<int>();
+	nl = std::vector<int>(patterns.size());
 
+	if ( individual_weights.empty() ) individual_weights = std::vector<int>(patterns.size(), 1);
+
+	int l = 0;
 	for ( auto it : patterns ) {
 		Y.add_row(it.first);
-		nl.push_back(it.second.size());
+		nl[l] = it.second.size() * individual_weights[l];
+		++l;
 	}
 
 	N = dataset.rows();
@@ -231,7 +236,7 @@ void estimation::gaussian_quadrature () {
 
 void estimation::load_initial_values ( std::string filename ) {
 	matrix<double> mt;
-	input<double> in(';');
+	input<double> in(',');
 	in.importData(filename, mt);
 
 	//Dimension

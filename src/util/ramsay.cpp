@@ -5,7 +5,7 @@
  *      Author: Milder
  */
 
-#include "squarem.h"
+#include "ramsay.h"
 
 namespace irtpp {
 

@@ -13,7 +13,6 @@
 #include "../../util/input.h"
 #include "../../util/quadraturepoints.h"
 #include "../../util/constants.h"
-#include "../../util/squarem.h"
 #include "../../util/ramsay.h"
 
 #include <map>
@@ -100,10 +99,11 @@ class estimation {
 		 * @param cluster a std vector integer template with number of items for each dimension.
 		 * @param custom_initial_values_filename string with path for custom initial_values. Default is none.
 		 */
-		estimation(int, matrix<char>&, unsigned int, double,
+		estimation(matrix<char>&, unsigned int, int themodel = 2, double convergence_difference = 0.001,
+						std::vector<int> cluster = EMPTY_INTEGER_VECTOR,
 						std::string quadrature_technique = GAUSSIAN_QUADRATURE,
 						int quadrature_points = DEFAULT_SOBOL_POINTS,
-						std::vector<int> cluster = EMPTY_INTEGER_VECTOR,
+						std::vector<int> individuals_weights = EMPTY_INTEGER_VECTOR,
 						std::string custom_initial_values_filename = NONE );
 
 		/**

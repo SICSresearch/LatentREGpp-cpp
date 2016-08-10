@@ -143,13 +143,13 @@ void test_sobol ( ) {
 void test_latent_traits ( ) {
 	matrix<char> Y;
 	input<char> in(';');
-	in.importData("datasets/2D-1000x40.csv", Y);
-	std::cout << "Data imported from " << "datasets/2D-1000x40.csv" << std::endl;
+	in.importData("datasets/3D/3D-dicho-1000x55-1.csv", Y);
+	std::cout << "Data imported from " << "datasets/3D/3D-dicho-1000x55-1.csv" << std::endl;
 
-	polytomous::estimation e(2, Y, 2, 0.001, "Sobol", 300);
+	dichomulti::estimation e(Y, 3, 2, 0.001, EMPTY_INTEGER_VECTOR, "Sobol", 300, EMPTY_INTEGER_VECTOR, "datasets/3D/INI/INITIAL-3D-dicho-1000x55-1.csv");
 	e.EMAlgortihm();
-
 	e.print_item_parameters();
+	e.EMAlgortihm();
 	std::cout << e.log_likelihood() << std::endl;
 
 //	e.print_item_parameters("datasets/2D-1000x40-estimation.csv");
@@ -167,6 +167,4 @@ int main() {
 	improveIO();
 
 	test_latent_traits();
-
-
 }
