@@ -92,9 +92,9 @@ class estimation {
 		 *
 		 *  Then it sets up all the data needed to start the estimation process
 		 *
-		 * @param themodel model to use 1PL, 2PL or 3PL.
 		 * @param dataset a matrix data type char template with data to estimate parameters.
 		 * @param d the dimension.
+		 * @param themodel model to use 1PL, 2PL or 3PL.
 		 * @param convergence_difference epsilon convergence difference.
 		 * @param quadrature_technique string. it can be Gaussian or Sobol.
 		 * @param quadrature_technique if Sobol. Number of points to use.
@@ -103,8 +103,8 @@ class estimation {
 		 */
 		estimation(matrix<char>&, unsigned int, int themodel = 2, double convergence_difference = 0.001,
 								std::vector<int> cluster = EMPTY_INTEGER_VECTOR,
-								std::string quadrature_technique = GAUSSIAN_QUADRATURE,
-								int quadrature_points = DEFAULT_SOBOL_POINTS,
+								std::string quadrature_technique = GAUSSIAN,
+								int quadrature_points = DEFAULT_QMCEM_POINTS,
 								std::vector<int> individuals_weights = EMPTY_INTEGER_VECTOR,
 								std::string custom_initial_values_filename = NONE );
 

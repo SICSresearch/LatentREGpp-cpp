@@ -99,7 +99,7 @@ estimation::estimation(matrix<char> &dataset, unsigned int d, int themodel,
 		categories_item[i] = max_category;
 	}
 
-	if ( quadrature_technique == SOBOL_QUADRATURE )
+	if ( quadrature_technique == QMCEM )
 		sobol_quadrature(quadrature_points);
 	else
 		gaussian_quadrature();

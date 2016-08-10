@@ -18,14 +18,14 @@ namespace irtpp {
 	typedef dlib::matrix<double,0,1> optimizer_vector; /**< data type from dlib library*/
 
 	const int MAX_ITERATIONS = 500; /**< Max number of iterations of EMAlgorithm*/
-	const int MAX_NUMBER_OF_QUADRATURE_POINTS = 40; /**< Max number of quadrature points*/
+	const int MAX_NUMBER_OF_GAUSSIAN_POINTS = 40; /**< Max number of quadrature points*/
 
-	const std::string GAUSSIAN_QUADRATURE = "Gaussian";
-	const std::string SOBOL_QUADRATURE = "Sobol";
-	const int DEFAULT_SOBOL_POINTS = 2000;
+	const std::string GAUSSIAN = "GAUSSIAN";
+	const std::string QMCEM = "QMCEM";
+	const int DEFAULT_QMCEM_POINTS = 2000;
 
-	const std::string NONE = "None";
-	const std::string BUILD = "Build";
+	const std::string NONE = "NONE";
+	const std::string BUILD = "BUILD";
 
 	const std::string ONEPL = "1PL";
 	const std::string TWOPL = "2PL";

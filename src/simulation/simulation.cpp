@@ -26,7 +26,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 	std::ofstream report_parameters;
 	std::stringstream ss;
 	ss << folder << "/estimation-" << name << '-' << start << '-' << end;
-	if ( quadrature_technique == SOBOL_QUADRATURE ) ss << "-G=" << G;
+	if ( quadrature_technique == QMCEM ) ss << "-G=" << G;
 	ss << (dicho ? "-dicho-package" : "-poly-package") << ".csv";
 
 	std::string parameters = ss.str();
@@ -52,7 +52,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 		in.importData(file_name, Y);
 
 		ss << " imported. Running with " << (dicho ? "dichotomous" : "polytomus") << " package";
-		if ( quadrature_technique == SOBOL_QUADRATURE )
+		if ( quadrature_technique == QMCEM )
 			ss << " and Sobol G=" << G;
 		else
 			ss << " and Gaussian";

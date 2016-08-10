@@ -103,8 +103,8 @@ public:
 	 */
 	void simulate ( int model, int d, int iterations, std::string folder,
 				    std::string name, int interval, double, bool,
-					std::string quadrature_technique = SOBOL_QUADRATURE,
-					int G = DEFAULT_SOBOL_POINTS,
+					std::string quadrature_technique = QMCEM,
+					int G = DEFAULT_QMCEM_POINTS,
 					std::vector<int> cluster = std::vector<int>(),
 					std::string custom_initial_values_filename = NONE );
 
@@ -135,7 +135,7 @@ public:
 	 * @param custom_initial_values_filename BUILD if the dataset has custom initial values, else NONE.
 	 */
 	void run_single ( int, int, std::string, double, bool,
-					  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
+					  std::string quadrature_technique = GAUSSIAN, int G = DEFAULT_QMCEM_POINTS,
 					  std::vector<int> cluster = std::vector<int>(),
 					  std::string custom_initial_values_filename = NONE );
 
@@ -162,7 +162,7 @@ public:
 	 * @param custom_initial_values_filename BUILD if the dataset has custom initial values, else NONE.
 	 */
 	void run_single_polytomous ( int, int, std::string, double,
-								 std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
+								 std::string quadrature_technique = GAUSSIAN, int G = DEFAULT_QMCEM_POINTS,
 								 std::vector<int> cluster = std::vector<int>(),
 								 std::string custom_initial_values_filename = NONE );
 
@@ -189,7 +189,7 @@ public:
 	 * @param custom_initial_values_filename BUILD if the dataset has custom initial values, else NONE.
 	 */
 	void run_single_dichotomous ( int, int, std::string, double,
-								  std::string quadrature_technique = GAUSSIAN_QUADRATURE, int G = DEFAULT_SOBOL_POINTS,
+								  std::string quadrature_technique = GAUSSIAN, int G = DEFAULT_QMCEM_POINTS,
 								  std::vector<int> cluster = std::vector<int>(),
 								  std::string custom_initial_values_filename = NONE );
 

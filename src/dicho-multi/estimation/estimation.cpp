@@ -78,7 +78,7 @@ estimation::estimation(matrix<char> &dataset, unsigned int d, int themodel,
 			if ( Y(l, i) )
 				correct.add_element(l, i);
 
-	if ( quadrature_technique == SOBOL_QUADRATURE )
+	if ( quadrature_technique == QMCEM )
 		sobol_quadrature(quadrature_points);
 	else
 		gaussian_quadrature();
