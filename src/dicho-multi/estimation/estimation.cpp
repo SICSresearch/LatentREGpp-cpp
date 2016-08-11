@@ -221,6 +221,10 @@ void estimation::load_initial_values ( std::string filename ) {
 		zeta[i] = optimizer_vector(total_parameters);
 		for ( int j = 0; j < total_parameters; ++j )
 			zeta[i](j) = mt(i, j);
+		if ( m.parameters == 3 ) {
+			double &c = zeta[i](total_parameters - 1);
+			c = std::log(c / (1.0 - c));
+		}
 	}
 
 	//Items that will not be estimated
