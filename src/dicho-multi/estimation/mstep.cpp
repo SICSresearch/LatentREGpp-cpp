@@ -41,6 +41,7 @@ double Mstep(estimation_data &data, int current) {
 	int next = (current + 1) % ACCELERATION_PERIOD;
 
 	int &p = data.p;
+	model &m = data.m;
 	std::vector<optimizer_vector> &current_zeta = data.zeta[current];
 	std::vector<optimizer_vector> &next_zeta = data.zeta[next];
 
@@ -74,8 +75,20 @@ double Mstep(estimation_data &data, int current) {
 					   Qi(i, &data), next_zeta[i], -1);
 
 		//Computing difference of current item
-		for ( int j = 0; j < next_zeta[i].size(); ++j )
-			max_difference = std::max(max_difference, std::abs(next_zeta[i](j) - current_zeta[i](j)));
+		if ( m.parameters < 3 ) {
+			for ( int j = 0; j < next_zeta[i].size(); ++j )
+				max_difference = std::max(max_difference, std::abs(next_zeta[i](j) - current_zeta[i](j)));
+		} else {
+			for ( int j = 0; j < next_zeta[i].size() - 1; ++j )
+				max_difference = std::max(max_difference, std::abs(next_zeta[i](j) - current_zeta[i](j)));
+			double c_current = current_zeta[i](current_zeta[i].size() - 1);
+			double c_next = next_zeta[i](next_zeta[i].size() - 1);
+
+			c_current = 1.0 / (1.0 + exp(-c_current));
+			c_next = 1.0 / (1.0 + exp(-c_next));
+
+			max_difference = std::max(max_difference, std::abs(c_next - c_current));
+		}
 	}
 
 	return max_difference;
