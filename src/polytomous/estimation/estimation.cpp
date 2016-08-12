@@ -50,6 +50,8 @@ estimation::estimation(matrix<char> &dataset, unsigned int d, int themodel,
 	//Matrix of response patterns and their frequency
 	std::map<std::vector<char>, std::vector<int> > &patterns = data.patterns;
 
+	double &loglikelihood = data.loglikelihood;
+
 	//-------------------------------------------------------------------------------------
 
 	bool dichotomous = false;
@@ -119,6 +121,7 @@ estimation::estimation(matrix<char> &dataset, unsigned int d, int themodel,
 	}
 
 	//Configurations for the estimation
+	loglikelihood = NOT_COMPUTED;
 	m = model(themodel, d, &categories_item);
 	this->convergence_difference = convergence_difference;
 	this->iterations = 0;
@@ -275,6 +278,7 @@ void estimation::load_initial_values ( std::string filename ) {
 			pinned_items.insert(i);
 	}
 
+	data.loglikelihood = NOT_COMPUTED;
 	iterations = 0;
 }
 
@@ -411,14 +415,13 @@ void estimation::initial_values() {
 			++j;
 		}
 	}
+
+	data.loglikelihood = NOT_COMPUTED;
 }
 void estimation::EMAlgortihm() {
 	if ( custom_initial_values_filename == NONE || custom_initial_values_filename == BUILD ) initial_values();
 	else load_initial_values(custom_initial_values_filename);
 	double dif = 0.0;
-
-	double &loglikelihood = data.loglikelihood;
-	loglikelihood = NOT_COMPUTED;
 
 	iterations = 0;
 	int current;
