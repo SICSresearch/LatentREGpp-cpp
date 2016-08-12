@@ -27,12 +27,12 @@ namespace irtpp {
 
 	void compute_and_save_quadrature_points(int G, int d) {
 		std::vector<double> q;
-		input<double> in(' ');
+		input<double> in;
 		//Quadrature points loaded from file
 		std::stringstream ss;
 		ss << G;
 		std::string filename = "data/quadrature" + ss.str() + "_in.data";
-		if ( !in.importData(filename, q) ) {
+		if ( !in.import_data(filename, q) ) {
 			std::cout << "Your filename " << filename << '\n';
 			std::cout << "Filename must have this form: " << '\n';
 			std::cout << "quadratureG_in.data and be allocated in /data/ \n";
@@ -96,11 +96,11 @@ namespace irtpp {
 
 	void compute_and_save_weights ( int G, int d ) {
 		std::vector<double> w;
-		input<double> in(' ');
+		input<double> in;
 		std::stringstream ss;
 		ss << G;
 		std::string filename = "data/weights" + ss.str() + "_in.data";
-		if ( !in.importData(filename, w) ) {
+		if ( !in.import_data(filename, w) ) {
 			std::cout << "Your filename " << filename << '\n';
 			std::cout << "Filename must have this form: " << '\n';
 			std::cout << "weightsG_in.data and be allocated in /data/\n";
@@ -142,8 +142,8 @@ namespace irtpp {
 		std::string filename = "data/quadrature" + ss.str() + "_computed.data";
 
 		matrix<double> m;
-		input<double> in(' ');
-		in.importData(filename, m);
+		input<double> in;
+		in.import_data(filename, m);
 		return m;
 	}
 
@@ -153,8 +153,8 @@ namespace irtpp {
 		std::string filename = "data/weights" + ss.str() + "_computed.data";
 
 		std::vector<double> v;
-		input<double> in(' ');
-		in.importData(filename, v);
+		input<double> in;
+		in.import_data(filename, v);
 		return v;
 	}
 }

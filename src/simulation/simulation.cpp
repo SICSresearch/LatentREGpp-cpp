@@ -43,13 +43,13 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 
 	for ( int i = start; i <= end; ++i ) {
 		matrix<char> Y;
-		input<char> in(';');
+		input<char> in;
 
 		ss.str("");
 		ss << base_name << i << ".csv";
 
 		std::string file_name = ss.str();
-		in.importData(file_name, Y);
+		in.import_data(file_name, Y);
 
 		ss << " imported. Running with " << (dicho ? "dichotomous" : "polytomus") << " package";
 		if ( quadrature_technique == QMCEM )
@@ -111,8 +111,8 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 										std::string quadrature_technique, int G, std::vector<int> cluster,
 									    std::string custom_initial_values_filename ) {
 	matrix<char> Y;
-	input<char> in(';');
-	in.importData(filename, Y);
+	input<char> in;
+	in.import_data(filename, Y);
 	std::cout << "Data imported from " << filename << std::endl;
 
 	START_CLOCK
@@ -135,8 +135,8 @@ void simulation::run_single_dichotomous ( int model, int d, std::string filename
 										  std::string quadrature_technique, int G, std::vector<int> cluster,
 										  std::string custom_initial_values_filename ) {
 	matrix<char> Y;
-	input<char> in(';');
-	in.importData(filename, Y);
+	input<char> in;
+	in.import_data(filename, Y);
 	std::cout << "Data imported from " << filename << std::endl;
 
 	START_CLOCK

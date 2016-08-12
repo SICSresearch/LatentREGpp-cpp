@@ -31,7 +31,7 @@ template<class T>
 class input {
 	private:
 
-		char delimiter; /**< Delimiter to split each file line*/
+		std::string delimiter; /**< Delimiter to split each file line*/
 
 	public:
 
@@ -43,9 +43,9 @@ class input {
 
 		/**
 		 * Constructor for input class.
-		 * @param del a char delimiter.
+		 * @param del a string delimiter.
 		 */
-		input(char);
+		input(std::string);
 
 		/**
 		 * Destructor for input class.
@@ -57,14 +57,14 @@ class input {
 		 * @param filename a string with source file path to import.
 		 * @param m a matrix instance for save the data.
 		 */
-		bool importData(std::string filename, matrix<T>& m);
+		bool import_data(std::string filename, matrix<T>& m);
 
 		/**
 		 * Imports matrixes from a csv.
 		 * @param filename a string with source file path to import.
 		 * @param m a vector instance from std library for save the data.
 		 */
-		bool importData(std::string filename, std::vector<T>& m);
+		bool import_data(std::string filename, std::vector<T>& m);
 
 		/**
 		 * Gets the delimiter used for inputting.
@@ -79,11 +79,11 @@ class input {
 
 template<class T>
 input<T>::input() {
-	delimiter = ',';
+	delimiter = ",; ";
 }
 
 template<class T>
-input<T>::input(char delimiter) {
+input<T>::input(std::string delimiter) {
 	this->delimiter = delimiter;
 }
 
@@ -92,7 +92,7 @@ input<T>::~input() {
 }
 
 template<class T>
-bool input<T>::importData(std::string filename, matrix<T>& m) {
+bool input<T>::import_data(std::string filename, matrix<T>& m) {
 	std::string line;
 	std::ifstream file(filename.c_str());
 	if (file.is_open()) {
@@ -100,13 +100,13 @@ bool input<T>::importData(std::string filename, matrix<T>& m) {
 			std::vector<T> splitted;
 			std::string::const_iterator start = line.begin();
 			std::string::const_iterator end = line.end();
-			std::string::const_iterator next = std::find(start, end, delimiter);
+			std::string::const_iterator next = std::find_first_of(start, end, delimiter.begin(), delimiter.end());
 			while (next != end) {
 				std::string to_add(start, next);
 				if ( !to_add.empty() )
 					splitted.push_back(strtold(to_add.c_str(), NULL));
 				start = next + 1;
-				next = std::find(start, end, delimiter);
+				next = std::find_first_of(start, end, delimiter.begin(), delimiter.end());
 			}
 			std::string to_add(start, next);
 			if ( !to_add.empty() )
@@ -121,7 +121,7 @@ bool input<T>::importData(std::string filename, matrix<T>& m) {
 
 
 template<class T>
-bool input<T>::importData(std::string filename, std::vector<T>& m) {
+bool input<T>::import_data(std::string filename, std::vector<T>& m) {
 	std::string line;
 	std::ifstream file(filename.c_str());
 	if (file.is_open()) {
@@ -129,13 +129,13 @@ bool input<T>::importData(std::string filename, std::vector<T>& m) {
 			std::vector<T> splitted;
 			std::string::const_iterator start = line.begin();
 			std::string::const_iterator end = line.end();
-			std::string::const_iterator next = std::find(start, end, delimiter);
+			std::string::const_iterator next = std::find_first_of(start, end, delimiter.begin(), delimiter.end());
 			while (next != end) {
 				std::string to_add(start, next);
 				if ( !to_add.empty() )
 					splitted.push_back(strtold(to_add.c_str(), NULL));
 				start = next + 1;
-				next = std::find(start, end, delimiter);
+				next = std::find_first_of(start, end, delimiter.begin(), delimiter.end());
 			}
 			std::string to_add(start, next);
 			if ( !to_add.empty() )

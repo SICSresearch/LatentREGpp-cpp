@@ -160,10 +160,10 @@ void estimation::sobol_quadrature (int g) {
 	//Weights
 	std::vector<double> &w = data.w;
 
-	input<double> in(' ');
+	input<double> in;
 	std::stringstream ss;
 	ss << "data/sobol" << d << ".data";
-	in.importData(ss.str(), theta);
+	in.import_data(ss.str(), theta);
 
 	G = g;
 
@@ -205,8 +205,8 @@ void estimation::gaussian_quadrature () {
 
 void estimation::load_initial_values ( std::string filename ) {
 	matrix<double> mt;
-	input<double> in(',');
-	in.importData(filename, mt);
+	input<double> in;
+	in.import_data(filename, mt);
 
 	//Dimension
 	int &d = data.d;

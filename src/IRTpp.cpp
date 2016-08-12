@@ -17,8 +17,8 @@ inline void improveIO () {
 
 void UNAL () {
 	matrix<char> Y;
-	input<char> in(',');
-	in.importData("datasets/Test UNAL/9D.csv", Y);
+	input<char> in;
+	in.import_data("datasets/Test UNAL/9D.csv", Y);
 	std::cout << "Data imported from " << "datasets/Test UNAL/9D.csv" << std::endl;
 
 	std::vector<int> cluster = {47, 12, 4, 4, 6, 4, 14, 5, 5};
