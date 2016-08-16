@@ -459,9 +459,9 @@ double estimation::posterior::operator() ( const optimizer_vector& theta_l ) con
 	value = std::exp(-0.5 * value) / std::pow( std::sqrt(2.0 * PI), d );
 
 	for ( int i = 0; i < p; ++i )
-		value *= Y(l, i) ? m.P(theta_l, zeta[i]) : 1 - m.P(theta_l, zeta[i]);
+		value += Y(l, i) ? std::log(m.P(theta_l, zeta[i])) : std::log(1 - m.P(theta_l, zeta[i]));
 
-	return std::log(std::max(value, LOWER_BOUND_));
+	return value;
 }
 
 void estimation::latent_traits_by_individuals () {
