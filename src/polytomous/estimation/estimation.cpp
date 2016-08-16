@@ -649,6 +649,10 @@ void estimation::print_latent_traits ( std::ofstream &out ) {
 	}
 }
 
+short estimation::get_iterations ( ) {
+	return iterations;
+}
+
 estimation::~estimation() {}
 
 }

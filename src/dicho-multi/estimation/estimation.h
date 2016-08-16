@@ -198,6 +198,10 @@ class estimation {
 		 * */
 		double log_likelihood();
 
+		/**
+		 * @return number of iterations
+		 * */
+		short get_iterations();
 };
 
 }
