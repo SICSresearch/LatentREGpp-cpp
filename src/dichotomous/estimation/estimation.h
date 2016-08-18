@@ -19,8 +19,8 @@
 #include <cmath>
 #include <functional>
 
-#include "../estimation/estep.h"
-#include "../estimation/mstep.h"
+#include "../../dichotomous/estimation/estep.h"
+#include "../../dichotomous/estimation/mstep.h"
 #include "../model/model.h"
 #include "../type/estimationdata.h"
 

@@ -5,7 +5,7 @@
  *      Author: Milder
  */
 
-#include "../../dicho-multi/estimation/mstep.h"
+#include "../../dichotomous/estimation/mstep.h"
 
 namespace irtpp {
 

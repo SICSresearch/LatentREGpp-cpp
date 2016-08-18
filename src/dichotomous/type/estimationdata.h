@@ -16,7 +16,7 @@
 
 #include <algorithm>
 
-#include "../../dicho-multi/model/model.h"
+#include "../../dichotomous/model/model.h"
 
 namespace irtpp {
 

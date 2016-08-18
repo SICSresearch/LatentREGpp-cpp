@@ -14,8 +14,8 @@
 #include <cmath>
 #include <set>
 
-#include "../../dicho-multi/model/model.h"
-#include "../../dicho-multi/type/estimationdata.h"
+#include "../../dichotomous/model/model.h"
+#include "../../dichotomous/type/estimationdata.h"
 
 namespace irtpp {
 

@@ -5,7 +5,7 @@
  *      Author: Milder
  */
 
-#include "../../dicho-multi/type/estimationdata.h"
+#include "../../dichotomous/type/estimationdata.h"
 
 namespace irtpp {
 

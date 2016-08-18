@@ -12,15 +12,15 @@ Title=Irtpp - Multidimensional
 main="Irtpp - Multidimensional","index.hhc","index.hhk","index.html","index.html",,,,,0x23520,,0x10387e,,,,,,,,0
 
 [FILES]
-dicho-multi_2estimation_2estep_8h_source.html
+dichotomous_2estimation_2estep_8h_source.html
 polytomous_2estimation_2estep_8h_source.html
-dicho-multi_2estimation_2estimation_8h_source.html
+dichotomous_2estimation_2estimation_8h_source.html
 polytomous_2estimation_2estimation_8h_source.html
-dicho-multi_2estimation_2mstep_8h_source.html
+dichotomous_2estimation_2mstep_8h_source.html
 polytomous_2estimation_2mstep_8h_source.html
-dicho-multi_2model_2model_8h_source.html
+dichotomous_2model_2model_8h_source.html
 polytomous_2model_2model_8h_source.html
-dicho-multi_2type_2estimationdata_8h_source.html
+dichotomous_2type_2estimationdata_8h_source.html
 polytomous_2type_2estimationdata_8h_source.html
 simulation_8h_source.html
 test_8h_source.html
