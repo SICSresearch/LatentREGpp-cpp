@@ -22,151 +22,151 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a5e5aee478b17d0a7c95ad44757ca04d5"><param name="Name" value="compute_gammas"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#ac3d715aed9f87528821ff7e7b5ad1f60"><param name="Name" value="compute_latent_trait"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#ab605695b3fda22a62567c4ce4681bc4e"><param name="Name" value="compute_weights"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb"><param name="Name" value="convergence_difference"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb"><param name="Name" value="convergence_difference"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#ae039b32d36baa201b9e845c5fab16a8e"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a999536cd2f9c8df4ae0861afc43481e4"><param name="Name" value="correct"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917"><param name="Name" value="custom_initial_values_filename"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a999536cd2f9c8df4ae0861afc43481e4"><param name="Name" value="correct"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917"><param name="Name" value="custom_initial_values_filename"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#ad797724a74505039dd42f2866fead6ca"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a88dec052497501836d8c59cb12f90d86"><param name="Name" value="d"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a88dec052497501836d8c59cb12f90d86"><param name="Name" value="d"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a88dec052497501836d8c59cb12f90d86"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a88dec052497501836d8c59cb12f90d86"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a835b4087ba8562719b4bc9046966ec5e"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1model.html#a58b012eea4baa538b8fca4532d9ea477"><param name="Name" value="irtpp::polytomous::model"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a823a32529a6707044212836e6e33dc5a"><param name="Name" value="data"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a823a32529a6707044212836e6e33dc5a"><param name="Name" value="data"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a823a32529a6707044212836e6e33dc5a"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#a372e1b0e4748389beb927066020ac022"><param name="Name" value="irtpp::dichomulti::Qi"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a823a32529a6707044212836e6e33dc5a"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#a372e1b0e4748389beb927066020ac022"><param name="Name" value="irtpp::dichotomous::Qi"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1matrix.html#a971f5918942202d85f1b3f782c21d2d2"><param name="Name" value="irtpp::matrix"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#ab45dabc06792f6e7208e2e8a260c9901"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1_qi.html#a05bab14bb1a0a128cf5a52bcd4b72265"><param name="Name" value="irtpp::polytomous::Qi"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1_qi__derivative.html#abf7df8e5082b643bf6609b38f3169407"><param name="Name" value="irtpp::polytomous::Qi_derivative"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a7be046e4b9456f1440dd2216fb278f23"><param name="Name" value="dataset"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a7be046e4b9456f1440dd2216fb278f23"><param name="Name" value="dataset"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a7be046e4b9456f1440dd2216fb278f23"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a7be046e4b9456f1440dd2216fb278f23"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a8154bbe5550d7e3f110c88230f5e0a98"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a89f1fb0563616256f8c685625842fb82"><param name="Name" value="DEFAULT_SOBOL_POINTS"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1input.html#af4905e83d392187f795261d61ee23337"><param name="Name" value="delimiter"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c"><param name="Name" value="EMAlgorithm"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c"><param name="Name" value="EMAlgorithm"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#a7a0aa228835a9abca007403cd7adcd46"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a58399775f38f9e91b3e21c8dcbfa33e2"><param name="Name" value="EMPTY_INTEGER_VECTOR"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#aa2bdb34a6c6999b4f0f6707c73f5cd4e"><param name="Name" value="Estep"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#aa2bdb34a6c6999b4f0f6707c73f5cd4e"><param name="Name" value="Estep"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#aa2bdb34a6c6999b4f0f6707c73f5cd4e"><param name="Name" value="irtpp::dichomulti"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#aa2bdb34a6c6999b4f0f6707c73f5cd4e"><param name="Name" value="irtpp::dichotomous"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1polytomous.html#a2cc2fca9030e827a2b7b4596d0b379ee"><param name="Name" value="irtpp::polytomous"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c"><param name="Name" value="estimation"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c"><param name="Name" value="estimation"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#a8a093654e62c32c41c2e5f17d507f269"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a0a0f65c698ba3527814e9affb5b02a9a"><param name="Name" value="estimation_data"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a0a0f65c698ba3527814e9affb5b02a9a"><param name="Name" value="estimation_data"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a0a0f65c698ba3527814e9affb5b02a9a"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a0a0f65c698ba3527814e9affb5b02a9a"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a20c7c58b8dc2f7e353ab9345a9ccf0c6"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a932279c16aae74fe21f4778bebbec0a9"><param name="Name" value="f"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a932279c16aae74fe21f4778bebbec0a9"><param name="Name" value="f"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a24bed4839e06caf17c4036152f0799f5"><param name="Name" value="find_initial_values"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a352006c93678fcf92ead2cce9469703f"><param name="Name" value="G"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a352006c93678fcf92ead2cce9469703f"><param name="Name" value="G"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a352006c93678fcf92ead2cce9469703f"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a352006c93678fcf92ead2cce9469703f"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a642090ff7e09563fc8403831a46c192b"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a38ad416b5ff2d448f38d2c02e72fa359"><param name="Name" value="GAUSSIAN_QUADRATURE"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b"><param name="Name" value="gaussian_quadrature"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b"><param name="Name" value="gaussian_quadrature"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#ad910f0a2c300cc254f8752846be6b392"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1matrix.html#a5c41af4c9f30eafa2c0c3009d2114046"><param name="Name" value="get_data"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1input.html#a95d68d7cf45e089d540fb250028f7811"><param name="Name" value="get_delimiter"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1matrix.html#a79a97a314b2b91113eb342d176163190"><param name="Name" value="get_pointer_row"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1matrix.html#aebb01d5c2ecbad147f4647f650df9f65"><param name="Name" value="get_row"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#afadb5e0f8939e42ac54531f8a63958d8"><param name="Name" value="i"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#afadb5e0f8939e42ac54531f8a63958d8"><param name="Name" value="i"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#afadb5e0f8939e42ac54531f8a63958d8"><param name="Name" value="irtpp::dichomulti::Qi"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#afadb5e0f8939e42ac54531f8a63958d8"><param name="Name" value="irtpp::dichotomous::Qi"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1_qi.html#aa31daa57dd98efde785fb071337d6f41"><param name="Name" value="irtpp::polytomous::Qi"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1_qi__derivative.html#abf448472df56fd5640c16bfecbe33dfd"><param name="Name" value="irtpp::polytomous::Qi_derivative"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1input.html#ac316b052b374c1a3b80ae89863f12506"><param name="Name" value="importData"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee"><param name="Name" value="initial_values"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee"><param name="Name" value="initial_values"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#a4027712e18f8549947e112ae7b674d22"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1input.html#af7d4279a67b8c9e98d40d867ff73f909"><param name="Name" value="input"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html"><param name="Name" value="irtpp"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html"><param name="Name" value="irtpp::dichomulti"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html"><param name="Name" value="irtpp::dichotomous"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb"><param name="Name" value="convergence_difference"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917"><param name="Name" value="custom_initial_values_filename"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a823a32529a6707044212836e6e33dc5a"><param name="Name" value="data"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c"><param name="Name" value="EMAlgorithm"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c"><param name="Name" value="estimation"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b"><param name="Name" value="gaussian_quadrature"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee"><param name="Name" value="initial_values"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#abb324ae78f31a5a9a43c9c147f607a19"><param name="Name" value="iterations"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1"><param name="Name" value="load_initial_values"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a61afff2d9bb5571574b0c2df8600b863"><param name="Name" value="print_results"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a7e395e461bb7506c885a435a8e939e1e"><param name="Name" value="sobol_quadrature"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17"><param name="Name" value="~estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb"><param name="Name" value="convergence_difference"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917"><param name="Name" value="custom_initial_values_filename"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a823a32529a6707044212836e6e33dc5a"><param name="Name" value="data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c"><param name="Name" value="EMAlgorithm"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c"><param name="Name" value="estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b"><param name="Name" value="gaussian_quadrature"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee"><param name="Name" value="initial_values"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#abb324ae78f31a5a9a43c9c147f607a19"><param name="Name" value="iterations"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1"><param name="Name" value="load_initial_values"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a61afff2d9bb5571574b0c2df8600b863"><param name="Name" value="print_results"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a7e395e461bb7506c885a435a8e939e1e"><param name="Name" value="sobol_quadrature"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17"><param name="Name" value="~estimation"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a999536cd2f9c8df4ae0861afc43481e4"><param name="Name" value="correct"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a88dec052497501836d8c59cb12f90d86"><param name="Name" value="d"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a7be046e4b9456f1440dd2216fb278f23"><param name="Name" value="dataset"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a0a0f65c698ba3527814e9affb5b02a9a"><param name="Name" value="estimation_data"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a932279c16aae74fe21f4778bebbec0a9"><param name="Name" value="f"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a352006c93678fcf92ead2cce9469703f"><param name="Name" value="G"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#add7063eea219fadf65665579143b8dc7"><param name="Name" value="m"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a3a7261a8553360b00852e8f52546e82b"><param name="Name" value="N"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#aab76c4938f0100a134a8a7baae7fc67e"><param name="Name" value="nl"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a79ab056cf0b1fedfefc5c41ed524ad02"><param name="Name" value="p"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a5366b468b05a8de5c3314e01cf374d86"><param name="Name" value="P"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ae5fe40f5bd3d4adabf270e77bb403929"><param name="Name" value="pi"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ac0ba66fcba79c5ca8e337e2a2f1622cd"><param name="Name" value="pinned_items"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783"><param name="Name" value="r"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a0c10184c6f65885d0277f45a1930130c"><param name="Name" value="s"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a4be950142cd1d1540dd941285a2d4d96"><param name="Name" value="theta"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ad67627858e79194005bdf4890c9e500b"><param name="Name" value="w"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a3b96ea009403b0ea4316e9883eef9de1"><param name="Name" value="Y"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a732cb022ad1dedfc674599cc3d99d404"><param name="Name" value="zeta"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a42b2d2b7704d8fc16024eb936fe02076"><param name="Name" value="~estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a999536cd2f9c8df4ae0861afc43481e4"><param name="Name" value="correct"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a88dec052497501836d8c59cb12f90d86"><param name="Name" value="d"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a7be046e4b9456f1440dd2216fb278f23"><param name="Name" value="dataset"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a0a0f65c698ba3527814e9affb5b02a9a"><param name="Name" value="estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a932279c16aae74fe21f4778bebbec0a9"><param name="Name" value="f"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a352006c93678fcf92ead2cce9469703f"><param name="Name" value="G"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#add7063eea219fadf65665579143b8dc7"><param name="Name" value="m"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a3a7261a8553360b00852e8f52546e82b"><param name="Name" value="N"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#aab76c4938f0100a134a8a7baae7fc67e"><param name="Name" value="nl"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a79ab056cf0b1fedfefc5c41ed524ad02"><param name="Name" value="p"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a5366b468b05a8de5c3314e01cf374d86"><param name="Name" value="P"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ae5fe40f5bd3d4adabf270e77bb403929"><param name="Name" value="pi"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ac0ba66fcba79c5ca8e337e2a2f1622cd"><param name="Name" value="pinned_items"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783"><param name="Name" value="r"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a0c10184c6f65885d0277f45a1930130c"><param name="Name" value="s"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a4be950142cd1d1540dd941285a2d4d96"><param name="Name" value="theta"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ad67627858e79194005bdf4890c9e500b"><param name="Name" value="w"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a3b96ea009403b0ea4316e9883eef9de1"><param name="Name" value="Y"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a732cb022ad1dedfc674599cc3d99d404"><param name="Name" value="zeta"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a42b2d2b7704d8fc16024eb936fe02076"><param name="Name" value="~estimation_data"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html"><param name="Name" value="irtpp::dichomulti::model"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html"><param name="Name" value="irtpp::dichotomous::model"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a62d2406c47f4a165535d631ca71241df"><param name="Name" value="model"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a7064eab20d3850eafe80903eb868ff95"><param name="Name" value="P"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a2069c6a0871905c485ce55d55bc589e7"><param name="Name" value="parameters"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a80deb7d5828ad47c155a9771eace352c"><param name="Name" value="~model"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a62d2406c47f4a165535d631ca71241df"><param name="Name" value="model"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a7064eab20d3850eafe80903eb868ff95"><param name="Name" value="P"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a2069c6a0871905c485ce55d55bc589e7"><param name="Name" value="parameters"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a80deb7d5828ad47c155a9771eace352c"><param name="Name" value="~model"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html"><param name="Name" value="irtpp::dichomulti::Qi"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html"><param name="Name" value="irtpp::dichotomous::Qi"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#a372e1b0e4748389beb927066020ac022"><param name="Name" value="data"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#afadb5e0f8939e42ac54531f8a63958d8"><param name="Name" value="i"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#a70d6860d3c0b214e62439e2b3ed5542d"><param name="Name" value="operator()"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#ac94250c993a57539ab7246a9da2e91b4"><param name="Name" value="Qi"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#a372e1b0e4748389beb927066020ac022"><param name="Name" value="data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#afadb5e0f8939e42ac54531f8a63958d8"><param name="Name" value="i"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#a70d6860d3c0b214e62439e2b3ed5542d"><param name="Name" value="operator()"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#ac94250c993a57539ab7246a9da2e91b4"><param name="Name" value="Qi"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html"><param name="Name" value="irtpp::dichomulti"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html"><param name="Name" value="irtpp::dichotomous"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#aa2bdb34a6c6999b4f0f6707c73f5cd4e"><param name="Name" value="Estep"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#a8b7592b9f06b97b685ebfbcfaead9345"><param name="Name" value="item_parameter"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#a597dcb0f43996a0330851f2b4babc545"><param name="Name" value="MAX_ITERATIONS"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#aaf5eee8fcfd9a31db98b07d1e7f54fbc"><param name="Name" value="MAX_NUMBER_OF_QUADRATURE_POINTS"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#ab1bc7ecd1bc63426d03087b4cf7f331e"><param name="Name" value="Mstep"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#aa2bdb34a6c6999b4f0f6707c73f5cd4e"><param name="Name" value="Estep"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#a8b7592b9f06b97b685ebfbcfaead9345"><param name="Name" value="item_parameter"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#a597dcb0f43996a0330851f2b4babc545"><param name="Name" value="MAX_ITERATIONS"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#aaf5eee8fcfd9a31db98b07d1e7f54fbc"><param name="Name" value="MAX_NUMBER_OF_QUADRATURE_POINTS"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#ab1bc7ecd1bc63426d03087b4cf7f331e"><param name="Name" value="Mstep"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1input.html"><param name="Name" value="irtpp::input"></OBJECT>
   <UL>
@@ -312,111 +312,111 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a0bc70e737911c757c189f4b0dfccd24c"><param name="Name" value="item_parameter"></OBJECT>
   <UL>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a0bc70e737911c757c189f4b0dfccd24c"><param name="Name" value="irtpp"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#a8b7592b9f06b97b685ebfbcfaead9345"><param name="Name" value="irtpp::dichomulti"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#a8b7592b9f06b97b685ebfbcfaead9345"><param name="Name" value="irtpp::dichotomous"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1polytomous.html#ad93d93a08d7f43b019b057d48145ee4a"><param name="Name" value="irtpp::polytomous"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1model.html#ac20dcfaaf4a501d664aa14b0a12daf40"><param name="Name" value="irtpp::polytomous::model"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#abb324ae78f31a5a9a43c9c147f607a19"><param name="Name" value="iterations"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#abb324ae78f31a5a9a43c9c147f607a19"><param name="Name" value="iterations"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#abb324ae78f31a5a9a43c9c147f607a19"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#abb324ae78f31a5a9a43c9c147f607a19"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#a41a4029353171d8e1c479fd5ac5b19ba"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1"><param name="Name" value="load_initial_values"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1"><param name="Name" value="load_initial_values"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#a56c2153181f4474bf0c81de98347cc64"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#ae1cedc1dfd72a27f845b514a83a41394"><param name="Name" value="load_quadrature_points"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#ae94ac36c92ddb23026124e5b70f4adb7"><param name="Name" value="load_weights"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#abf3683d53ae19c2ae9ed23bacd727581"><param name="Name" value="LOWER_BOUND_"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#add7063eea219fadf65665579143b8dc7"><param name="Name" value="m"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#add7063eea219fadf65665579143b8dc7"><param name="Name" value="m"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#add7063eea219fadf65665579143b8dc7"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#add7063eea219fadf65665579143b8dc7"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a884099e49cdd49aa61f00e9b81792060"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1matrix.html#ae01d6e9e4202f78464e547cb862b5fa7"><param name="Name" value="matrix"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#a597dcb0f43996a0330851f2b4babc545"><param name="Name" value="MAX_ITERATIONS"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#a597dcb0f43996a0330851f2b4babc545"><param name="Name" value="MAX_ITERATIONS"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#a597dcb0f43996a0330851f2b4babc545"><param name="Name" value="irtpp::dichomulti"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#a597dcb0f43996a0330851f2b4babc545"><param name="Name" value="irtpp::dichotomous"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1polytomous.html#a1af91d37b582b8de4473ea9814bfeb53"><param name="Name" value="irtpp::polytomous"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#aaf5eee8fcfd9a31db98b07d1e7f54fbc"><param name="Name" value="MAX_NUMBER_OF_QUADRATURE_POINTS"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#aaf5eee8fcfd9a31db98b07d1e7f54fbc"><param name="Name" value="MAX_NUMBER_OF_QUADRATURE_POINTS"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#aaf5eee8fcfd9a31db98b07d1e7f54fbc"><param name="Name" value="irtpp::dichomulti"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#aaf5eee8fcfd9a31db98b07d1e7f54fbc"><param name="Name" value="irtpp::dichotomous"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1polytomous.html#aa581f301bd3c9a1cbb972bffb7bc3016"><param name="Name" value="irtpp::polytomous"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a96f46ea900cca9ab415527dcf6b6b24b"><param name="Name" value="mean"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a398d53782a70aa394c3b254947a43074"><param name="Name" value="MINIMUM_ACCEL"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a62d2406c47f4a165535d631ca71241df"><param name="Name" value="model"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a62d2406c47f4a165535d631ca71241df"><param name="Name" value="model"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a62d2406c47f4a165535d631ca71241df"><param name="Name" value="irtpp::dichomulti::model"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a62d2406c47f4a165535d631ca71241df"><param name="Name" value="irtpp::dichotomous::model"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1model.html#aae7b3559bc3384213247df2a24792b88"><param name="Name" value="irtpp::polytomous::model"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#ab1bc7ecd1bc63426d03087b4cf7f331e"><param name="Name" value="Mstep"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#ab1bc7ecd1bc63426d03087b4cf7f331e"><param name="Name" value="Mstep"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichomulti.html#ab1bc7ecd1bc63426d03087b4cf7f331e"><param name="Name" value="irtpp::dichomulti"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1dichotomous.html#ab1bc7ecd1bc63426d03087b4cf7f331e"><param name="Name" value="irtpp::dichotomous"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp_1_1polytomous.html#a97cf9fd6f009d1cccd686b5f921d7aaa"><param name="Name" value="irtpp::polytomous"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a3a7261a8553360b00852e8f52546e82b"><param name="Name" value="N"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a3a7261a8553360b00852e8f52546e82b"><param name="Name" value="N"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a3a7261a8553360b00852e8f52546e82b"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a3a7261a8553360b00852e8f52546e82b"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a22b12194bd1a8cfa8bc7a7de87dc1314"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#aab76c4938f0100a134a8a7baae7fc67e"><param name="Name" value="nl"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#aab76c4938f0100a134a8a7baae7fc67e"><param name="Name" value="nl"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#aab76c4938f0100a134a8a7baae7fc67e"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#aab76c4938f0100a134a8a7baae7fc67e"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a5331a819b4102b8a9ee9b6060559e14f"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#af55423089a4bc841724318daf36f9ab2"><param name="Name" value="NONE"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#aba8db131ea73438d0e2d2959e32c06d9"><param name="Name" value="norm"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#ae004894f2cfd0e5788de004061106049"><param name="Name" value="ONEPL"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#a70d6860d3c0b214e62439e2b3ed5542d"><param name="Name" value="operator()"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#a70d6860d3c0b214e62439e2b3ed5542d"><param name="Name" value="operator()"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#a70d6860d3c0b214e62439e2b3ed5542d"><param name="Name" value="irtpp::dichomulti::Qi"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#a70d6860d3c0b214e62439e2b3ed5542d"><param name="Name" value="irtpp::dichotomous::Qi"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1matrix.html#a59d8d0988367e573cea8cb02bc4fc33e"><param name="Name" value="irtpp::matrix"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1_qi.html#aa8fb45076301de82659998441699e707"><param name="Name" value="irtpp::polytomous::Qi"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1_qi__derivative.html#ab55b298d5889d1638bcc149c3af90cb9"><param name="Name" value="irtpp::polytomous::Qi_derivative"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a0cd6b9d5267c7cc45315fe52682ab5ab"><param name="Name" value="operator<<"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a79ab056cf0b1fedfefc5c41ed524ad02"><param name="Name" value="p"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a5366b468b05a8de5c3314e01cf374d86"><param name="Name" value="P"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a79ab056cf0b1fedfefc5c41ed524ad02"><param name="Name" value="p"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a5366b468b05a8de5c3314e01cf374d86"><param name="Name" value="P"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a5366b468b05a8de5c3314e01cf374d86"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a7064eab20d3850eafe80903eb868ff95"><param name="Name" value="irtpp::dichomulti::model"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a5366b468b05a8de5c3314e01cf374d86"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a7064eab20d3850eafe80903eb868ff95"><param name="Name" value="irtpp::dichotomous::model"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a94a6f198f7eb744ceab96c6b594bb167"><param name="Name" value="p"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#af0a35290474504c53fbaf0179067a7df"><param name="Name" value="P"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a2069c6a0871905c485ce55d55bc589e7"><param name="Name" value="parameters"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a2069c6a0871905c485ce55d55bc589e7"><param name="Name" value="parameters"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a2069c6a0871905c485ce55d55bc589e7"><param name="Name" value="irtpp::dichomulti::model"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a2069c6a0871905c485ce55d55bc589e7"><param name="Name" value="irtpp::dichotomous::model"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1model.html#a3b8c4c8031486cc94e84c8736033aaf4"><param name="Name" value="irtpp::polytomous::model"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ae5fe40f5bd3d4adabf270e77bb403929"><param name="Name" value="pi"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ae5fe40f5bd3d4adabf270e77bb403929"><param name="Name" value="pi"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ae5fe40f5bd3d4adabf270e77bb403929"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ae5fe40f5bd3d4adabf270e77bb403929"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#af09aac65194cf90a594ca6a53482508a"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1model.html#af9a35b03aafb3151747e0f11abdf5012"><param name="Name" value="Pik"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ac0ba66fcba79c5ca8e337e2a2f1622cd"><param name="Name" value="pinned_items"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ac0ba66fcba79c5ca8e337e2a2f1622cd"><param name="Name" value="pinned_items"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ac0ba66fcba79c5ca8e337e2a2f1622cd"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ac0ba66fcba79c5ca8e337e2a2f1622cd"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#ae478256b63d264614c2582e9943030b6"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a61afff2d9bb5571574b0c2df8600b863"><param name="Name" value="print_results"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a61afff2d9bb5571574b0c2df8600b863"><param name="Name" value="print_results"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a61afff2d9bb5571574b0c2df8600b863"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a61afff2d9bb5571574b0c2df8600b863"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#ab6925150409922a25d7ff2f370c04f8d"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1model.html#a904d26cbb96a8fb26bd40c9018eb8237"><param name="Name" value="Pstar_ik"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#ac94250c993a57539ab7246a9da2e91b4"><param name="Name" value="Qi"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#ac94250c993a57539ab7246a9da2e91b4"><param name="Name" value="Qi"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#ac94250c993a57539ab7246a9da2e91b4"><param name="Name" value="irtpp::dichomulti::Qi"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#ac94250c993a57539ab7246a9da2e91b4"><param name="Name" value="irtpp::dichotomous::Qi"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1_qi.html#ad72976ab5d94c595f4e815458462e7be"><param name="Name" value="irtpp::polytomous::Qi"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1_qi__derivative.html#aef78dcdfb8ebd7256b5829857d10cda4"><param name="Name" value="Qi_derivative"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783"><param name="Name" value="r"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783"><param name="Name" value="r"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a9ca7444afc3b667ed882219e81c4deb3"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a44e7a90057ce89a8a1ad943d7f159529"><param name="Name" value="ramsay"></OBJECT>
@@ -426,9 +426,9 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1simulation.html#ac93888b9ba70561d7f00ab6bbe065010"><param name="Name" value="run_single"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1simulation.html#a0566e75a8d129084901f0769e4dc9d1f"><param name="Name" value="run_single_dichotomous"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1simulation.html#a348b19a8e9d1f71475ac6593a21cc8a2"><param name="Name" value="run_single_polytomous"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a0c10184c6f65885d0277f45a1930130c"><param name="Name" value="s"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a0c10184c6f65885d0277f45a1930130c"><param name="Name" value="s"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a0c10184c6f65885d0277f45a1930130c"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a0c10184c6f65885d0277f45a1930130c"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#ac51cba25ab9a743039c7be7430b96528"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a7ff9593e5489f1dac8feaadb70673433"><param name="Name" value="sd"></OBJECT>
@@ -436,52 +436,52 @@
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1simulation.html#a76aafac4747d14a1d7e5ebac540f6c2f"><param name="Name" value="simulate"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1simulation.html#a80e764186c76f0c6e28a165c08a6fde8"><param name="Name" value="simulation"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a2a949277521c54525ef4b2888006aec4"><param name="Name" value="SOBOL_QUADRATURE"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a7e395e461bb7506c885a435a8e939e1e"><param name="Name" value="sobol_quadrature"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a7e395e461bb7506c885a435a8e939e1e"><param name="Name" value="sobol_quadrature"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a7e395e461bb7506c885a435a8e939e1e"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a7e395e461bb7506c885a435a8e939e1e"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#a7f453ed771207b336d1c076ce265727a"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a76ac64c15af36180d2eda820230fcd91"><param name="Name" value="squarem"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a1d6cdbc5a014031f3d8ea4f163611ffb"><param name="Name" value="test_pi"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#aa08ceff4e6b9ad5a0bbdba0b10b98dc0"><param name="Name" value="test_r"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a4be950142cd1d1540dd941285a2d4d96"><param name="Name" value="theta"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a4be950142cd1d1540dd941285a2d4d96"><param name="Name" value="theta"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a4be950142cd1d1540dd941285a2d4d96"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a4be950142cd1d1540dd941285a2d4d96"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a54e5fbce3ffa4307ab43d92c0dbdba40"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a1dff3af0c1ed37d22b4c71ab0ae5216c"><param name="Name" value="THREEPL"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#a90264f9845d920c8a6931ca5c6029133"><param name="Name" value="TWOPL"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="namespaceirtpp.html#aa42d8339ab70253f98fc7876d8d7f53f"><param name="Name" value="UPPER_BOUND_"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ad67627858e79194005bdf4890c9e500b"><param name="Name" value="w"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ad67627858e79194005bdf4890c9e500b"><param name="Name" value="w"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ad67627858e79194005bdf4890c9e500b"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ad67627858e79194005bdf4890c9e500b"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a160b2bc434ef157a6cecafa3fad249ae"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a3b96ea009403b0ea4316e9883eef9de1"><param name="Name" value="Y"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a3b96ea009403b0ea4316e9883eef9de1"><param name="Name" value="Y"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a3b96ea009403b0ea4316e9883eef9de1"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a3b96ea009403b0ea4316e9883eef9de1"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a98c17f068e111c37ca5d25b088623c52"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a732cb022ad1dedfc674599cc3d99d404"><param name="Name" value="zeta"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a732cb022ad1dedfc674599cc3d99d404"><param name="Name" value="zeta"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a732cb022ad1dedfc674599cc3d99d404"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a732cb022ad1dedfc674599cc3d99d404"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#a61cfc9fb3fd36000b7ee71507eb36e39"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17"><param name="Name" value="~estimation"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17"><param name="Name" value="~estimation"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17"><param name="Name" value="irtpp::dichomulti::estimation"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17"><param name="Name" value="irtpp::dichotomous::estimation"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation.html#a4f7944902a2ed7ad261f79c0dc626bcb"><param name="Name" value="irtpp::polytomous::estimation"></OBJECT>
   </UL>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a42b2d2b7704d8fc16024eb936fe02076"><param name="Name" value="~estimation_data"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a42b2d2b7704d8fc16024eb936fe02076"><param name="Name" value="~estimation_data"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a42b2d2b7704d8fc16024eb936fe02076"><param name="Name" value="irtpp::dichomulti::estimation_data"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a42b2d2b7704d8fc16024eb936fe02076"><param name="Name" value="irtpp::dichotomous::estimation_data"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1estimation__data.html#acdb17bec1e9e183ba3ca4b8a8f4c2735"><param name="Name" value="irtpp::polytomous::estimation_data"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1input.html#a6abae4715da2d243c2e0b6f784d9f96a"><param name="Name" value="~input"></OBJECT>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1matrix.html#aa835e6b236fef6055f25401c4c616e0b"><param name="Name" value="~matrix"></OBJECT>
-  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a80deb7d5828ad47c155a9771eace352c"><param name="Name" value="~model"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a80deb7d5828ad47c155a9771eace352c"><param name="Name" value="~model"></OBJECT>
   <UL>
-    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a80deb7d5828ad47c155a9771eace352c"><param name="Name" value="irtpp::dichomulti::model"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a80deb7d5828ad47c155a9771eace352c"><param name="Name" value="irtpp::dichotomous::model"></OBJECT>
     <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1polytomous_1_1model.html#a306c7dea1d233c42653cc5f6d1398c6e"><param name="Name" value="irtpp::polytomous::model"></OBJECT>
   </UL>
   <LI><OBJECT type="text/sitemap"><param name="Local" value="classirtpp_1_1simulation.html#aee9f78d53a48d7cc63c20bb5a59051f8"><param name="Name" value="~simulation"></OBJECT>

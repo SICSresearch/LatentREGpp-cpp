@@ -5,8 +5,8 @@
  *      Author: Milder
  */
 
-#ifndef DICHOMULTI_ESTIMATION_ESTIMATION_H_
-#define DICHOMULTI_ESTIMATION_ESTIMATION_H_
+#ifndef dichotomous_ESTIMATION_ESTIMATION_H_
+#define dichotomous_ESTIMATION_ESTIMATION_H_
 
 #include "../../util/initial_values.h"
 #include "../../util/matrix.h"
@@ -26,7 +26,7 @@
 
 namespace irtpp {
 
-namespace dichomulti {
+namespace dichotomous {
 
 /**
  * Class to set up and run the estimation process.
@@ -99,7 +99,7 @@ class estimation {
 		 * @param cluster a std vector integer template with number of items for each dimension.
 		 * @param custom_initial_values_filename string with path for custom initial_values. Default is none.
 		 */
-		estimation(matrix<char>&, unsigned int, int themodel = 2, double convergence_difference = 0.001,
+		estimation(matrix<char>&, unsigned int, int themodel = 2, double convergence_difference = 0.0001,
 						std::vector<int> cluster = EMPTY_INTEGER_VECTOR,
 						std::string quadrature_technique = GAUSSIAN,
 						int quadrature_points = DEFAULT_QMCEM_POINTS,

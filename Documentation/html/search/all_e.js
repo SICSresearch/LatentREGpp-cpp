@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['r',['r',['../classirtpp_1_1dichomulti_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783',1,'irtpp::dichomulti::estimation_data::r()'],['../classirtpp_1_1polytomous_1_1estimation__data.html#a9ca7444afc3b667ed882219e81c4deb3',1,'irtpp::polytomous::estimation_data::r()']]],
+  ['r',['r',['../classirtpp_1_1dichotomous_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783',1,'irtpp::dichotomous::estimation_data::r()'],['../classirtpp_1_1polytomous_1_1estimation__data.html#a9ca7444afc3b667ed882219e81c4deb3',1,'irtpp::polytomous::estimation_data::r()']]],
   ['ramsay',['ramsay',['../namespaceirtpp.html#a44e7a90057ce89a8a1ad943d7f159529',1,'irtpp']]],
   ['reset',['reset',['../classirtpp_1_1matrix.html#af1df8a1df6919e65fb93e489e79e7e04',1,'irtpp::matrix']]],
   ['reset_5frow',['reset_row',['../classirtpp_1_1matrix.html#a0956d371c238e2639061089247eea919',1,'irtpp::matrix']]],

@@ -9,7 +9,7 @@
 
 namespace irtpp {
 
-namespace dichomulti {
+namespace dichotomous {
 
 model::model() : model(2) {
 }

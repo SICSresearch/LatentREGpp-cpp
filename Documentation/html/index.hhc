@@ -10,7 +10,7 @@
     <UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="irtpp"><param name="Local" value="namespaceirtpp.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="dichomulti"><param name="Local" value="namespaceirtpp_1_1dichomulti.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="dichotomous"><param name="Local" value="namespaceirtpp_1_1dichotomous.html"><param name="ImageNumber" value="11"></OBJECT>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="polytomous"><param name="Local" value="namespaceirtpp_1_1polytomous.html"><param name="ImageNumber" value="11"></OBJECT>
       </UL>
     </UL>
@@ -28,62 +28,62 @@
     <UL>
     <LI><OBJECT type="text/sitemap"><param name="Name" value="irtpp"><param name="Local" value="namespaceirtpp.html"><param name="ImageNumber" value="1"></OBJECT>
       <UL>
-      <LI><OBJECT type="text/sitemap"><param name="Name" value="dichomulti"><param name="Local" value="namespaceirtpp_1_1dichomulti.html"><param name="ImageNumber" value="1"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="dichotomous"><param name="Local" value="namespaceirtpp_1_1dichotomous.html"><param name="ImageNumber" value="1"></OBJECT>
         <UL>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="~estimation"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="EMAlgorithm"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="gaussian_quadrature"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="initial_values"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="load_initial_values"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="print_results"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a61afff2d9bb5571574b0c2df8600b863"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="print_results"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a7f824af31f7c17d93b7a5e0ee3f652c2"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="sobol_quadrature"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a7e395e461bb7506c885a435a8e939e1e"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="convergence_difference"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="custom_initial_values_filename"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="data"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#a823a32529a6707044212836e6e33dc5a"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="iterations"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation.html#abb324ae78f31a5a9a43c9c147f607a19"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~estimation"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="EMAlgorithm"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="gaussian_quadrature"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="initial_values"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="load_initial_values"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="print_results"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a61afff2d9bb5571574b0c2df8600b863"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="print_results"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a7f824af31f7c17d93b7a5e0ee3f652c2"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="sobol_quadrature"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a7e395e461bb7506c885a435a8e939e1e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="convergence_difference"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="custom_initial_values_filename"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="data"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#a823a32529a6707044212836e6e33dc5a"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="iterations"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation.html#abb324ae78f31a5a9a43c9c147f607a19"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation_data"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation_data"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation_data"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a0a0f65c698ba3527814e9affb5b02a9a"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation_data"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a9c56044b2936577deaef6b9ed1ee6479"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="~estimation_data"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a42b2d2b7704d8fc16024eb936fe02076"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="correct"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a999536cd2f9c8df4ae0861afc43481e4"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="d"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a88dec052497501836d8c59cb12f90d86"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="dataset"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a7be046e4b9456f1440dd2216fb278f23"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="f"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a932279c16aae74fe21f4778bebbec0a9"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="G"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a352006c93678fcf92ead2cce9469703f"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="m"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#add7063eea219fadf65665579143b8dc7"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="N"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a3a7261a8553360b00852e8f52546e82b"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="nl"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#aab76c4938f0100a134a8a7baae7fc67e"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="p"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a79ab056cf0b1fedfefc5c41ed524ad02"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="P"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a5366b468b05a8de5c3314e01cf374d86"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="pi"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ae5fe40f5bd3d4adabf270e77bb403929"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="pinned_items"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ac0ba66fcba79c5ca8e337e2a2f1622cd"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="r"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="s"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a0c10184c6f65885d0277f45a1930130c"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="theta"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a4be950142cd1d1540dd941285a2d4d96"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#ad67627858e79194005bdf4890c9e500b"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="Y"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a3b96ea009403b0ea4316e9883eef9de1"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="zeta"><param name="Local" value="classirtpp_1_1dichomulti_1_1estimation__data.html#a732cb022ad1dedfc674599cc3d99d404"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation_data"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a0a0f65c698ba3527814e9affb5b02a9a"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="estimation_data"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a9c56044b2936577deaef6b9ed1ee6479"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~estimation_data"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a42b2d2b7704d8fc16024eb936fe02076"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="correct"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a999536cd2f9c8df4ae0861afc43481e4"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="d"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a88dec052497501836d8c59cb12f90d86"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="dataset"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a7be046e4b9456f1440dd2216fb278f23"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="f"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a932279c16aae74fe21f4778bebbec0a9"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="G"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a352006c93678fcf92ead2cce9469703f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="m"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#add7063eea219fadf65665579143b8dc7"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="N"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a3a7261a8553360b00852e8f52546e82b"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="nl"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#aab76c4938f0100a134a8a7baae7fc67e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="p"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a79ab056cf0b1fedfefc5c41ed524ad02"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="P"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a5366b468b05a8de5c3314e01cf374d86"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="pi"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ae5fe40f5bd3d4adabf270e77bb403929"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="pinned_items"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ac0ba66fcba79c5ca8e337e2a2f1622cd"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="r"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#aab672c9db890d96de10cf4e00c103783"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="s"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a0c10184c6f65885d0277f45a1930130c"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="theta"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a4be950142cd1d1540dd941285a2d4d96"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="w"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#ad67627858e79194005bdf4890c9e500b"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Y"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a3b96ea009403b0ea4316e9883eef9de1"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="zeta"><param name="Local" value="classirtpp_1_1dichotomous_1_1estimation__data.html#a732cb022ad1dedfc674599cc3d99d404"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="model"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="model"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="model"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a62d2406c47f4a165535d631ca71241df"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="model"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#acbd35b888409be342d0875cfbb1b5596"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="~model"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a80deb7d5828ad47c155a9771eace352c"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="P"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a7064eab20d3850eafe80903eb868ff95"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="parameters"><param name="Local" value="classirtpp_1_1dichomulti_1_1model.html#a2069c6a0871905c485ce55d55bc589e7"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="model"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a62d2406c47f4a165535d631ca71241df"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="model"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#acbd35b888409be342d0875cfbb1b5596"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~model"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a80deb7d5828ad47c155a9771eace352c"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="P"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a7064eab20d3850eafe80903eb868ff95"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="parameters"><param name="Local" value="classirtpp_1_1dichotomous_1_1model.html#a2069c6a0871905c485ce55d55bc589e7"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
-        <LI><OBJECT type="text/sitemap"><param name="Name" value="Qi"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html"><param name="ImageNumber" value="1"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Qi"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html"><param name="ImageNumber" value="1"></OBJECT>
           <UL>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="Qi"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#ac94250c993a57539ab7246a9da2e91b4"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="operator()"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#a70d6860d3c0b214e62439e2b3ed5542d"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="data"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#a372e1b0e4748389beb927066020ac022"><param name="ImageNumber" value="11"></OBJECT>
-          <LI><OBJECT type="text/sitemap"><param name="Name" value="i"><param name="Local" value="classirtpp_1_1dichomulti_1_1_qi.html#afadb5e0f8939e42ac54531f8a63958d8"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Qi"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#ac94250c993a57539ab7246a9da2e91b4"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="operator()"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#a70d6860d3c0b214e62439e2b3ed5542d"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="data"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#a372e1b0e4748389beb927066020ac022"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="i"><param name="Local" value="classirtpp_1_1dichotomous_1_1_qi.html#afadb5e0f8939e42ac54531f8a63958d8"><param name="ImageNumber" value="11"></OBJECT>
           </UL>
         </UL>
       <LI><OBJECT type="text/sitemap"><param name="Name" value="polytomous"><param name="Local" value="namespaceirtpp_1_1polytomous.html"><param name="ImageNumber" value="1"></OBJECT>

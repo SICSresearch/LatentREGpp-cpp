@@ -9,7 +9,7 @@
 
 namespace irtpp {
 
-namespace dichomulti {
+namespace dichotomous {
 
 estimation::estimation(matrix<char> &dataset, unsigned int d, int themodel,
 					   double convergence_difference,
@@ -557,6 +557,6 @@ estimation::~estimation() {
 
 }
 
-} /* namespace dichomulti */
+} /* namespace dichotomous */
 
 } /* namespace irtpp */

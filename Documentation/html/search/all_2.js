@@ -10,7 +10,7 @@ var searchData=
   ['compute_5fgammas',['compute_gammas',['../namespaceirtpp.html#a5e5aee478b17d0a7c95ad44757ca04d5',1,'irtpp']]],
   ['compute_5flatent_5ftrait',['compute_latent_trait',['../namespaceirtpp.html#ac3d715aed9f87528821ff7e7b5ad1f60',1,'irtpp']]],
   ['compute_5fweights',['compute_weights',['../namespaceirtpp.html#ab605695b3fda22a62567c4ce4681bc4e',1,'irtpp']]],
-  ['convergence_5fdifference',['convergence_difference',['../classirtpp_1_1dichomulti_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb',1,'irtpp::dichomulti::estimation::convergence_difference()'],['../classirtpp_1_1polytomous_1_1estimation.html#ae039b32d36baa201b9e845c5fab16a8e',1,'irtpp::polytomous::estimation::convergence_difference()']]],
-  ['correct',['correct',['../classirtpp_1_1dichomulti_1_1estimation__data.html#a999536cd2f9c8df4ae0861afc43481e4',1,'irtpp::dichomulti::estimation_data']]],
-  ['custom_5finitial_5fvalues_5ffilename',['custom_initial_values_filename',['../classirtpp_1_1dichomulti_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917',1,'irtpp::dichomulti::estimation::custom_initial_values_filename()'],['../classirtpp_1_1polytomous_1_1estimation.html#ad797724a74505039dd42f2866fead6ca',1,'irtpp::polytomous::estimation::custom_initial_values_filename()']]]
+  ['convergence_5fdifference',['convergence_difference',['../classirtpp_1_1dichotomous_1_1estimation.html#abd4bf4696e569fb9999f82b3d88021bb',1,'irtpp::dichotomous::estimation::convergence_difference()'],['../classirtpp_1_1polytomous_1_1estimation.html#ae039b32d36baa201b9e845c5fab16a8e',1,'irtpp::polytomous::estimation::convergence_difference()']]],
+  ['correct',['correct',['../classirtpp_1_1dichotomous_1_1estimation__data.html#a999536cd2f9c8df4ae0861afc43481e4',1,'irtpp::dichotomous::estimation_data']]],
+  ['custom_5finitial_5fvalues_5ffilename',['custom_initial_values_filename',['../classirtpp_1_1dichotomous_1_1estimation.html#a81f001bfd91beda5720da1f1b2b35917',1,'irtpp::dichotomous::estimation::custom_initial_values_filename()'],['../classirtpp_1_1polytomous_1_1estimation.html#ad797724a74505039dd42f2866fead6ca',1,'irtpp::polytomous::estimation::custom_initial_values_filename()']]]
 ];

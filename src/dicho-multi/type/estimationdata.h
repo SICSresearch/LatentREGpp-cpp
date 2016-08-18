@@ -5,8 +5,8 @@
  *      Author: Milder
  */
 
-#ifndef DICHOMULTI_UTIL_ESTIMATIONDATA_H_
-#define DICHOMULTI_UTIL_ESTIMATIONDATA_H_
+#ifndef dichotomous_UTIL_ESTIMATIONDATA_H_
+#define dichotomous_UTIL_ESTIMATIONDATA_H_
 #include <vector>
 #include <set>
 #include "../../util/matrix.h"
@@ -20,7 +20,7 @@
 
 namespace irtpp {
 
-namespace dichomulti {
+namespace dichotomous {
 
 /**
  * estimation_data class contains all the information needed to execute the EM estimation in
