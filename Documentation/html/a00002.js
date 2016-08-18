@@ -2,7 +2,7 @@ var a00002 =
 [
     [ "estimation", "a00002.html#a8a093654e62c32c41c2e5f17d507f269", null ],
     [ "~estimation", "a00002.html#a4f7944902a2ed7ad261f79c0dc626bcb", null ],
-    [ "EMAlgortihm", "a00002.html#a7a0aa228835a9abca007403cd7adcd46", null ],
+    [ "EMAlgorithm", "a00002.html#a7a0aa228835a9abca007403cd7adcd46", null ],
     [ "gaussian_quadrature", "a00002.html#ad910f0a2c300cc254f8752846be6b392", null ],
     [ "initial_values", "a00002.html#a4027712e18f8549947e112ae7b674d22", null ],
     [ "load_initial_values", "a00002.html#a56c2153181f4474bf0c81de98347cc64", null ],

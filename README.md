@@ -32,7 +32,7 @@ Simple estimation<br>
 Just with dataset and dimension.
 ```cpp
 dichomulti::estimation e(Y, 7);
-e.EMAlgortihm();
+e.EMAlgorithm();
 e.print_item_parameters();
 ```
 Or more customized configurations for the estimation.<br>

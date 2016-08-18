@@ -71,7 +71,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 		if ( dicho ) {
 			START_CLOCK
 			dichomulti::estimation e(Y, d, model, dif, cluster, quadrature_technique, G, EMPTY_INTEGER_VECTOR, initial_values);
-			e.EMAlgortihm();
+			e.EMAlgorithm();
 
 			END_CLOCK
 			REPORT_TIME
@@ -79,7 +79,7 @@ void simulation::simulate ( int model, int d, int start, int end, std::string fo
 		} else {
 			START_CLOCK
 			polytomous::estimation e(Y, d, model, dif, cluster, quadrature_technique, G, EMPTY_INTEGER_VECTOR, initial_values);
-			e.EMAlgortihm();
+			e.EMAlgorithm();
 
 			END_CLOCK
 			REPORT_TIME
@@ -118,7 +118,7 @@ void simulation::run_single_polytomous ( int model, int d, std::string filename,
 	START_CLOCK
 
 	polytomous::estimation e(Y, d, model, dif, cluster, quadrature_technique, G, EMPTY_INTEGER_VECTOR, custom_initial_values_filename);
-	e.EMAlgortihm();
+	e.EMAlgorithm();
 
 	END_CLOCK
 	e.print_item_parameters();
@@ -142,7 +142,7 @@ void simulation::run_single_dichotomous ( int model, int d, std::string filename
 	START_CLOCK
 
 	dichomulti::estimation e(Y, d, model, dif, cluster, quadrature_technique, G, EMPTY_INTEGER_VECTOR, custom_initial_values_filename);
-	e.EMAlgortihm();
+	e.EMAlgorithm();
 
 	END_CLOCK
 	e.print_item_parameters();

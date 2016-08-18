@@ -2,7 +2,7 @@ var classirtpp_1_1dichomulti_1_1estimation =
 [
     [ "estimation", "classirtpp_1_1dichomulti_1_1estimation.html#aa8f524ebf64236866d82ee8cdd8db51c", null ],
     [ "~estimation", "classirtpp_1_1dichomulti_1_1estimation.html#a1d774054c9d79378127dfbc7b9a89b17", null ],
-    [ "EMAlgortihm", "classirtpp_1_1dichomulti_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c", null ],
+    [ "EMAlgorithm", "classirtpp_1_1dichomulti_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c", null ],
     [ "gaussian_quadrature", "classirtpp_1_1dichomulti_1_1estimation.html#a106a4dbd8764aad91e85b2135a4cef8b", null ],
     [ "initial_values", "classirtpp_1_1dichomulti_1_1estimation.html#a185cd4dd34042c16e86bace3a2ef6eee", null ],
     [ "load_initial_values", "classirtpp_1_1dichomulti_1_1estimation.html#a49612fd64f76c5dec5c1058061e4e3f1", null ],

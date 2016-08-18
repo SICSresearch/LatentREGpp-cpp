@@ -314,7 +314,7 @@ void estimation::initial_values() {
 	data.loglikelihood = NOT_COMPUTED;
 }
 
-void estimation::EMAlgortihm() {
+void estimation::EMAlgorithm() {
 	if ( custom_initial_values_filename == NONE || custom_initial_values_filename == BUILD ) initial_values();
 	else load_initial_values(custom_initial_values_filename);
 	double dif = 0.0;

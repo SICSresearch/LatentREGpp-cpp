@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['emalgortihm',['EMAlgortihm',['../classirtpp_1_1dichomulti_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c',1,'irtpp::dichomulti::estimation::EMAlgortihm()'],['../classirtpp_1_1polytomous_1_1estimation.html#a7a0aa228835a9abca007403cd7adcd46',1,'irtpp::polytomous::estimation::EMAlgortihm()']]],
+  ['EMAlgorithm',['EMAlgorithm',['../classirtpp_1_1dichomulti_1_1estimation.html#a08564b197cad2d755df2c8d3d383219c',1,'irtpp::dichomulti::estimation::EMAlgorithm()'],['../classirtpp_1_1polytomous_1_1estimation.html#a7a0aa228835a9abca007403cd7adcd46',1,'irtpp::polytomous::estimation::EMAlgorithm()']]],
   ['empty_5finteger_5fvector',['EMPTY_INTEGER_VECTOR',['../namespaceirtpp.html#a58399775f38f9e91b3e21c8dcbfa33e2',1,'irtpp']]],
   ['estep',['Estep',['../namespaceirtpp_1_1dichomulti.html#aa2bdb34a6c6999b4f0f6707c73f5cd4e',1,'irtpp::dichomulti::Estep()'],['../namespaceirtpp_1_1polytomous.html#a2cc2fca9030e827a2b7b4596d0b379ee',1,'irtpp::polytomous::Estep()']]],
   ['estimation',['estimation',['../classirtpp_1_1dichomulti_1_1estimation.html',1,'irtpp::dichomulti']]],

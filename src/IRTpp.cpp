@@ -24,7 +24,7 @@ void UNAL () {
 	std::vector<int> cluster = {47, 12, 4, 4, 6, 4, 14, 5, 5};
 	dichomulti::estimation e(Y, 9, 3, 0.001, cluster, "QMCEM", 2000,
 			EMPTY_INTEGER_VECTOR, "datasets/Test UNAL/INI-9D.csv");
-	e.EMAlgortihm();
+	e.EMAlgorithm();
 	e.print_item_parameters();
 	e.print_item_parameters("datasets/Test UNAL/9D-items-estimation.csv");
 	e.MAP(true);
