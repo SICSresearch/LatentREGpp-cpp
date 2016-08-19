@@ -119,7 +119,7 @@ double Mstep(estimation_data &data, int current) {
 
 		next_zeta[i] = current_zeta[i];
 
-		// Calling BFGS from dlib to optimize Qi with explicit derivatives (Log likelihood)
+		// Calling BFGS from dlib to optimize Qi with explicit derivatives
 		// If the dimension is 1, the optimization is done with explicit derivatives
 		if ( d == 1 ) {
 			dlib::find_max(dlib::bfgs_search_strategy(),

@@ -69,7 +69,7 @@ double Mstep(estimation_data &data, int current) {
 
 		next_zeta[i] = current_zeta[i];
 
-		//Calling BFGS from dlib to optimize Qi with approximate derivatives (Log likelihood)
+		//Calling BFGS from dlib to optimize Qi with approximate derivatives
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
 					   dlib::objective_delta_stop_strategy(OPTIMIZER_DELTA_STOP),
 					   Qi(i, &data), next_zeta[i], -1);
