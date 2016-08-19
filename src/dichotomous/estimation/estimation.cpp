@@ -85,8 +85,6 @@ estimation::estimation(matrix<char> &dataset, unsigned int d, int themodel,
 	else
 		gaussian_quadrature();
 
-	build_matrixes();
-
 	//Pinned items in multidimensional case (the first of each dimension)
 	std::set<int> &pinned_items = data.pinned_items;
 
@@ -166,8 +164,8 @@ void estimation::sobol_quadrature (int g) {
 	in.import_data(ss.str(), theta);
 
 	G = g;
-
 	w = std::vector<double>(G, 1.0);
+	build_matrixes();
 }
 
 void estimation::gaussian_quadrature () {
@@ -201,6 +199,7 @@ void estimation::gaussian_quadrature () {
 	w = load_weights(d);
 
 	G = theta.rows();
+	build_matrixes();
 }
 
 void estimation::load_initial_values ( std::string filename ) {
@@ -218,13 +217,13 @@ void estimation::load_initial_values ( std::string filename ) {
 	model &m = data.m;
 
 	zeta = std::vector<optimizer_vector>(p);
-	int total_parameters = m.parameters == 1 ? 1 : m.parameters - 1 + d;
+	int total_parameters = m.parameters == ONEPL ? 1 : m.parameters - 1 + d;
 
 	for ( int i = 0; i < p; ++i ) {
 		zeta[i] = optimizer_vector(total_parameters);
 		for ( int j = 0; j < total_parameters; ++j )
 			zeta[i](j) = mt(i, j);
-		if ( m.parameters == 3 ) {
+		if ( m.parameters == THREEPL ) {
 			double &c = zeta[i](total_parameters - 1);
 			c = std::log(c / (1.0 - c));
 		}
@@ -256,12 +255,12 @@ void estimation::initial_values() {
 	matrix<char> &dataset = *data.dataset;
 
 	zeta = std::vector<optimizer_vector>(p);
-	int total_parameters = m.parameters == 1 ? 1 : m.parameters - 1 + d;
+	int total_parameters = m.parameters == ONEPL ? 1 : m.parameters - 1 + d;
 
 	for ( int i = 0; i < p; ++i ) {
 		zeta[i] = optimizer_vector(total_parameters);
 		for ( int j = 0; j < total_parameters; ++j )
-			zeta[i](j) = 1.0;
+			zeta[i](j) = DEFAULT_INITIAL_VALUE;
 	}
 
 	if ( d == 1 ) {
@@ -271,10 +270,10 @@ void estimation::initial_values() {
 		for ( int i = 0; i < p; ++i ) {
 			optimizer_vector &item_i = zeta[i];
 
-			if ( m.parameters > 1 ) {
+			if ( m.parameters > ONEPL ) {
 				item_i(0) = alpha[i];
 				item_i(1) = gamma[i];
-				if ( m.parameters == 3 ) item_i(2) = -1.1;
+				if ( m.parameters == THREEPL ) item_i(2) = DEFAULT_C_INITIAL_VALUE;
 			} else {
 				item_i(0) = gamma[i];
 			}
@@ -286,10 +285,10 @@ void estimation::initial_values() {
 		for ( int i = 0; i < p; ++i ) {
 			optimizer_vector &item_i = zeta[i];
 
-			if ( m.parameters < 3 ) item_i(item_i.size() - 1) = gamma[i];
+			if ( m.parameters < THREEPL ) item_i(item_i.size() - 1) = gamma[i];
 			else {
 				item_i(item_i.size() - 2) = gamma[i];
-				item_i(item_i.size() - 1) = -1.1;
+				item_i(item_i.size() - 1) = DEFAULT_C_INITIAL_VALUE;
 			}
 		}
 
@@ -307,7 +306,7 @@ void estimation::initial_values() {
 			optimizer_vector &item = zeta[pinned];
 			for ( int h = 0; h < d; ++h )
 				item(h) = 0;
-			item(j) = 1;
+			item(j) = DEFAULT_INITIAL_VALUE;
 			++j;
 		}
 	}
@@ -435,7 +434,7 @@ void estimation::MAP ( bool all_factors ) {
 	int current_zeta = iterations % ACCELERATION_PERIOD;
 	for ( int l = 0; l < s; ++l ) {
 		dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-							   dlib::objective_delta_stop_strategy(1e-6),
+							   dlib::objective_delta_stop_strategy(OPTIMIZER_DELTA_STOP),
 							   posterior(l, current_zeta, &data), latent_traits[l], -1);
 	}
 
@@ -456,7 +455,7 @@ double estimation::posterior::operator() ( const optimizer_vector& theta_l ) con
 	double value = 0.0;
 	for ( int h = 0; h < d; ++h )
 		value += theta_l(h) * theta_l(h);
-	value = std::exp(-0.5 * value) / std::pow( std::sqrt(2.0 * PI), d );
+	value = std::exp(-0.5 * value) / std::pow( std::sqrt(2.0 * PI_), d );
 
 	for ( int i = 0; i < p; ++i )
 		value += Y(l, i) ? std::log(m.P(theta_l, zeta[i])) : std::log(1 - m.P(theta_l, zeta[i]));
@@ -484,7 +483,7 @@ void estimation::print_item_parameters ( ) {
 
 	std::cout << "Finished after " << iterations << " iterations.\n";
 
-	bool guessing_parameter = m.parameters == 3;
+	bool guessing_parameter = m.parameters == THREEPL;
 	for ( int i = 0; i < p; ++i ) {
 		std::cout << "Item " << i + 1 << '\n';
 		for ( int j = 0; j < zeta[i].size() - guessing_parameter; ++j )
@@ -508,7 +507,7 @@ void estimation::print_item_parameters ( std::ofstream &fout, double elapsed ) {
 	int &p = data.p;
 	model &m = data.m;
 
-	bool guessing_parameter = m.parameters == 3;
+	bool guessing_parameter = m.parameters == THREEPL;
 	for ( int i = 0; i < p; ++i ) {
 		for ( int j = 0; j < zeta[i].size() - guessing_parameter; ++j ) {
 			if ( j ) fout << ';';

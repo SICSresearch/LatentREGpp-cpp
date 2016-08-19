@@ -123,12 +123,12 @@ double Mstep(estimation_data &data, int current) {
 		// If the dimension is 1, the optimization is done with explicit derivatives
 		if ( d == 1 ) {
 			dlib::find_max(dlib::bfgs_search_strategy(),
-										   dlib::objective_delta_stop_strategy(1e-6),
+										   dlib::objective_delta_stop_strategy(OPTIMIZER_DELTA_STOP),
 										   Qi(i, &data),
 										   Qi_derivative(i, &data), next_zeta[i],-1);
 		} else {
 			dlib::find_max_using_approximate_derivatives(dlib::bfgs_search_strategy(),
-						   dlib::objective_delta_stop_strategy(1e-6),
+						   dlib::objective_delta_stop_strategy(OPTIMIZER_DELTA_STOP),
 						   Qi(i, &data),next_zeta[i],-1);
 		}
 
